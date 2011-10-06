@@ -1,4 +1,4 @@
-package com.ateam.webstore.ui;
+package com.ateam.webstore.ui.views;
 
 import java.util.List;
 import java.util.Map;
