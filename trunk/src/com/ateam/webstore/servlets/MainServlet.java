@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ateam.webstore.ui.Constants;
-import com.ateam.webstore.ui.ContentView;
-import com.ateam.webstore.ui.View;
+import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.views.View;
 
 
 public class MainServlet extends HttpServlet implements Constants {
