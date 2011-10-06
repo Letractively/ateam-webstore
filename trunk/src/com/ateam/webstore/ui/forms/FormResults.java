@@ -1,4 +1,4 @@
-package com.ateam.webstore.ui.requests;
+package com.ateam.webstore.ui.forms;
 
 import com.ateam.webstore.ui.views.ContentView;
 

@@ -1,16 +1,25 @@
 package com.ateam.webstore.ui.views;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import com.ateam.webstore.ui.models.Visitor;
 
 public class View {
 	String title;
 	String headerTitle;
 	String headerSubText;
 	String footerText;
+	Visitor visitor;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
+	
+	public View () {
+		navLinks = new HashMap<String,String>();
+		contentViews = new ArrayList<ContentView>();
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -46,5 +55,11 @@ public class View {
 	}
 	public void setContentViews(List<ContentView> contentViews) {
 		this.contentViews = contentViews;
+	}
+	public Visitor getVisitor() {
+		return visitor;
+	}
+	public void setVisitor(Visitor visitor) {
+		this.visitor = visitor;
 	}
 }
