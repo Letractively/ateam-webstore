@@ -1,5 +1,5 @@
-<%@page import="com.ateam.webstore.ui.ContentView"%>
-<%@page import="com.ateam.webstore.ui.View"%>
+<%@page import="com.ateam.webstore.ui.views.ContentView"%>
+<%@page import="com.ateam.webstore.ui.views.View"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
