@@ -2,8 +2,8 @@ package com.ateam.webstore.ui.models;
 
 public class Visitor {
 	String id;
-	String email;
-	String name;
+	String email = "";
+	String name = "";
 	boolean authenticated;
 	public String getId() {
 		return id;

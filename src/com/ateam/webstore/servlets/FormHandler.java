@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ateam.webstore.ui.Constants;
+import com.ateam.webstore.ui.forms.FormResults;
+import com.ateam.webstore.ui.forms.FormSubmission;
+import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.models.Visitor;
-import com.ateam.webstore.ui.requests.FormResults;
-import com.ateam.webstore.ui.requests.FormSubmission;
-import com.ateam.webstore.ui.requests.LoginRequest;
 
 public class FormHandler extends HttpServlet implements Constants {
 	
@@ -63,8 +63,8 @@ public class FormHandler extends HttpServlet implements Constants {
 	 * @param req
 	 * @return
 	 */
-	private LoginRequest processLoginRequest(HttpServletRequest req) {
-		LoginRequest login = new LoginRequest();
+	private LoginForm processLoginRequest(HttpServletRequest req) {
+		LoginForm login = new LoginForm();
 		Visitor v = new Visitor();
 		v.setId("12345");
 		v.setEmail(req.getParameter(Parameters.PRODUCT_ID.getId()));

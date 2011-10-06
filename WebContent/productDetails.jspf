@@ -1,0 +1,10 @@
+       <p>Description of a TV </p>
+	  <table>
+		<tr>
+		<td>Price</td><td>$1000.00</td>
+		</tr>
+				<tr>
+		<td>Rating</td><td>4/5</td>
+		</tr>
+
+	</table>

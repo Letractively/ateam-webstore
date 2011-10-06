@@ -1,5 +1,7 @@
 package com.ateam.webstore.ui.models;
 
-public class Cart {
+import java.util.List;
 
+public class Cart {
+	List<Product> products;
 }
