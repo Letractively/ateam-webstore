@@ -1,6 +1,5 @@
 package com.ateam.webstore.ui;
 
-import java.util.List;
 
 public interface Constants {
 	
