@@ -62,14 +62,96 @@ font-weight:bold;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+#headerVisitor
+{
+position:relative;
+left:-10px;
+top:30px;
+color:#DEE6F8;
+text-align:right;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-#bar
+#headerVisitor .actionLink a
+{
+color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+float:right;
+}
+
+#headerVisitor .actionLink a:hover
+{
+color:#E4EBFA;
+}
+
+#headerCart
+{
+position:relative;
+left:-10px;
+top:40px;
+color:#DEE6F8;
+text-align:right;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+#headerCart .actionLink a
+{
+color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+float:right;
+}
+
+#headerCart .actionLink a:hover
+{
+color:#E4EBFA;
+}
+
+#headerSearch
+{
+position:relative;
+left:10px;
+top:90px;
+color:#DEE6F8;
+text-align:right;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+#searchBar
 {
 background-image:url(images/bar.png);
 background-repeat:no-repeat;
-height:53px;
+height:40px;
 width:750px;
-padding-bottom:15px;
+}
+
+#searchField
+{
+position:relative;
+left:-10px;
+top:10px;
+color:#DEE6F8;
+text-align:right;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+#bar
+{
+background-image:url(images/bar-invert.png);
+background-repeat:no-repeat;
+height:40px;
+width:750px;
 
 }
 

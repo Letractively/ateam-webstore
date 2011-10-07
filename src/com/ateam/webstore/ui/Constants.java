@@ -4,14 +4,17 @@ package com.ateam.webstore.ui;
 public interface Constants {
 	
 	/**
-	 * Form/URL Parameters
+	 * URL Parameters
 	 */
 	public enum Parameters {
 		PRODUCT_ID ("productId"),
 		EMAIL ("email"),
+		LOGIN ("login"),
 		FORM_ID ("formId"),
 		PASSWORD ("pw"),
-		CART ("card");
+		CART ("card"), 
+		REGISTER ("register"),
+		CATEGORY ("category");
 		
 		String id;
 		Parameters (String id) {
@@ -26,18 +29,18 @@ public interface Constants {
 	}
 	
 	/**
-	 * 
+	 * Form IDs
 	 * @author bdrew
 	 *
 	 */
-	public enum Forms {
+	public enum FormName {
 		LOGIN ("login"),
-		REQISTER ("register");
+		REGISTER ("register");
 		
 		String id;
 		String handler;
 		
-		Forms (String id) {
+		FormName (String id) {
             this.id = id;
 		}
 		public String getId() {
@@ -52,7 +55,7 @@ public interface Constants {
 	/**
 	 * Session Attributes
 	 */
-	public static final String SESSION_ATTRIBUTE_USER_AUTH = "userAuth";
+	public static final String SESSION_ATTRIBUTE_VISITOR = "visitor";
 	public static final String SESSION_ATTRIBUTE_CART = "cart";
 	
 	/**
