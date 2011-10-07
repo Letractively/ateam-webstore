@@ -7,6 +7,9 @@ import com.ateam.webstore.ui.models.Product;
 public class HomePageView extends View {
 	List<Product> featuredProducts;
 	
+	public HomePageView(View v) {
+		super(v);
+	}
 	public List<Product> getFeaturedProducts() {
 		return featuredProducts;
 	}

@@ -5,21 +5,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ateam.webstore.ui.models.Cart;
 import com.ateam.webstore.ui.models.Visitor;
 
 public class View {
-	String title;
-	String headerTitle;
-	String headerSubText;
-	String footerText;
+	String title = "";
+	String headerTitle = "";
+	String headerSubText = "";
+	String footerText = "";
 	Visitor visitor;
+	Cart cart;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
 	
+	/**
+	 * 
+	 */
 	public View () {
 		navLinks = new HashMap<String,String>();
 		contentViews = new ArrayList<ContentView>();
+		visitor = new Visitor(); 
 	}
+	/**
+	 * Copy Constructor
+	 * @param v
+	 */
+	public View (View v) {
+		this.title = v.title;
+		this.headerTitle = v.headerTitle;
+		this.headerSubText = v.headerSubText;
+		this.footerText = v.footerText;
+		this.visitor = v.visitor;
+		this.navLinks = v.navLinks;
+		this.contentViews = v.contentViews;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -61,5 +81,25 @@ public class View {
 	}
 	public void setVisitor(Visitor visitor) {
 		this.visitor = visitor;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String getGreeting() {
+		String greet = "Welcome";
+		if (visitor != null && visitor.getEmail() != null
+				&& !visitor.getEmail().isEmpty()) {
+			greet+=" "+visitor.getEmail();
+		}
+
+		return greet+"!";
+		
+	}
+	public Cart getCart() {
+		return cart;
+	}
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 }

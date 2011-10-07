@@ -1,7 +1,7 @@
 package com.ateam.webstore.ui.forms;
 
-import com.ateam.webstore.ui.Constants.Forms;
-import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.Constants.FormName;
+import com.ateam.webstore.ui.views.View;
 
 public abstract class FormSubmission {
 	/**
@@ -12,8 +12,31 @@ public abstract class FormSubmission {
 	 * 
 	 */
 	String method;
+	/**
+	 * 
+	 */
+	FormName f;
+	/**
+	 * If it was successful
+	 */
+	boolean success;
+	/**
+	 * 
+	 */
+	String resultMessage;
 	
-	Forms f;
+	/**
+	 * The view that should be presented after processing the form
+	 */
+	View resultView;
+	
+	public View getResultView() {
+		return resultView;
+	}
+
+	public void setResultView(View view) {
+		this.resultView = view;
+	}
 
 	public String getAction() {
 		return action;
@@ -31,14 +54,28 @@ public abstract class FormSubmission {
 		this.method = method;
 	}
 
-
-
-	public Forms getForm() {
+	public FormName getForm() {
 		return f;
 	}
 
-	public void setForm(Forms f) {
+	public void setForm(FormName f) {
 		this.f = f;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getResultMessage() {
+		return resultMessage;
+	}
+
+	public void setResultMessage(String resultMessage) {
+		this.resultMessage = resultMessage;
 	}
 	
 }

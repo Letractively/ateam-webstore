@@ -29,4 +29,15 @@ public class Visitor {
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
 	}
+	@Override
+	public String toString() {
+		
+		return "[ Visitor :: id="+id+", " +
+				"email="+email+","+
+				"name="+name+","+
+				"authenticated="+authenticated
+				+" ]";
+				
+	}
+	
 }
