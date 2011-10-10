@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import com.ateam.webstore.dao.ProductDAO;
 import com.ateam.webstore.model.Product;
-import com.ateam.webstore.service.IProduct;
+import com.ateam.webstore.service.RepositoryService;
 
-public class ProductService implements IProduct {
+public class ProductService implements RepositoryService<Product> {
 	
 	/**
 	 * Initializes a <code>ProductService</code> 
@@ -39,7 +39,6 @@ public class ProductService implements IProduct {
 		
 	}
 
-	@Override
 	public Collection<Product> getProductByName(String name) {
 		
 		ProductDAO repository = new ProductDAO();
