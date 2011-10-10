@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE orm SYSTEM "file:/javax/jdo/orm.dtd">
+<orm>
+  <package name="com.ateam.webstore.model">
+
+    
+    <class name="Product" table="ateamweb.product">
+    <inheritance strategy="new-table"/>
+   
+      <field name="id" persistence-modifier="persistent">
+        <column name="product_id"/>
+      </field>
+   
+      <field name="name" persistence-modifier="persistent">
+        <column name="name" length="100" jdbc-type="VARCHAR" allows-null="false"/>
+      </field>
+      <field name="price" persistence-modifier="persistent">
+        <column name="price" jdbc-type="DOUBLE" allows-null="false"/>
+      </field>
+      <field name="description" persistence-modifier="persistent">
+        <column name="description" length="512" jdbc-type="VARCHAR" allows-null="false"/>
+      </field>
+    </class>
+    
+ 
+  </package>
+</orm>
