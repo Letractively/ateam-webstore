@@ -4,21 +4,39 @@
   <package name="com.ateam.webstore.model">
 
     
-    <class name="Product" table="ateamweb.product">
+    <class name="Product" table="webstore.product">
     <inheritance strategy="new-table"/>
    
       <field name="id" persistence-modifier="persistent">
-        <column name="product_id"/>
+        <column name="productID"/>
       </field>
    
-      <field name="name" persistence-modifier="persistent">
-        <column name="name" length="100" jdbc-type="VARCHAR" allows-null="false"/>
+      <field name="productName" persistence-modifier="persistent">
+        <column name="productName" length="150" jdbc-type="VARCHAR" allows-null="false"/>
+      </field>
+      <field name="SKU" persistence-modifier="persistent">
+        <column name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="price" persistence-modifier="persistent">
-        <column name="price" jdbc-type="DOUBLE" allows-null="false"/>
+        <column name="price" jdbc-type="DECIMAL(10,2)" allows-null="false"/>
+      </field>
+      <field name="percentDiscount" persistence-modifier="persistent">
+        <column name="percentDiscount" jdbc-type="DECIMAL(6,4)" allows-null="false"/>
       </field>
       <field name="description" persistence-modifier="persistent">
-        <column name="description" length="512" jdbc-type="VARCHAR" allows-null="false"/>
+        <column name="description" length="1000" jdbc-type="VARCHAR" allows-null="false"/>
+      </field>
+      <field name="imagePath" persistence-modifier="persistent">
+        <column name="imagePath" length="50" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="firstOffered" persistence-modifier="persistent">
+        <column name="firstOffered"  jdbc-type="DAE" allows-null="true"/>
+      </field>
+      <field name="saleInd" persistence-modifier="persistent">
+        <column name="saleInd" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="lastUpdated" persistence-modifier="persistent">
+        <column name="lastUpdated"  jdbc-type="TIMESTAMP" allows-null="false"/>
       </field>
     </class>
     
