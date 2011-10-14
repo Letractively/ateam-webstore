@@ -7,11 +7,18 @@
    
     <class name="Product" identity-type="application" detachable="true" >   
       <field name="id" value-strategy="identity" primary-key="true"/>         
-      <field name="name"/>
+      <field name="productName"/>
+      <field name="SKU"/>
       <field name="price"/>
+      <field name="percentDiscount"/>
       <field name="description"/>
+      <field name="imagePath"/>
+      <field name="firstOffered"/>
+	  <field name="saleInd"/>
+      <field name="lastUpdated"/>
     </class> 
- 
+
+     
   </package>
 
 </jdo>    
