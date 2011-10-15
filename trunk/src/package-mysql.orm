@@ -4,7 +4,7 @@
   <package name="com.ateam.webstore.model">
 
     
-    <class name="Product" table="webstore.product">
+    <class name="Product" table="product">
     <inheritance strategy="new-table"/>
    
       <field name="id" persistence-modifier="persistent">
@@ -18,10 +18,10 @@
         <column name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="price" persistence-modifier="persistent">
-        <column name="price" jdbc-type="DECIMAL(10,2)" allows-null="false"/>
+        <column name="price" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
       <field name="percentDiscount" persistence-modifier="persistent">
-        <column name="percentDiscount" jdbc-type="DECIMAL(6,4)" allows-null="false"/>
+        <column name="percentDiscount" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
       <field name="description" persistence-modifier="persistent">
         <column name="description" length="1000" jdbc-type="VARCHAR" allows-null="false"/>
@@ -30,7 +30,7 @@
         <column name="imagePath" length="50" jdbc-type="CHAR" allows-null="true"/>
       </field>
       <field name="firstOffered" persistence-modifier="persistent">
-        <column name="firstOffered"  jdbc-type="DAE" allows-null="true"/>
+        <column name="firstOffered"  jdbc-type="DATE" allows-null="true"/>
       </field>
       <field name="saleInd" persistence-modifier="persistent">
         <column name="saleInd" length="1" jdbc-type="CHAR" allows-null="true"/>
