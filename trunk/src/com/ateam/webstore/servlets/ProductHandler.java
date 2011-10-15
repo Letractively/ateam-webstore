@@ -1,5 +1,6 @@
 package com.ateam.webstore.servlets;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -37,17 +38,10 @@ public class ProductHandler extends Handler {
 	 * @param id
 	 * @return
 	 */
-	private Product getProduct(String id) {
-		// TODO Implement for real, something like:
-		//p = service.getById(id);
+	private Product getProduct(String name) {
 		
-		//Dummy Data
-		Product p = new Product();
-		p.setProductName(id);
-		p.setPrice(12.99);
-		p.setDescription("hello description!");
-		
-		return p;
+		ProductService productServ = new ProductService();			
+		return (Product) productServ.getProductByName(name).toArray()[0];
 	}
 	
 	/**
@@ -57,15 +51,22 @@ public class ProductHandler extends Handler {
 	 */
 	private Collection<Product> getFeaturedProducts() {
 		// TODO Implement for real
-		//featured = service.getFeatured(id);
+		//      We need to either a flag on product table to know what's featured, or
+		//      We could just pick them from getAll()
+		//      BEWARE: the output should be limited to 6 records.
 		
 		Collection<Product> featured = new ArrayList<Product>();
-		featured.add(getProduct("Foo"));
-		featured.add(getProduct("Bar"));
-		featured.add(getProduct("Thing 1"));
-		featured.add(getProduct("Thing 2"));
-		featured.add(getProduct("One Fish"));
-		featured.add(getProduct("Two Fish"));
+		
+		ProductService productServ = new ProductService();
+		Collection<com.ateam.webstore.model.Product> products = productServ.getAll();
+		for (com.ateam.webstore.model.Product product : products) {
+			featured.add(product);
+		}	
+				
+//		featured.add(getProduct("iMac"));
+//		featured.add(getProduct("iPod"));
+//		featured.add(getProduct("iPhone"));
+//		featured.add(getProduct("iPad"));
 		l.info("returning "+featured.size()+" products");
 		return featured;
 		
