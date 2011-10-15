@@ -14,7 +14,7 @@
       <field name="productName" persistence-modifier="persistent">
         <column name="productName" length="150" jdbc-type="VARCHAR" allows-null="false"/>
       </field>
-      <field name="SKU" persistence-modifier="persistent">
+      <field name="sku" persistence-modifier="persistent">
         <column name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="price" persistence-modifier="persistent">
