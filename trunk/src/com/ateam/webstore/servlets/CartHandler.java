@@ -13,10 +13,11 @@ public class CartHandler extends Handler {
 	
 	/**
 	 * Process a request to view the cart
+	 * @param id 
 	 * @param req
 	 * @return
 	 */
-	public View getCartView() {
+	public View getCartView(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
