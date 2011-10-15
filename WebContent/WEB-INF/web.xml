@@ -17,7 +17,7 @@
     
     <servlet>
         <servlet-name>FormHandler</servlet-name>
-        <servlet-class>com.ateam.webstore.servlets.FormHandler</servlet-class>
+        <servlet-class>com.ateam.webstore.servlets.SubmissionServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

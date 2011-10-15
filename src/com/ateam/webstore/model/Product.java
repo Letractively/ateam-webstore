@@ -56,7 +56,7 @@ public class Product extends BaseModel implements Serializable {
 	/**
 	 * Product
 	 */
-	private Product() { 		
+	public Product() { 		
 	}
 	
 	/**
