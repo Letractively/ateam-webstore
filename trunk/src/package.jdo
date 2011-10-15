@@ -8,7 +8,7 @@
     <class name="Product" identity-type="application" detachable="true" >   
       <field name="id" value-strategy="identity" primary-key="true"/>         
       <field name="productName"/>
-      <field name="SKU"/>
+      <field name="sku"/>
       <field name="price"/>
       <field name="percentDiscount"/>
       <field name="description"/>
