@@ -38,24 +38,24 @@ public class MainServlet extends HttpServlet implements Constants {
 		}		
 		else if (req.getParameterMap().containsKey(Parameters.PRODUCT_ID.getId())) {
 			ProductHandler ph = new ProductHandler(req);
-			v = ph.getProductView();
+			v = ph.getProductView(req.getParameter(Parameters.PRODUCT_ID.getId()));
 		}
-		else if (req.getParameterMap().containsKey(Parameters.CART.getId())) {
+		else if (req.getParameterMap().containsKey(Parameters.CART_ID.getId())) {
 			CartHandler ch = new CartHandler(req);
-			v = ch.getCartView();
+			v = ch.getCartView(req.getParameter(Parameters.CART_ID.getId()));
 		}
 		else if (req.getParameterMap().containsKey(Parameters.WISHLIST.getId())) {
 			WishListHandler wlh = new WishListHandler(req);
 			v = wlh.getWishListView();
 		}
-		else if (req.getParameterMap().containsKey(Parameters.CATEGORY.getId())) {
-			String category = req.getParameter(Parameters.CATEGORY.getId());
+		else if (req.getParameterMap().containsKey(Parameters.CATEGORY_ID.getId())) {
+			String category = req.getParameter(Parameters.CATEGORY_ID.getId());
 			ProductHandler ph = new ProductHandler(req);
 			v = ph.getCategoryView(category);
 		}
-		else if (req.getParameterMap().containsKey(Parameters.ORDER.getId())) {
+		else if (req.getParameterMap().containsKey(Parameters.ORDER_ID.getId())) {
 			OrderHandler oh = new OrderHandler(req);
-			v = oh.getOrderDetailsView(req.getParameter(Parameters.ORDER.getId()));
+			v = oh.getOrderDetailsView(req.getParameter(Parameters.ORDER_ID.getId()));
 		}
 		else {
 			ProductHandler ph = new ProductHandler(req);

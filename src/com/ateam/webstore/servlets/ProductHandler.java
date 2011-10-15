@@ -7,11 +7,18 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Product;
+import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.HomePageView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
 import com.ateam.webstore.ui.views.View;
 
+/**
+ * Handles all Servlet requests related to Products
+ * @author Brendon Drew
+ *
+ */
 public class ProductHandler extends Handler {
 	
 	static Logger l = Logger.getLogger(ProductHandler.class.getName().toString());
@@ -22,30 +29,36 @@ public class ProductHandler extends Handler {
 	 */
 	public ProductHandler(HttpServletRequest req) {
 		super(req);
-		// TODO Auto-generated constructor stub
+		service = new ProductService();
 	}
 	
 	/**
-	 * 
+	 * Gets a product from DB
 	 * @param id
 	 * @return
 	 */
-	public Product getProduct(String id) {
-		// TODO Implement for real
+	private Product getProduct(String id) {
+		// TODO Implement for real, something like:
+		//p = service.getById(id);
+		
+		//Dummy Data
 		Product p = new Product();
 		p.setProductName(id);
 		p.setPrice(12.99);
 		p.setDescription("hello description!");
+		
 		return p;
 	}
 	
 	/**
-	 * Get festured from DB
+	 * Get featured products from DB
 	 * @param id
 	 * @return
 	 */
 	private Collection<Product> getFeaturedProducts() {
 		// TODO Implement for real
+		//featured = service.getFeatured(id);
+		
 		Collection<Product> featured = new ArrayList<Product>();
 		featured.add(getProduct("Foo"));
 		featured.add(getProduct("Bar"));
@@ -56,6 +69,17 @@ public class ProductHandler extends Handler {
 		l.info("returning "+featured.size()+" products");
 		return featured;
 		
+	}
+	
+	/**
+	 * Gets all products in the given category
+	 * @param category
+	 * @return
+	 */
+	private Collection<Product> getCategory(String category) {
+		// TODO Auto-generated method stub
+		//category = service.getCategory(id);
+		return null;
 	}
 	
 	/**
@@ -78,12 +102,12 @@ public class ProductHandler extends Handler {
 		return hp;
 		
 	}
-	
-	public Collection<Product> getCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
+	/**
+	 * Builds a returns the view for a product category.
+	 * @param category
+	 * @return
+	 */
 	public View getCategoryView(String category) {
 		// TODO Auto-generated method stub
 		//TODO Should return ProductListView
@@ -92,24 +116,32 @@ public class ProductHandler extends Handler {
 
 	
 	/**
-	 * 
+	 * Builds a returns the view for search results
 	 * @param query
 	 * @return
 	 */
 	public Collection<Product> getSearchResults(String query) {
+		// TODO Auto-generated method stub
+		//TODO Should return ProductListView
 		return null;
 		
 	}
 	
 	/**
-	 * Get the product view
+	 * Get the view for a specific product.
 	 * @param req
 	 * @return
 	 */
-	public ProductDetailsView getProductView() {
+	public ProductDetailsView getProductView(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	/**
+	 * Updates a product entry.
+	 */
+	public void update(ProductEditForm update) {
+		service.store(update.getProduct());
+	}
 
 }

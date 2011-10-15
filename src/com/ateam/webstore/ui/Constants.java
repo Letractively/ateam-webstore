@@ -12,11 +12,11 @@ public interface Constants {
 		LOGIN ("login"),
 		FORM_ID ("formId"),
 		PASSWORD ("pw"),
-		CART ("card"), 
+		CART_ID ("card"), 
 		WISHLIST ("wishList"),
 		REGISTER ("register"),
-		ORDER ("order"),
-		CATEGORY ("category");
+		ORDER_ID ("order"),
+		CATEGORY_ID ("category");
 		
 		String id;
 		Parameters (String id) {

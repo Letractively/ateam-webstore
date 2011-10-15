@@ -21,7 +21,7 @@ import com.ateam.webstore.ui.views.View;
  */
 public abstract class Handler implements Constants {
 	HttpServletRequest req;
-	RepositoryService<BaseModel> service;
+	RepositoryService service;
 	
 	public Handler(HttpServletRequest req) {
 		this.req = req;
@@ -31,11 +31,11 @@ public abstract class Handler implements Constants {
 		return req;
 	}
 
-	public RepositoryService<BaseModel> getService() {
+	public RepositoryService getService() {
 		return service;
 	}
 
-	public void setService(RepositoryService<BaseModel> service) {
+	public void setService(RepositoryService service) {
 		this.service = service;
 	}
 	
