@@ -120,7 +120,7 @@ public class PersistenceHelper {
 //      properties.put("datanucleus.NontransactionalRead", "false");
 //      properties.put("datanucleus.NontransactionalWrite", "false");
       
-      properties.put("datanucleus.Schema", "database");
+//      properties.put("datanucleus.Schema", "database");
       
 //      try {
 //        
