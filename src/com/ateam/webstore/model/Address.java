@@ -13,7 +13,6 @@ import com.ateam.webstore.dao.common.BaseModel;
  * @author Hendrix Tavarez
  *
  */
-@PersistenceCapable
 public class Address extends BaseModel implements Serializable {
 
 	/**
