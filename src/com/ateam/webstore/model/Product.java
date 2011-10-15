@@ -30,7 +30,7 @@ public class Product extends BaseModel implements Serializable {
 	private String productName;
 	
 	
-	private String SKU;
+	private String sku;
 	
 	/**
 	 * product's price
@@ -56,7 +56,8 @@ public class Product extends BaseModel implements Serializable {
 	/**
 	 * Product
 	 */
-	public Product() { 		
+	@SuppressWarnings("unused")
+	private Product() { 		
 	}
 	
 	/**
@@ -66,8 +67,8 @@ public class Product extends BaseModel implements Serializable {
 	 * @param price
 	 * @param description
 	 */
-	private Product(String productName, Double price, String description) {
-		
+	public Product(String productName, Double price, String description) {
+		super();
 		this.productName = productName;
 		this.price = price;
 		this.description = description;
@@ -132,11 +133,11 @@ public class Product extends BaseModel implements Serializable {
 	}
 
 	public String getSKU() {
-		return SKU;
+		return sku;
 	}
 
-	public void setSKU(String sKU) {
-		SKU = sKU;
+	public void setSKU(String sku) {
+		this.sku = sku;
 	}
 
 	public Double getPercentDiscount() {
