@@ -13,8 +13,14 @@ import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.forms.RegistrationForm;
 import com.ateam.webstore.ui.models.Visitor;
+import com.ateam.webstore.ui.views.View;
 
-public class FormHandler extends HttpServlet implements Constants {
+/**
+ * Handles Form Submissions
+ * @author bdrew
+ *
+ */
+public class SubmissionServlet extends HttpServlet implements Constants {
 	static Logger l = Logger.getLogger(MainServlet.class.getName().toString());
 	/**
 	 * 
@@ -135,7 +141,10 @@ public class FormHandler extends HttpServlet implements Constants {
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
 		login.setForm(FormName.LOGIN);
 		login.setSuccess(true);
-		login.setResultView(MainServlet.getHomePageView(req));
+		ProductHandler ph = new ProductHandler(req);
+		View rv = ph.getHomePageView();
+
+		login.setResultView(rv);
 		return login;
 	}
 }

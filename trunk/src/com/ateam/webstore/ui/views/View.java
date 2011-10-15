@@ -36,6 +36,7 @@ public class View {
 		this.headerSubText = v.headerSubText;
 		this.footerText = v.footerText;
 		this.visitor = v.visitor;
+		this.cart = v.cart;
 		this.navLinks = v.navLinks;
 		this.contentViews = v.contentViews;
 	}

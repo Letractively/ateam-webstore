@@ -58,9 +58,9 @@ Released   : 20081009
  	if (v.getCart() != null) {
  %>
 				<div id="headerCart">
-					xx item(s) in Cart
+					<%=v.getCart().getProducts().size()%> item(s) in Cart
 					<div class="actionLink">
-						<a href="">View Cart</a>
+						<a href="<%=request.getContextPath()%>/store?cart=12345">View Cart</a>
 					</div>
 				</div> <%
  	}
@@ -95,7 +95,7 @@ Released   : 20081009
 			<h1><%=cv.getContentHeader()%></h1>
 		</div>
 		<div class="contentText">
-			<p><%=cv.getContentText()%></p>
+			<p><%if (cv.getContentText() != null) { cv.getContentText();}%></p>
 			<jsp:include page="<%=cv.getJspf()%>" />
 		</div>
 		<%

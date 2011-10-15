@@ -13,7 +13,9 @@ public interface Constants {
 		FORM_ID ("formId"),
 		PASSWORD ("pw"),
 		CART ("card"), 
+		WISHLIST ("wishList"),
 		REGISTER ("register"),
+		ORDER ("order"),
 		CATEGORY ("category");
 		
 		String id;
@@ -62,5 +64,13 @@ public interface Constants {
 	 * Request Attributes
 	 */
 	public static final String REQUEST_ATTRIBUTE_VIEW = "view";
+	
+	/**
+	 * JSPs
+	 */
+	public static final String JSP_MAIN = "/main.jsp";
+	public static final String JSP_LOGIN = "/login.jsp";
+	public static final String JSP_HOME = "/home.jsp";
+	public static final String JSP_PRODUCT_DETAILS = "/prdouctDetails.jsp";
 	
 }
