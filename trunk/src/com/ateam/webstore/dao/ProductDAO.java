@@ -16,7 +16,7 @@ public class ProductDAO extends GenericDAOImpl<Product, Serializable>{
 		Collection<Product> products = null;
 		
 		try {
-			Query query = getPersistenceManager().newQuery(getPersistentClass(), "name == :name");
+			Query query = getPersistenceManager().newQuery(getPersistentClass(), "productName == :name");
 			products = (Collection<Product>) query.execute(name);
 			
 			return (Collection<Product>) getPersistenceManager().detachCopyAll(products);
