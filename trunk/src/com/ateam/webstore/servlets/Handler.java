@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,8 @@ import com.ateam.webstore.ui.views.View;
  *
  */
 public abstract class Handler implements Constants {
+	
+	static Logger l = Logger.getLogger(Handler.class.getName().toString());
 	HttpServletRequest req;
 	RepositoryService service;
 	
@@ -44,6 +47,7 @@ public abstract class Handler implements Constants {
 	 * @return
 	 */
 	public View getMainView(HttpServletRequest req) {
+		l.fine("building main view");
 		View v = new View();
 		v.setTitle("A+Team WebStore");
 		v.setHeaderTitle(v.getTitle());
@@ -52,10 +56,8 @@ public abstract class Handler implements Constants {
 		navLinks.put("Category 2", req.getContextPath()+"/store?category=cat2");
 		navLinks.put("Category 3", req.getContextPath()+"/store?category=cat3");
 		v.setNavLinks(navLinks);
-		Object o = req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
-		if (o != null) {
-			v.setVisitor((Visitor) o);			
-		}
+
+		v = setVisitorInfo(v);
 		
 		Cart cart = new Cart();
 		List list = new ArrayList();
@@ -66,4 +68,30 @@ public abstract class Handler implements Constants {
 		return  v;
 	}
 
+	/**
+	 * Grab visitor info from the request and add it to the view.  
+	 * Visitor info is obtained from cookies as well as the session.
+	 * 
+	 * @param v
+	 * @return
+	 */
+	private View setVisitorInfo(View v) {
+		Visitor vis = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
+
+		v.setShowLogonForm(true);
+		
+		if (vis != null) {
+			l.info("visitor in session:"+vis);
+			v.setShowVisitorInfo(vis.isKnown());
+		}
+		else {
+			l.info("No visitor in session");
+			//TODO Look for cookies if not in session
+			vis = new Visitor();
+		}
+
+		v.setVisitor(vis);
+		
+		return v;
+	}
 }

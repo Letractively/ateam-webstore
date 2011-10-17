@@ -17,6 +17,8 @@ public class View {
 	Cart cart;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
+	boolean showLogonForm;
+	boolean showVisitorInfo;
 	
 	/**
 	 * 
@@ -39,6 +41,8 @@ public class View {
 		this.cart = v.cart;
 		this.navLinks = v.navLinks;
 		this.contentViews = v.contentViews;
+		this.showLogonForm = v.showLogonForm;
+		this.showVisitorInfo = v.showVisitorInfo;
 	}
 	
 	public String getTitle() {
@@ -102,5 +106,17 @@ public class View {
 	}
 	public void setCart(Cart cart) {
 		this.cart = cart;
+	}
+	public boolean showLogonForm() {
+		return showLogonForm;
+	}
+	public void setShowLogonForm(boolean showLogonForm) {
+		this.showLogonForm = showLogonForm;
+	}
+	public boolean showVisitorInfo() {
+		return showVisitorInfo;
+	}
+	public void setShowVisitorInfo(boolean showVisitorInfo) {
+		this.showVisitorInfo = showVisitorInfo;
 	}
 }

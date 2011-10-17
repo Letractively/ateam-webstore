@@ -6,7 +6,7 @@
 
 <%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 
-			<form method="post" action="<%=request.getContextPath()%>/handler">
+			<form method="post" action="<%=request.getContextPath()%>/store">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.LOGIN.getId()%>">
 						Email:<br>

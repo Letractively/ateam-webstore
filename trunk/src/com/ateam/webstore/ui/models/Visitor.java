@@ -5,6 +5,7 @@ public class Visitor {
 	String email = "";
 	String name = "";
 	boolean authenticated;
+	boolean known;
 	public String getId() {
 		return id;
 	}
@@ -35,9 +36,16 @@ public class Visitor {
 		return "[ Visitor :: id="+id+", " +
 				"email="+email+","+
 				"name="+name+","+
-				"authenticated="+authenticated
+				"authenticated="+authenticated+","+
+				"known="+known
 				+" ]";
 				
+	}
+	public boolean isKnown() {
+		return known;
+	}
+	public void setKnown(boolean known) {
+		this.known = known;
 	}
 	
 }
