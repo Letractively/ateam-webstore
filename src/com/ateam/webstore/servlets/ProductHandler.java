@@ -30,7 +30,7 @@ public class ProductHandler extends Handler {
 	 */
 	public ProductHandler(HttpServletRequest req) {
 		super(req);
-		service = new ProductService();
+		//service = new ProductService();
 	}
 	
 	/**
@@ -40,8 +40,9 @@ public class ProductHandler extends Handler {
 	 */
 	private Product getProduct(String name) {
 		
-		ProductService productServ = new ProductService();			
-		return (Product) productServ.getProductByName(name).toArray()[0];
+		//ProductService productServ = new ProductService();			
+		//return (Product) productServ.getProductByName(name).toArray()[0];
+		return null;
 	}
 	
 	/**
@@ -57,11 +58,11 @@ public class ProductHandler extends Handler {
 		
 		Collection<Product> featured = new ArrayList<Product>();
 		
-		ProductService productServ = new ProductService();
-		Collection<com.ateam.webstore.model.Product> products = productServ.getAll();
-		for (com.ateam.webstore.model.Product product : products) {
-			featured.add(product);
-		}	
+		//ProductService productServ = new ProductService();
+		//Collection<com.ateam.webstore.model.Product> products = productServ.getAll();
+		//for (com.ateam.webstore.model.Product product : products) {
+		//	featured.add(product);
+		//}	
 				
 //		featured.add(getProduct("iMac"));
 //		featured.add(getProduct("iPod"));

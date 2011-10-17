@@ -39,6 +39,10 @@ Released   : 20081009
 			<div id="headerTitle"><%=v.getHeaderTitle()%></div>
 			<div id="headerSubText"><%=v.getHeaderSubText()%></div>
 
+			
+					<%
+						if (v.showVisitorInfo()) {
+					%>
 			<div id="headerVisitor"><%=v.getGreeting()%>
 				<div class="actionLink">
 					<%
@@ -54,8 +58,24 @@ Released   : 20081009
 					%>
 				</div>
 			</div>
-			<br> <%
- 	if (v.getCart() != null) {
+					
+					<%
+						} else if (v.showLogonForm()) {
+					%>
+			<div id="headerLogon">
+				<form method="post" action="<%=request.getContextPath()%>/store" id="headerLogonForm">
+				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
+						value="<%=Constants.FormName.LOGIN.getId()%>">
+				Email: <input type="text"  name="email" value="<%=v.getVisitor().getEmail()%>">
+				Password: <input type="password" name="password"> <input type="submit" value="Login"></form>
+			</div> 
+					
+					<%
+						} 
+					%>
+			
+					<%
+ 	if (!v.getVisitor().isAuthenticated() && v.getCart() != null) {
  %>
 				<div id="headerCart">
 					<%=v.getCart().getProducts().size()%> item(s) in Cart
@@ -78,14 +98,12 @@ Released   : 20081009
 				}
 			%>
 
-		</div>
-
-		<div id="searchBar">
 			<div id="searchField">
-
-				<input type="text" /> <input type="submit" value="Search" />
+				<form id="searchFieldForm"><input type="text" /> <input type="submit" value="Search" /> </form>
 			</div>
+
 		</div>
+
 
 		<%
 			if (v.getContentViews() != null)

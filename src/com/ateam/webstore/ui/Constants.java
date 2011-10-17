@@ -10,11 +10,13 @@ public interface Constants {
 		PRODUCT_ID ("productId"),
 		EMAIL ("email"),
 		LOGIN ("login"),
+		LOGOUT ("logout"),
 		FORM_ID ("formId"),
 		PASSWORD ("pw"),
 		CART_ID ("card"), 
 		WISHLIST ("wishList"),
 		REGISTER ("register"),
+		CHECKOUT ("checkout"),
 		ORDER_ID ("order"),
 		CATEGORY_ID ("category");
 		
@@ -37,7 +39,11 @@ public interface Constants {
 	 */
 	public enum FormName {
 		LOGIN ("login"),
-		REGISTER ("register");
+		REGISTER ("register"),
+		EDIT_CART ("editCart"),
+		ORDER_SHIPPING ("orderShipper"),
+		ORDER_PAYMENT ("orderShipper"),
+		ORDER_CONFIRM ("orderShipper");
 		
 		String id;
 		String handler;
@@ -59,6 +65,7 @@ public interface Constants {
 	 */
 	public static final String SESSION_ATTRIBUTE_VISITOR = "visitor";
 	public static final String SESSION_ATTRIBUTE_CART = "cart";
+	public static final String SESSION_ATTRIBUTE_ORDER = "order";
 	
 	/**
 	 * Request Attributes
@@ -72,5 +79,10 @@ public interface Constants {
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_HOME = "/home.jsp";
 	public static final String JSP_PRODUCT_DETAILS = "/prdouctDetails.jsp";
+	public static final String JSP_ORDER_CONFIRMATION = "/orderConfirmation.jsp";
+	public static final String JSP_ORDER_DETAILS = "/orderDetails.jsp";
+	public static final String JSP_ORDER_PAYMENT = "/orderPayment.jsp";
+	public static final String JSP_ORDER_PREVIEW = "/orderPreview.jsp";
+	public static final String JSP_ORDER_SHIPPING = "/orderShipping.jsp";
 	
 }
