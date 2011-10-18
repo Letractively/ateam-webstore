@@ -1,12 +1,4 @@
-		<div class="contentTitle">
-			<h1>Product List</h1>
-		</div>
-		<div class="contentText">
-			<p></p>
-			
-
-
-
+		
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
@@ -104,5 +96,4 @@
 		</tr>
 	</table>
 
-		</div>
-		
+	
