@@ -22,7 +22,7 @@
       </field>
       <field name="percentDiscount" persistence-modifier="persistent">
         <column name="percentDiscount" jdbc-type="DECIMAL" allows-null="false"/>
-      </field>
+      </field> 
       <field name="description" persistence-modifier="persistent">
         <column name="description" length="1000" jdbc-type="VARCHAR" allows-null="false"/>
       </field>
@@ -39,6 +39,559 @@
         <column name="lastUpdated"  jdbc-type="TIMESTAMP" allows-null="false"/>
       </field>
     </class>
+    
+
+    <class name="Person" table="person">
+    <inheritance strategy="new-table"/>
+   
+      <field name="id" persistence-modifier="persistent">
+        <column name="personID"/>
+      </field>
+   
+      <field name="login" persistence-modifier="persistent">
+        <column name="login" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="password" persistence-modifier="persistent">
+        <column name="password" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="securityQuesID" persistence-modifier="persistent">
+        <column name="securityQuestID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="securityAnswer" persistence-modifier="persistent">
+        <column name="securityAnswer" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field> 
+
+    </class>
+    
+    
+    <class name="SecurityQuestion" table="security_question">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="securityQuesID"/>
+      </field>
+      
+      <field name="question" persistence-modifier="persistent">
+        <column name="question" length="60" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Customer" table="customer">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="customerID"/>
+      </field>
+      
+      <field name="personID" persistence-modifier="persistent">
+        <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="firstName" persistence-modifier="persistent">
+        <column name="firstName" length="20" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="middleName" persistence-modifier="persistent">
+        <column name="middleName" length="20" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="lastName" persistence-modifier="persistent">
+        <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="dateOfBirth" persistence-modifier="persistent">
+        <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="sex" persistence-modifier="persistent">
+        <column name="sex" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Employee" table="employee">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="customerID"/>
+      </field>
+      
+      <field name="personID" persistence-modifier="persistent">
+        <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="firstName" persistence-modifier="persistent">
+        <column name="firstName" length="20" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="middleName" persistence-modifier="persistent">
+        <column name="middleName" length="20" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="lastName" persistence-modifier="persistent">
+        <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="dateOfBirth" persistence-modifier="persistent">
+        <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="sex" persistence-modifier="persistent">
+        <column name="sex" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="ssn" persistence-modifier="persistent">
+        <column name="ssn" length="9" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="jobTitle" persistence-modifier="persistent">
+        <column name="jobTitle" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="dateOfHire" persistence-modifier="persistent">
+        <column name="dateOfHire" jdbc-type="DATE" allows-null="false"/>
+      </field>
+      <field name="departmentCode" persistence-modifier="persistent">
+        <column name="departmentCode" length="4" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="salary" persistence-modifier="persistent">
+        <column name="salary" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Address" table="address">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="addressID"/>
+      </field>
+      
+      <field name="personID" persistence-modifier="persistent">
+        <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="streetAddress1" persistence-modifier="persistent">
+        <column name="streetAddress1" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="streetAddress2" persistence-modifier="persistent">
+        <column name="streetAddress2" length="50" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="city" persistence-modifier="persistent">
+        <column name="city" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="state" persistence-modifier="persistent">
+        <column name="state" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="zip" persistence-modifier="persistent">
+        <column name="zip" length="5" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="plusFour" persistence-modifier="persistent">
+        <column name="plusFour" length="4" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="defaultInd" persistence-modifier="persistent">
+        <column name="defaultInd" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="CreditCard" table="credit_card">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="cardID"/>
+      </field>
+      
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="cardNumber" persistence-modifier="persistent"> 
+        <column name="customerID" length="16" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="expMonth" persistence-modifier="persistent">
+        <column name="expMonth" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="expYear" persistence-modifier="persistent">
+        <column name="expYear" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="securityCode" persistence-modifier="persistent">
+        <column name="securityCode" length="4" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="nameOnCard" persistence-modifier="persistent">
+        <column name="nameOnCard" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="billingAddrID" persistence-modifier="persistent">
+        <column name="billingAddrID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="defaultInd" persistence-modifier="persistent">
+        <column name="defaultInd" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Cart" table="cart">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="cartID"/>
+      </field>
+      
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="lastUpdated" persistence-modifier="persistent">
+        <column name="lastUpdated" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+      <field name="lastOrderDate" persistence-modifier="persistent">
+        <column name="lastOrderDate" jdbc-type="DATE" allows-null="true"/>
+      </field>
+    
+    </class>
+    
+    
+    <class name="WishList" table="wish_list">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="wishListID"/>
+      </field>
+      
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="createdDate" persistence-modifier="persistent">
+        <column name="createdDate" jdbc-type="DATE" allows-null="false"/>
+      </field>
+      <field name="lastUpdated" persistence-modifier="persistent">
+        <column name="lastUpdated" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+    
+    </class>
+    
+    
+    <class name="SalesTax" table="sales_tax">
+    <inheritance strategy="new-table"/>
+    
+      <field name="state" persistence-modifier="persistent">
+        <column name="state" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+      <field name="percent" persistence-modifier="persistent">
+        <column name="percent" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Shipper" table="shipper">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="shipperID"/>
+      </field>
+      
+      <field name="shipperName" persistence-modifier="persistent">
+        <column name="shipperName" length="40" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="streetAddress1" persistence-modifier="persistent">
+        <column name="streetAddress1" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="streetAddress2" persistence-modifier="persistent">
+        <column name="streetAddress2" length="50" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="city" persistence-modifier="persistent">
+        <column name="city" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="state" persistence-modifier="persistent">
+        <column name="state" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="zip" persistence-modifier="persistent">
+        <column name="zip" length="5" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="plusFour" persistence-modifier="persistent">
+        <column name="plusFour" length="4" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="acctNumber" persistence-modifier="persistent">
+        <column name="acctNumber" length="20" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="acctMgrFirstNm" persistence-modifier="persistent">
+        <column name="acctMgrFirstNm" length="15" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="acctMgrLastNm" persistence-modifier="persistent">
+        <column name="acctMgrLastNm" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="ShippingCode" table="shipping_code">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="shippingCode"/>
+      </field>
+      
+      <field name="shipperID" persistence-modifier="persistent">
+        <column name="shipperID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="cost" persistence-modifier="persistent">
+        <column name="cost" jdbc-type="DECIMAL"	allows-null="false"/>
+      </field>
+      <field name="description" persistence-modifier="persistent">
+        <column name="description" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Orders" table="orders">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="orderID"/>
+      </field>
+      
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="numOfItems" persistence-modifier="persistent">
+        <column name="numOfItems" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="itemSubtotal" persistence-modifier="persistent">
+        <column name="itemSubtotal" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      <field name="shippingTotal" persistence-modifier="persistent">
+        <column name="shippingTotal" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      <field name="salesTaxPaid" persistence-modifier="persistent">
+        <column name="salesTaxPaid" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="cardID" persistence-modifier="persistent">
+        <column name="cardID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="timePlaced" persistence-modifier="persistent">
+        <column name="timePlaced" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+      <field name="timeShipped" persistence-modifier="persistent">
+        <column name="timeShipped" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+      <field name="shippingCode" persistence-modifier="persistent">
+        <column name="shippingCode" jdbc-type="SMALLINT" allows-null="false"/>
+      </field>
+      <field name="trackingNumber" persistence-modifier="persistent">
+        <column name="trackingNumber" length="20" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="transactNumber" persistence-modifier="persistent">
+        <column name="transactNumber" length="20" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="returnInd" persistence-modifier="persistent">
+        <column name="returnInd" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Role" table="role">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="roleCode"/>
+      </field>
+      
+      <field name="roleDescription" persistence-modifier="persistent">
+        <column name="roleDescription" length="20" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Vendor" table="vendor">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="vendorID"/>
+      </field>
+      
+      <field name="vendorName" persistence-modifier="persistent">
+        <column name="vendorName" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="streetAddress1" persistence-modifier="persistent">
+        <column name="streetAddress1" length="50" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="streetAddress2" persistence-modifier="persistent">
+        <column name="streetAddress2" length="50" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="city" persistence-modifier="persistent">
+        <column name="city" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="state" persistence-modifier="persistent">
+        <column name="state" length="2" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="zip" persistence-modifier="persistent">
+        <column name="zip" length="5" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="plusFour" persistence-modifier="persistent">
+        <column name="plusFour" length="4" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      <field name="firstOrderDate" persistence-modifier="persistent">
+        <column name="firstOrderDate" jdbc-type="DATE" allows-null="true"/>
+      </field>
+      <field name="lastOrderDate" persistence-modifier="persistent">
+        <column name="lastOrderDate" jdbc-type="DATE" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="ProductQtyAtVendor" table="product_qty_at_vendor">
+    <inheritance strategy="new-table"/>
+    
+      <field name="productID" persistence-modifier="persistent">
+        <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="vendorID" persistence-modifier="persistent">
+        <column name="vendorID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      
+      <field name="vendorSKU" persistence-modifier="persistent">
+        <column name="vendorSKU" length="15" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      <field name="qtyAvailable" persistence-modifier="persistent">
+        <column name="qtyAvailable" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="ProductsInCart" table="products_in_cart">
+    <inheritance strategy="new-table"/>
+    
+      <field name="cartID" persistence-modifier="persistent">
+        <column name="cartID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="productID" persistence-modifier="persistent">
+        <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      
+      <field name="quantity" persistence-modifier="persistent">
+        <column name="quantity" jdbc-type="SMALLINT" allows-null="false"/>
+      </field>
+      <field name="timeAdded" persistence-modifier="persistent">
+        <column name="timeAdded" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="ProductsInWishList" table="products_in_wish_list">
+    <inheritance strategy="new-table"/>
+    
+      <field name="wishListID" persistence-modifier="persistent">
+        <column name="wishListID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="productID" persistence-modifier="persistent">
+        <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      
+      <field name="quantity" persistence-modifier="persistent">
+        <column name="quantity" jdbc-type="SMALLINT" allows-null="false"/>
+      </field>
+      <field name="timeAdded" persistence-modifier="persistent">
+        <column name="timeAdded" jdbc-type="TIMESTAMP" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="ItemsOrdered" table="items_ordered">
+    <inheritance strategy="new-table"/>
+    
+      <field name="orderID" persistence-modifier="persistent">
+        <column name="orderID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="productID" persistence-modifier="persistent">
+        <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      
+      <field name="unitPrice" persistence-modifier="persistent">
+        <column name="unitPrice" jdbc-type="DECIMAL" allows-null="false"/>
+      </field>
+      <field name="itemQty" persistence-modifier="persistent">
+        <column name="itemQty" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="shippedInd" persistence-modifier="persistent">
+        <column name="shippedInd" length="1" jdbc-type="CHAR" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="EmployeeRoles" table="employee_roles">
+    <inheritance strategy="new-table"/>
+    
+      <field name="employeeID" persistence-modifier="persistent">
+        <column name="employeeID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="roleCode" persistence-modifier="persistent">
+        <column name="roleCode" jdbc-type="SMALLINT" allows-null="false"/>
+      </field>
+      
+      <field name="effectiveDate" persistence-modifier="persistent">
+        <column name="effectiveDate" jdbc-type="DATE" allows-null="false"/>
+      </field>
+      <field name="endDate" persistence-modifier="persistent">
+        <column name="endDate" jdbc-type="DATE" allows-null="true"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Review" table="review"
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="reviewID"/>
+      </field>
+      
+      <field name="productID" persistence-modifier="persistent">
+        <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="customerID" persistence-modifier="persistent">
+        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="review" persistence-modifier="persistent">
+        <column name="review" length="2000" jdbc-type="VARCHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Category" table="category">
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="categoryID"/>
+      </field>
+      
+      <field name="categoryName" persistence-modifier="persistent">
+        <column name="categoryName" length="20" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+    
+    
+    <class name="Subcategory" table="subcategory"
+    <inheritance strategy="new-table"/>
+    
+      <field name="id" persistence-modifier="persistent">
+        <column name="subcategoryID"/>
+      </field>
+      
+      <field name="categoryID" persistence-modifier="persistent">
+        <column name="categoryID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="subcategoryName" persistence-modifier="persistent">
+        <column name="subcategoryName" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
+      
+    </class>
+      
+    
     
  
   </package>
