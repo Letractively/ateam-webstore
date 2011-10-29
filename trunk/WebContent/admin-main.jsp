@@ -27,7 +27,7 @@ Released   : 20081009
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/admin.css" />
 
 <title><%=v.getTitle()%></title>
 </head>
@@ -43,31 +43,31 @@ Released   : 20081009
 					<%
 						if (v.showVisitorInfo()) {
 					%>
-			<div id="headerVisitor"><%=v.getGreeting()%><br>
-				<%
-					if (v.getVisitor().isAuthenticated()) {
-				%>
-				<a class="headerLink" href="<%=request.getContextPath()%>/store?logout">Logout</a>
-				<%
-					} else {
-				%>
-				<a class="headerLink" href="<%=request.getContextPath()%>/store?login">Login</a>
-				<%
-					}
-				%>
+			<div id="headerVisitor"><%=v.getGreeting()%>
+				<div class="actionLink">
+					<%
+						if (v.getVisitor().isAuthenticated()) {
+					%>
+					<a href="<%=request.getContextPath()%>/store?logout">Logout</a>
+					<%
+						} else {
+					%>
+					<a href="<%=request.getContextPath()%>/store?login">Login</a>
+					<%
+						}
+					%>
+				</div>
 			</div>
-			<br>
 					
 					<%
 						} else if (v.showLogonForm()) {
 					%>
 			<div id="headerLogon">
 				<form method="post" action="<%=request.getContextPath()%>/store" id="headerLogonForm">
-				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.LOGIN.getId()%>">
+				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
+						value="<%=Constants.FormName.LOGIN.getId()%>">
 				Email: <input type="text"  name="email" value="<%=v.getVisitor().getEmail()%>">
-				Password: <input type="password" name="password"> <input type="submit" value="Login">
-				<a class="headerLink" href="<%=request.getContextPath()%>/store?register"> &nbsp Or Register</a>
-				</form>
+				Password: <input type="password" name="password"> <input type="submit" value="Login"></form>
 			</div> 
 					
 					<%
@@ -75,11 +75,13 @@ Released   : 20081009
 					%>
 			
 					<%
- 	if (v.getCart() != null) {
+ 	if (!v.getVisitor().isAuthenticated() && v.getCart() != null) {
  %>
 				<div id="headerCart">
-					<%=v.getCart().getProducts().size()%> item(s) in Cart<br>
-					<a class="headerLink" href="<%=request.getContextPath()%>/store?cart=12345">View Cart</a>
+					<%=v.getCart().getProducts().size()%> item(s) in Cart
+					<div class="actionLink">
+						<a href="<%=request.getContextPath()%>/store?cart=12345">View Cart</a>
+					</div>
 				</div> <%
  	}
  %>
@@ -112,9 +114,7 @@ Released   : 20081009
 		</div>
 		<div class="contentText">
 			<p><%if (cv.getContentText() != null) { cv.getContentText();}%></p>
-			
-			<%if (cv.getJspf() != null) { %><jsp:include page="<%=cv.getJspf()%>" /><% }%>
-			
+			<jsp:include page="<%=cv.getJspf()%>" />
 		</div>
 		<%
 			}

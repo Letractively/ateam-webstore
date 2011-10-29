@@ -3,7 +3,7 @@ package com.ateam.webstore.ui.forms;
 import com.ateam.webstore.ui.Constants.FormName;
 import com.ateam.webstore.ui.views.View;
 
-public abstract class FormSubmission {
+public class FormSubmission {
 	/**
 	 * The action
 	 */

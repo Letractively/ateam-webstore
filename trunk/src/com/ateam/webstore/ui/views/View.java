@@ -24,6 +24,7 @@ public class View {
 	 * 
 	 */
 	public View () {
+		contentViews = new ArrayList<ContentView>();
 		navLinks = new HashMap<String,String>();
 		contentViews = new ArrayList<ContentView>();
 		visitor = new Visitor(); 
@@ -81,6 +82,10 @@ public class View {
 	public void setContentViews(List<ContentView> contentViews) {
 		this.contentViews = contentViews;
 	}
+	public void addContentView(ContentView contentView) {
+		this.contentViews.add(contentView);
+	}
+
 	public Visitor getVisitor() {
 		return visitor;
 	}
@@ -93,7 +98,11 @@ public class View {
 	 */
 	public String getGreeting() {
 		String greet = "Welcome";
-		if (visitor != null && visitor.getEmail() != null
+		
+		if (visitor.getCustomer().getFirstName() != null) {
+			greet+=visitor.getCustomer().getFirstName();
+		}
+		else if (visitor != null && visitor.getEmail() != null
 				&& !visitor.getEmail().isEmpty()) {
 			greet+=" "+visitor.getEmail();
 		}
@@ -118,5 +127,9 @@ public class View {
 	}
 	public void setShowVisitorInfo(boolean showVisitorInfo) {
 		this.showVisitorInfo = showVisitorInfo;
+	}
+	
+	public String toString() {
+		return "[View :: "+this.getClass().getName()+", "+contentViews.size()+" content views ]";
 	}
 }

@@ -10,24 +10,29 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  
+      <listener>
+      <listener-class>com.ateam.webstore.servlets.AteamContextListener</listener-class>
+    </listener>
+  
 	<servlet>
-        <servlet-name>MainServlet</servlet-name>
-        <servlet-class>com.ateam.webstore.servlets.MainServlet</servlet-class>
+        <servlet-name>Store</servlet-name>
+        <servlet-class>com.ateam.webstore.servlets.StoreFrontServlet</servlet-class>
     </servlet>
     
     <servlet>
-        <servlet-name>FormHandler</servlet-name>
-        <servlet-class>com.ateam.webstore.servlets.SubmissionServlet</servlet-class>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>com.ateam.webstore.servlets.AdminServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>MainServlet</servlet-name>
+        <servlet-name>Store</servlet-name>
         <url-pattern>/store</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>FormHandler</servlet-name>
-        <url-pattern>/handler</url-pattern>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     
 </web-app>

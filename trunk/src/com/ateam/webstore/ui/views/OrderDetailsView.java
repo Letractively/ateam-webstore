@@ -11,6 +11,10 @@ import com.ateam.webstore.model.Orders;
 public class OrderDetailsView extends View{
 	Orders order;
 
+	public OrderDetailsView(View v) {
+		super(v);
+	}
+
 	public Orders getOrder() {
 		return order;
 	}

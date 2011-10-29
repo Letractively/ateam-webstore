@@ -11,13 +11,10 @@ import com.ateam.webstore.model.Orders;
  *
  */
 public class OrderPaymentView extends View {
-	Orders order;
 	Collection<CreditCard> userCards;
-	public Orders getOrder() {
-		return order;
-	}
-	public void setOrder(Orders order) {
-		this.order = order;
+
+	public OrderPaymentView(View v) {
+		super(v);
 	}
 	public Collection<CreditCard> getUserCards() {
 		return userCards;

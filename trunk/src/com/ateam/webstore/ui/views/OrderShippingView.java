@@ -5,6 +5,7 @@ import java.util.Collection;
 import com.ateam.webstore.model.Address;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.Shipper;
+import com.ateam.webstore.model.ShippingCode;
 
 /**
  * Presents the shipping options to a user. 
@@ -13,17 +14,12 @@ import com.ateam.webstore.model.Shipper;
  *
  */
 public class OrderShippingView extends View {
-	Orders order;
+
 	Collection<Address> userAddresses;
-	Collection<Shipper> shippers;
-	
+	Collection<ShippingCode> shippers;
 
-	public Orders getOrder() {
-		return order;
-	}
-
-	public void setOrder(Orders order) {
-		this.order = order;
+	public OrderShippingView(View v) {
+		super(v);
 	}
 
 	public Collection<Address> getUserAddresses() {
@@ -34,11 +30,11 @@ public class OrderShippingView extends View {
 		this.userAddresses = userAddresses;
 	}
 
-	public Collection<Shipper> getShippers() {
+	public Collection<ShippingCode> getShippers() {
 		return shippers;
 	}
 
-	public void setShippers(Collection<Shipper> shippers) {
+	public void setShippers(Collection<ShippingCode> shippers) {
 		this.shippers = shippers;
 	}
 }

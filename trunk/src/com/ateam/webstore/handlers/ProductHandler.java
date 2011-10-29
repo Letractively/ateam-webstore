@@ -1,4 +1,4 @@
-package com.ateam.webstore.servlets;
+package com.ateam.webstore.handlers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -90,14 +90,12 @@ public class ProductHandler extends Handler {
 	 */
 	public HomePageView getHomePageView() {
 		
-		HomePageView hp = new HomePageView(getMainView(req));
+		HomePageView hp = new HomePageView(getMainView());
 		
 		hp.setFeaturedProducts(getFeaturedProducts());
 		
-		ContentView cv = new ContentView();
-		cv.setContentHeader("Featured Products");
+		ContentView cv = new ContentView(JSP_HOME, "Featured Products");
 		cv.setContentText("Check out these winners...");
-		cv.setJspf(JSP_HOME);
 		
 		hp.getContentViews().add(cv);
 

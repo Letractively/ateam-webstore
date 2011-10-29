@@ -1,17 +1,15 @@
 package com.ateam.webstore.ui.models;
 
+import com.ateam.webstore.model.Customer;
+import com.ateam.webstore.model.Employee;
+
 public class Visitor {
-	String id;
+	Customer customer;
+	Employee employee;
 	String email = "";
 	String name = "";
 	boolean authenticated;
 	boolean known;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -33,8 +31,7 @@ public class Visitor {
 	@Override
 	public String toString() {
 		
-		return "[ Visitor :: id="+id+", " +
-				"email="+email+","+
+		return "[ Visitor :: email="+email+","+
 				"name="+name+","+
 				"authenticated="+authenticated+","+
 				"known="+known
@@ -46,6 +43,18 @@ public class Visitor {
 	}
 	public void setKnown(boolean known) {
 		this.known = known;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
 }

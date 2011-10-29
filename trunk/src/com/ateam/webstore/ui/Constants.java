@@ -3,6 +3,9 @@ package com.ateam.webstore.ui;
 
 public interface Constants {
 	
+	
+	public static final String LOGGER_NAME = "ateam";
+	
 	/**
 	 * URL Parameters
 	 */
@@ -11,14 +14,32 @@ public interface Constants {
 		EMAIL ("email"),
 		LOGIN ("login"),
 		LOGOUT ("logout"),
+		FORGOT ("forgot"),
 		FORM_ID ("formId"),
 		PASSWORD ("pw"),
-		CART_ID ("card"), 
+		CART_ID ("cart"), 
+		CARD_ID ("card"),
+		ADDRESS ("address"),
 		WISHLIST ("wishList"),
 		REGISTER ("register"),
 		CHECKOUT ("checkout"),
 		ORDER_ID ("order"),
-		CATEGORY_ID ("category");
+		CATEGORY_ID ("category"),
+		SHIPPING_CODE ("shippingCode"),
+		CARD_NAME ("cardName"),
+		CARD_TYPE ("cardType"),
+		CARD_ACCOUNT_NUMBER ("cardAcctNum"),
+		CARD_EXPIRATION ("cardExp"),
+		CARD_SECURITY_CODE ("cardCode"),
+		USE_SHIPPING ("useShipping"),
+		NAME ("name"),
+		ADDRESS_1 ("addr1"),
+		ADDRESS_2 ("addr2"),
+		CITY ("city"),
+		STATE ("state"),
+		ZIP ("zip")
+		
+		;
 		
 		String id;
 		Parameters (String id) {
@@ -41,9 +62,11 @@ public interface Constants {
 		LOGIN ("login"),
 		REGISTER ("register"),
 		EDIT_CART ("editCart"),
-		ORDER_SHIPPING ("orderShipper"),
-		ORDER_PAYMENT ("orderShipper"),
-		ORDER_CONFIRM ("orderShipper");
+		ORDER_SHIPPING ("orderShipping"),
+		ORDER_PAYMENT ("orderPayment"),
+		ORDER_CONFIRM ("orderConfirm"),
+		ADDRESS ("address"),
+		CREDIT_CARD ("creditCard");
 		
 		String id;
 		String handler;
@@ -76,13 +99,16 @@ public interface Constants {
 	 * JSPs
 	 */
 	public static final String JSP_MAIN = "/main.jsp";
+	public static final String JSP_ERROR = "/error.jsp";
+	public static final String JSP_ADMIN_MAIN = "/admin-main.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_HOME = "/home.jsp";
 	public static final String JSP_PRODUCT_DETAILS = "/prdouctDetails.jsp";
 	public static final String JSP_ORDER_CONFIRMATION = "/orderConfirmation.jsp";
 	public static final String JSP_ORDER_DETAILS = "/orderDetails.jsp";
 	public static final String JSP_ORDER_PAYMENT = "/orderPayment.jsp";
-	public static final String JSP_ORDER_PREVIEW = "/orderPreview.jsp";
 	public static final String JSP_ORDER_SHIPPING = "/orderShipping.jsp";
+	public static final String JSP_ADDRESS = "/address.jsp";
+	public static final String JSP_CREDIT_CARD = "/creditCard.jsp";
 	
 }

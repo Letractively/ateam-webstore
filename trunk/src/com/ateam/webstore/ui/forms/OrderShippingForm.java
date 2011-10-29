@@ -1,8 +1,7 @@
 package com.ateam.webstore.ui.forms;
 
 import com.ateam.webstore.model.Address;
-import com.ateam.webstore.model.Shipper;
-import com.ateam.webstore.ui.forms.FormSubmission;
+import com.ateam.webstore.model.ShippingCode;
 
 /**
  * Represents the users shipping preference for an order.
@@ -10,10 +9,21 @@ import com.ateam.webstore.ui.forms.FormSubmission;
  *
  */
 public class OrderShippingForm extends FormSubmission {
-	/**
-	 * The order ID
-	 */
-	String id;
+
 	Address address;
-	Shipper shipper;
+	ShippingCode shippingCode;
+	
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public ShippingCode getShippingCode() {
+		return shippingCode;
+	}
+	public void setShippingCode(ShippingCode shippingCode) {
+		this.shippingCode = shippingCode;
+	}
+	
 }

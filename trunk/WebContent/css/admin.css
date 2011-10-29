@@ -12,7 +12,7 @@ body {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #F1F5F8;
-	background-color:#697281;
+	background-color:#4d4d4d;
 }
 *
 {
@@ -26,13 +26,13 @@ body {
   height:auto;
   position: relative; 
   overflow: hidden; 
-  background: #697281 url(images/background.png) repeat-y;
+  background: #697281 url(images/background-black-border.png) repeat-y;
   width: 750px;
 }
 
 #header
 {
-background-image:url(images/header.png);
+background-image:url(images/header-red-square.png);
 background-repeat:no-repeat;
 height:130px;
 width:750px;
@@ -74,6 +74,21 @@ font-weight:bold;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+#headerVisitor .actionLink a
+{
+color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+font-family:Arial, Helvetica, sans-serif;
+float:right;
+}
+
+#headerVisitor .actionLink a:hover
+{
+color:#E4EBFA;
+
+}
+
 #headerLogon
 {
 position:relative;
@@ -81,7 +96,7 @@ left:-10px;
 top:30px;
 color:#DEE6F8;
 text-align:right;
-font-size:12px;
+font-size:10px;
 font-weight:bold;
 font-family:Arial, Helvetica, sans-serif;
 }
@@ -106,23 +121,15 @@ border-style:inset;
 border-width:thin;
 }
 
-#headerLogonForm input[type=password] { 
-width: 90px;
-font-size:8pt;
-border-style:inset;
-border-width:thin;
-}
-
 #headerLogonForm input[type=submit] { 
 font-size:8pt;
 }
-
 
 #headerCart
 {
 position:relative;
 left:-10px;
-top:45px;
+top:40px;
 color:#DEE6F8;
 text-align:right;
 font-size:12px;
@@ -130,7 +137,7 @@ font-weight:bold;
 font-family:Arial, Helvetica, sans-serif;
 }
 
-a.headerLink
+#headerCart .actionLink a
 {
 color:#FFFFFF;
 font-size:10px;
@@ -139,7 +146,7 @@ font-family:Arial, Helvetica, sans-serif;
 float:right;
 }
 
-a.headerLink:hover
+#headerCart .actionLink a:hover
 {
 color:#E4EBFA;
 }
@@ -158,7 +165,7 @@ font-family:Arial, Helvetica, sans-serif;
 
 #searchBar
 {
-background-image:url(images/bar.png);
+background-image:url(images/bar-grey.png);
 background-repeat:no-repeat;
 height:40px;
 width:750px;
@@ -200,7 +207,7 @@ font-size:8pt;
 
 #bar
 {
-background-image:url(images/bar-invert.png);
+background-image:url(images/bar-grey.png);
 background-repeat:no-repeat;
 height:40px;
 width:750px;
@@ -234,7 +241,7 @@ height:44px;
 margin-top:20px;
 margin-left:25px;
 margin-right:25px;
-background-image:url(images/tab_back.png);
+background-image:url(images/tab_back-grey.png);
 background-repeat:no-repeat;
 
 }
@@ -281,19 +288,19 @@ padding:0;
 a
 {
 text-decoration:none;
-color:#223F8D;
+color:#4d4d4d;
 }
 
 a:hover
 {
-color:#5478D6;
+color:#000000;
 }
 
 
 #footer {
 width: 750px;
 height:49px;
-background: url(images/footer.png) no-repeat;
+background: url(images/footer-black-border-square.png) no-repeat;
 text-align:center;
 font-size:9px;
 color:#223F8D;

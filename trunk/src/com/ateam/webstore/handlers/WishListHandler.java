@@ -1,4 +1,4 @@
-package com.ateam.webstore.servlets;
+package com.ateam.webstore.handlers;
 
 import javax.servlet.http.HttpServletRequest;
 

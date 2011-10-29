@@ -6,6 +6,11 @@ public class ContentView {
 	String contentText;
 	String jspf;
 
+	public ContentView (String jspf, String contentHeader) {
+		this.jspf = jspf;
+		this.contentHeader = contentHeader;
+	}
+	
 	public String getContentHeader() {
 		return contentHeader;
 	}
