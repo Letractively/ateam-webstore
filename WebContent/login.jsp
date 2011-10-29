@@ -12,7 +12,9 @@
 						Email:<br>
 					<input type="text" name="email" value="<%=v.getVisitor().getEmail()%>"><br><br>
 						Password:<br>
-					<input type="password" name="password"><br><br>
+					<input type="password" name="password"><br>
+					<a href="<%=request.getContextPath()%>/store?register">Register</a>    <a href="<%=request.getContextPath()%>/store?forgot">Forgot Password?</a>
+					<br><br>
 					<input type="checkbox" name="rememberMe">Remember Me<br><br>
 					<input type="submit" name="submit" value="Login">
 			</form>

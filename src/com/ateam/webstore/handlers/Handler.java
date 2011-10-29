@@ -1,4 +1,4 @@
-package com.ateam.webstore.servlets;
+package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +20,9 @@ import com.ateam.webstore.ui.views.View;
  * @author bdrew
  *
  */
-public abstract class Handler implements Constants {
+public class Handler implements Constants {
 	
-	static Logger l = Logger.getLogger(Handler.class.getName().toString());
+	static Logger l = Logger.getLogger(Constants.LOGGER_NAME);
 	HttpServletRequest req;
 	RepositoryService service;
 	
@@ -46,7 +46,7 @@ public abstract class Handler implements Constants {
 	 * Builds the main site View
 	 * @return
 	 */
-	public View getMainView(HttpServletRequest req) {
+	public View getMainView() {
 		l.fine("building main view");
 		View v = new View();
 		v.setTitle("A+Team WebStore");

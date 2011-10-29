@@ -1,12 +1,11 @@
-package com.ateam.webstore.servlets;
+package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ateam.webstore.ui.Constants.FormName;
-import com.ateam.webstore.ui.Constants.Parameters;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.forms.RegistrationForm;
@@ -29,15 +28,11 @@ public class VisitorHandler extends Handler {
 	 */
 	public View getLoginView () {
 		
-		View l = getMainView(req);
+		View l = getMainView();
 		
 		l.setShowLogonForm(false);
 		
-		ContentView cv = new ContentView();
-		cv.setContentHeader("Login");
-		//cv.setContentText("Please Login");
-		cv.setJspf(JSP_LOGIN);
-		l.getContentViews().add(cv);
+		l.addContentView(new ContentView(JSP_LOGIN, "Login"));
 		
 		return l;
 	}
@@ -68,6 +63,8 @@ public class VisitorHandler extends Handler {
 		l.info("Processing Login Request from session "+req.getSession().getId()); 
 		Visitor v = login.getVistor();
 		//TODO implement a "real" authentication mechanism.
+		v.setCustomer(new Customer("John", "Doe", null));
+		
 		v.setAuthenticated(true);
 		v.setKnown(true);
 		v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
@@ -96,7 +93,6 @@ public class VisitorHandler extends Handler {
 		
 		LoginForm login = new LoginForm();
 		Visitor v = new Visitor();
-		v.setId("12345");
 		v.setEmail(req.getParameter(Parameters.PRODUCT_ID.getId()));
 		login.setVisitor(v);
 		
@@ -131,6 +127,11 @@ public class VisitorHandler extends Handler {
 		ProductHandler ph = new ProductHandler(req);
 		View rv = ph.getHomePageView();
 		return rv;
+	}
+
+	public View getForgotPasswordView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -8,9 +8,14 @@ import com.ateam.webstore.model.CreditCard;
  *
  */
 public class OrderPaymentForm extends FormSubmission  {
-	/**
-	 * The order id.
-	 */
-	String id;
+
 	CreditCard card;
+
+	public CreditCard getCard() {
+		return card;
+	}
+
+	public void setCard(CreditCard card) {
+		this.card = card;
+	}
 }
