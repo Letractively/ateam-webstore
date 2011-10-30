@@ -1,15 +1,19 @@
 package com.ateam.webstore.ui.views;
 
-import com.ateam.webstore.ui.models.Product;
+import java.util.List;
+
+import com.ateam.webstore.model.Product;
 
 public class ProductListView extends View {
-	Product product;
+	List<Product> product;
 
-	public Product getProduct() {
+	public List<Product> getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+
+	
 }

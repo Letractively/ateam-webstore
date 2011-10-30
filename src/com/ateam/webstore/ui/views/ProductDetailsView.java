@@ -1,6 +1,6 @@
 package com.ateam.webstore.ui.views;
 
-import com.ateam.webstore.ui.models.Product;
+import com.ateam.webstore.model.Product;
 
 public class ProductDetailsView extends View {
 	Product product;
