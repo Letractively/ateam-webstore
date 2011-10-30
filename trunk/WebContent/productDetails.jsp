@@ -1,30 +1,29 @@
-	
-<?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="com.ateam.webstore.ui.views.ContentView"%>
+<%@page import="com.ateam.webstore.ui.views.*"%>
+<%@page import="com.ateam.webstore.ui.Constants"%>
+<%@page import="com.ateam.webstore.model.Product"%>
+<%@page import="com.ateam.webstore.ui.views.ProductDetailsView"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
-				<p><img src:"" alt"product Image"/>
-				<b>Samsung UN55D8000 55-Inch 1080p 240Hz 3D LED HDTV (Silver)</b>
-				<br>by &nbsp;<a href="/ateam/store?product=null">Samsung</a>
-				<br>Rating: 4 out of 5 stars
-				<br><button type="Button">Add to Cart </button>
-				<br><button type="Button">Add to Wishlist </button></p> 
+<%ProductDetailsView v = (ProductDetailsView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
+Product p=v.getProduct();
+%>	
+<h3>Product Details</h3>
+			<table>
+				<tr>
+						<td><%=p.getImagePath() %></td>
+						<td><%=p.getProductName() %>
+						<br>by Samsumg
+						<br><%=p.getPrice() %>
+						<br><%=p.getSaleInd() %> </td>
+						<td><input type="button" value="Add to cart">
+						<br>or<br><input type="button" value="Add to wishlist"></td>
+				</tr>
 				
-				<hr>
-				Price:<font color="red">1299.99</font>
-				<br><font size=4 color="green">In Stock</font>
-				
-				<hr>	
-				<h3> Technical Details</h3>
-				QWERTY Remote Control
-				<br>Samsung Smart TV
-				<br>Two pairs of 3D glasses included in box
-				<br>Full HD 1080p resolution
-				
-				<hr>	
-				<h3> Product Details</h3>
-				Product Dimensions: 1.2 x 48.5 x 27.8 inches ; 35.7 pounds
-				<br>Shipping Weight: 56 pounds (<a href="/ateam/store?product=null">View shipping rates and policies</a>)
-				<br>Shipping: Currently, item can be shipped only within the U.S.
-				<br>Item model number: UN55D8000YFXZA</br>
-
-
-
+				<tr>
+						<td>Product Description
+						<br><%= p.getDescription() %></td>
+						
+		
+				</table>
