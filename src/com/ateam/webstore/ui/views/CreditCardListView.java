@@ -1,19 +1,21 @@
 package com.ateam.webstore.ui.views;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.ateam.webstore.model.CreditCard;
 
 public class CreditCardListView extends View {
-	List<CreditCard> creditcard;
+	Collection<CreditCard> creditcard;
 
-	public List<CreditCard> getCreditcard() {
+	public Collection<CreditCard> getCreditcard() {
 		return creditcard;
 	}
 
-	public void setCreditcard(List<CreditCard> creditcard) {
+	public void setCreditcard(Collection<CreditCard> creditcard) {
 		this.creditcard = creditcard;
 	}
+
+	
 	
 	
 

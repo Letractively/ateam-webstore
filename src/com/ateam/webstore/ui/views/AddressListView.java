@@ -1,17 +1,17 @@
 package com.ateam.webstore.ui.views;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.ateam.webstore.model.Address;
 
 public class AddressListView extends View {
-	List<Address> address;
+	Collection<Address> address;
 
-	public List<Address> getAddress() {
+	public Collection<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(List<Address> address) {
+	public void setAddress(Collection<Address> address) {
 		this.address = address;
 	}
 
