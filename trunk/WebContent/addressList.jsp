@@ -14,7 +14,7 @@
 			<%  for (Address addr : v.getAddress()) { %>
 
 				<tr>
-						<td><%= addr.getStreetAddress1() %>
+						<td><%= addr. getStreetAddress1() %>
 						<br> <%= addr.getStreetAddress2() %>
 						<br><%= addr.getCity() %>
 						<br> <%= addr.getState() %><%= addr.getZip() %></td>
