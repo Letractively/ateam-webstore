@@ -1,15 +1,15 @@
 package com.ateam.webstore.ui.views;
 
-import java.util.List;
-
+import java.util.Collection;
+import com.ateam.webstore.model.*;
 public class RegistrationView extends View {
-	List<String> securityQuestions;
-
-	public List<String> getSecurityQuestions() {
+	Collection<SecurityQuestion> securityQuestions;
+       
+	public Collection<SecurityQuestion> getSecurityQuestions() {
 		return securityQuestions;
 	}
 
-	public void setSecurityQuestions(List<String> securityQuestions) {
+	public void setSecurityQuestions(Collection<SecurityQuestion> securityQuestions) {
 		this.securityQuestions = securityQuestions;
 	}
 }
