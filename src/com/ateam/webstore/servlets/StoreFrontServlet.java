@@ -52,12 +52,10 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				VisitorHandler vh = new VisitorHandler(req);
 				v = vh.getLogoutView();
 			}
-
 			else if (req.getParameterMap().containsKey(Parameters.FORGOT.getId())) {
 				VisitorHandler vh = new VisitorHandler(req);
 				v = vh.getForgotPasswordView();
 			}
-		
 			else if (req.getParameterMap().containsKey(Parameters.REGISTER.getId())) {
 				VisitorHandler vh = new VisitorHandler(req);
 				v = vh.getRegistrationView();
