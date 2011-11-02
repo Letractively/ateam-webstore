@@ -7,21 +7,18 @@
 	pageEncoding="UTF-8"%>
 
 <%ProductListView v = (ProductListView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
-int i;
-int count = v.getProduct().size();
 
 %>
 
-
-<h3>Products List</h3>
-<table>
-	<%  for (i = 0; i < count; i++) { %>
+<h3><%=v.getListTitle()%></h3>
+<table width="100%">
+	<%  for (Product p : v.getProducts()) { %>
 
 	<tr>
-		<td><%= v.getProduct().get(i).getImagePath() %></td>
-		<td><%= v.getProduct().get(i).getProductName() %></td>
-		<td><%= v.getProduct().get(i).getPrice() %></td>
-		<td><%= v.getProduct().get(i).getSaleInd() %></td>
+		<td><img src="<%=request.getContextPath()%>/<%=p.getImagePath()%>small.png"></td>
+		<td><a href="<%=request.getContextPath()%>/store?product=<%=p.getId()%>"><%=p.getProductName()%></a></td>
+		<td><%=p.getPrice()%></td>
+		<td><%=p.getDescription()%></td>
 
 	</tr>
 	<%  } %>

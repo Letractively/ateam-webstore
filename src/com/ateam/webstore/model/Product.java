@@ -45,7 +45,7 @@ public class Product extends BaseModel implements Serializable {
 	 */
 	private String description;
 	
-	private String imagePath;
+	private String imagePath = "/images/no_img/";
 	
 	private Date firstOffered;
 	
