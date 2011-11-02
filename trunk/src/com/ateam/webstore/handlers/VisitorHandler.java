@@ -1,11 +1,13 @@
 package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Customer;
+import com.ateam.webstore.model.SecurityQuestion;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.forms.RegistrationForm;
@@ -43,10 +45,15 @@ public class VisitorHandler extends Handler {
 	 * @return
 	 */
 	public RegistrationView getRegistrationView() {
-		RegistrationView r = new RegistrationView();
-		List<String> sec = new ArrayList<String>();
+		RegistrationView r = new RegistrationView(getMainView());
+		
+		//TODO Use SecurityQuestionService to get questions from DB
+		Collection<SecurityQuestion> sec = new ArrayList<SecurityQuestion>();
 		r.setSecurityQuestions(sec);
-		return null;
+		
+		r.addContentView(new ContentView(JSP_REGISTRATION, "Register"));
+		
+		return r;
 		
 	}
 	

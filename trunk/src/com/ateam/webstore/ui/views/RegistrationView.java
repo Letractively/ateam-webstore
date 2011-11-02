@@ -5,6 +5,10 @@ import com.ateam.webstore.model.*;
 public class RegistrationView extends View {
 	Collection<SecurityQuestion> securityQuestions;
        
+	public RegistrationView(View mainView) {
+		super(mainView);
+	}
+
 	public Collection<SecurityQuestion> getSecurityQuestions() {
 		return securityQuestions;
 	}

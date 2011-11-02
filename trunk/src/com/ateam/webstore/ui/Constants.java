@@ -24,8 +24,8 @@ public interface Constants {
 		WISHLIST ("wishList"),
 		REGISTER ("register"),
 		CHECKOUT ("checkout"),
-		PRODUCTSELECT("ps"),
-		PRODUCT("product"),
+		PRODUCTSELECT ("ps"),
+		PRODUCT ("product"),
 		ORDER_ID ("order"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
@@ -108,6 +108,7 @@ public interface Constants {
 	public static final String JSP_ERROR = "/error.jsp";
 	public static final String JSP_ADMIN_MAIN = "/admin-main.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
+	public static final String JSP_REGISTRATION = "/registration.jsp";
 	public static final String JSP_HOME = "/home.jsp";
 	public static final String JSP_PRODUCT_DETAILS = "/productDetails.jsp";
 	public static final String JSP_PRODUCT_LIST = "/productList.jsp";

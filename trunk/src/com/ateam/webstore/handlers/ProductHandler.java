@@ -1,6 +1,5 @@
 package com.ateam.webstore.handlers;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -11,9 +10,8 @@ import com.ateam.webstore.model.Product;
 import com.ateam.webstore.service.impl.ProductService;
 import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
-import com.ateam.webstore.ui.views.HomePageView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
-import com.ateam.webstore.ui.views.View;
+import com.ateam.webstore.ui.views.ProductListView;
 
 /**
  * Handles all Servlet requests related to Products
@@ -30,7 +28,7 @@ public class ProductHandler extends Handler {
 	 */
 	public ProductHandler(HttpServletRequest req) {
 		super(req);
-		//service = new ProductService();
+		service = new ProductService();
 	}
 	
 	/**
@@ -88,14 +86,14 @@ public class ProductHandler extends Handler {
 	 * Gets the home page view.
 	 * @return
 	 */
-	public HomePageView getHomePageView() {
+	public ProductListView getHomePageView() {
 		
-		HomePageView hp = new HomePageView(getMainView());
+		ProductListView hp = new ProductListView(getMainView());
 		
-		hp.setFeaturedProducts(getFeaturedProducts());
+		hp.setProducts(getDummyProductList());
 		
 		ContentView cv = new ContentView(JSP_HOME, "Featured Products");
-		cv.setContentText("Check out these winners...");
+		//cv.setContentText("Check out these winners...");
 		
 		hp.getContentViews().add(cv);
 
@@ -108,10 +106,19 @@ public class ProductHandler extends Handler {
 	 * @param category
 	 * @return
 	 */
-	public View getCategoryView(String category) {
-		// TODO Auto-generated method stub
-		//TODO Should return ProductListView
-		return null;
+	public ProductListView getCategoryView(String category) {
+		ProductListView hp = new ProductListView(getMainView());
+		
+		hp.setProducts(getDummyProductList());
+		
+		ContentView cv = new ContentView(JSP_PRODUCT_LIST, "A Category");
+		//cv.setContentText("Check out these winners...");
+		
+		hp.getContentViews().add(cv);
+
+		return hp;
+		
+
 	}
 
 	
@@ -133,8 +140,9 @@ public class ProductHandler extends Handler {
 	 * @return
 	 */
 	public ProductDetailsView getProductView(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductDetailsView pv = new ProductDetailsView(getMainView());
+		pv.setProduct(getDummyProduct());
+		return pv;
 	}
 	
 	/**
@@ -143,5 +151,29 @@ public class ProductHandler extends Handler {
 	public void update(ProductEditForm update) {
 		service.store(update.getProduct());
 	}
+	
+	private Collection<Product> getDummyProductList() {
+		Collection<Product> products = new ArrayList<Product>();
+		
+		products.add(new Product("TV", 699.99, "A television"));
+		products.add(new Product("Tablet", 299.99, "A tablet"));
+		products.add(new Product("Laptop", 999.99, "A laptop"));
+		products.add(new Product("Blu-ray player", 99.99, "A blue-ray player"));
+		products.add(new Product("Stereo", 199.99, "A stero"));
+		products.add(new Product("PS3", 299.99, "A playstation"));
+		
+		return products;
+	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	private Product getDummyProduct() {
+		
+		Product prod = new Product("TV", 699.99, "A television");
+		//prod.setImagePath("/images/no_img/");
+		return prod;
+		
+	}
 }

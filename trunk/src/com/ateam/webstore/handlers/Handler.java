@@ -52,9 +52,9 @@ public class Handler implements Constants {
 		v.setTitle("A+Team WebStore");
 		v.setHeaderTitle(v.getTitle());
 		Map<String, String> navLinks = new HashMap<String,String>();
-		navLinks.put("Category 1", req.getContextPath()+"/store?category=cat1");
-		navLinks.put("Category 2", req.getContextPath()+"/store?category=cat2");
-		navLinks.put("Category 3", req.getContextPath()+"/store?category=cat3");
+		navLinks.put("Electronics", req.getContextPath()+"/store?category=12121");
+		navLinks.put("Furniture", req.getContextPath()+"/store?category=12121");
+		navLinks.put("Homegoods", req.getContextPath()+"/store?category=12121");
 		v.setNavLinks(navLinks);
 
 		v = setVisitorInfo(v);

@@ -6,8 +6,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%HomePageView v = (HomePageView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
-Collection<Product> products = v.getFeaturedProducts();
+<%ProductListView v = (ProductListView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
+Collection<Product> products = v.getProducts();
 %>
 
 	<table class="contentTable">
@@ -23,6 +23,7 @@ Collection<Product> products = v.getFeaturedProducts();
 
 				<td>
 				<h3><a href="<%=request.getContextPath()%>/store?product=<%=p.getId()%>"><%=p.getProductName()%></a></h3>
+				<img src="<%=request.getContextPath()%>/<%= p.getImagePath()%>medium.png">
 				<%=p.getDescription()%>
 				<br>
 				<b><%=p.getPrice()%></b>
