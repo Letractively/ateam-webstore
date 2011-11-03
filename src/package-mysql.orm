@@ -17,6 +17,9 @@
       <field name="sku" persistence-modifier="persistent">
         <unique name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
+      <field name="modelNumber" persistence-modifier="persistent">
+        <unique name="modelNumber" length="25" jdbc-type="CHAR" allows-null="false"/>
+      </field>
       <field name="subcategoryID" persistence-modifier="persistent">
         <unique name="subcategoryID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
@@ -571,6 +574,9 @@
       </field>
       <field name="customerID" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
+      <field name="rating" persistence-modifier="persistent">
+        <column name="rating" jdbc-type="SMALLINT" allows-null="false"/>
       </field>
       <field name="review" persistence-modifier="persistent">
         <column name="review" length="2000" jdbc-type="VARCHAR" allows-null="false"/>
