@@ -5,19 +5,247 @@
 <jdo>
   <package name="com.ateam.webstore.model">
    
-    <class name="Product" identity-type="application" detachable="true" >   
+    <class name="Brand" identity-type="application" detachable="true">
+    	<field name="id" value-strategy="identity" primary-key="true"/>
+    	<field name="brandName" />
+    </class>
+    
+    <class name="Product" identity-type="application" detachable="true">   
       <field name="id" value-strategy="identity" primary-key="true"/>         
       <field name="productName"/>
       <field name="sku"/>
+      <field name="modelNumber"/>      
       <field name="price"/>
       <field name="percentDiscount"/>
       <field name="description"/>
+      <field name="qtyOnHand"/>      
       <field name="imagePath"/>
       <field name="firstOffered"/>
-	  <field name="saleInd"/>
+	    <field name="saleInd"/>
       <field name="lastUpdated"/>
+      <field name="brand" default-fetch-group="true" />
+      <field name="subCategory" default-fetch-group="true" />      
     </class> 
 
+  	<class name="Person" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="login"/>
+      <field name="password"/>
+      <field name="securityQuestion"/>
+      <field name="securityAnswer"/>
+    </class>  
+
+		<class name="SecurityQuestion" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="question"/>
+		</class>
+
+		<class name="Customer" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="firstName"/>
+			<field name="middleName"/>
+			<field name="lastName"/>
+			<field name="dob"/>
+			<field name="sex"/>
+      <field name="person" default-fetch-group="true" />
+		</class>
+
+		<class name="Employee" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="firstName"/>
+      <field name="middleName"/>
+      <field name="lastName"/>
+      <field name="dob"/>
+      <field name="sex"/>
+      <field name="ssn"/>
+      <field name="jobTitle"/>
+      <field name="dateOfHire"/>
+      <field name="departmentCode"/>
+      <field name="salary"/>
+      <field name="person" default-fetch-group="true" />
+		</class>
+        
+		<class name="Department" identity-type="application" detachable="true">
+      <field name="code" primary-key="true"/>
+      <field name="name"/>
+    	<field name="manager"/>
+		</class>
+
+    <class name="Address" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="streetAddress1" />
+      <field name="streetAddress2" />
+      <field name="city" />
+      <field name="state" />
+      <field name="zip" />
+      <field name="plusFour" />
+      <field name="phone" />      
+      <field name="defaultInd" />
+      <field name="person" default-fetch-group="true" />
+    </class>
+
+		<class name="CreditCard" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+			<field name="cardNmber"/>
+			<field name="expMonth"/>
+      <field name="expYear"/>
+      <field name="securityCode"/>
+      <field name="nameOnCard"/>
+      <field name="defaultInd"/>
+      <field name="cardType"/>
+      <field name="customer"/>
+      <field name="billingAddress"/>
+		</class>
+		
+		<class name="AcceptedCards" identity-type="application" detachable="true">
+    	<field name="cardType" primary-key="true"/>
+    </class>
+    
+		<class name="Cart" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+			<field name="lastUpdated"/>
+      <field name="lastOrderDate" />
+      <field name="customer" default-fetch-group="true" />
+    </class>
+
+		<class name="WishList" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="name"/>
+      <field name="createdDate"/>
+      <field name="lastUdated"/>
+      <field name="customer" default-fetch-group="true" />
+		</class>
+    	
+    <class name="SalesTax" identity-type="application" detachable="true">
+			<field name="state" primary-key="true"/>
+      <field name="percent"/>
+		</class>
+
+		<class name="Shipper" identity-type="application" detachable="true">
+			<field name="id" value-strategy="identity" primary-key="true"/>
+			<field name="name"/>
+			<field name="streetAddress1"/>
+			<field name="streetAddress2"/>			
+			<field name="city"/>
+			<field name="state"/>
+			<field name="zip"/>
+			<field name="plusFour"/>
+			<field name="acctNumber"/>
+			<field name="acctMgrFirstNm"/>
+			<field name="acctMgrLastNm"/>
+		</class>	
+
+		<class name="ShippingCode" identity-type="application" detachable="true">
+			<field name="shippingCode" primary-key="true"/>
+			<field name="description"/>
+			<field name="itemQty"/>
+			<field name="cost"/>			
+			<field name="shipper" default-fetch-group="true"/>
+		</class>
+
+		<class name="Orders" identity-type="application" detachable="true">
+    	<field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="numOfItems"/>
+      <field name="itemSubTotal"/>
+      <field name="shippingTotal"/>
+      <field name="salesTax"/>
+      <field name="timePlaced"/>
+      <field name="timeShipped"/>
+      <field name="trackingNumber"/>
+      <field name="transactNumber"/>
+      <field name="returnInd"/>
+      <field name="customer" default-fetch-group="true"/>
+      <field name="address" default-fetch-group="true"/>
+      <field name="creditCard" default-fetch-group="true"/>
+      <field name="shippingCode" default-fetch-group="true"/>
+		</class>
+		
+		<class name="Role" identity-type="application" detachable="true">
+			<field name="code" value-strategy="identity" primary-key="true"/>
+			<field name="description"/>
+		</class>
+		
+		<class name="Vendor" identity-type="application" detachable="true">
+    	<field name="id" value-strategy="identity" primary-key="true"/>
+    	<field name="name"/>
+      <field name="streetAddress1"/>
+      <field name="streetAddress2"/>
+      <field name="city"/>
+      <field name="state"/>
+      <field name="zip"/>
+      <field name="plusFour"/>
+      <field name="firstOrderDate"/>
+      <field name="lastOrderDate"/>
+		</class>
+		
+		<class name="ProductQtyAtVendor" detachable="true">
+			<field name="vendorSKU"/>
+      <field name="qtyAvailable"/>
+      <field name="product" default-fetch-group="true"/>
+      <field name="vendor" default-fetch-group="true"/>
+		</class>
+
+		<class name="ProductsInCart" detachable="true">
+			<field name="quantity"/>
+      <field name="timeAdded"/>
+      <field name="cart" default-fetch-group="true"/>
+      <field name="product" default-fetch-group="true"/>
+		</class>
+
+		<class name="ProductsInWishList" detachable="true">
+			<field name="quantity"/>
+			<field name="timeAdded"/>
+      <field name="wishList" default-fetch-group="true"/>
+      <field name="product" default-fetch-group="true"/>
+		</class>
+        
+		<class name="ItemsOrdered" detachable="true">
+			<field name="unitPrice"/>
+      <field name="itemQty"/>
+      <field name="shippedInd"/>
+      <field name="orders" default-fetch-group="true"/>
+      <field name="product" default-fetch-group="true"/>
+		</class>
+
+		<class name="EmployeeRoles" detachable="true">
+			<field name="effectiveDate"/>
+      <field name="endDate"/>
+      <field name="employee" default-fetch-group="true"/>
+			<field name="role" default-fetch-group="true"/>
+		</class>
+		
+		<class name="Review" identity-type="application" detachable="true">
+    	<field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="rating"/>
+      <field name="review"/>
+      <field name="product" default-fetch-group="true"/>
+      <field name="customer" default-fetch-group="true"/>
+		</class>
+		
+		<class name="Category" identity-type="application" detachable="true">
+    	<field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="name"/>
+		</class>
+
+		<class name="SubCategory" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="subcategoryName"/>
+			<field name="category"/>
+		</class>
+        
+		<class name="ServiceCase" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="customer"/>
+		</class>
+     
+		<class name="Message" identity-type="application" detachable="true">
+      <field name="id" value-strategy="identity" primary-key="true"/>
+			<field name="empOrCust"/>
+			<field name="sequence"/>
+			<field name="message"/>
+			<field name="serviceCase"/>
+			<field name="person"/>
+		</class>
      
   </package>
 
