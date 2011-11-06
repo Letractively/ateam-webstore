@@ -3,7 +3,6 @@
 <orm>
   <package name="com.ateam.webstore.model">
 
-    
     <class name="Product" table="product">
     <inheritance strategy="new-table"/>
    
@@ -606,7 +605,7 @@
         <column name="subcategoryID"/>
       </field>
       
-      <field name="categoryID" persistence-modifier="persistent">
+      <field name="category" persistence-modifier="persistent">
         <column name="categoryID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="subcategoryName" persistence-modifier="persistent">
