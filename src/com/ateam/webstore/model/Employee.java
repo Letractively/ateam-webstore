@@ -29,6 +29,8 @@ public class Employee extends BaseModel implements Serializable {
 	
 	private Date dob;
 	
+	private String sex;
+	
 	private String ssn;
 	
 	private String jobTitle;
@@ -89,6 +91,14 @@ public class Employee extends BaseModel implements Serializable {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getSsn() {

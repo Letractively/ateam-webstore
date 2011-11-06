@@ -10,6 +10,7 @@ import com.ateam.webstore.dao.common.BaseModel;
  * @author Hendrix Tavarez
  *
  */
+@PersistenceCapable
 public class Person extends BaseModel implements Serializable {
 
 	/**

@@ -25,6 +25,10 @@ public class ShippingCode extends BaseModel implements Serializable {
 	
 	private String description;
 	
+	private int itemQty;
+	
+	private Double cost;
+	
 	private Shipper shipper;
 	
 	@SuppressWarnings("unused")
@@ -52,6 +56,22 @@ public class ShippingCode extends BaseModel implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getItemQty() {
+		return itemQty;
+	}
+
+	public void setItemQty(int itemQty) {
+		this.itemQty = itemQty;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
 	}
 
 	public Shipper getShipper() {

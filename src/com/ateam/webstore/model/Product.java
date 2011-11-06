@@ -32,6 +32,8 @@ public class Product extends BaseModel implements Serializable {
 	
 	private String sku;
 	
+	private String modelNumber;
+	
 	/**
 	 * product's price
 	 */
@@ -45,6 +47,8 @@ public class Product extends BaseModel implements Serializable {
 	 */
 	private String description;
 	
+	private int qtyOnHand;
+	
 	private String imagePath = "/images/no_img/";
 	
 	private Date firstOffered;
@@ -52,6 +56,10 @@ public class Product extends BaseModel implements Serializable {
 	private String saleInd;
 	
 	private Date lastUpdated;
+	
+	private Brand brand;
+	
+	private SubCategory subCategory;
 	
 	/**
 	 * Product
@@ -123,6 +131,14 @@ public class Product extends BaseModel implements Serializable {
 		this.description = description;
 	}
 
+	public int getQtyOnHand() {
+		return qtyOnHand;
+	}
+
+	public void setQtyOnHand(int qtyOnHand) {
+		this.qtyOnHand = qtyOnHand;
+	}
+
 	/**
 	 * Get the product object id
 	 * 
@@ -138,6 +154,14 @@ public class Product extends BaseModel implements Serializable {
 
 	public void setSKU(String sku) {
 		this.sku = sku;
+	}
+
+	public String getModelNumber() {
+		return modelNumber;
+	}
+
+	public void setModelNumber(String modelNumber) {
+		this.modelNumber = modelNumber;
 	}
 
 	public Double getPercentDiscount() {
@@ -178,6 +202,22 @@ public class Product extends BaseModel implements Serializable {
 
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
 }

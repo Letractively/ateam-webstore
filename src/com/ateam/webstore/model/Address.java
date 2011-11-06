@@ -13,6 +13,7 @@ import com.ateam.webstore.dao.common.BaseModel;
  * @author Hendrix Tavarez
  *
  */
+@PersistenceCapable
 public class Address extends BaseModel implements Serializable {
 
 	/**
@@ -33,6 +34,8 @@ public class Address extends BaseModel implements Serializable {
 	private String zip;
 	
 	private String plusFour;
+	
+	private String phone;
 	
 	private boolean defaultInd;
 	
@@ -99,6 +102,14 @@ public class Address extends BaseModel implements Serializable {
 
 	public void setPlusFour(String plusFour) {
 		this.plusFour = plusFour;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public boolean isDefaultInd() {

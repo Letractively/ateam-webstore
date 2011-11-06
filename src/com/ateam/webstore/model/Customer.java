@@ -29,6 +29,8 @@ public class Customer extends BaseModel implements Serializable {
 	
 	private Date dob;
 	
+	private String sex;
+	
 	private Person person;
 	
 	@SuppressWarnings("unused")
@@ -72,6 +74,14 @@ public class Customer extends BaseModel implements Serializable {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public Person getPerson() {

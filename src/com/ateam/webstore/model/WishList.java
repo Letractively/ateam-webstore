@@ -24,6 +24,8 @@ public class WishList extends BaseModel implements Serializable {
 	
 	private Long id;
 	
+	private String name;
+	
 	private Date createdDate;
 	
 	private Date lastUdated;
@@ -65,6 +67,14 @@ public class WishList extends BaseModel implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

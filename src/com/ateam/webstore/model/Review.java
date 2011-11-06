@@ -23,7 +23,9 @@ public class Review extends BaseModel implements Serializable {
 	
 	private Long id;
 	
-	private String description;
+	private int rating;
+	
+	private String review;
 	
 	private Product product;
 	
@@ -33,19 +35,19 @@ public class Review extends BaseModel implements Serializable {
 	private Review() {
 	}
 
-	public Review(String description, Product product, Customer customer) {
+	public Review(String review, Product product, Customer customer) {
 		super();
-		this.description = description;
+		this.review = review;
 		this.product = product;
 		this.customer = customer;
 	}
 
 	public String getDescription() {
-		return description;
+		return review;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String review) {
+		this.review = review;
 	}
 
 	public Product getProduct() {
@@ -66,6 +68,14 @@ public class Review extends BaseModel implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 	
