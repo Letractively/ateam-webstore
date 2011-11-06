@@ -35,6 +35,8 @@ public class CreditCard extends BaseModel implements Serializable {
 	
 	private boolean defaultInd;
 	
+	private String cardType;
+	
 	private Customer customer;
 	
 	private Address billingAddress;
@@ -103,6 +105,14 @@ public class CreditCard extends BaseModel implements Serializable {
 
 	public void setDefaultInd(boolean defaultInd) {
 		this.defaultInd = defaultInd;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
 	}
 
 	public Customer getCustomer() {
