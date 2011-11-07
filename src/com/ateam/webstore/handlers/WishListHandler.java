@@ -2,7 +2,10 @@ package com.ateam.webstore.handlers;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ateam.webstore.ui.views.View;
+import com.ateam.webstore.model.WishList;
+import com.ateam.webstore.ui.forms.FormSubmission;
+import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.views.WishListView;
 
 public class WishListHandler extends Handler {
 
@@ -15,8 +18,31 @@ public class WishListHandler extends Handler {
 	 * Return the WishList View
 	 * @return
 	 */
-	public View getWishListView() {
-		// TODO Auto-generated method stub
-		return null;
+	public WishListView getWishListView() {
+
+		WishListView wlv = new WishListView(getMainView());
+		
+		//TODO get wl from DB
+		WishList wl = new WishList(null);
+		
+		wlv.addContentView(new ContentView(JSP_CART, wl.getName()));
+		
+		return wlv;
+		
+	}
+	
+	/**
+	 * Adds the product ID from the request to the wishlist.
+	 * @return
+	 */
+	public FormSubmission addProduct() {
+		
+		FormSubmission add = new FormSubmission();
+		
+		//TODO Add item to DB
+		
+		add.setResultView(getWishListView());
+		
+		return add;
 	}
 }

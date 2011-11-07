@@ -2,17 +2,17 @@
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="com.ateam.webstore.model.Product"%>
+<%@page import="com.ateam.webstore.model.ProductsInWishList"%>
 <%@page import="com.ateam.webstore.ui.views.ProductListView"%>
-<%@page import="com.ateam.webstore.ui.views.CartView"%>
-<%@page import="com.ateam.webstore.model.ProductsInCart"%>
+<%@page import="com.ateam.webstore.ui.views.WishListView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<%CartView v = (CartView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
+<%WishListView v = (WishListView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 <h3> <%= v.getTitle() %></h3>
 
 <table width="100%">
 
-	<%  for (ProductsInCart p : v.getProducts()) { %>  
+	<%  for (ProductsInWishList p : v.getProductsInWishList()) { %>  
 	<tr>
 		<td><input type="checkbox" name="Product" value="Cart item" ;/> <br /></td>
 		<td><a href="<%=request.getContextPath()%>/store?product=<%=p.getProduct().getId()%>"><%=p.getProduct().getProductName()%></a></td>
@@ -24,7 +24,7 @@
 	<%  } %>
 	
 <tr>
-<td> </td><td > <input type="submit" value="Move to WishList" /> 
+<td> </td><td > <input type="submit" value="Move to Cart" /> 
    <input type="submit" value="Update" /></td>
 </tr>
 

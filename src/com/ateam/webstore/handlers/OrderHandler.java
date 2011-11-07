@@ -6,6 +6,7 @@ import com.ateam.webstore.model.Address;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.ShippingCode;
 import com.ateam.webstore.ui.Constants;
+import com.ateam.webstore.ui.Constants.Parameters;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.OrderPaymentForm;
 import com.ateam.webstore.ui.forms.OrderShippingForm;
@@ -98,9 +99,19 @@ public class OrderHandler extends Handler {
 	 * @param id
 	 * @return
 	 */
-	public OrderDetailsView getOrderDetailsView(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrderDetailsView getOrderDetailsView() {
+
+		OrderDetailsView odv = new OrderDetailsView(getMainView());
+		
+		Orders order = new Orders(1, null, null, null, null, null, null, null); //TODO get order from DB
+		
+		odv.setOrder(order);
+		
+		req.getParameter(Parameters.ORDER_ID.getId());
+		
+		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
+		
+		return odv;
 	}
 	
 	
@@ -128,7 +139,7 @@ public class OrderHandler extends Handler {
 		
 		opf.setCard(cch.getUsersCard(0));
 		
-		opf.setResultView(getOrderDetailsView(null));
+		opf.setResultView(getOrderDetailsView());
 		return opf;
 	}
 

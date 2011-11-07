@@ -72,7 +72,9 @@ public interface Constants {
 		ORDER_PAYMENT ("orderPayment"),
 		ORDER_CONFIRM ("orderConfirm"),
 		ADDRESS ("address"),
-		CREDIT_CARD ("creditCard");
+		CREDIT_CARD ("creditCard"),
+		ADD_TO_CART ("addToCart"),
+		ADD_TO_WISHLIST ("addToWishList");
 		
 		String id;
 		String handler;
@@ -107,7 +109,7 @@ public interface Constants {
 	public static final String JSP_MAIN = "/main.jsp";
 	public static final String JSP_MESSAGE = "/message.jsp";
 	public static final String JSP_ERROR = "/error.jsp";
-	public static final String JSP_ADMIN_MAIN = "/admin-main.jsp";
+	public static final String JSP_ADMIN_MAIN = "/adminMain.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_REGISTRATION = "/registration.jsp";
 	public static final String JSP_HOME = "/home.jsp";
@@ -119,5 +121,7 @@ public interface Constants {
 	public static final String JSP_ORDER_SHIPPING = "/orderShipping.jsp";
 	public static final String JSP_ADDRESS = "/address.jsp";
 	public static final String JSP_CREDIT_CARD = "/creditCard.jsp";
+	public static final String JSP_CART = "/cart.jsp";
+	public static final String JSP_WISHLIST = "/wishList.jsp";
 	
 }

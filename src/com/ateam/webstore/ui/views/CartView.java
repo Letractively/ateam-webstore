@@ -2,26 +2,24 @@ package com.ateam.webstore.ui.views;
 
 import java.util.Collection;
 
-import com.ateam.webstore.ui.models.ProductInCart;
+import com.ateam.webstore.model.ProductsInCart;
 
-public class CartView extends View{
-private static final long serialVersionUID = 6996210412301012927L;
-	
-Collection<ProductInCart> productincart;
-String listTitle;
+public class CartView extends View {
+	private static final long serialVersionUID = 6996210412301012927L;
 
-public CartView(View v) {
-	super(v);
-}
-public Collection<ProductInCart> getProducts() {
-	return productincart;
-}
+	Collection<ProductsInCart> productincart;
+	String listTitle;
 
-public void setProducts(Collection<ProductInCart> productincart) {
-	this.productincart = productincart;
-}
+	public CartView(View v) {
+		super(v);
+	}
 
+	public Collection<ProductsInCart> getProducts() {
+		return productincart;
+	}
 
-	
+	public void setProducts(Collection<ProductsInCart> productincart) {
+		this.productincart = productincart;
+	}
 
 }
