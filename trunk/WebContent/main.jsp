@@ -78,8 +78,8 @@ Released   : 20081009
  	if (v.getCart() != null) {
  %>
 				<div id="headerCart">
-					<%=v.getCart().getProducts().size()%> item(s) in Cart<br>
-					<a class="headerLink" href="<%=request.getContextPath()%>/store?cart=12345">View Cart</a>
+					? item(s) in Cart<br>
+					<a class="headerLink" href="<%=request.getContextPath()%>/store?viewCart">View Cart</a>
 				</div> <%
  	}
  %>

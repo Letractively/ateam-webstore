@@ -62,7 +62,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			}		
 			else if (req.getParameterMap().containsKey(Parameters.CART_ID.getId())) {
 				CartHandler ch = new CartHandler(req);
-				v = ch.getCartView(req.getParameter(Parameters.CART_ID.getId()));
+				v = ch.getCartView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.WISHLIST.getId())) {
 				WishListHandler wlh = new WishListHandler(req);
@@ -73,17 +73,16 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				v = ch.checkout();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.CATEGORY_ID.getId())) {
-				String category = req.getParameter(Parameters.CATEGORY_ID.getId());
 				ProductHandler ph = new ProductHandler(req);
-				v = ph.getCategoryView(category);
+				v = ph.getCategoryView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.ORDER_ID.getId())) {
 				OrderHandler oh = new OrderHandler(req);
-				v = oh.getOrderDetailsView(req.getParameter(Parameters.ORDER_ID.getId()));
+				v = oh.getOrderDetailsView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.PRODUCT.getId())) {
 				ProductHandler ph = new ProductHandler(req);
-				v = ph.getProductView(req.getParameter(Parameters.PRODUCT.getId()));
+				v = ph.getProductView();
 			}
 			else {
 				ProductHandler ph = new ProductHandler(req);
@@ -193,6 +192,14 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		else if (formId.equals(FormName.ORDER_CONFIRM.getId())) {
 			OrderHandler oh = new OrderHandler(req);
 			return oh.processOrderConfirmationRequest();
+		}
+		else if (formId.equals(FormName.ADD_TO_CART.getId())) {
+			CartHandler ch = new CartHandler(req);
+			return ch.addProduct();
+		}
+		else if (formId.equals(FormName.ADD_TO_WISHLIST.getId())) {
+			WishListHandler wh = new WishListHandler(req);
+			return wh.addProduct();
 		}
 		else {
 			l.warning("unknown formId:"+formId);

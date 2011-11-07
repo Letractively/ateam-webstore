@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ateam.webstore.ui.models.Cart;
+import com.ateam.webstore.model.Cart;
 import com.ateam.webstore.ui.models.Visitor;
 
 public class View {

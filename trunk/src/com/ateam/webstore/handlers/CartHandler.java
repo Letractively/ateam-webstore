@@ -1,23 +1,27 @@
 package com.ateam.webstore.handlers;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 
-import com.ateam.webstore.handlers.Handler;
-import com.ateam.webstore.model.Address;
 import com.ateam.webstore.model.Cart;
 import com.ateam.webstore.model.Orders;
-import com.ateam.webstore.model.Shipper;
+import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
+import com.ateam.webstore.ui.views.CartView;
+import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.OrderShippingView;
-import com.ateam.webstore.ui.views.View;
 
 public class CartHandler extends Handler {
 
+	/**
+	 * 
+	 */
+	Cart cart;
+	
 	public CartHandler(HttpServletRequest req) {
 		super(req);
-		// TODO Auto-generated constructor stub
+	
+		//Get Cart from session
+		cart = (Cart) req.getSession().getAttribute(SESSION_ATTRIBUTE_CART);
 	}
 	
 	/**
@@ -26,9 +30,15 @@ public class CartHandler extends Handler {
 	 * @param req
 	 * @return
 	 */
-	public View getCartView(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CartView getCartView() {
+		
+		CartView cv = new CartView(getMainView());
+		
+		cv.setCart(cart);
+		
+		cv.addContentView(new ContentView(JSP_CART, "Your Cart"));
+		
+		return cv;
 	}
 	
 	/**
@@ -37,9 +47,6 @@ public class CartHandler extends Handler {
 	 */
 	public OrderShippingView checkout() {
 
-		//Get Cart from session
-		Cart c = (Cart) req.getSession().getAttribute(SESSION_ATTRIBUTE_CART);
-		
 		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
 				
 		//TODO the Cart needs to supply # of items, and subtotal
@@ -51,5 +58,11 @@ public class CartHandler extends Handler {
 		OrderHandler oh = new OrderHandler(req);
 		
 		return oh.getOrderShippingView(v.getCustomer().getId());
+	}
+	
+	public FormSubmission addProduct() {
+		FormSubmission add = new FormSubmission();
+		add.setResultView(getCartView());
+		return add;
 	}
 }

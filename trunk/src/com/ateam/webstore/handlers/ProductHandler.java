@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
 import com.ateam.webstore.service.impl.ProductService;
 import com.ateam.webstore.ui.forms.ProductEditForm;
@@ -106,13 +107,17 @@ public class ProductHandler extends Handler {
 	 * @param category
 	 * @return
 	 */
-	public ProductListView getCategoryView(String category) {
+	public ProductListView getCategoryView() {
+		
+		String category = req.getParameter(Parameters.CATEGORY_ID.getId());
+		
+		Category cat = new Category(category);
+		
 		ProductListView hp = new ProductListView(getMainView());
 		
 		hp.setProducts(getDummyProductList());
 		
-		ContentView cv = new ContentView(JSP_PRODUCT_LIST, "A Category");
-		//cv.setContentText("Check out these winners...");
+		ContentView cv = new ContentView(JSP_PRODUCT_LIST, cat.getName());
 		
 		hp.getContentViews().add(cv);
 
@@ -139,7 +144,10 @@ public class ProductHandler extends Handler {
 	 * @param req
 	 * @return
 	 */
-	public ProductDetailsView getProductView(String id) {
+	public ProductDetailsView getProductView() {
+		
+		String id = req.getParameter(Parameters.PRODUCT.getId());
+		
 		ProductDetailsView pv = new ProductDetailsView(getMainView());
 		pv.setProduct(getDummyProduct());
 		return pv;

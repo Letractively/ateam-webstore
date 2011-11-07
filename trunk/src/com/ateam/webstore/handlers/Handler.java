@@ -8,10 +8,10 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.ateam.webstore.dao.common.BaseModel;
+import com.ateam.webstore.model.Cart;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.service.RepositoryService;
 import com.ateam.webstore.ui.Constants;
-import com.ateam.webstore.ui.models.Cart;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.View;
 
@@ -59,12 +59,13 @@ public class Handler implements Constants {
 
 		v = setVisitorInfo(v);
 		
-		Cart cart = new Cart();
-		List list = new ArrayList();
-		list.add("123");
-		list.add("123");
-		cart.setProducts(list);
-		v.setCart(cart);
+//		Customer cust = null;
+//		Cart cart = new Cart(cust );
+//		List list = new ArrayList();
+//		list.add("123");
+//		list.add("123");
+//		cart.setProducts(list);
+//		v.setCart(cart);
 		return  v;
 	}
 
