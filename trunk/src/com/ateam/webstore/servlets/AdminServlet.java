@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ateam.webstore.handlers.VisitorHandler;
+import com.ateam.webstore.handlers.CustomerHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.Constants.Parameters;
 import com.ateam.webstore.ui.views.View;
@@ -21,11 +21,11 @@ public class AdminServlet extends HttpServlet implements Constants  {
 		View v = null;
 		
 		if (req.getParameterMap().containsKey(Parameters.LOGIN.getId())) {
-			VisitorHandler vh = new VisitorHandler(req);
+			CustomerHandler vh = new CustomerHandler(req);
 			v = vh.getLoginView();
 		}
 		else {
-			VisitorHandler vh = new VisitorHandler(req);
+			CustomerHandler vh = new CustomerHandler(req);
 			v = vh.getLoginView();
 		}
 

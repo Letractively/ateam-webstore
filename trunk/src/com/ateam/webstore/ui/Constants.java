@@ -105,6 +105,7 @@ public interface Constants {
 	 * JSPs
 	 */
 	public static final String JSP_MAIN = "/main.jsp";
+	public static final String JSP_MESSAGE = "/message.jsp";
 	public static final String JSP_ERROR = "/error.jsp";
 	public static final String JSP_ADMIN_MAIN = "/admin-main.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";

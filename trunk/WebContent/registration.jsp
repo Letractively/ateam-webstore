@@ -7,10 +7,10 @@
 
 <%RegistrationView v = (RegistrationView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 
-			<form method="post" action="<%=request.getContextPath()%>/registrationHandler">
+			<form method="post" action="<%=request.getContextPath()%>/store">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.REGISTER.getId()%>">
-<table style="color:blue;"  >						
+<table>						
 <tr>
 <td><font size="2" >Email:</font></td><td>
 					<input type="text" name="<%=Constants.Parameters.EMAIL.getId() %>" name="username" size="25"/></td>
