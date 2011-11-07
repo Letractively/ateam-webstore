@@ -2,25 +2,28 @@ package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Customer;
+import com.ateam.webstore.model.Person;
 import com.ateam.webstore.model.SecurityQuestion;
+import com.ateam.webstore.service.impl.CustomerService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.forms.RegistrationForm;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.views.MessageView;
 import com.ateam.webstore.ui.views.RegistrationView;
 import com.ateam.webstore.ui.views.View;
 
-public class VisitorHandler extends Handler {
+public class CustomerHandler extends Handler {
 
-	public VisitorHandler(HttpServletRequest req) {
+	public CustomerHandler(HttpServletRequest req) {
 		super(req);
-		// TODO Auto-generated constructor stub
+		service = new CustomerService();
 	}
 	
 	/**
@@ -47,9 +50,8 @@ public class VisitorHandler extends Handler {
 	public RegistrationView getRegistrationView() {
 		RegistrationView r = new RegistrationView(getMainView());
 		
-		//TODO Use SecurityQuestionService to get questions from DB
-		Collection<SecurityQuestion> sec = new ArrayList<SecurityQuestion>();
-		r.setSecurityQuestions(sec);
+		SecurityQuestionHandler sech = new SecurityQuestionHandler(req);
+		r.setSecurityQuestions(sech.getSecurityQuestions());
 		
 		r.addContentView(new ContentView(JSP_REGISTRATION, "Register"));
 		
@@ -69,6 +71,7 @@ public class VisitorHandler extends Handler {
 		
 		l.info("Processing Login Request from session "+req.getSession().getId()); 
 		Visitor v = login.getVistor();
+		
 		//TODO implement a "real" authentication mechanism.
 		v.setCustomer(new Customer("John", "Doe", null));
 		
@@ -90,6 +93,58 @@ public class VisitorHandler extends Handler {
 	}
 	
 	/**
+	 * Process a login request
+	 * @param login
+	 * @param req
+	 * @return
+	 */
+	public FormSubmission processRegistrationRequest() {
+		
+		l.info("Processing registration request from session "+req.getSession().getId());
+		
+		RegistrationForm reg = getRegistrationRequest();
+		
+		SecurityQuestion sq = new SecurityQuestion(reg.getSecurityQuestionId(), "???");
+		Person newPerson = new Person(reg.getEmail(), reg.getPw(), sq , reg.getSecurityAnswer());
+		Customer newCustomer = new Customer("John", "Doe", newPerson );
+		
+		MessageView rv = new MessageView(getMainView());
+		
+		rv.addContentView(new ContentView(JSP_MESSAGE, "Registration"));
+		
+		try {
+			PersonHandler ph = new PersonHandler(req);
+			ph.store(newPerson);
+			service.store(newCustomer);
+			rv.setMessage("Success!!");
+		} catch (Exception e) {
+			l.log(Level.WARNING, "", e);
+			rv.setError(true);
+			rv.setMessage("Failed!! "+e.getMessage());
+		}
+
+		reg.setResultView(rv);
+		
+		return reg;
+	}
+	
+	private RegistrationForm getRegistrationRequest() {
+		l.info("Parsing Registration Request from session "+req.getSession().getId());
+		
+		RegistrationForm reg = new RegistrationForm();
+
+		reg.setFirstName("John"); //TODO add form support
+		reg.setLastName("Doe"); //TODO add form support
+		reg.setEmail(req.getParameter(Parameters.EMAIL.getId()));
+		reg.setPw(req.getParameter(Parameters.PASSWORD.getId())); //TODO confirm password
+		reg.setSecurityQuestionId(Long.parseLong(req.getParameter(Parameters.SECURITY_QUESTION.getId())));
+		reg.setSecurityAnswer(req.getParameter(Parameters.SECURITY_ANSWER.getId()));
+		reg.setForm(FormName.REGISTER);
+		
+		return reg;
+	}
+
+	/**
 	 * Builds a LoginForm from the request
 	 * @param req
 	 * @return
@@ -100,7 +155,7 @@ public class VisitorHandler extends Handler {
 		
 		LoginForm login = new LoginForm();
 		Visitor v = new Visitor();
-		v.setEmail(req.getParameter(Parameters.PRODUCT_ID.getId()));
+		v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 		login.setVisitor(v);
 		
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
@@ -110,14 +165,6 @@ public class VisitorHandler extends Handler {
 		return login;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public RegistrationForm getRegistrationRequest() {
-		return null;
-	}
-
 	/**
 	 * 
 	 * @return

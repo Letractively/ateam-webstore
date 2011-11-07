@@ -14,7 +14,7 @@ import com.ateam.webstore.handlers.CartHandler;
 import com.ateam.webstore.handlers.Handler;
 import com.ateam.webstore.handlers.OrderHandler;
 import com.ateam.webstore.handlers.ProductHandler;
-import com.ateam.webstore.handlers.VisitorHandler;
+import com.ateam.webstore.handlers.CustomerHandler;
 import com.ateam.webstore.handlers.WishListHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
@@ -45,19 +45,19 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			
 			
 			if (req.getParameterMap().containsKey(Parameters.LOGIN.getId())) {
-				VisitorHandler vh = new VisitorHandler(req);
+				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getLoginView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.LOGOUT.getId())) {
-				VisitorHandler vh = new VisitorHandler(req);
+				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getLogoutView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.FORGOT.getId())) {
-				VisitorHandler vh = new VisitorHandler(req);
+				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getForgotPasswordView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.REGISTER.getId())) {
-				VisitorHandler vh = new VisitorHandler(req);
+				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getRegistrationView();
 			}		
 			else if (req.getParameterMap().containsKey(Parameters.CART_ID.getId())) {
@@ -175,12 +175,12 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			//TODO throw execpton
 		}
 		else if (formId.equals(FormName.LOGIN.getId())) {
-			VisitorHandler h = new VisitorHandler(req);
+			CustomerHandler h = new CustomerHandler(req);
 			return h.processLoginRequest();
 		}
 		else if (formId.equals(FormName.REGISTER.getId())) {
-			VisitorHandler h = new VisitorHandler(req);
-			return h.getRegistrationRequest();
+			CustomerHandler h = new CustomerHandler(req);
+			return h.processRegistrationRequest();
 		}
 		else if (formId.equals(FormName.ORDER_SHIPPING.getId())) {
 			OrderHandler oh = new OrderHandler(req);
