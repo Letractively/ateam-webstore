@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ItemsOrderedDAO;
@@ -35,6 +36,12 @@ public class ItemsOrderedService implements RepositoryService<ItemsOrdered> {
 
 		ItemsOrderedDAO repository = new ItemsOrderedDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public ItemsOrdered getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

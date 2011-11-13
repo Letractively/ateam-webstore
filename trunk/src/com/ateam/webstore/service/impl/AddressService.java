@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.AddressDAO;
@@ -37,6 +38,12 @@ public class AddressService implements RepositoryService<Address> {
 		AddressDAO repository = new AddressDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Address getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

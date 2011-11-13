@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.CartDAO;
@@ -37,6 +38,12 @@ public class CartService implements RepositoryService<Cart> {
 		CartDAO repository = new CartDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Cart getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

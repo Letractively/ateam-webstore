@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ReviewDAO;
@@ -35,6 +36,12 @@ public class ReviewService implements RepositoryService<Review> {
 		
 		ReviewDAO repository = new ReviewDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public Review getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

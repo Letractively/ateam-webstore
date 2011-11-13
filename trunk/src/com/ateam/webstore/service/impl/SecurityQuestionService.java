@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.SecurityQuestionDAO;
@@ -39,5 +40,13 @@ public class SecurityQuestionService implements
 		return repository.getAll();
 		
 	}
+
+	@Override
+	public SecurityQuestion getById(Serializable id) {
+		SecurityQuestionDAO repository = new SecurityQuestionDAO();
+		return repository.get(id);
+	}
+	
+	
 
 }

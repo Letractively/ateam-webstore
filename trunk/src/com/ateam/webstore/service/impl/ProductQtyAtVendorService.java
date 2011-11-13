@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ProductQtyAtVendorDAO;
@@ -36,6 +37,12 @@ public class ProductQtyAtVendorService implements
 		
 		ProductQtyAtVendorDAO repository = new ProductQtyAtVendorDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public ProductQtyAtVendor getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
