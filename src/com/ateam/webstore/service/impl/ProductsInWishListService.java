@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ProductsInWishListDAO;
@@ -36,6 +37,12 @@ public class ProductsInWishListService implements
 
 		ProductsInWishListDAO repository = new ProductsInWishListDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public ProductsInWishList getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

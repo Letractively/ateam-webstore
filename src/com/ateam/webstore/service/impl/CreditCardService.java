@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.CreditCardDAO;
@@ -37,6 +38,12 @@ public class CreditCardService implements RepositoryService<CreditCard> {
 		CreditCardDAO repository = new CreditCardDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public CreditCard getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ProductDAO;
@@ -43,6 +44,12 @@ public class ProductService implements RepositoryService<Product> {
 		
 		ProductDAO repository = new ProductDAO();
 		return repository.getProductByName(name);
+	}
+
+	@Override
+	public Product getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.AcceptedCardsDAO;
@@ -37,6 +38,12 @@ public class AcceptedCardsService implements RepositoryService<AcceptedCards> {
 		AcceptedCardsDAO repository = new AcceptedCardsDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public AcceptedCards getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

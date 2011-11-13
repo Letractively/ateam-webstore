@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.DepartmentDAO;
@@ -37,6 +38,12 @@ public class DepartmentService implements RepositoryService<Department> {
 		DepartmentDAO repository = new DepartmentDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Department getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

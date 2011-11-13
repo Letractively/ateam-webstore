@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.EmployeeDAO;
@@ -37,6 +38,12 @@ public class EmployeeService implements RepositoryService<Employee> {
 		EmployeeDAO repository = new EmployeeDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Employee getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.SubCategoryDAO;
@@ -35,6 +36,12 @@ public class SubCategoryService implements RepositoryService<SubCategory> {
 		
 		SubCategoryDAO repository = new SubCategoryDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public SubCategory getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

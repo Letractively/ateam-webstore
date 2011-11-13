@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.CategoryDAO;
@@ -35,6 +36,12 @@ public class CategoryService implements RepositoryService<Category> {
 		
 		CategoryDAO repository = new CategoryDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public Category getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

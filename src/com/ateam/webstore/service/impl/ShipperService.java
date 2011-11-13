@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ShipperDAO;
@@ -37,6 +38,12 @@ public class ShipperService implements RepositoryService<Shipper> {
 		ShipperDAO repository = new ShipperDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Shipper getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

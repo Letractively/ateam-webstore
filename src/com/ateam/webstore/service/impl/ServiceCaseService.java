@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.ServiceCaseDAO;
@@ -35,6 +36,12 @@ public class ServiceCaseService implements RepositoryService<ServiceCase> {
 		
 		ServiceCaseDAO repository = new ServiceCaseDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public ServiceCase getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

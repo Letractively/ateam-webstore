@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.MessageDAO;
@@ -35,6 +36,12 @@ public class MessageService implements RepositoryService<Message> {
 		
 		MessageDAO repository = new MessageDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public Message getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

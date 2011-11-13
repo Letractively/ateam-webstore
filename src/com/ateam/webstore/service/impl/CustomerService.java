@@ -1,5 +1,6 @@
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.CustomerDAO;
@@ -28,6 +29,17 @@ public class CustomerService implements RepositoryService<Customer> {
 		
 		CustomerDAO repository = new CustomerDAO();
 		return repository.getAll();
+	}
+
+	@Override
+	public Customer getById(Serializable id) {
+		CustomerDAO repository = new CustomerDAO();
+		return repository.get(id);
+	}
+	
+	public Customer getByPersonId(Serializable id) {
+		CustomerDAO repository = new CustomerDAO();
+		return repository.getCustomerByPersonID(id);
 	}
 
 }

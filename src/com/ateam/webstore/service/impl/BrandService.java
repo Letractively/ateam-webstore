@@ -3,6 +3,7 @@
  */
 package com.ateam.webstore.service.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.BrandDAO;
@@ -36,6 +37,12 @@ public class BrandService implements RepositoryService<Brand> {
 		BrandDAO repository = new BrandDAO();
 		return repository.getAll();
 		
+	}
+
+	@Override
+	public Brand getById(Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
