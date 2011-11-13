@@ -19,10 +19,10 @@
       <field name="modelNumber" persistence-modifier="persistent">
         <unique name="modelNumber" length="25" jdbc-type="CHAR" allows-null="false"/>
       </field>
-      <field name="subcategoryID" persistence-modifier="persistent">
+      <field name="subCategory" persistence-modifier="persistent">
         <unique name="subcategoryID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="brandID" persistence-modifier="persistent">
+      <field name="brand" persistence-modifier="persistent">
         <unique name="brandID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="price" persistence-modifier="persistent">
@@ -62,7 +62,7 @@
       <field name="password" persistence-modifier="persistent">
         <column name="password" length="50" jdbc-type="CHAR" allows-null="false"/>
       </field>
-      <field name="securityQuesID" persistence-modifier="persistent">
+      <field name="securityQuestion" persistence-modifier="persistent">
         <column name="securityQuestID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="securityAnswer" persistence-modifier="persistent">
@@ -93,7 +93,7 @@
         <column name="customerID"/>
       </field>
       
-      <field name="personID" persistence-modifier="persistent">
+      <field name="person" persistence-modifier="persistent">
         <unique name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="firstName" persistence-modifier="persistent">
@@ -105,7 +105,7 @@
       <field name="lastName" persistence-modifier="persistent">
         <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
       </field>
-      <field name="dateOfBirth" persistence-modifier="persistent">
+      <field name="dob" persistence-modifier="persistent">
         <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
       </field>
       <field name="sex" persistence-modifier="persistent">
@@ -122,7 +122,7 @@
         <column name="customerID"/>
       </field>
       
-      <field name="personID" persistence-modifier="persistent">
+      <field name="person" persistence-modifier="persistent">
         <unique name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="firstName" persistence-modifier="persistent">
@@ -134,7 +134,7 @@
       <field name="lastName" persistence-modifier="persistent">
         <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
       </field>
-      <field name="dateOfBirth" persistence-modifier="persistent">
+      <field name="dob" persistence-modifier="persistent">
         <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
       </field>
       <field name="sex" persistence-modifier="persistent">
@@ -166,7 +166,7 @@
         <column name="addressID"/>
       </field>
       
-      <field name="personID" persistence-modifier="persistent">
+      <field name="person" persistence-modifier="persistent">
         <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="streetAddress1" persistence-modifier="persistent">
@@ -204,7 +204,7 @@
         <column name="cardID"/>
       </field>
       
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="cardType" persistence-modifier="persistent"> 
@@ -225,7 +225,7 @@
       <field name="nameOnCard" persistence-modifier="persistent">
         <column name="nameOnCard" length="50" jdbc-type="CHAR" allows-null="false"/>
       </field>
-      <field name="billingAddrID" persistence-modifier="persistent">
+      <field name="billingAddress" persistence-modifier="persistent">
         <column name="billingAddrID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="defaultInd" persistence-modifier="persistent">
@@ -242,7 +242,7 @@
         <column name="cartID"/>
       </field>
       
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="lastUpdated" persistence-modifier="persistent">
@@ -262,10 +262,10 @@
         <column name="wishListID"/>
       </field>
       
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="wishListName" persistence-modifier="persistent">
+      <field name="name" persistence-modifier="persistent">
       	<column name="wishListName" length="20" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="createdDate" persistence-modifier="persistent">
@@ -299,7 +299,7 @@
         <column name="shipperID"/>
       </field>
       
-      <field name="shipperName" persistence-modifier="persistent">
+      <field name="name" persistence-modifier="persistent">
         <column name="shipperName" length="40" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="streetAddress1" persistence-modifier="persistent">
@@ -336,15 +336,15 @@
     <class name="ShippingCode" table="shipping_code">
     <inheritance strategy="new-table"/>
     
-      <field name="id" persistence-modifier="persistent">
+      <field name="shippingCode" persistence-modifier="persistent">
         <column name="shippingCode"/>
       </field>
       
-      <field name="shipperID" persistence-modifier="persistent">
+      <field name="shipper" persistence-modifier="persistent">
         <column name="shipperID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="itemQty" persistence-modifier="persistent">
-        <column name="itemQty" jdbc-type"SMALLINT" allows-null="false"/>
+        <column name="itemQty" jdbc-type="SMALLINT" allows-null="false"/>
       </field>
       <field name="cost" persistence-modifier="persistent">
         <column name="cost" jdbc-type="DECIMAL"	allows-null="false"/>
@@ -363,25 +363,22 @@
         <column name="orderID"/>
       </field>
       
-      <field name="customerID" persistence-modifier="persistent">
-        <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
-      </field>
       <field name="numOfItems" persistence-modifier="persistent">
         <column name="numOfItems" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="itemSubtotal" persistence-modifier="persistent">
+      <field name="itemSubTotal" persistence-modifier="persistent">
         <column name="itemSubtotal" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
       <field name="shippingTotal" persistence-modifier="persistent">
         <column name="shippingTotal" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
-      <field name="salesTaxPaid" persistence-modifier="persistent">
+      <field name="salesTax" persistence-modifier="persistent">
         <column name="salesTaxPaid" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="cardID" persistence-modifier="persistent">
+      <field name="creditCard" persistence-modifier="persistent">
         <column name="cardID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="timePlaced" persistence-modifier="persistent">
@@ -409,11 +406,11 @@
     <class name="Role" table="role">
     <inheritance strategy="new-table"/>
     
-      <field name="id" persistence-modifier="persistent">
+      <field name="code" persistence-modifier="persistent">
         <column name="roleCode"/>
       </field>
       
-      <field name="roleDescription" persistence-modifier="persistent">
+      <field name="description" persistence-modifier="persistent">
         <column name="roleDescription" length="20" jdbc-type="CHAR" allows-null="false"/>
       </field>
       
@@ -427,7 +424,7 @@
         <column name="vendorID"/>
       </field>
       
-      <field name="vendorName" persistence-modifier="persistent">
+      <field name="name" persistence-modifier="persistent">
         <column name="vendorName" length="50" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="streetAddress1" persistence-modifier="persistent">
@@ -461,10 +458,10 @@
     <class name="ProductQtyAtVendor" table="product_qty_at_vendor">
     <inheritance strategy="new-table"/>
     
-      <field name="productID" persistence-modifier="persistent">
+      <field name="product" persistence-modifier="persistent">
         <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="vendorID" persistence-modifier="persistent">
+      <field name="vendor" persistence-modifier="persistent">
         <column name="vendorID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       
@@ -481,10 +478,10 @@
     <class name="ProductsInCart" table="products_in_cart">
     <inheritance strategy="new-table"/>
     
-      <field name="cartID" persistence-modifier="persistent">
+      <field name="cart" persistence-modifier="persistent">
         <column name="cartID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="productID" persistence-modifier="persistent">
+      <field name="product" persistence-modifier="persistent">
         <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       
@@ -501,10 +498,10 @@
     <class name="ProductsInWishList" table="products_in_wish_list">
     <inheritance strategy="new-table"/>
     
-      <field name="wishListID" persistence-modifier="persistent">
+      <field name="wishList" persistence-modifier="persistent">
         <column name="wishListID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="productID" persistence-modifier="persistent">
+      <field name="product" persistence-modifier="persistent">
         <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       
@@ -521,10 +518,10 @@
     <class name="ItemsOrdered" table="items_ordered">
     <inheritance strategy="new-table"/>
     
-      <field name="orderID" persistence-modifier="persistent">
+      <field name="orders" persistence-modifier="persistent">
         <column name="orderID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="productID" persistence-modifier="persistent">
+      <field name="product" persistence-modifier="persistent">
         <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       
@@ -544,10 +541,10 @@
     <class name="EmployeeRoles" table="employee_roles">
     <inheritance strategy="new-table"/>
     
-      <field name="employeeID" persistence-modifier="persistent">
+      <field name="employee" persistence-modifier="persistent">
         <column name="employeeID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="roleCode" persistence-modifier="persistent">
+      <field name="role" persistence-modifier="persistent">
         <column name="roleCode" jdbc-type="SMALLINT" allows-null="false"/>
       </field>
       
@@ -561,17 +558,17 @@
     </class>
     
     
-    <class name="Review" table="review"
+    <class name="Review" table="review">
     <inheritance strategy="new-table"/>
     
       <field name="id" persistence-modifier="persistent">
         <column name="reviewID"/>
       </field>
       
-      <field name="productID" persistence-modifier="persistent">
+      <field name="product" persistence-modifier="persistent">
         <column name="productID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="rating" persistence-modifier="persistent">
@@ -591,14 +588,14 @@
         <column name="categoryID"/>
       </field>
       
-      <field name="categoryName" persistence-modifier="persistent">
+      <field name="name" persistence-modifier="persistent">
         <column name="categoryName" length="20" jdbc-type="CHAR" allows-null="false"/>
       </field>
       
     </class>
     
     
-    <class name="Subcategory" table="subcategory"
+    <class name="Subcategory" table="subcategory">
     <inheritance strategy="new-table"/>
     
       <field name="id" persistence-modifier="persistent">
@@ -621,7 +618,7 @@
         <column name="caseID"/>
       </field>
       
-      <field name="customerID" persistence-modifier="persistent">
+      <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       
@@ -634,10 +631,10 @@
         <column name="messageID"/>
       </field>
       
-      <field name="caseID" persistence-modifier="persistent">
+      <field name="serviceCase" persistence-modifier="persistent">
         <column name="caseID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
-      <field name="personID" persistence-modifier="persistent">
+      <field name="person" persistence-modifier="persistent">
         <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="empOrCust" persistence-modifier="persistent">
