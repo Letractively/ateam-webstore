@@ -22,7 +22,7 @@
 		
 				<tr>
 						<td>Account Number:</td>
-						<td><%= ccard.getCardNmber() %></td>
+						<td><%= ccard.getCardNumber() %></td>
 				</tr>
 				<tr>
 						<td>Expiration:</td>

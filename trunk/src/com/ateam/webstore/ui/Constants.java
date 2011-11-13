@@ -26,6 +26,7 @@ public interface Constants {
 		CHECKOUT ("checkout"),
 		PRODUCTSELECT ("ps"),
 		PRODUCT ("product"),
+		ALL_PRODUCTS ("products"),
 		ORDER_ID ("order"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
@@ -123,5 +124,8 @@ public interface Constants {
 	public static final String JSP_CREDIT_CARD = "/creditCard.jsp";
 	public static final String JSP_CART = "/cart.jsp";
 	public static final String JSP_WISHLIST = "/wishList.jsp";
+
+	//Properties
+	public static final String PROPERTY_PRODUCT_IMAGE_ROOT =  "com.ateam.webstore.ui.ProductImageRoot";
 	
 }

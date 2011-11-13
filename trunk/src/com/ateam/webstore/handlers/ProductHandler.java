@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
 import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.servlets.AteamContextListener;
 import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
@@ -39,7 +40,8 @@ public class ProductHandler extends Handler {
 	 */
 	private Product getProduct(String name) {
 		
-		//ProductService productServ = new ProductService();			
+		//ProductService productServ = new ProductService();
+		//service.p
 		//return (Product) productServ.getProductByName(name).toArray()[0];
 		return null;
 	}
@@ -126,6 +128,26 @@ public class ProductHandler extends Handler {
 
 	}
 
+	/**
+	 * Builds a returns the view for a list of all products
+	 * @param category
+	 * @return
+	 */
+	public ProductListView getAllView() {
+		
+		ProductListView hp = new ProductListView(getMainView());
+		
+		hp.setProducts(getAllProducts());
+		
+		ContentView cv = new ContentView(JSP_PRODUCT_LIST, "All Products");
+		
+		hp.getContentViews().add(cv);
+
+		return hp;
+		
+
+	}
+ 
 	
 	/**
 	 * Builds a returns the view for search results
@@ -160,6 +182,14 @@ public class ProductHandler extends Handler {
 		service.store(update.getProduct());
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	private Collection<Product> getAllProducts() {
+		return service.getAll();
+	}
+	
 	private Collection<Product> getDummyProductList() {
 		Collection<Product> products = new ArrayList<Product>();
 		
@@ -184,4 +214,5 @@ public class ProductHandler extends Handler {
 		return prod;
 		
 	}
+	
 }

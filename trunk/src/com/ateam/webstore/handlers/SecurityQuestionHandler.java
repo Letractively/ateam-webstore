@@ -22,7 +22,7 @@ public class SecurityQuestionHandler extends Handler {
 	private Collection<SecurityQuestion> getDummies() {
 		Collection<SecurityQuestion> secs = new ArrayList<SecurityQuestion>();
 		
-		SecurityQuestion sec = new SecurityQuestion((long) 12, "Mothers maiden name?");
+		SecurityQuestion sec = new SecurityQuestion(("Mothers maiden name?"));
 		secs.add(sec);
 		
 		return secs;
