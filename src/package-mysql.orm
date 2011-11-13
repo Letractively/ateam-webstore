@@ -63,11 +63,15 @@
         <column name="password" length="50" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="securityQuestion" persistence-modifier="persistent">
-        <column name="securityQuestID" jdbc-type="INTEGER" allows-null="false"/>
+        <column name="securityQuesID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="securityAnswer" persistence-modifier="persistent">
         <column name="securityAnswer" length="25" jdbc-type="CHAR" allows-null="false"/>
       </field> 
+      
+      <field name="customer" persistence-modifier="persistent" mapped-by="person">
+        <unique element-type="Customer" />
+      </field>      
 
     </class>
     
@@ -106,7 +110,7 @@
         <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="dob" persistence-modifier="persistent">
-        <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
+        <column name="dateOfBirth" jdbc-type="DATE" allows-null="true"/>
       </field>
       <field name="sex" persistence-modifier="persistent">
         <column name="sex" length="1" jdbc-type="CHAR" allows-null="true"/>

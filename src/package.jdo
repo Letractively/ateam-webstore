@@ -31,8 +31,9 @@
       <field name="id" value-strategy="identity" primary-key="true"/>
       <field name="login"/>
       <field name="password"/>
-      <field name="securityQuestion"/>
+      <field name="securityQuestion" default-fetch-group="true"/>
       <field name="securityAnswer"/>
+      <field name="customer" default-fetch-group="true"/>
     </class>  
 
 		<class name="SecurityQuestion" identity-type="application" detachable="true">
