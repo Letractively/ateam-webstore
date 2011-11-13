@@ -86,7 +86,7 @@
 
 		<class name="CreditCard" identity-type="application" detachable="true">
       <field name="id" value-strategy="identity" primary-key="true"/>
-			<field name="cardNmber"/>
+			<field name="cardNumber"/>
 			<field name="expMonth"/>
       <field name="expYear"/>
       <field name="securityCode"/>
@@ -112,7 +112,7 @@
       <field name="id" value-strategy="identity" primary-key="true"/>
       <field name="name"/>
       <field name="createdDate"/>
-      <field name="lastUdated"/>
+      <field name="lastUpdated"/>
       <field name="customer" default-fetch-group="true" />
 		</class>
     	
