@@ -28,7 +28,7 @@ public class WishList extends BaseModel implements Serializable {
 	
 	private Date createdDate;
 	
-	private Date lastUdated;
+	private Date lastUpdated;
 	
 	private Customer customer;
 	
@@ -49,12 +49,12 @@ public class WishList extends BaseModel implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public Date getLastUdated() {
-		return lastUdated;
+	public Date getLastUpdated() {
+		return lastUpdated;
 	}
 
-	public void setLastUdated(Date lastUdated) {
-		this.lastUdated = lastUdated;
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	public Customer getCustomer() {
