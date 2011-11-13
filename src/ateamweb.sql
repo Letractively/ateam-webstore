@@ -36,7 +36,8 @@ values("ZZ", "iPad", 1000.00, 0, "iPad tablet");
 select * from PRODUCT;
 delete from PRODUCT where productId=100001
 
-
+select * from BRAND;
+delete from BRAND where brandID=100001
 
 
     <class name="Person" identity-type="application" detachable="true" >   
