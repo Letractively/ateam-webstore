@@ -6,7 +6,7 @@
   <package name="com.ateam.webstore.model">
    
     <class name="Brand" identity-type="application" detachable="true">
-    	<field name="id" value-strategy="identity" primary-key="true"/>
+    	<field name="brandID" value-strategy="identity" primary-key="true"/>
     	<field name="brandName" />
     </class>
     
@@ -228,7 +228,7 @@
 		</class>
 
 		<class name="SubCategory" identity-type="application" detachable="true">
-      <field name="id" value-strategy="identity" primary-key="true"/>
+      <field name="subcategoryID" value-strategy="identity" primary-key="true"/>
       <field name="subcategoryName"/>
 			<field name="category"/>
 		</class>
