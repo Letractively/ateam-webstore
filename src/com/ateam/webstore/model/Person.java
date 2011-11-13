@@ -28,6 +28,8 @@ public class Person extends BaseModel implements Serializable {
 	
 	private String securityAnswer;
 	
+	private Customer customer;
+	
 	@SuppressWarnings("unused")
 	private Person() {
 	}
@@ -74,6 +76,14 @@ public class Person extends BaseModel implements Serializable {
 
 	public void setSecurityAnswer(String securityAnswer) {
 		this.securityAnswer = securityAnswer;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 	
