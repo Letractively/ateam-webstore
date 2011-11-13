@@ -23,7 +23,7 @@ public class CreditCard extends BaseModel implements Serializable {
 	
 	private Long id;
 	
-	private String cardNmber;
+	private String cardNumber;
 	
 	private String expMonth;
 	
@@ -49,7 +49,7 @@ public class CreditCard extends BaseModel implements Serializable {
 			String securityCode, String nameOnCard, boolean defaultInd,
 			Customer customer, Address billingAddress) {
 		super();
-		this.cardNmber = cardNmber;
+		this.cardNumber = cardNmber;
 		this.expMonth = expMonth;
 		this.expYear = expYear;
 		this.securityCode = securityCode;
@@ -59,12 +59,12 @@ public class CreditCard extends BaseModel implements Serializable {
 		this.billingAddress = billingAddress;
 	}
 
-	public String getCardNmber() {
-		return cardNmber;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setCardNmber(String cardNmber) {
-		this.cardNmber = cardNmber;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public String getExpMonth() {

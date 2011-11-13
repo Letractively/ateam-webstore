@@ -26,9 +26,8 @@ public class SecurityQuestion extends BaseModel implements Serializable {
 	private SecurityQuestion() {
 	}
 
-	public SecurityQuestion(Long id, String question) {
+	public SecurityQuestion(String question) {
 		super();
-		this.id = id;
 		this.question = question;
 	}
 
