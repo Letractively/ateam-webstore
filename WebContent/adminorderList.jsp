@@ -28,7 +28,7 @@
 		<td><%=p.getId()%></td>
 		<td><%=p.getCustomer().getFirstName()%>,<%=p.getCustomer().getLastName()%></td>
 		<td><%=p.getAddress().getStreetAddress1()%>,<%=p.getAddress().getZip()%></td>
-		<td><%=p.getCreditCard().getCardNmber()%></td>
+		<td><%=p.getCreditCard().getCardNumber()%></td>
 		<td><%=p.getTimePlaced()%></td>
 		<td><%=p.getTimeShipped()%></td>
 		<td><%=p.getTrackingNumber()%></td>

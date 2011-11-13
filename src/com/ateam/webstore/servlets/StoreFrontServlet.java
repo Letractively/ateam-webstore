@@ -19,6 +19,7 @@ import com.ateam.webstore.handlers.WishListHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.views.MessageView;
 import com.ateam.webstore.ui.views.View;
 
 /**
@@ -84,6 +85,10 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				ProductHandler ph = new ProductHandler(req);
 				v = ph.getProductView();
 			}
+			else if (req.getParameterMap().containsKey(Parameters.ALL_PRODUCTS.getId())) {
+				ProductHandler ph = new ProductHandler(req);
+				v = ph.getAllView();
+			}
 			else {
 				ProductHandler ph = new ProductHandler(req);
 				v = ph.getHomePageView();
@@ -108,11 +113,15 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		} catch (Exception e) {
 			l.log(Level.SEVERE, "Exception caught in doGet", e);
 			Handler h = new Handler(req);
-			v = h.getMainView();
+			MessageView mv = new MessageView(h.getMainView());
+			mv.setMessage(e.getMessage());
 			
-			ContentView cv = new ContentView(null, "Opps...");
-			cv.setContentText(e.getMessage());
-			v.addContentView(cv);
+			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
+			//cv.setContentText(e.getMessage());
+			mv.addContentView(cv);
+			
+			v = mv;
+			
 		}
 
 		req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);

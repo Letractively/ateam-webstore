@@ -25,7 +25,7 @@ Orders o = v.getOrder();
 							<%=o.getAddress().getCity()%> <%=o.getAddress().getState()%> <%=o.getAddress().getZip()%><br>
 							</td>
 							<td><h3>Payment Details</h3>
-							<%=o.getCreditCard().getCardNmber()%><br>
+							<%=o.getCreditCard().getCardNumber()%><br>
 							Billing: <%=o.getCreditCard().getBillingAddress()%>
 							</td>
 							<td></td>

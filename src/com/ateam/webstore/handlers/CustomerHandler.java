@@ -104,8 +104,8 @@ public class CustomerHandler extends Handler {
 		
 		RegistrationForm reg = getRegistrationRequest();
 		
-		SecurityQuestion sq = new SecurityQuestion(reg.getSecurityQuestionId(), "???");
-		Person newPerson = new Person(reg.getEmail(), reg.getPw(), sq , reg.getSecurityAnswer());
+		//SecurityQuestion sq = new SecurityQuestion("");
+		Person newPerson = new Person(reg.getEmail(), reg.getPw(), null , reg.getSecurityAnswer());
 		Customer newCustomer = new Customer("John", "Doe", newPerson );
 		
 		MessageView rv = new MessageView(getMainView());

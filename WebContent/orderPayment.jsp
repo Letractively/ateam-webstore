@@ -16,7 +16,7 @@
 
 				<select  name="<%=Constants.Parameters.CART_ID%>">
 				<%for (CreditCard cc : v.getUserCards()) {%>
-					<option value="<%=cc.getId()%>"><%=cc.getCardNmber() %></option>
+					<option value="<%=cc.getId()%>"><%=cc.getCardNumber() %></option>
 				<%} %>
 				</select>
 

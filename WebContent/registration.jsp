@@ -26,10 +26,10 @@
 					<%for(SecurityQuestion s : v.getSecurityQuestions()){%>
 					<option  value= "<%=s.getId() %>"><%=s.getQuestion() %> </option> <% } %></select></td>
 					<tr>
-<td><font size="2" >Hint:</font></td><td><input type="text" name="<%=Constants.Parameters.SECURITY_ANSWER.getId()%>" size="25" /></td>
+<td><font size="2" >Answer:</font></td><td><input type="text" name="<%=Constants.Parameters.SECURITY_ANSWER.getId()%>" size="25" /></td>
 </tr>
 <tr>	
-   <td></td><td>	<input type="submit" name="submit" value="Reset"></td><td>	<input type="submit" name="submit" value="Login"></td><td></td>
+   <td></td><td></td><td>	<input type="submit" name="submit" value="Register"></td><td></td>
 </tr>
 </table>
 			</form>
