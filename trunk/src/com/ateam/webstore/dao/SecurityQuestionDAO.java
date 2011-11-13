@@ -14,4 +14,5 @@ import com.ateam.webstore.model.SecurityQuestion;
  */
 public class SecurityQuestionDAO extends GenericDAOImpl<SecurityQuestion, Serializable> {
 
+	
 }
