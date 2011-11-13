@@ -21,7 +21,7 @@ public class SubCategory extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -6953582594821141998L;
 	
-	private Long id;
+	private Long subcategoryID;
 	
 	private String subcategoryName;
 	
@@ -53,7 +53,7 @@ public class SubCategory extends BaseModel implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return subcategoryID;
 	}
 	
 

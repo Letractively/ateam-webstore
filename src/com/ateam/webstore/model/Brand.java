@@ -21,7 +21,7 @@ public class Brand extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -2767538394276604281L;
 
-	private Long id;
+	private Long brandID;
 	
 	private String brandName;
 	
@@ -43,6 +43,6 @@ public class Brand extends BaseModel implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return brandID;
 	}
 }
