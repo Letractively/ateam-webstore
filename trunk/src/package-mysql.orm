@@ -14,16 +14,16 @@
         <column name="productName" length="150" jdbc-type="VARCHAR" allows-null="false"/>
       </field>
       <field name="sku" persistence-modifier="persistent">
-        <unique name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
+        <column name="SKU" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="modelNumber" persistence-modifier="persistent">
-        <unique name="modelNumber" length="25" jdbc-type="CHAR" allows-null="false"/>
+        <column name="modelNumber" length="25" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="subCategory" persistence-modifier="persistent">
-        <unique name="subcategoryID" jdbc-type="INTEGER" allows-null="false"/>
+        <column name="subcategoryID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="brand" persistence-modifier="persistent">
-        <unique name="brandID" jdbc-type="INTEGER" allows-null="false"/>
+        <column name="brandID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="price" persistence-modifier="persistent">
         <column name="price" jdbc-type="DECIMAL" allows-null="false"/>
@@ -57,7 +57,7 @@
       </field>
    
       <field name="login" persistence-modifier="persistent">
-        <unique name="login" length="50" jdbc-type="CHAR" allows-null="false"/>
+        <column name="login" length="50" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="password" persistence-modifier="persistent">
         <column name="password" length="50" jdbc-type="CHAR" allows-null="false"/>
@@ -94,7 +94,7 @@
       </field>
       
       <field name="person" persistence-modifier="persistent">
-        <unique name="personID" jdbc-type="INTEGER" allows-null="false"/>
+        <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="firstName" persistence-modifier="persistent">
         <column name="firstName" length="20" jdbc-type="CHAR" allows-null="false"/>
@@ -123,7 +123,7 @@
       </field>
       
       <field name="person" persistence-modifier="persistent">
-        <unique name="personID" jdbc-type="INTEGER" allows-null="false"/>
+        <column name="personID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="firstName" persistence-modifier="persistent">
         <column name="firstName" length="20" jdbc-type="CHAR" allows-null="false"/>
@@ -141,7 +141,7 @@
         <column name="sex" length="1" jdbc-type="CHAR" allows-null="true"/>
       </field>
       <field name="ssn" persistence-modifier="persistent">
-        <unique name="ssn" length="9" jdbc-type="CHAR" allows-null="false"/>
+        <column name="ssn" length="9" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="jobTitle" persistence-modifier="persistent">
         <column name="jobTitle" length="25" jdbc-type="CHAR" allows-null="false"/>
@@ -208,10 +208,10 @@
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
       <field name="cardType" persistence-modifier="persistent"> 
-        <unique name="cardType" length="15" jdbc-type="CHAR" allows-null="false"/>
+        <column name="cardType" length="15" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="cardNumber" persistence-modifier="persistent"> 
-        <unique name="cardNumber" length="16" jdbc-type="CHAR" allows-null="false"/>
+        <column name="cardNumber" length="16" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="expMonth" persistence-modifier="persistent">
         <column name="expMonth" length="2" jdbc-type="CHAR" allows-null="false"/>
@@ -598,7 +598,7 @@
     <class name="Subcategory" table="subcategory">
     <inheritance strategy="new-table"/>
     
-      <field name="id" persistence-modifier="persistent">
+      <field name="subcategoryID" persistence-modifier="persistent">
         <column name="subcategoryID"/>
       </field>
       
@@ -654,7 +654,7 @@
     <class name="Brand" table="brand">
     <inheritance strategy="new-table"/>
     
-      <field name="id" persistence-modifier="persistent">
+      <field name="brandID" persistence-modifier="persistent">
         <column name="brandID"/>
       </field>
       
