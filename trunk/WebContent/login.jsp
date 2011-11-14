@@ -6,15 +6,17 @@
 
 <%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 
+<%if (v.getMessage() != null) { %><%=v.getMessage() %><br><% } %>
+
 			<form method="post" action="<%=request.getContextPath()%>/store">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.LOGIN.getId()%>">
 						Email:<br>
-					<input type="text" name="email" value="<%=v.getVisitor().getEmail()%>"><br><br>
+					<input type="text" name="<%=Constants.Parameters.EMAIL.getId()%>" value="<%=v.getVisitor().getEmail()%>"><br><br>
 						Password:<br>
-					<input type="password" name="password"><br>
+					<input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>"><br>
 					<a href="<%=request.getContextPath()%>/store?register">Register</a>    <a href="<%=request.getContextPath()%>/store?forgot">Forgot Password?</a>
 					<br><br>
-					<input type="checkbox" name="rememberMe">Remember Me<br><br>
+					<input type="checkbox" name="<%=Constants.Parameters.REMEMBER_ME.getId()%>">Remember Me<br><br>
 					<input type="submit" name="submit" value="Login">
 			</form>

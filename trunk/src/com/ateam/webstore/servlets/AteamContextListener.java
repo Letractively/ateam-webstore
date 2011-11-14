@@ -47,7 +47,8 @@ public class AteamContextListener implements ServletContextListener {
 				}
 			}
 			
-			String logFile = "/var/log/tomcat6/ateam.log";
+			
+			String logFile = "/var/log/tomcat6/"+arg0.getServletContext().getContextPath().substring(1).replace("/", "_")+".log";
 			
 			fileHandler = new FileHandler(logFile, 0, 1, true);
 			fileHandler.setFormatter(new LogFormatter());
@@ -63,7 +64,7 @@ public class AteamContextListener implements ServletContextListener {
 		}
 		
 		
-		InputStream is = ClassLoader.getSystemResourceAsStream("ateam-webstore.properties");
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("ateam-webstore.properties");
 
 		if (is != null) {
 			try {

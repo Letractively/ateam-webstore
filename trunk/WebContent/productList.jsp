@@ -13,15 +13,21 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 
 %>
 
-<h3><%=v.getListTitle()%></h3>
 <table width="100%">
 	<%  for (Product p : v.getProducts()) { %>
 
 	<tr>
-		<td><img src="<%=request.getContextPath()%>/<%=p.getImagePath()%>small.png"></td>
-		<td><a href="<%=productImageRoot%>t_<%=p.getId()%>.png"><%=p.getProductName()%></a></td>
-		<td><%=p.getPrice()%></td>
+		
+		<td rowspan="2"><img src="<%=productImageRoot%>t_<%=p.getSKU()%>.png"></td>
+		<td colspan="2"><a href="<%=request.getContextPath()%>/store?product=<%=p.getId()%>"><%=p.getProductName()%></a></td>
+	</tr>
+	<tr>
+		<%if (p.getDescription().length() > 100) { %> 
+		<td><%=p.getDescription().substring(0, 100)%>...</td>
+		<%} else { %>
 		<td><%=p.getDescription()%></td>
+		<%} %>
+		<td><b><%=p.getPrice()%></b></td>
 
 	</tr>
 	<%  } %>

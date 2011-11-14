@@ -22,6 +22,8 @@ import com.ateam.webstore.ui.views.ProductListView;
  */
 public class ProductHandler extends Handler {
 	
+	ProductService service;
+	
 	static Logger l = Logger.getLogger(ProductHandler.class.getName().toString());
 
 	/**
@@ -38,12 +40,8 @@ public class ProductHandler extends Handler {
 	 * @param id
 	 * @return
 	 */
-	private Product getProduct(String name) {
-		
-		//ProductService productServ = new ProductService();
-		//service.p
-		//return (Product) productServ.getProductByName(name).toArray()[0];
-		return null;
+	private Product getProduct(String id) {
+		return (Product) service.getById(Long.parseLong(id));
 	}
 	
 	/**
@@ -52,26 +50,7 @@ public class ProductHandler extends Handler {
 	 * @return
 	 */
 	private Collection<Product> getFeaturedProducts() {
-		// TODO Implement for real
-		//      We need to either a flag on product table to know what's featured, or
-		//      We could just pick them from getAll()
-		//      BEWARE: the output should be limited to 6 records.
-		
-		Collection<Product> featured = new ArrayList<Product>();
-		
-		//ProductService productServ = new ProductService();
-		//Collection<com.ateam.webstore.model.Product> products = productServ.getAll();
-		//for (com.ateam.webstore.model.Product product : products) {
-		//	featured.add(product);
-		//}	
-				
-//		featured.add(getProduct("iMac"));
-//		featured.add(getProduct("iPod"));
-//		featured.add(getProduct("iPhone"));
-//		featured.add(getProduct("iPad"));
-		l.info("returning "+featured.size()+" products");
-		return featured;
-		
+		return service.getFeaturedProducts();
 	}
 	
 	/**
@@ -93,10 +72,9 @@ public class ProductHandler extends Handler {
 		
 		ProductListView hp = new ProductListView(getMainView());
 		
-		hp.setProducts(getDummyProductList());
+		hp.setProducts(getFeaturedProducts());
 		
 		ContentView cv = new ContentView(JSP_HOME, "Featured Products");
-		//cv.setContentText("Check out these winners...");
 		
 		hp.getContentViews().add(cv);
 
@@ -168,10 +146,19 @@ public class ProductHandler extends Handler {
 	 */
 	public ProductDetailsView getProductView() {
 		
-		String id = req.getParameter(Parameters.PRODUCT.getId());
+		Product p = getProduct(req.getParameter(Parameters.PRODUCT.getId()));
 		
 		ProductDetailsView pv = new ProductDetailsView(getMainView());
-		pv.setProduct(getDummyProduct());
+		
+		if (p != null) {
+			pv.setProduct(p);
+			pv.addContentView(new ContentView(JSP_PRODUCT_DETAILS, p.getProductName()));
+		}
+		else {
+			pv.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));
+			pv.setMessage("Sorry, product not found.");
+		}
+		
 		return pv;
 	}
 	
