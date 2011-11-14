@@ -41,8 +41,8 @@ public class ProductsInWishListService implements
 
 	@Override
 	public ProductsInWishList getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductsInWishListDAO repository = new ProductsInWishListDAO();
+		return repository.get(id);
 	}
 
 }

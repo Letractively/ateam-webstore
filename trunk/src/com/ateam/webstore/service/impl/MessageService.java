@@ -40,8 +40,8 @@ public class MessageService implements RepositoryService<Message> {
 
 	@Override
 	public Message getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		MessageDAO repository = new MessageDAO();
+		return repository.get(id);
 	}
 
 }

@@ -41,8 +41,8 @@ public class ProductQtyAtVendorService implements
 
 	@Override
 	public ProductQtyAtVendor getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductQtyAtVendorDAO repository = new ProductQtyAtVendorDAO();
+		return repository.get(id);
 	}
 
 }

@@ -40,8 +40,8 @@ public class EmployeeRolesService implements RepositoryService<EmployeeRoles> {
 
 	@Override
 	public EmployeeRoles getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeRolesDAO repository = new EmployeeRolesDAO();
+		return repository.get(id);
 	}
 
 }

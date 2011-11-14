@@ -39,8 +39,8 @@ public class VendorService implements RepositoryService<Vendor> {
 
 	@Override
 	public Vendor getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		VendorDAO repository = new VendorDAO();
+		return repository.get(id);
 	}
 
 }

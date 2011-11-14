@@ -42,8 +42,8 @@ public class AcceptedCardsService implements RepositoryService<AcceptedCards> {
 
 	@Override
 	public AcceptedCards getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		AcceptedCardsDAO repository = new AcceptedCardsDAO();
+		return repository.get(id);
 	}
 
 }

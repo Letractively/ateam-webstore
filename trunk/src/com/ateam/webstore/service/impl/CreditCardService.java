@@ -42,8 +42,8 @@ public class CreditCardService implements RepositoryService<CreditCard> {
 
 	@Override
 	public CreditCard getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		CreditCardDAO repository = new CreditCardDAO();
+		return repository.get(id);
 	}
 
 }
