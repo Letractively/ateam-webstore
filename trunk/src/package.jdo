@@ -24,7 +24,7 @@
 	    <field name="saleInd"/>
       <field name="lastUpdated"/>
       <field name="brand" default-fetch-group="true" />
-      <field name="subCategory" default-fetch-group="true" />      
+      <field name="subCategory" default-fetch-group="true" /> 
     </class> 
 
   	<class name="Person" identity-type="application" detachable="true">
@@ -226,12 +226,14 @@
 		<class name="Category" identity-type="application" detachable="true">
     	<field name="id" value-strategy="identity" primary-key="true"/>
       <field name="name"/>
+      <field name="subCategories" default-fetch-group="true" /> 
 		</class>
 
 		<class name="SubCategory" identity-type="application" detachable="true">
       <field name="subcategoryID" value-strategy="identity" primary-key="true"/>
       <field name="subcategoryName"/>
-			<field name="category"/>
+			<field name="category" default-fetch-group="true"/>
+			<field name="products" default-fetch-group="true"/>
 		</class>
         
 		<class name="ServiceCase" identity-type="application" detachable="true">
