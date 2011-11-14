@@ -7,6 +7,7 @@ import javax.jdo.Query;
 
 import com.ateam.webstore.dao.common.GenericDAOImpl;
 import com.ateam.webstore.model.Product;
+import com.ateam.webstore.model.ProductListing;
 
 public class ProductDAO extends GenericDAOImpl<Product, Serializable>{
 	
@@ -47,5 +48,25 @@ public class ProductDAO extends GenericDAOImpl<Product, Serializable>{
 		}
 	}	
 	
+	@SuppressWarnings("unchecked")
+	public Collection<ProductListing> getProductsByCategory(Serializable categoryId) {
+				
+		try {
+			String sqlText = "SELECT A.productId, A.productName, A.sku, A.modelNumber, A.price, A.percentDiscount"
+					+ ", A.description, A.qtyOnHand, A.imagePath, A.firstOffered, A.saleInd, A.lastUpdated "
+					+ "FROM PRODUCT A INNER JOIN (SELECT X.subcategoryID FROM SUBCATEGORY X INNER JOIN CATEGORY Y ON X.categoryID = Y.categoryID AND Y.categoryID = ?) B "
+					+ " ON A.subcategoryID = B.subcategoryID ";      
+		    	      
+			Query query = getPersistenceManager().newQuery("javax.jdo.query.SQL", sqlText);
+			query.setResultClass(ProductListing.class);
+		    	      
+			return (Collection<ProductListing>) query.execute(categoryId);	
+			
+		} catch (RuntimeException re) {
+			throw re;
+		} finally {
+			getPersistenceManager().close();
+		}
+	}		
 
 }
