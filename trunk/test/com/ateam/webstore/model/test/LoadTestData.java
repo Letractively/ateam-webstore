@@ -3,10 +3,14 @@
  */
 package com.ateam.webstore.model.test;
 
-import com.ateam.webstore.model.Customer;
-import com.ateam.webstore.model.Person;
-import com.ateam.webstore.service.impl.CustomerService;
-import com.ateam.webstore.service.impl.PersonService;
+import java.util.Collection;
+
+import com.ateam.webstore.model.Category;
+import com.ateam.webstore.model.Product;
+import com.ateam.webstore.model.SubCategory;
+import com.ateam.webstore.service.impl.CategoryService;
+import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.service.impl.SubCategoryService;
 
 /**
  * @author Hendrix Tavarez
@@ -37,11 +41,42 @@ public class LoadTestData {
 //		System.out.println((new SecurityQuestionService().getById(new Long(22))).getQuestion());
 
 		
-		CustomerService cs = new CustomerService();
-		Customer customer = cs.authenticateCustomer("valerie@pou.com", "password");
-		System.out.println(customer.getFirstName());
+//		CustomerService cs = new CustomerService();
+//		Customer customer = cs.authenticateCustomer("valerie@pou.com", "password");
+//		System.out.println(customer.getFirstName());
+		
+//		ProductService prodServ = new ProductService();
+//		Collection<Product> products = prodServ.getFeaturedProducts();
+//		for (Product product : products) {
+//			System.out.println(product.getProductName());
+//		}
+		
+//		CategoryService catServ = new CategoryService();
+//		Collection<Category> categories = catServ.getAll();
+//		for (Category category : categories) {
+//			System.out.println(category.getName());
+//			Collection<SubCategory> subCategories = category.getSubCategories();
+//			for (SubCategory subCategory : subCategories) {
+//				System.out.println(subCategory.getSubcategoryName());
+//			}
+//		}
 		
 		
+//		SubCategoryService subCatServ = new SubCategoryService();
+//		Collection<SubCategory> subCategories = subCatServ.getAll();
+//		for (SubCategory subCategory : subCategories) {
+//			System.out.println(subCategory.getSubcategoryName());
+//			Collection<Product> products = subCategory.getProducts();
+//			for (Product product : products) {
+//				System.out.println(product.getProductName());
+//			}			
+//		}
+		
+		ProductService productService = new ProductService();
+		Collection<Product> products = productService.getProductsBySubCategory(new Long(12));
+		for (Product product : products) {
+			System.out.println(product.getProductName());
+		}
 	}
 
 }
