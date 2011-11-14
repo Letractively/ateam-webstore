@@ -22,6 +22,8 @@ public class EmployeeRoles extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -7953730935339863118L;
 	
+	private Long id;
+	
 	private Date effectiveDate;
 	
 	private Date endDate;
@@ -71,6 +73,10 @@ public class EmployeeRoles extends BaseModel implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 	

@@ -22,6 +22,8 @@ public class ProductsInWishList extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1766128488366368977L;
 	
+	private Long id;
+	
 	private int quantity;
 	
 	private Date timeAdded;
@@ -71,6 +73,10 @@ public class ProductsInWishList extends BaseModel implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 	

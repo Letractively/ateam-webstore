@@ -36,5 +36,24 @@ public class OrdersDAO extends GenericDAOImpl<Orders, Serializable> {
 			getPersistenceManager().close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Orders> getOrdersInCompleted() {
+		
+		
+		Collection<Orders> orders = null;
+		
+		try {
+			Query query = getPersistenceManager().newQuery(getPersistentClass(), "timeShipped > :zero");
+			orders = (Collection<Orders>) query.execute(new Timestamp(0));
+			
+			return (Collection<Orders>) getPersistenceManager().detachCopyAll(orders);
+			
+		} catch (RuntimeException re) {
+			throw re;
+		} finally {
+			getPersistenceManager().close();
+		}
+	}	
 
 }

@@ -4,6 +4,7 @@
 package com.ateam.webstore.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -29,6 +30,8 @@ public class Cart extends BaseModel implements Serializable {
 	private Date lastOrderDate;
 	
 	private Customer customer;
+	
+	private Collection<ProductsInCart> products;
 	
 	@SuppressWarnings("unused")
 	private Cart() {
@@ -67,6 +70,17 @@ public class Cart extends BaseModel implements Serializable {
 		return id;
 	}
 	
+	public void addProduct(ProductsInCart product) {
+		this.products.add(product);
+	}
+	
+	public void removeProduct(ProductsInCart product) {
+		this.products.remove(product);
+	}
+	
+	public Collection<ProductsInCart> getProducts() {
+		return this.products;
+	}
 	
 
 }
