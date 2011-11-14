@@ -7,7 +7,6 @@ public class Visitor {
 	Customer customer;
 	Employee employee;
 	String email = "";
-	String name = "";
 	boolean authenticated;
 	boolean known;
 	public String getEmail() {
@@ -15,12 +14,6 @@ public class Visitor {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public boolean isAuthenticated() {
 		return authenticated;
@@ -32,7 +25,7 @@ public class Visitor {
 	public String toString() {
 		
 		return "[ Visitor :: email="+email+","+
-				"name="+name+","+
+				"customer="+customer+","+
 				"authenticated="+authenticated+","+
 				"known="+known
 				+" ]";

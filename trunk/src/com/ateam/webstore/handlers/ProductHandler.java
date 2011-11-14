@@ -95,7 +95,7 @@ public class ProductHandler extends Handler {
 		
 		ProductListView hp = new ProductListView(getMainView());
 		
-		hp.setProducts(getDummyProductList());
+		//hp.setProducts(service.getProductsByCategory(Long.parseLong(category)));
 		
 		ContentView cv = new ContentView(JSP_PRODUCT_LIST, cat.getName());
 		

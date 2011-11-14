@@ -81,6 +81,7 @@ public class CustomerHandler extends Handler {
 		try {
 			cust = service.authenticateCustomer(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
 			if (cust != null) {
+				l.info("Login Successful for "+cust.getFirstName());
 				v.setCustomer(cust);
 				v.setAuthenticated(true);
 				v.setKnown(true);
@@ -174,8 +175,8 @@ public class CustomerHandler extends Handler {
 		
 		RegistrationForm reg = new RegistrationForm();
 
-		reg.setFirstName("John"); //TODO add form support
-		reg.setLastName("Doe"); //TODO add form support
+		reg.setFirstName(req.getParameter(Parameters.FIRST_NAME.getId()));
+		reg.setLastName(req.getParameter(Parameters.LAST_NAME.getId()));
 		reg.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 		reg.setPw(req.getParameter(Parameters.PASSWORD.getId())); //TODO confirm password
 		reg.setSecurityQuestionId(Long.parseLong(req.getParameter(Parameters.SECURITY_QUESTION.getId())));
