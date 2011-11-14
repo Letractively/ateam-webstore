@@ -382,6 +382,9 @@
       <field name="customer" persistence-modifier="persistent">
         <column name="customerID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
+      <field name="address" persistence-modifier="persistent">
+        <column name="addressID" jdbc-type="INTEGER" allows-null="false"/>
+      </field>
       <field name="creditCard" persistence-modifier="persistent">
         <column name="cardID" jdbc-type="INTEGER" allows-null="false"/>
       </field>
