@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
+import com.ateam.webstore.model.ProductListing;
 import com.ateam.webstore.model.SubCategory;
 import com.ateam.webstore.service.impl.CategoryService;
 import com.ateam.webstore.service.impl.ProductService;
@@ -72,9 +73,25 @@ public class LoadTestData {
 //			}			
 //		}
 		
+//		ProductService productService = new ProductService();
+//		Collection<Product> products = productService.getProductsBySubCategory(new Long(12));
+//		for (Product product : products) {
+//			System.out.println(product.getProductName());
+//		}
+		
+//		CategoryService categoryService = new CategoryService();
+//		Category category = categoryService.getById(new Long(102));
+//		Collection<SubCategory> subCategories = category.getSubCategories();
+//		for (SubCategory subCategory : subCategories) {
+//			Collection<Product> products = subCategory.getProducts();
+//			for (Product product : products) {
+//				System.out.println(subCategory.getSubcategoryName() + " ** " + product.getProductName());
+//			}
+//		}
+		
 		ProductService productService = new ProductService();
-		Collection<Product> products = productService.getProductsBySubCategory(new Long(12));
-		for (Product product : products) {
+		Collection<ProductListing> products = productService.getProductsByCategory(new Long(102));
+		for (ProductListing product : products) {
 			System.out.println(product.getProductName());
 		}
 	}
