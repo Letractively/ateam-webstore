@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import com.ateam.webstore.dao.ProductDAO;
 import com.ateam.webstore.model.Product;
+import com.ateam.webstore.model.SubCategory;
 import com.ateam.webstore.service.RepositoryService;
 
 public class ProductService implements RepositoryService<Product> {
@@ -56,5 +57,11 @@ public class ProductService implements RepositoryService<Product> {
 		ProductDAO repository = new ProductDAO();
 		
 		return repository.getFeaturedProducts();
+	}
+	
+	public Collection<Product> getProductsBySubCategory(Serializable id) {
+		SubCategoryService subCategoryService = new SubCategoryService();
+		SubCategory subCategory = subCategoryService.getById(id);
+		return subCategory.getProducts();
 	}
 }
