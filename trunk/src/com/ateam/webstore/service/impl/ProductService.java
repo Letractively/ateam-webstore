@@ -52,4 +52,9 @@ public class ProductService implements RepositoryService<Product> {
 		return repository.get(id);
 	}
 
+	public Collection<Product> getFeaturedProducts() {
+		ProductDAO repository = new ProductDAO();
+		
+		return repository.getFeaturedProducts();
+	}
 }
