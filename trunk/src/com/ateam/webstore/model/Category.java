@@ -4,6 +4,7 @@
 package com.ateam.webstore.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.jdo.annotations.PersistenceCapable;
 
@@ -25,6 +26,8 @@ public class Category extends BaseModel implements Serializable {
 	
 	private String name;
 	
+	private Collection<SubCategory> subCategories;
+	
 	@SuppressWarnings("unused")
 	private Category(){
 	}
@@ -44,6 +47,18 @@ public class Category extends BaseModel implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void addSubCategory(SubCategory subCategory) {
+		this.subCategories.add(subCategory);
+	}
+	
+	public void removeSubCategory(SubCategory subCategory) {
+		this.subCategories.remove(subCategory);
+	}
+	
+	public Collection<SubCategory> getSubCategories() {
+		return this.subCategories;
 	}
 
 }
