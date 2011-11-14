@@ -44,5 +44,10 @@ public class OrdersService implements RepositoryService<Orders> {
 		OrdersDAO repository = new OrdersDAO();
 		return repository.get(id);
 	}
+	
+	public Collection<Orders> getOrdersInProgress() {
+		OrdersDAO repository = new OrdersDAO();
+		return repository.getOrdersInProgress();
+	}
 
 }
