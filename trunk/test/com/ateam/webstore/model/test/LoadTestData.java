@@ -35,14 +35,11 @@ public class LoadTestData {
 //		}
 		
 //		System.out.println((new SecurityQuestionService().getById(new Long(22))).getQuestion());
+
 		
-		PersonService ps = new PersonService();
-		Person person = ps.getByLoginAndPassword("valerie@pou.com", "password");
-		
-		System.out.println(person.getCustomer().getFirstName());
 		CustomerService cs = new CustomerService();
-//		Customer customer = cs.getByPersonId(person.getId());
-//		System.out.println(customer.getFirstName());
+		Customer customer = cs.authenticateCustomer("valerie@pou.com", "password");
+		System.out.println(customer.getFirstName());
 		
 		
 	}
