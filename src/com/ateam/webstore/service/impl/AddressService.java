@@ -42,8 +42,8 @@ public class AddressService implements RepositoryService<Address> {
 
 	@Override
 	public Address getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		AddressDAO repository = new AddressDAO();
+		return repository.get(id);
 	}
 
 }

@@ -41,8 +41,8 @@ public class OrdersService implements RepositoryService<Orders> {
 
 	@Override
 	public Orders getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		OrdersDAO repository = new OrdersDAO();
+		return repository.get(id);
 	}
 
 }

@@ -42,8 +42,8 @@ public class CartService implements RepositoryService<Cart> {
 
 	@Override
 	public Cart getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		CartDAO repository = new CartDAO();
+		return repository.get(id);
 	}
 
 }

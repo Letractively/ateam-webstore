@@ -46,7 +46,5 @@ public class SecurityQuestionService implements
 		SecurityQuestionDAO repository = new SecurityQuestionDAO();
 		return repository.get(id);
 	}
-	
-	
 
 }

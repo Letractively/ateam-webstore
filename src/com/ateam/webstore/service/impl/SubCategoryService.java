@@ -40,8 +40,8 @@ public class SubCategoryService implements RepositoryService<SubCategory> {
 
 	@Override
 	public SubCategory getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		SubCategoryDAO repository = new SubCategoryDAO();
+		return repository.get(id);
 	}
 
 }

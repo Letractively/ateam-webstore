@@ -42,8 +42,9 @@ public class EmployeeService implements RepositoryService<Employee> {
 
 	@Override
 	public Employee getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		EmployeeDAO repository = new EmployeeDAO();
+		return repository.get(id);
 	}
 
 }

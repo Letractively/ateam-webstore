@@ -40,8 +40,8 @@ public class ServiceCaseService implements RepositoryService<ServiceCase> {
 
 	@Override
 	public ServiceCase getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceCaseDAO repository = new ServiceCaseDAO();
+		return repository.get(id);
 	}
 
 }

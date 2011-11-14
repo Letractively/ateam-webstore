@@ -48,8 +48,8 @@ public class ProductService implements RepositoryService<Product> {
 
 	@Override
 	public Product getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductDAO repository = new ProductDAO();
+		return repository.get(id);
 	}
 
 }

@@ -40,8 +40,8 @@ public class ItemsOrderedService implements RepositoryService<ItemsOrdered> {
 
 	@Override
 	public ItemsOrdered getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ItemsOrderedDAO repository = new ItemsOrderedDAO();
+		return repository.get(id);
 	}
 
 }

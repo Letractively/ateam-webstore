@@ -42,8 +42,8 @@ public class WishListService implements RepositoryService<WishList> {
 
 	@Override
 	public WishList getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		WishListDAO repository = new WishListDAO();
+		return repository.get(id);
 	}
 
 }

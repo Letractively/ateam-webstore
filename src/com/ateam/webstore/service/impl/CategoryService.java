@@ -40,8 +40,8 @@ public class CategoryService implements RepositoryService<Category> {
 
 	@Override
 	public Category getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		CategoryDAO repository = new CategoryDAO();
+		return repository.get(id);
 	}
 
 }

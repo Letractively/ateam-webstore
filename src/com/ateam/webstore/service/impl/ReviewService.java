@@ -40,8 +40,8 @@ public class ReviewService implements RepositoryService<Review> {
 
 	@Override
 	public Review getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ReviewDAO repository = new ReviewDAO();
+		return repository.get(id);
 	}
 
 }

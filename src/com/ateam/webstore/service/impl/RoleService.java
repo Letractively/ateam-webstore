@@ -40,8 +40,8 @@ public class RoleService implements RepositoryService<Role> {
 
 	@Override
 	public Role getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		RoleDAO repository = new RoleDAO();
+		return repository.get(id);
 	}
 
 }

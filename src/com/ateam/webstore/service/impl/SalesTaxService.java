@@ -42,8 +42,8 @@ public class SalesTaxService implements RepositoryService<SalesTax> {
 
 	@Override
 	public SalesTax getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		SalesTaxDAO repository = new SalesTaxDAO();
+		return repository.get(id);
 	}
 
 }

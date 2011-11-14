@@ -41,8 +41,8 @@ public class BrandService implements RepositoryService<Brand> {
 
 	@Override
 	public Brand getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		BrandDAO repository = new BrandDAO();
+		return repository.get(id);
 	}
 
 }

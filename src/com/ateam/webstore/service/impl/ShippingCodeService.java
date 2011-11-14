@@ -41,8 +41,8 @@ public class ShippingCodeService implements RepositoryService<ShippingCode> {
 
 	@Override
 	public ShippingCode getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ShippingCodeDAO repository = new ShippingCodeDAO();
+		return repository.get(id);
 	}
 
 }

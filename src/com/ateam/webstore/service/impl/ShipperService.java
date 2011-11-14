@@ -42,8 +42,8 @@ public class ShipperService implements RepositoryService<Shipper> {
 
 	@Override
 	public Shipper getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		ShipperDAO repository = new ShipperDAO();
+		return repository.get(id);
 	}
 
 }

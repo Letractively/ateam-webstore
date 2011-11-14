@@ -42,8 +42,8 @@ public class DepartmentService implements RepositoryService<Department> {
 
 	@Override
 	public Department getById(Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
+		DepartmentDAO repository = new DepartmentDAO();
+		return repository.get(id);
 	}
 
 }
