@@ -281,48 +281,58 @@ CREATE TABLE VENDOR (
 ;
 
 CREATE TABLE PRODUCT_QTY_AT_VENDOR (
+  productQtyAtVendorID	INTEGER		NOT NULL AUTO_INCREMENT	,
 	productID	INTEGER		NOT NULL		,
 	vendorID	INTEGER		NOT NULL		,
 	vendorSKU	CHAR(15)	NOT NULL		,
 	qtyAvailable	INTEGER		NOT NULL		,
-		PRIMARY KEY (productID, vendorID))
+		PRIMARY KEY (productQtyAtVendorID),
+		UNIQUE KEY (productID, vendorID))
 		ENGINE = INNODB
 ;
 
 CREATE TABLE PRODUCTS_IN_CART (
+  productsInCartID	INTEGER		NOT NULL AUTO_INCREMENT	,
 	cartID		INTEGER		NOT NULL		,
 	productID	INTEGER		NOT NULL		,
 	quantity	SMALLINT	NOT NULL DEFAULT 1  ,
 	timeAdded	TIMESTAMP	,
-		PRIMARY KEY (cartID, productID))
+		PRIMARY KEY (productsInCartID),
+		UNIQUE KEY (cartID, productID))
 		ENGINE = INNODB
 ;
 
 CREATE TABLE PRODUCTS_IN_WISH_LIST (
+	productsInWishListID	INTEGER		NOT NULL AUTO_INCREMENT	,
 	wishListID	INTEGER		NOT NULL		,
 	productID	INTEGER		NOT NULL		,
 	quantity	SMALLINT	NOT NULL DEFAULT 1	,
 	timeAdded	TIMESTAMP	,
-		PRIMARY KEY (wishListID, productID))
+		PRIMARY KEY (productsInWishListID),
+		UNIQUE KEY (wishListID, productID))
 		ENGINE = INNODB
 ;
 
 CREATE TABLE ITEMS_ORDERED (
+  itemsOrderedID	INTEGER		NOT NULL AUTO_INCREMENT	, 
 	orderID		INTEGER		NOT NULL		,
 	productID	INTEGER		NOT NULL		,
 	unitPrice	DECIMAL(10,2)	NOT NULL		,
 	itemQty		INTEGER		NOT NULL		,
 	shippedInd	CHAR(1)					,
-		PRIMARY KEY (orderID, productID))
+		PRIMARY KEY (itemsOrderedID),
+		UNIQUE KEY (orderID, productID))
 		ENGINE=INNODB
 ;
 
 CREATE TABLE EMPLOYEE_ROLES (
+  employeeRolesID	INTEGER		NOT NULL AUTO_INCREMENT	,
 	employeeID	INTEGER		NOT NULL		,
 	roleCode	SMALLINT	NOT NULL		,
 	effectiveDate	DATE		NOT NULL		,
 	endDate		DATE					,
-		PRIMARY KEY (employeeID, roleCode))
+	  PRIMARY KEY (employeeRolesID),
+		UNIQUE KEY (employeeID, roleCode))
 		ENGINE=INNODB
 ;
 
