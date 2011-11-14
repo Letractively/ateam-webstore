@@ -21,6 +21,8 @@ public class ProductQtyAtVendor extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 6996210412301012927L;
 	
+	private Long id;
+	
 	private String vendorSKU;
 	
 	private int qtyAvailable;
@@ -72,6 +74,10 @@ public class ProductQtyAtVendor extends BaseModel implements Serializable {
 
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 	

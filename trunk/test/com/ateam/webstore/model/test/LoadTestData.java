@@ -5,8 +5,14 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Orders;
-import com.ateam.webstore.service.impl.OrdersService;
+import com.ateam.webstore.model.Cart;
+import com.ateam.webstore.model.Product;
+import com.ateam.webstore.model.ProductsInCart;
+import com.ateam.webstore.service.impl.BrandService;
+import com.ateam.webstore.service.impl.CartService;
+import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.service.impl.ProductsInCartService;
+import com.ateam.webstore.service.impl.SubCategoryService;
 
 /**
  * @author Hendrix Tavarez
@@ -90,11 +96,33 @@ public class LoadTestData {
 //			System.out.println(product.getProductName());
 //		}
 		
-		OrdersService ordersService = new OrdersService();
-		Collection<Orders> orders = ordersService.getAll();
-		for (Orders orders2 : orders) {
-			System.out.println(orders2.getId() + " " + orders2.getTransactNumber() + " " + orders2.getTrackingNumber());
+//		OrdersService ordersService = new OrdersService();
+//		Collection<Orders> orders = ordersService.getAll();
+//		for (Orders orders2 : orders) {
+//			System.out.println(orders2.getId() + " " + orders2.getTimeShipped() + " " + orders2.getTrackingNumber());
+//		}
+		
+//		Product product = new Product("Testing", 99.99, "test product");
+//		product.setSKU("1998038");
+//		product.setModelNumber("24SL");
+//		product.setSubCategory(new SubCategoryService().getById(new Long(1001)));
+//		product.setBrand(new BrandService().getById(new Long(100033)));
+//		product.setPercentDiscount(9.5);
+//		product.setQtyOnHand(10);
+//		new ProductService().store(product);
+		
+		
+		CartService cartService = new CartService();
+		Cart cart = cartService.getById(new Long (100002));
+//		ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(100001)));
+//		cart.addProduct(prodInCart);
+//		cartService.store(cart);
+
+		Collection<ProductsInCart> productsInCart = cart.getProducts();
+		for (ProductsInCart list : productsInCart) {
+			System.out.println( list.getCart().getId() + " ** " + list.getCart().getCustomer().getPerson().getLogin() + " ** " + list.getProduct().getProductName());
 		}
+		
 	}
 
 }

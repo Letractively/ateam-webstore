@@ -21,6 +21,8 @@ public class ItemsOrdered extends BaseModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -4290106147044135362L;
 	
+	private Long id;
+	
 	private Double unitPrice;
 	
 	private int itemQty;
@@ -83,6 +85,10 @@ public class ItemsOrdered extends BaseModel implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 	
