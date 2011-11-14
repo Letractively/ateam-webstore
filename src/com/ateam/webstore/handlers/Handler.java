@@ -59,10 +59,11 @@ public class Handler implements Constants {
 		Collection<Category> categories = new CategoryService().getAll();
 		Map<String, String> navLinks = new HashMap<String,String>();
 
-		int i = 4;
-		for (Category c : categories) while (i>1) {
+		
+		int i = 0;
+		for (Category c : categories) if (i < 3) {
 			navLinks.put(c.getName(), req.getContextPath()+"/store?category="+c.getId());
-			i--;
+			i++;
 		}
 		
 		v.setNavLinks(navLinks);
