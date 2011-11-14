@@ -4,7 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%MessageView v = (MessageView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
+<%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 
-
+<%if (v.isError()) {%> <font color=red><%} %>
 <%=v.getMessage()%>
+<%if (v.isError()) {%> </font color=red><%} %>

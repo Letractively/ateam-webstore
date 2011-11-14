@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ateam.webstore.handlers.CartHandler;
+import com.ateam.webstore.handlers.CustomerHandler;
 import com.ateam.webstore.handlers.Handler;
 import com.ateam.webstore.handlers.OrderHandler;
 import com.ateam.webstore.handlers.ProductHandler;
-import com.ateam.webstore.handlers.CustomerHandler;
 import com.ateam.webstore.handlers.WishListHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.views.ContentView;
-import com.ateam.webstore.ui.views.MessageView;
 import com.ateam.webstore.ui.views.View;
 
 /**
@@ -113,7 +112,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		} catch (Exception e) {
 			l.log(Level.SEVERE, "Exception caught in doGet", e);
 			Handler h = new Handler(req);
-			MessageView mv = new MessageView(h.getMainView());
+			View mv = new View(h.getMainView());
 			mv.setMessage(e.getMessage());
 			
 			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
@@ -155,8 +154,8 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			Handler h = new Handler(req);
 			View v = h.getMainView();
 			
-			ContentView cv = new ContentView(null, "Opps...");
-			cv.setContentText(e.getMessage());
+			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
+			v.setMessage(e.getMessage());
 			v.addContentView(cv);
 			
 			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);

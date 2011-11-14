@@ -111,10 +111,7 @@ Released   : 20081009
 			<h1><%=cv.getContentHeader()%></h1>
 		</div>
 		<div class="contentText">
-			<p><%if (cv.getContentText() != null) { cv.getContentText();}%></p>
-			
 			<%if (cv.getJspf() != null) { %><jsp:include page="<%=cv.getJspf()%>" /><% }%>
-			
 		</div>
 		<%
 			}

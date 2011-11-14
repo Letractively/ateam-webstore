@@ -1,26 +1,21 @@
 package com.ateam.webstore.handlers;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Customer;
-import com.ateam.webstore.model.Person;
-import com.ateam.webstore.model.SecurityQuestion;
 import com.ateam.webstore.service.impl.CustomerService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.forms.RegistrationForm;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
-import com.ateam.webstore.ui.views.MessageView;
 import com.ateam.webstore.ui.views.RegistrationView;
 import com.ateam.webstore.ui.views.View;
 
 public class CustomerHandler extends Handler {
-
+	CustomerService service;
 	public CustomerHandler(HttpServletRequest req) {
 		super(req);
 		service = new CustomerService();
@@ -32,14 +27,7 @@ public class CustomerHandler extends Handler {
 	 * @return
 	 */
 	public View getLoginView () {
-		
-		View l = getMainView();
-		
-		l.setShowLogonForm(false);
-		
-		l.addContentView(new ContentView(JSP_LOGIN, "Login"));
-		
-		return l;
+		return getLoginView(null);
 	}
 	
 	/**
@@ -48,10 +36,25 @@ public class CustomerHandler extends Handler {
 	 * @return
 	 */
 	public RegistrationView getRegistrationView() {
+		return getRegistrationView(null);
+	}
+	
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	public RegistrationView getRegistrationView(String message) {
 		RegistrationView r = new RegistrationView(getMainView());
 		
 		SecurityQuestionHandler sech = new SecurityQuestionHandler(req);
 		r.setSecurityQuestions(sech.getSecurityQuestions());
+		
+		if (message != null) {
+			r.setMessage(message);
+		}
+		
+		r.setShowVisitorInfo(false);
 		
 		r.addContentView(new ContentView(JSP_REGISTRATION, "Register"));
 		
@@ -72,26 +75,64 @@ public class CustomerHandler extends Handler {
 		l.info("Processing Login Request from session "+req.getSession().getId()); 
 		Visitor v = login.getVistor();
 		
-		//TODO implement a "real" authentication mechanism.
-		v.setCustomer(new Customer("John", "Doe", null));
+		Customer cust = null;
+		View resultView;
 		
-		v.setAuthenticated(true);
-		v.setKnown(true);
-		v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
-		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
-		login.setForm(FormName.LOGIN);
-		login.setSuccess(true);
+		try {
+			cust = service.authenticateCustomer(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
+			if (cust != null) {
+				v.setCustomer(cust);
+				v.setAuthenticated(true);
+				v.setKnown(true);
+				v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
+				
+				req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
+				login.setForm(FormName.LOGIN);
+				login.setSuccess(true);
 
-		ProductHandler ph = new ProductHandler(req);
-		View rv = ph.getHomePageView();
-
-		login.setResultView(rv);
+				//Build view
+				ProductHandler ph = new ProductHandler(req);
+				resultView = ph.getHomePageView();
+			}
+			else {
+				resultView = getLoginView("Invalid email or password. Please try again.");
+			}
+			
+		} catch (Exception e) {
+			l.log(Level.INFO, "Failed autnetication", e);
+			resultView = getLoginView("Invalid email or password. Please try again.");
+		}
+		
+		login.setResultView(resultView);
 		
 		l.info("Login results:"+v);
 		
 		return login;
 	}
 	
+	/**
+	 * Get the login view
+	 * @param loginMessage
+	 * @return
+	 */
+	public View getLoginView(String loginMessage) {
+		
+		View l = getMainView();
+		
+		l.setShowLogonForm(false);
+		
+		ContentView cv = new ContentView(JSP_LOGIN, "Login");
+		
+		if (loginMessage != null) {
+			l.setMessage(loginMessage);
+		}
+		
+		l.addContentView(cv);
+		
+		return l;
+
+	}
+
 	/**
 	 * Process a login request
 	 * @param login
@@ -104,26 +145,26 @@ public class CustomerHandler extends Handler {
 		
 		RegistrationForm reg = getRegistrationRequest();
 		
-		//SecurityQuestion sq = new SecurityQuestion("");
-		Person newPerson = new Person(reg.getEmail(), reg.getPw(), null , reg.getSecurityAnswer());
-		Customer newCustomer = new Customer("John", "Doe", newPerson );
-		
-		MessageView rv = new MessageView(getMainView());
-		
-		rv.addContentView(new ContentView(JSP_MESSAGE, "Registration"));
-		
-		try {
-			PersonHandler ph = new PersonHandler(req);
-			ph.store(newPerson);
-			service.store(newCustomer);
-			rv.setMessage("Success!!");
-		} catch (Exception e) {
-			l.log(Level.WARNING, "", e);
-			rv.setError(true);
-			rv.setMessage("Failed!! "+e.getMessage());
+		if (service.customerExists(reg.getEmail())) {
+			reg.setResultView(getRegistrationView("An account for"+reg.getEmail()+" already exists"));
 		}
+		else {
+			View rv = new View(getMainView());
+			
+			rv.addContentView(new ContentView(JSP_LOGIN, "Login"));
+			
+			try {
+				service.registerCustomer(reg.getFirstName(), reg.getLastName(), reg.getEmail(), reg.getPw(), reg.getSecurityQuestionId(), reg.getSecurityAnswer());
+				rv.setMessage("Registration Complete, please login.");
+			} catch (Exception e) {
+				l.log(Level.WARNING, "", e);
+				rv.setError(true);
+				//rv.setMessage("Failed!! "+e.getMessage());
+				reg.setResultView(getRegistrationView("An error occured."));
+			}
 
-		reg.setResultView(rv);
+			reg.setResultView(rv);			
+		}
 		
 		return reg;
 	}

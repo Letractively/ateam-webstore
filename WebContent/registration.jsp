@@ -7,14 +7,24 @@
 
 <%RegistrationView v = (RegistrationView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
 
+<%if (v.getMessage() != null) { %><%=v.getMessage() %><br><% } %>
+
 			<form method="post" action="<%=request.getContextPath()%>/store">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.REGISTER.getId()%>">
 <table>						
 <tr>
-<td><font size="2" >Email:</font></td><td>
-					<input type="text" name="<%=Constants.Parameters.EMAIL.getId() %>" name="username" size="25"/></td>
-					</tr>
+		<td><font size="2" >First Name:</font></td><td>
+		<input type="text" name="<%=Constants.Parameters.FIRST_NAME.getId() %>" size="25"/></td>
+</tr>
+<tr>
+		<td><font size="2" >Last Name:</font></td><td>
+		<input type="text" name="<%=Constants.Parameters.LAST_NAME.getId() %>" size="25"/></td>
+</tr>
+<tr>
+		<td><font size="2" >Email:</font></td><td>
+		<input type="text" name="<%=Constants.Parameters.EMAIL.getId() %>" size="25"/></td>
+</tr>
 <tr>
 <td><font size="2" >Password:</font></td><td><input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>" size="26" /></td>
 </tr>

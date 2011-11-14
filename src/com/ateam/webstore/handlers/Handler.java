@@ -1,6 +1,7 @@
 package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,10 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Cart;
+import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.service.RepositoryService;
+import com.ateam.webstore.service.impl.CategoryService;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.View;
@@ -47,25 +50,25 @@ public class Handler implements Constants {
 	 * @return
 	 */
 	public View getMainView() {
+
 		l.fine("building main view");
 		View v = new View();
 		v.setTitle("A+Team WebStore");
 		v.setHeaderTitle(v.getTitle());
+		
+		Collection<Category> categories = new CategoryService().getAll();
 		Map<String, String> navLinks = new HashMap<String,String>();
-		navLinks.put("Electronics", req.getContextPath()+"/store?category=12121");
-		navLinks.put("Furniture", req.getContextPath()+"/store?category=12121");
-		navLinks.put("Homegoods", req.getContextPath()+"/store?category=12121");
+
+		int i = 4;
+		for (Category c : categories) while (i>1) {
+			navLinks.put(c.getName(), req.getContextPath()+"/store?category="+c.getId());
+			i--;
+		}
+		
 		v.setNavLinks(navLinks);
 
 		v = setVisitorInfo(v);
 		
-//		Customer cust = null;
-//		Cart cart = new Cart(cust );
-//		List list = new ArrayList();
-//		list.add("123");
-//		list.add("123");
-//		cart.setProducts(list);
-//		v.setCart(cart);
 		return  v;
 	}
 

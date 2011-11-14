@@ -13,12 +13,14 @@ public class View {
 	String headerTitle = "";
 	String headerSubText = "";
 	String footerText = "";
+	String message;
 	Visitor visitor;
 	Cart cart;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
 	boolean showLogonForm;
 	boolean showVisitorInfo;
+	private boolean error;
 	
 	/**
 	 * 
@@ -97,7 +99,7 @@ public class View {
 	 * @return
 	 */
 	public String getGreeting() {
-		String greet = "Welcome";
+		String greet = "Welcome ";
 		
 		if (visitor.getCustomer().getFirstName() != null) {
 			greet+=visitor.getCustomer().getFirstName();
@@ -131,5 +133,18 @@ public class View {
 	
 	public String toString() {
 		return "[View :: "+this.getClass().getName()+", "+contentViews.size()+" content views ]";
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public boolean isError() {
+		return error;
+	}
+
+	public void setError(boolean error) {
+		this.error = error;
 	}
 }
