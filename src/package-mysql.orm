@@ -595,11 +595,15 @@
       <field name="name" persistence-modifier="persistent">
         <column name="categoryName" length="20" jdbc-type="CHAR" allows-null="false"/>
       </field>
+
+      <field name="subCategories" persistence-modifier="persistent" mapped-by="category">
+        <collection element-type="SubCategory" />
+      </field>      
       
     </class>
     
     
-    <class name="Subcategory" table="subcategory">
+    <class name="SubCategory" table="subcategory">
     <inheritance strategy="new-table"/>
     
       <field name="subcategoryID" persistence-modifier="persistent">
@@ -612,6 +616,10 @@
       <field name="subcategoryName" persistence-modifier="persistent">
         <column name="subcategoryName" length="30" jdbc-type="CHAR" allows-null="false"/>
       </field>
+      
+      <field name="products" persistence-modifier="persistent" mapped-by="subCategory">
+        <collection element-type="Product" />
+      </field>        
       
     </class>
     
