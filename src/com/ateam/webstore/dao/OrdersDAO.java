@@ -4,6 +4,10 @@
 package com.ateam.webstore.dao;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Collection;
+
+import javax.jdo.Query;
 
 import com.ateam.webstore.dao.common.GenericDAOImpl;
 import com.ateam.webstore.model.Orders;
@@ -13,5 +17,24 @@ import com.ateam.webstore.model.Orders;
  *
  */
 public class OrdersDAO extends GenericDAOImpl<Orders, Serializable> {
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Orders> getOrdersInProgress() {
+		
+		
+		Collection<Orders> orders = null;
+		
+		try {
+			Query query = getPersistenceManager().newQuery(getPersistentClass(), "timeShipped == :zero");
+			orders = (Collection<Orders>) query.execute(new Timestamp(0));
+			
+			return (Collection<Orders>) getPersistenceManager().detachCopyAll(orders);
+			
+		} catch (RuntimeException re) {
+			throw re;
+		} finally {
+			getPersistenceManager().close();
+		}
+	}
 
 }
