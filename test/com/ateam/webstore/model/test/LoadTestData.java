@@ -5,13 +5,8 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Category;
-import com.ateam.webstore.model.Product;
-import com.ateam.webstore.model.ProductListing;
-import com.ateam.webstore.model.SubCategory;
-import com.ateam.webstore.service.impl.CategoryService;
-import com.ateam.webstore.service.impl.ProductService;
-import com.ateam.webstore.service.impl.SubCategoryService;
+import com.ateam.webstore.model.Orders;
+import com.ateam.webstore.service.impl.OrdersService;
 
 /**
  * @author Hendrix Tavarez
@@ -89,10 +84,16 @@ public class LoadTestData {
 //			}
 //		}
 		
-		ProductService productService = new ProductService();
-		Collection<ProductListing> products = productService.getProductsByCategory(new Long(102));
-		for (ProductListing product : products) {
-			System.out.println(product.getProductName());
+//		ProductService productService = new ProductService();
+//		Collection<ProductListing> products = productService.getProductsByCategory(new Long(102));
+//		for (ProductListing product : products) {
+//			System.out.println(product.getProductName());
+//		}
+		
+		OrdersService ordersService = new OrdersService();
+		Collection<Orders> orders = ordersService.getAll();
+		for (Orders orders2 : orders) {
+			System.out.println(orders2.getId() + " " + orders2.getTransactNumber() + " " + orders2.getTrackingNumber());
 		}
 	}
 
