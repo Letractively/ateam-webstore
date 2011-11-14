@@ -107,6 +107,7 @@
 			<field name="lastUpdated"/>
       <field name="lastOrderDate" />
       <field name="customer" default-fetch-group="true" />
+      <field name="products" default-fetch-group="true"/>
     </class>
 
 		<class name="WishList" identity-type="application" detachable="true">
@@ -115,6 +116,7 @@
       <field name="createdDate"/>
       <field name="lastUpdated"/>
       <field name="customer" default-fetch-group="true" />
+      <field name="products" default-fetch-group="true"/>
 		</class>
     	
     <class name="SalesTax" identity-type="application" detachable="true">
@@ -180,6 +182,7 @@
 		</class>
 		
 		<class name="ProductQtyAtVendor" detachable="true">
+		  <field name="id" value-strategy="identity" primary-key="true"/>
 			<field name="vendorSKU"/>
       <field name="qtyAvailable"/>
       <field name="product" default-fetch-group="true"/>
@@ -187,6 +190,7 @@
 		</class>
 
 		<class name="ProductsInCart" detachable="true">
+			<field name="id" value-strategy="identity" primary-key="true"/>
 			<field name="quantity"/>
       <field name="timeAdded"/>
       <field name="cart" default-fetch-group="true"/>
@@ -194,6 +198,7 @@
 		</class>
 
 		<class name="ProductsInWishList" detachable="true">
+		  <field name="id" value-strategy="identity" primary-key="true"/>
 			<field name="quantity"/>
 			<field name="timeAdded"/>
       <field name="wishList" default-fetch-group="true"/>
@@ -201,6 +206,7 @@
 		</class>
         
 		<class name="ItemsOrdered" detachable="true">
+			<field name="id" value-strategy="identity" primary-key="true"/>
 			<field name="unitPrice"/>
       <field name="itemQty"/>
       <field name="shippedInd"/>
@@ -209,6 +215,7 @@
 		</class>
 
 		<class name="EmployeeRoles" detachable="true">
+		  <field name="id" value-strategy="identity" primary-key="true"/>
 			<field name="effectiveDate"/>
       <field name="endDate"/>
       <field name="employee" default-fetch-group="true"/>
