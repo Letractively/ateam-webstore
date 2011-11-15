@@ -69,4 +69,23 @@ public class ProductDAO extends GenericDAOImpl<Product, Serializable>{
 		}
 	}		
 
+	@SuppressWarnings("unchecked")
+	public Collection<ProductListing> searchProductsByNameOrDescription(String searchTerm) {
+				
+		try {
+			String sqlText = "SELECT A.productId, A.productName, A.sku, A.modelNumber, A.price, A.percentDiscount"
+					+ ", A.description, A.qtyOnHand, A.imagePath, A.firstOffered, A.saleInd, A.lastUpdated "
+					+ "FROM PRODUCT A  "
+					+ "WHERE A.productName LIKE '%" + searchTerm + "%' OR A.description LIKE '%" + searchTerm + "%'";      
+		    	      
+			Query query = getPersistenceManager().newQuery("javax.jdo.query.SQL", sqlText);
+			query.setResultClass(ProductListing.class);
+			return (Collection<ProductListing>) query.execute();	
+			
+		} catch (RuntimeException re) {
+			throw re;
+		} finally {
+			getPersistenceManager().close();
+		}
+	}		
 }

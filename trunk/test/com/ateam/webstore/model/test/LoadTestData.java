@@ -5,14 +5,9 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Cart;
 import com.ateam.webstore.model.Product;
-import com.ateam.webstore.model.ProductsInCart;
-import com.ateam.webstore.service.impl.BrandService;
-import com.ateam.webstore.service.impl.CartService;
+import com.ateam.webstore.model.ProductListing;
 import com.ateam.webstore.service.impl.ProductService;
-import com.ateam.webstore.service.impl.ProductsInCartService;
-import com.ateam.webstore.service.impl.SubCategoryService;
 
 /**
  * @author Hendrix Tavarez
@@ -112,17 +107,23 @@ public class LoadTestData {
 //		new ProductService().store(product);
 		
 		
-		CartService cartService = new CartService();
-		Cart cart = cartService.getById(new Long (100002));
+//		CartService cartService = new CartService();
+//		Cart cart = cartService.getById(new Long (100002));
+		
 //		ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(100001)));
 //		cart.addProduct(prodInCart);
 //		cartService.store(cart);
 
-		Collection<ProductsInCart> productsInCart = cart.getProducts();
-		for (ProductsInCart list : productsInCart) {
-			System.out.println( list.getCart().getId() + " ** " + list.getCart().getCustomer().getPerson().getLogin() + " ** " + list.getProduct().getProductName());
-		}
+//		Collection<ProductsInCart> productsInCart = cart.getProducts();
+//		for (ProductsInCart list : productsInCart) {
+//			System.out.println( list.getCart().getId() + " ** " + list.getCart().getCustomer().getPerson().getLogin() + " ** " + list.getProduct().getProductName());
+//		}
 		
+		ProductService productService = new ProductService();
+		Collection<ProductListing> products = productService.searchProductsByNameOrDescription("sony");
+		for (ProductListing product : products) {
+			System.out.println(product.getProductName() + " ** " + product.getDescription());
+		}		
 	}
 
 }
