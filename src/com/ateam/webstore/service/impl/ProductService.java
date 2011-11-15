@@ -70,4 +70,9 @@ public class ProductService implements RepositoryService<Product> {
 		ProductDAO repository = new ProductDAO();
 		return repository.getProductsByCategory(categoryId);
 	}
+	
+	public Collection<ProductListing> searchProductsByNameOrDescription(String searchTerm) {
+		ProductDAO repository = new ProductDAO();
+		return repository.searchProductsByNameOrDescription(searchTerm);
+	}
 }
