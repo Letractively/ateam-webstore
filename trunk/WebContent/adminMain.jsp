@@ -75,7 +75,7 @@ Released   : 20081009
 					%>
 			
 					<%
- 	if (!v.getVisitor().isAuthenticated() && v.getCart() != null) {
+	if (request.getSession().getAttribute(Constants.SESSION_ATTRIBUTE_CART) != null) {
  %>
 				<div id="headerCart">
 					? item(s) in Cart

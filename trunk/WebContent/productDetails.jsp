@@ -18,16 +18,16 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 						</td>
 						<td align=top>
 							<b><%=p.getPrice() %><b></b><br>
-							<form method="post" action="<%=request.getContextPath()%>/store">
+							<form method="POST" action="<%=request.getContextPath()%>/store">
 							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_CART.getId()%>">
 							<input type="hidden" name=<%=Constants.Parameters.PRODUCT_ID.getId()%> value="<%=p.getId()%>">
 							<input type="button" value="Add to cart"></form>
 							<br>
 							<br>
-							<form method="post" action="<%=request.getContextPath()%>/store">
-							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_CART.getId()%>">
+							<form method="POST" action="<%=request.getContextPath()%>/store">
+							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_WISHLIST.getId()%>">
 							<input type="hidden" name=<%=Constants.Parameters.PRODUCT_ID.getId()%> value="<%=p.getId()%>">
-							<input type="button" value="Add to wishlist"></form>
+							<input type="button" value="Add to Wish List"></form>
 						</td>
 				</tr>
 				

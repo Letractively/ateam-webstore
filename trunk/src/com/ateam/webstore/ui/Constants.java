@@ -20,6 +20,7 @@ public interface Constants {
 		REMEMBER_ME ("remember"),
 		CONFIRMPASSWORD ("cpw"),
 		CART_ID ("cart"), 
+		VIEW_CART ("viewCart"),
 		CARD_ID ("card"),
 		ADDRESS ("address"),
 		WISHLIST ("wishList"),

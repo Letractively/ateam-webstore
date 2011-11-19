@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Customer;
+import com.ateam.webstore.service.impl.CartService;
 import com.ateam.webstore.service.impl.CustomerService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
@@ -91,6 +92,10 @@ public class CustomerHandler extends Handler {
 				login.setForm(FormName.LOGIN);
 				login.setSuccess(true);
 
+				CartService cs = new CartService();
+				//TODO get the actual cust cart
+				req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getById(new Long(2)));
+				
 				//Build view
 				ProductHandler ph = new ProductHandler(req);
 				resultView = ph.getHomePageView();

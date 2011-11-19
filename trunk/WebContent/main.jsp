@@ -1,6 +1,7 @@
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
 <%@page import="com.ateam.webstore.ui.views.View"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
+<%@page import="com.ateam.webstore.model.Cart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -75,10 +76,11 @@ Released   : 20081009
 					%>
 			
 					<%
- 	if (v.getCart() != null) {
+ 	if (request.getSession().getAttribute(Constants.SESSION_ATTRIBUTE_CART) != null) {
+ 		Cart c = (Cart) request.getSession().getAttribute(Constants.SESSION_ATTRIBUTE_CART);
  %>
 				<div id="headerCart">
-					? item(s) in Cart<br>
+					<%=c.getProducts().size()%> item(s) in Cart<br>
 					<a class="headerLink" href="<%=request.getContextPath()%>/store?viewCart">View Cart</a>
 				</div> <%
  	}

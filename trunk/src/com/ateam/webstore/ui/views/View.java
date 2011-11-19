@@ -15,7 +15,6 @@ public class View {
 	String footerText = "";
 	String message;
 	Visitor visitor;
-	Cart cart;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
 	boolean showLogonForm;
@@ -41,7 +40,6 @@ public class View {
 		this.headerSubText = v.headerSubText;
 		this.footerText = v.footerText;
 		this.visitor = v.visitor;
-		this.cart = v.cart;
 		this.navLinks = v.navLinks;
 		this.contentViews = v.contentViews;
 		this.showLogonForm = v.showLogonForm;
@@ -111,12 +109,6 @@ public class View {
 
 		return greet+"!";
 		
-	}
-	public Cart getCart() {
-		return cart;
-	}
-	public void setCart(Cart cart) {
-		this.cart = cart;
 	}
 	public boolean showLogonForm() {
 		return showLogonForm;
