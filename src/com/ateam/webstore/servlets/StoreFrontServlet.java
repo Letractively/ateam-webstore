@@ -60,13 +60,13 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getRegistrationView();
 			}		
-			else if (req.getParameterMap().containsKey(Parameters.CART_ID.getId())) {
-				CartHandler ch = new CartHandler(req);
-				v = ch.getCartView();
-			}
 			else if (req.getParameterMap().containsKey(Parameters.WISHLIST.getId())) {
 				WishListHandler wlh = new WishListHandler(req);
 				v = wlh.getWishListView();
+			}
+			else if (req.getParameterMap().containsKey(Parameters.VIEW_CART.getId())) {
+				CartHandler ch = new CartHandler(req);
+				v = ch.getCartView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.CHECKOUT.getId())) {
 				CartHandler ch = new CartHandler(req);
