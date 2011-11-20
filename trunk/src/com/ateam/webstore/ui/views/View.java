@@ -15,6 +15,7 @@ public class View {
 	String footerText = "";
 	String message;
 	Visitor visitor;
+	String servletPath;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
 	boolean showLogonForm;
@@ -138,5 +139,11 @@ public class View {
 
 	public void setError(boolean error) {
 		this.error = error;
+	}
+	public String getServletPath() {
+		return servletPath;
+	}
+	public void setServletPath(String servletPath) {
+		this.servletPath = servletPath;
 	}
 }
