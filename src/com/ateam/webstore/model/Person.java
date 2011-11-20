@@ -30,6 +30,8 @@ public class Person extends BaseModel implements Serializable {
 	
 	private Customer customer;
 	
+	private Employee employee;
+	
 	@SuppressWarnings("unused")
 	private Person() {
 	}
@@ -86,6 +88,12 @@ public class Person extends BaseModel implements Serializable {
 		this.customer = customer;
 	}
 	
+	public Employee getEmployee() {
+		return employee;
+	}
 	
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 }
