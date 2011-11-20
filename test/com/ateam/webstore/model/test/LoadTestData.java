@@ -5,9 +5,8 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Product;
-import com.ateam.webstore.model.ProductListing;
-import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.model.Employee;
+import com.ateam.webstore.service.impl.EmployeeService;
 
 /**
  * @author Hendrix Tavarez
@@ -108,22 +107,50 @@ public class LoadTestData {
 		
 		
 //		CartService cartService = new CartService();
-//		Cart cart = cartService.getById(new Long (100002));
+////		Cart cart = cartService.getById(new Long (100002));
+//		Cart cart = cartService.getByCustomerId(new Long (100002));
+//		ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(100001)));
+//		cart.addProduct(prodInCart);
+//		cartService.store(cart);
 		
+
 //		ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(100001)));
 //		cart.addProduct(prodInCart);
 //		cartService.store(cart);
 
 //		Collection<ProductsInCart> productsInCart = cart.getProducts();
 //		for (ProductsInCart list : productsInCart) {
-//			System.out.println( list.getCart().getId() + " ** " + list.getCart().getCustomer().getPerson().getLogin() + " ** " + list.getProduct().getProductName());
+//			System.out.println( list.getCart().getId() + " ** " + list.getCart().getCustomer().getId() + " ** " + list.getProduct().getProductName());
 //		}
 		
-		ProductService productService = new ProductService();
-		Collection<ProductListing> products = productService.searchProductsByNameOrDescription("sony");
-		for (ProductListing product : products) {
-			System.out.println(product.getProductName() + " ** " + product.getDescription());
-		}		
+//		ProductService productService = new ProductService();
+//		Collection<ProductListing> products = productService.searchProductsByNameOrDescription("sony");
+//		for (ProductListing product : products) {
+//			System.out.println(product.getProductName() + " ** " + product.getDescription());
+//		}
+		
+//		CartService cartService = new CartService();
+////	Cart cart = cartService.getById(new Long (100002));
+//	Cart cart = cartService.getByCustomerId(new Long (100002));
+//	System.out.println(cart.getCustomer().getPerson().getLogin());
+//	ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(100001)));
+//	cart.addProduct(prodInCart);
+//	cartService.store(cart);
+//	
+//	WishListService ws = new WishListService();
+//	WishList wishList = ws.getByCustomerId(new Long(100002));
+//	System.out.println(wishList.getCustomer().getPerson().getLogin());	
+		
+		EmployeeService employeeServ = new EmployeeService();
+//		Collection<Employee> employees = employeeServ.getAll();
+//		for (Employee employee : employees) {
+//			System.out.println(employee.getPerson().getLogin() + "**" + employee.getPerson().getPassword());
+//		}	
+		
+		Employee employee = employeeServ.authenticateEmployee("claudio@loose.com", "password");
+		System.out.println(employee.getJobTitle());
+		
+//		employeeServ.registerEmployee(fname, lname, email, password, securityQuestionID, securityAnswer, ssn, jobTitle, dateOfHire, deptCode, salary)
 	}
 
 }
