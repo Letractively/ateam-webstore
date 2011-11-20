@@ -34,6 +34,7 @@
       <field name="securityQuestion" default-fetch-group="true"/>
       <field name="securityAnswer"/>
       <field name="customer" default-fetch-group="true"/>
+      <field name="employee" default-fetch-group="true"/>
     </class>  
 
 		<class name="SecurityQuestion" identity-type="application" detachable="true">
