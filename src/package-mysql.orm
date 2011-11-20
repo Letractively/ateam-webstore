@@ -72,7 +72,9 @@
       <field name="customer" persistence-modifier="persistent" mapped-by="person">
         <unique element-type="Customer" />
       </field>      
-
+      <field name="employee" persistence-modifier="persistent" mapped-by="person">
+        <unique element-type="Employee" />
+      </field>    
     </class>
     
     
@@ -123,7 +125,7 @@
     <inheritance strategy="new-table"/>
     
       <field name="id" persistence-modifier="persistent">
-        <column name="customerID"/>
+        <column name="employeeID"/>
       </field>
       
       <field name="person" persistence-modifier="persistent">
@@ -139,7 +141,7 @@
         <column name="lastName" length="30" jdbc-type="CHAR" allows-null="false"/>
       </field>
       <field name="dob" persistence-modifier="persistent">
-        <column name="dateOfBirth" jdbc-type="CHAR" allows-null="true"/>
+        <column name="dateOfBirth" jdbc-type="DATE" allows-null="true"/>
       </field>
       <field name="sex" persistence-modifier="persistent">
         <column name="sex" length="1" jdbc-type="CHAR" allows-null="true"/>
@@ -283,7 +285,7 @@
         <column name="lastUpdated" jdbc-type="TIMESTAMP" allows-null="true"/>
       </field>
       
-      <field name="products" persistence-modifier="persistent" mapped-by="cart">
+      <field name="products" persistence-modifier="persistent" mapped-by="wishList">
         <collection element-type="ProductsInWishList" />
       </field>        
     
