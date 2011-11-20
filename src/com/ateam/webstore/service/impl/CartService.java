@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import com.ateam.webstore.dao.CartDAO;
 import com.ateam.webstore.model.Cart;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.service.RepositoryService;
 
 /**
@@ -44,6 +45,13 @@ public class CartService implements RepositoryService<Cart> {
 	public Cart getById(Serializable id) {
 		CartDAO repository = new CartDAO();
 		return repository.get(id);
+	}
+	
+	public Cart getByCustomerId(Serializable customerID) {
+		
+		Customer customer = new CustomerService().getById(customerID);		
+		CartDAO repository = new CartDAO();
+		return repository.getByCustomer(customer);
 	}
 
 }

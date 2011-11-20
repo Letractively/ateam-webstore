@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.WishListDAO;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.WishList;
 import com.ateam.webstore.service.RepositoryService;
 
@@ -45,5 +46,12 @@ public class WishListService implements RepositoryService<WishList> {
 		WishListDAO repository = new WishListDAO();
 		return repository.get(id);
 	}
+	
+	public WishList getByCustomerId(Serializable customerID) {
+		
+		Customer customer = new CustomerService().getById(customerID);		
+		WishListDAO repository = new WishListDAO();
+		return repository.getByCustomer(customer);
+	}	
 
 }
