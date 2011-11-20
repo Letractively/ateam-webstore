@@ -43,8 +43,8 @@ public class CustomerService implements RepositoryService<Customer> {
 		
 		SecurityQuestion secQuestion = new SecurityQuestionService().getById(securityQuestionID);
 		Person person = new Person(email, password, secQuestion, securityAnswer);
-		CustomerService custService = new CustomerService();
-		return custService.store(new Customer(fname, lname, person));
+//		CustomerService custService = new CustomerService();
+		return store(new Customer(fname, lname, person));
 	}
 	
 	public boolean customerExists(String email) {
