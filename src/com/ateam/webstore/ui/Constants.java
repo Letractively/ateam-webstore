@@ -28,7 +28,12 @@ public interface Constants {
 		CHECKOUT ("checkout"),
 		PRODUCTSELECT ("ps"),
 		PRODUCT ("product"),
+		PRODUCT_DESC ("productDesc"),
+		PRODUCT_PRICE ("productPrice"),
+		ON_SALE ("onSale"),
 		ALL_PRODUCTS ("products"),
+		ALL_EMPLOYEES ("employees"),
+		ALL_ORDERS ("orders"),
 		ORDER_ID ("order"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
@@ -72,14 +77,21 @@ public interface Constants {
 	public enum FormName {
 		LOGIN ("login"),
 		REGISTER ("register"),
+		ADD_EMPLOYEE ("addEmployee"),
 		EDIT_CART ("editCart"),
 		ORDER_SHIPPING ("orderShipping"),
 		ORDER_PAYMENT ("orderPayment"),
 		ORDER_CONFIRM ("orderConfirm"),
+		ORDER_UPDATE ("orderUpdate"),
+		ORDER_CANCEL ("orderCancel"),
 		ADDRESS ("address"),
 		CREDIT_CARD ("creditCard"),
 		ADD_TO_CART ("addToCart"),
-		ADD_TO_WISHLIST ("addToWishList");
+		ADD_TO_WISHLIST ("addToWishList"),
+		EDIT_PRODUCT ("editProduct"),
+		DELETE_PRODUCT ("deleteProduct"),
+		DELETE_EMPLOYEE ("deleteEmployee")
+		;
 		
 		String id;
 		String handler;
@@ -115,15 +127,20 @@ public interface Constants {
 	public static final String JSP_MESSAGE = "/message.jsp";
 	public static final String JSP_ERROR = "/error.jsp";
 	public static final String JSP_ADMIN_MAIN = "/adminMain.jsp";
+	public static final String JSP_ADMIN_HOME = "/adminHome.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_REGISTRATION = "/registration.jsp";
 	public static final String JSP_HOME = "/home.jsp";
 	public static final String JSP_PRODUCT_DETAILS = "/productDetails.jsp";
 	public static final String JSP_PRODUCT_LIST = "/productList.jsp";
+	public static final String JSP_ADMIN_PRODUCT_LIST = "/adminProductList.jsp";
+	public static final String JSP_ADMIN_PRODUCT_DETAILS = "/adminProductDetails.jsp";
 	public static final String JSP_ORDER_CONFIRMATION = "/orderConfirmation.jsp";
 	public static final String JSP_ORDER_DETAILS = "/orderDetails.jsp";
+	public static final String JSP_ADMIN_ORDER_DETAILS = "/adminOrderDetails.jsp";
 	public static final String JSP_ORDER_PAYMENT = "/orderPayment.jsp";
 	public static final String JSP_ORDER_SHIPPING = "/orderShipping.jsp";
+	public static final String JSP_ORDER_LIST = "/orderList.jsp";
 	public static final String JSP_ADDRESS = "/address.jsp";
 	public static final String JSP_CREDIT_CARD = "/creditCard.jsp";
 	public static final String JSP_CART = "/cart.jsp";

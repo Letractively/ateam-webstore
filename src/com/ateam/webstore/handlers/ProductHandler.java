@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
 import com.ateam.webstore.service.impl.ProductService;
-import com.ateam.webstore.servlets.AteamContextListener;
 import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
 import com.ateam.webstore.ui.views.ProductListView;
+import com.ateam.webstore.ui.views.View;
 
 /**
  * Handles all Servlet requests related to Products
@@ -108,16 +108,25 @@ public class ProductHandler extends Handler {
 
 	/**
 	 * Builds a returns the view for a list of all products
-	 * @param category
+	 * @param admin True for the admin context
 	 * @return
 	 */
-	public ProductListView getAllView() {
+	public ProductListView getAllView(boolean admin) {
 		
-		ProductListView hp = new ProductListView(getMainView());
+		View main = getMainView();
+		if (admin) {
+			main = getMainAdminView();
+		}
+		
+		ProductListView hp = new ProductListView(main);
 		
 		hp.setProducts(getAllProducts());
 		
-		ContentView cv = new ContentView(JSP_PRODUCT_LIST, "All Products");
+		String jsp = JSP_PRODUCT_LIST;
+		if (admin) {
+			jsp = JSP_ADMIN_PRODUCT_LIST;
+		}
+		ContentView cv = new ContentView(jsp, "All Products");
 		
 		hp.getContentViews().add(cv);
 
@@ -144,15 +153,23 @@ public class ProductHandler extends Handler {
 	 * @param req
 	 * @return
 	 */
-	public ProductDetailsView getProductView() {
+	public ProductDetailsView getProductView(boolean admin) {
 		
 		Product p = getProduct(req.getParameter(Parameters.PRODUCT.getId()));
 		
-		ProductDetailsView pv = new ProductDetailsView(getMainView());
+		View main = getMainView();
+		if (admin) {
+			main = getMainAdminView();
+		}
+		ProductDetailsView pv = new ProductDetailsView(main);
 		
 		if (p != null) {
 			pv.setProduct(p);
-			pv.addContentView(new ContentView(JSP_PRODUCT_DETAILS, p.getProductName()));
+			String jsp = JSP_PRODUCT_DETAILS;
+			if (admin) {
+				jsp = JSP_ADMIN_PRODUCT_DETAILS;
+			}
+			pv.addContentView(new ContentView(jsp, p.getProductName()));
 		}
 		else {
 			pv.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));

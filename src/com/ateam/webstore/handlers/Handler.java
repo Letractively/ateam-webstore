@@ -16,6 +16,7 @@ import com.ateam.webstore.service.RepositoryService;
 import com.ateam.webstore.service.impl.CategoryService;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.models.Visitor;
+import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.View;
 
 /**
@@ -72,6 +73,46 @@ public class Handler implements Constants {
 		
 		return  v;
 	}
+	
+	/**
+	 * Builds the main site View
+	 * @return
+	 */
+	public View getMainAdminView() {
+
+		l.fine("building main admin view");
+		View v = new View();
+		v.setTitle("A+Team Administration");
+		v.setHeaderTitle(v.getTitle());
+		
+//		Collection<Category> categories = new CategoryService().getAll();
+//		Map<String, String> navLinks = new HashMap<String,String>();
+//
+//		
+//		int i = 0;
+//		for (Category c : categories) if (i < 3) {
+//			navLinks.put(c.getName(), req.getContextPath()+"/admin?);
+//			i++;
+//		}
+//		
+//		v.setNavLinks(navLinks);
+
+		//v.addContentView(new ContentView(JSP_ADMIN_HOME, "Admin Home"));
+		
+		v = setVisitorInfo(v);
+		
+		return  v;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public View getAdminHomeView() {
+		View v = getMainAdminView();
+		v.addContentView(new ContentView(JSP_ADMIN_HOME, "Admin Home"));
+		return v;
+	}
 
 	/**
 	 * Grab visitor info from the request and add it to the view.  
@@ -98,5 +139,26 @@ public class Handler implements Constants {
 		v.setVisitor(vis);
 		
 		return v;
+	}
+	
+	/**
+	 * Get the login view
+	 * @param loginMessage
+	 * @return
+	 */
+	public View getLoginView(String loginMessage, View l) {
+		
+		l.setShowLogonForm(false);
+		
+		ContentView cv = new ContentView(JSP_LOGIN, "Login");
+		
+		if (loginMessage != null) {
+			l.setMessage(loginMessage);
+		}
+		
+		l.addContentView(cv);
+		
+		return l;
+
 	}
 }

@@ -8,7 +8,7 @@
 
 <%if (v.getMessage() != null) { %><%=v.getMessage() %><br><% } %>
 
-			<form method="post" action="<%=request.getContextPath()%>/store">
+			<form method="post" action="<%=request.getContextPath()%>/<%=v.getServletPath()%>">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.LOGIN.getId()%>">
 						Email:<br>

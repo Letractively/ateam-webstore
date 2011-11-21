@@ -97,7 +97,6 @@ Released   : 20081009
 			<%
 				}
 			%>
-
 			<div id="searchField">
 				<form id="searchFieldForm"><input type="text" /> <input type="submit" value="Search" /> </form>
 			</div>
@@ -109,6 +108,7 @@ Released   : 20081009
 			if (v.getContentViews() != null)
 				for (ContentView cv : v.getContentViews()) {
 		%>
+		
 		<div class="contentTitle">
 			<h1><%=cv.getContentHeader()%></h1>
 		</div>

@@ -9,13 +9,10 @@
 <%ProductListView v = (ProductListView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
 
 %>
-
-<h3><%=v.getListTitle()%></h3>
-<table border="1">
+<table>
 	<tr>
 			<th> Product ID</th>
 			<th> Product Name</th>
-			<th> Description</th>
 			<th> Price</th>
 			<th> Model#</th>
 			<th> SKU</th>
@@ -25,9 +22,8 @@
 	<%  for (Product p : v.getProducts()) { %>
 
 	<tr>
-		<td><%=p.getId()%></td>
+		<td><a href="<%=request.getContextPath()%>/<%=v.getServletPath()%>?product=<%=p.getId()%>"><%=p.getId()%></a></td>
 		<td><%=p.getProductName()%></td>
-		<td><%=p.getDescription()%></td>
 		<td><%=p.getPrice()%></td>
 		<td><%=p.getModelNumber()%></td>
 		<td><%=p.getSKU()%></td>

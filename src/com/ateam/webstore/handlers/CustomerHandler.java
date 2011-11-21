@@ -101,12 +101,12 @@ public class CustomerHandler extends Handler {
 				resultView = ph.getHomePageView();
 			}
 			else {
-				resultView = getLoginView("Invalid email or password. Please try again.");
+				resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
 			}
 			
 		} catch (Exception e) {
 			l.log(Level.INFO, "Failed autnetication", e);
-			resultView = getLoginView("Invalid email or password. Please try again.");
+			resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
 		}
 		
 		login.setResultView(resultView);
@@ -123,20 +123,7 @@ public class CustomerHandler extends Handler {
 	 */
 	public View getLoginView(String loginMessage) {
 		
-		View l = getMainView();
-		
-		l.setShowLogonForm(false);
-		
-		ContentView cv = new ContentView(JSP_LOGIN, "Login");
-		
-		if (loginMessage != null) {
-			l.setMessage(loginMessage);
-		}
-		
-		l.addContentView(cv);
-		
-		return l;
-
+		return getLoginView(loginMessage, getMainView());
 	}
 
 	/**

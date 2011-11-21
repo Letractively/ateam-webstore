@@ -21,13 +21,13 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 							<form method="POST" action="<%=request.getContextPath()%>/store">
 							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_CART.getId()%>">
 							<input type="hidden" name=<%=Constants.Parameters.PRODUCT_ID.getId()%> value="<%=p.getId()%>">
-							<input type="button" value="Add to cart"></form>
+							<input type="submit" value="Add to cart"></form>
 							<br>
 							<br>
 							<form method="POST" action="<%=request.getContextPath()%>/store">
 							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_WISHLIST.getId()%>">
 							<input type="hidden" name=<%=Constants.Parameters.PRODUCT_ID.getId()%> value="<%=p.getId()%>">
-							<input type="button" value="Add to Wish List"></form>
+							<input type="submit" value="Add to Wish List"></form>
 						</td>
 				</tr>
 				
