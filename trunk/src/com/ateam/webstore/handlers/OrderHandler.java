@@ -5,16 +5,18 @@ import javax.servlet.http.HttpServletRequest;
 import com.ateam.webstore.model.Address;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.ShippingCode;
+import com.ateam.webstore.service.impl.OrdersService;
 import com.ateam.webstore.ui.Constants;
-import com.ateam.webstore.ui.Constants.Parameters;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.OrderPaymentForm;
 import com.ateam.webstore.ui.forms.OrderShippingForm;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.OrderDetailsView;
+import com.ateam.webstore.ui.views.OrderListView;
 import com.ateam.webstore.ui.views.OrderPaymentView;
 import com.ateam.webstore.ui.views.OrderShippingView;
+import com.ateam.webstore.ui.views.View;
 
 /**
  * Handles the order process.  The 'current' order is the Orders object found in the session associated to the request.
@@ -22,14 +24,14 @@ import com.ateam.webstore.ui.views.OrderShippingView;
  *
  */
 public class OrderHandler extends Handler {
-
+	OrdersService service;
 	/**
 	 * 
 	 * @param req
 	 */
 	public OrderHandler(HttpServletRequest req) {
 		super(req);
-		// TODO Auto-generated constructor stub
+		service = new OrdersService();
 	}
 	
 	/**
@@ -37,9 +39,9 @@ public class OrderHandler extends Handler {
 	 * @param id The Order ID
 	 * @return
 	 */
-	private Orders getOrder(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	private Orders getOrder() {
+		String orderId = req.getParameter(Parameters.ORDER_ID.getId());
+		return service.getById(new Long(orderId));
 	}
 	
 	/**
@@ -103,11 +105,8 @@ public class OrderHandler extends Handler {
 
 		OrderDetailsView odv = new OrderDetailsView(getMainView());
 		
-		Orders order = new Orders(1, null, null, null, null, null, null, null); //TODO get order from DB
-		
+		Orders order = getOrder();
 		odv.setOrder(order);
-		
-		req.getParameter(Parameters.ORDER_ID.getId());
 		
 		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
 		
@@ -219,5 +218,24 @@ public class OrderHandler extends Handler {
 		opf.setResultView(getOrderPreView());
 		
 		return opf;
+	}
+
+	public OrderListView getAllView() {
+		OrderListView olv = new OrderListView(getMainView());
+		olv.setOrders(service.getAll());
+		
+		olv.addContentView(new ContentView(JSP_ORDER_LIST, "All Orders"));
+		return olv;
+	}
+
+	public OrderDetailsView getAdminOrderDetailsView() {
+		OrderDetailsView odv = new OrderDetailsView(getMainAdminView());
+		
+		Orders order = getOrder();
+		odv.setOrder(order);
+		
+		odv.addContentView(new ContentView(JSP_ADMIN_ORDER_DETAILS, "Order "+order.getId()));
+		
+		return odv;
 	}
 }

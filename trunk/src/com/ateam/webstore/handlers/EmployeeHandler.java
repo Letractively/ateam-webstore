@@ -34,6 +34,7 @@ public class EmployeeHandler extends Handler {
 		// TODO Auto-generated constructor stub
 		return null;
 	}
+	
 	/**
 	 * Get the login view
 	 * @param loginMessage
@@ -41,21 +42,8 @@ public class EmployeeHandler extends Handler {
 	 */
 	public View getLoginView(String loginMessage) {
 		
-		View l = getMainView();
+		return getLoginView(loginMessage, getMainAdminView());
 		
-		l.setShowLogonForm(false);
-		
-		ContentView cv = new ContentView(JSP_LOGIN, "Login");
-		
-		if (loginMessage != null) {
-			l.setMessage(loginMessage);
-		}
-		
-		l.addContentView(cv);
-		l.setServletPath("admin");
-		
-		return l;
-
 	}
 
 
