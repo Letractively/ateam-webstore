@@ -22,6 +22,7 @@
       <field name="imagePath"/>
       <field name="firstOffered"/>
 	    <field name="saleInd"/>
+	    <field name="active"/>
       <field name="lastUpdated"/>
       <field name="brand" default-fetch-group="true" />
       <field name="subCategory" default-fetch-group="true" /> 
