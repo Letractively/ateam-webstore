@@ -3,7 +3,7 @@ package com.ateam.webstore.handlers;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.WishList;
-import com.ateam.webstore.ui.Constants.Parameters;
+import com.ateam.webstore.service.impl.WishListService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
@@ -11,9 +11,10 @@ import com.ateam.webstore.ui.views.WishListView;
 
 public class WishListHandler extends Handler {
 
+	WishListService service;
 	public WishListHandler(HttpServletRequest req) {
 		super(req);
-		// TODO Auto-generated constructor stub
+		service = new WishListService();
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class WishListHandler extends Handler {
 		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
 		l.fine("add prodId :"+prodId);
 		//TODO add product to cart via cart service.
-		//service.
+		//service.add
 
 		add.setResultView(getWishListView());
 		

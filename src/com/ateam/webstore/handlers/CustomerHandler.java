@@ -82,7 +82,7 @@ public class CustomerHandler extends Handler {
 		try {
 			cust = service.authenticateCustomer(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
 			if (cust != null) {
-				l.info("Login Successful for "+cust.getFirstName());
+				l.info("Login Successful for "+cust.getPerson().getLogin());
 				v.setCustomer(cust);
 				v.setAuthenticated(true);
 				v.setKnown(true);
@@ -93,8 +93,8 @@ public class CustomerHandler extends Handler {
 				login.setSuccess(true);
 
 				CartService cs = new CartService();
-				//TODO get the actual cust cart
-				req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getById(new Long(2)));
+				l.info("retrieving cart for customerId:"+cust.getId());
+				req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByCustomerId(cust.getId()));
 				
 				//Build view
 				ProductHandler ph = new ProductHandler(req);
