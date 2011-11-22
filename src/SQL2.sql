@@ -80,6 +80,7 @@ CREATE TABLE PRODUCT (
 	imagePath	CHAR(50)				,
 	firstOffered	DATE					,
 	saleInd		CHAR(1)					,
+	active    CHAR(1) NOT NULL DEFAULT 'Y',
 	lastUpdated	TIMESTAMP				,
 		PRIMARY KEY (productID))
 		AUTO_INCREMENT=100001
