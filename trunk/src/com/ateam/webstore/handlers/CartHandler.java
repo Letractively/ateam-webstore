@@ -1,13 +1,10 @@
 package com.ateam.webstore.handlers;
 
-import java.util.logging.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Cart;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.service.impl.CartService;
-import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.CartView;
@@ -44,6 +41,10 @@ public class CartHandler extends Handler {
 		
 		cv.addContentView(new ContentView(JSP_CART, "Your Cart"));
 		
+		if (cart != null) {
+			cv.setProducts(cart.getProducts());
+		}
+		
 		return cv;
 	}
 	
@@ -60,8 +61,7 @@ public class CartHandler extends Handler {
 			return ch.getLoginView("Please first login");
 		}
 		
-		//TODO the Cart needs to supply # of items, and subtotal
-		Orders order = new Orders(2, 99.99, 0.0, 0.0, v.getCustomer(), null, null, null);
+		Orders order = new Orders(cart.getProducts().size(), 0.0, 0.0, 0.0, v.getCustomer(), null, null, null);
 		
 		//Add order to session
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_ORDER, order);
@@ -88,7 +88,7 @@ public class CartHandler extends Handler {
 		}
 		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
 		l.fine("add prodId :"+prodId);		
-		//TODO add product to cart via cart service.
+
 		//service.
 
 		add.setResultView(getCartView());
