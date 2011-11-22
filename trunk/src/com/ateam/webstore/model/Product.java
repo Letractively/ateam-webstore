@@ -55,6 +55,8 @@ public class Product extends BaseModel implements Serializable {
 	
 	private String saleInd;
 	
+	private Boolean active = true;
+
 	private Date lastUpdated;
 	
 	private Brand brand;
@@ -195,6 +197,15 @@ public class Product extends BaseModel implements Serializable {
 	public void setSaleInd(String saleInd) {
 		this.saleInd = saleInd;
 	}
+	
+	
+	public Boolean isActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}	
 
 	public Date getLastUpdated() {
 		return lastUpdated;
