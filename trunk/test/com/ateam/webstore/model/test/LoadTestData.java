@@ -3,10 +3,10 @@
  */
 package com.ateam.webstore.model.test;
 
-import java.util.Collection;
-
-import com.ateam.webstore.model.Employee;
-import com.ateam.webstore.service.impl.EmployeeService;
+import com.ateam.webstore.model.Product;
+import com.ateam.webstore.service.impl.BrandService;
+import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.service.impl.SubCategoryService;
 
 /**
  * @author Hendrix Tavarez
@@ -17,9 +17,28 @@ public class LoadTestData {
 	
 	
 	public static void main(String[] args) {
-//		
+		
 //		Brand brand = new Brand("Sony");
 //		new BrandService().store(brand);
+//		
+//		Category category = new Category("Electronics");
+//		new CategoryService().store(category);
+//		
+//		SubCategory subCategory = new SubCategory("TV");
+//		subCategory.setCategory(category);
+//		new SubCategoryService().store(subCategory);
+//		
+//		Product product = new Product("Viao", 199.99, "Sony TV");
+//		product.setSKU("1SK1");
+//		product.setModelNumber("1MS11");
+//		product.setBrand(new BrandService().getById(new Long(100001)));
+//		product.setSubCategory(new SubCategoryService().getById(new Long(1001)));
+//		product.setPercentDiscount(0.10);
+//		new ProductService().store(product);
+		
+		Product p = new ProductService().getById(new Long(100001));
+		System.out.println(p.getProductName());
+		
 		
 //		ProductService prodService = new ProductService();
 //		Collection<Product> products = prodService.getAll();		
@@ -141,14 +160,14 @@ public class LoadTestData {
 //	WishList wishList = ws.getByCustomerId(new Long(100002));
 //	System.out.println(wishList.getCustomer().getPerson().getLogin());	
 		
-		EmployeeService employeeServ = new EmployeeService();
+//		EmployeeService employeeServ = new EmployeeService();
 //		Collection<Employee> employees = employeeServ.getAll();
 //		for (Employee employee : employees) {
 //			System.out.println(employee.getPerson().getLogin() + "**" + employee.getPerson().getPassword());
 //		}	
 		
-		Employee employee = employeeServ.authenticateEmployee("claudio@loose.com", "password");
-		System.out.println(employee.getJobTitle());
+//		Employee employee = employeeServ.authenticateEmployee("claudio@loose.com", "password");
+//		System.out.println(employee.getJobTitle());
 		
 //		employeeServ.registerEmployee(fname, lname, email, password, securityQuestionID, securityAnswer, ssn, jobTitle, dateOfHire, deptCode, salary)
 	}
