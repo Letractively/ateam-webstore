@@ -3,10 +3,10 @@
  */
 package com.ateam.webstore.model.test;
 
-import com.ateam.webstore.model.Product;
-import com.ateam.webstore.service.impl.BrandService;
-import com.ateam.webstore.service.impl.ProductService;
-import com.ateam.webstore.service.impl.SubCategoryService;
+import java.util.Collection;
+
+import com.ateam.webstore.model.Orders;
+import com.ateam.webstore.service.impl.OrdersService;
 
 /**
  * @author Hendrix Tavarez
@@ -36,8 +36,10 @@ public class LoadTestData {
 //		product.setPercentDiscount(0.10);
 //		new ProductService().store(product);
 		
-		Product p = new ProductService().getById(new Long(100001));
-		System.out.println(p.getProductName());
+//		Product p = new ProductService().getById(new Long(100001));
+//		System.out.println(p.getProductName());
+//		p.setActive(true);
+//		new ProductService().store(p);
 		
 		
 //		ProductService prodService = new ProductService();
@@ -109,11 +111,11 @@ public class LoadTestData {
 //			System.out.println(product.getProductName());
 //		}
 		
-//		OrdersService ordersService = new OrdersService();
-//		Collection<Orders> orders = ordersService.getAll();
-//		for (Orders orders2 : orders) {
-//			System.out.println(orders2.getId() + " " + orders2.getTimeShipped() + " " + orders2.getTrackingNumber());
-//		}
+		OrdersService ordersService = new OrdersService();
+		Collection<Orders> orders = ordersService.getAll();
+		for (Orders orders2 : orders) {
+			System.out.println(orders2.getId() + " " + orders2.hasShipped() + " " + orders2.getTrackingNumber());
+		}
 		
 //		Product product = new Product("Testing", 99.99, "test product");
 //		product.setSKU("1998038");
