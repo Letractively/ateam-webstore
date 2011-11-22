@@ -176,7 +176,9 @@ public class Orders extends BaseModel implements Serializable {
 		return id;
 	}
 	
-	
+	public boolean hasShipped() {
+		return this.timeShipped != null;
+	}
 	
 
 }
