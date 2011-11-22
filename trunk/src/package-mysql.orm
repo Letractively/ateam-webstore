@@ -43,6 +43,9 @@
       <field name="saleInd" persistence-modifier="persistent">
         <column name="saleInd" length="1" jdbc-type="CHAR" allows-null="true"/>
       </field>
+      <field name="active" persistence-modifier="persistent">
+        <column name="active" length="1" jdbc-type="CHAR" default-value="Y" allows-null="false"/>
+      </field>      
       <field name="lastUpdated" persistence-modifier="persistent">
         <column name="lastUpdated"  jdbc-type="TIMESTAMP" allows-null="true"/>
       </field>
