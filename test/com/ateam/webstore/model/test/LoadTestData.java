@@ -5,8 +5,7 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Orders;
-import com.ateam.webstore.service.impl.OrdersService;
+import com.ateam.webstore.service.impl.HelperService;
 
 /**
  * @author Hendrix Tavarez
@@ -111,11 +110,11 @@ public class LoadTestData {
 //			System.out.println(product.getProductName());
 //		}
 		
-		OrdersService ordersService = new OrdersService();
-		Collection<Orders> orders = ordersService.getAll();
-		for (Orders orders2 : orders) {
-			System.out.println(orders2.getId() + " " + orders2.hasShipped() + " " + orders2.getTrackingNumber());
-		}
+//		OrdersService ordersService = new OrdersService();
+//		Collection<Orders> orders = ordersService.getAll();
+//		for (Orders orders2 : orders) {
+//			System.out.println(orders2.getId() + " " + orders2.hasShipped() + " " + orders2.getTrackingNumber());
+//		}
 		
 //		Product product = new Product("Testing", 99.99, "test product");
 //		product.setSKU("1998038");
@@ -172,6 +171,22 @@ public class LoadTestData {
 //		System.out.println(employee.getJobTitle());
 		
 //		employeeServ.registerEmployee(fname, lname, email, password, securityQuestionID, securityAnswer, ssn, jobTitle, dateOfHire, deptCode, salary)
+		
+		
+//		CategoryService catServ = new CategoryService();
+//		Category category = catServ.getById(new Long(102));
+//		System.out.println(category.getName());
+		
+		String queryText = "SELECT * FROM CUSTOMER -- WHERE 1=0";
+		Collection<Object> results = new HelperService().runAnyQuery(queryText);
+		for (Object columns : results) {
+			Object[] row = (Object[])columns;
+			for (Object column : row) {
+				System.out.print(column + " ");
+			}
+			System.out.println("");
+		}
+		
 	}
 
 }
