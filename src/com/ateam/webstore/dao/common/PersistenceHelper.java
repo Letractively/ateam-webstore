@@ -117,7 +117,7 @@ public class PersistenceHelper {
       // disable L2 caching 
 //      properties.put("datanucleus.cache.level2.type", "none");
       
-      properties.put("datanucleus.maxFetchDepth", "2");
+//      properties.put("datanucleus.maxFetchDepth", "2");
 //      properties.put("datanucleus.NontransactionalWrite", "false");
       
 //      properties.put("datanucleus.Schema", "database");
