@@ -177,7 +177,7 @@ public class LoadTestData {
 //		Category category = catServ.getById(new Long(102));
 //		System.out.println(category.getName());
 		
-		String queryText = "SELECT * FROM CUSTOMER -- WHERE 1=0";
+		String queryText = "SELECT * FROM PRODUCT";
 		Collection<Object> results = new HelperService().runAnyQuery(queryText);
 		for (Object columns : results) {
 			Object[] row = (Object[])columns;
