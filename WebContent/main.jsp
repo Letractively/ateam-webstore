@@ -28,6 +28,9 @@ Released   : 20081009
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<% if (v.getRedirectPath() != null) { %>
+<meta http-equiv="REFRESH" content="0;url="<%=v.getRedirectPath()%>"/>
+<%} %>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 
 <title><%=v.getTitle()%></title>
@@ -65,8 +68,8 @@ Released   : 20081009
 			<div id="headerLogon">
 				<form method="post" action="<%=request.getContextPath()%>/store" id="headerLogonForm">
 				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.LOGIN.getId()%>">
-				Email: <input type="text"  name="email" value="<%=v.getVisitor().getEmail()%>">
-				Password: <input type="password" name="password"> <input type="submit" value="Login">
+				Email: <input type="text"  name="<%=Constants.Parameters.EMAIL.getId()%>" value="<%=v.getVisitor().getEmail()%>">
+				Password: <input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>"> <input type="submit" value="Login">
 				<a class="headerLink" href="<%=request.getContextPath()%>/store?register"> &nbsp Or Register</a>
 				</form>
 			</div> 

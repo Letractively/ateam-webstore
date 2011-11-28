@@ -68,6 +68,10 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				CartHandler ch = new CartHandler(req);
 				v = ch.getCartView();
 			}
+			else if (req.getParameterMap().containsKey(Parameters.CART_ID.getId())) {
+				CartHandler ch = new CartHandler(req);
+				v = ch.getCartView();
+			}
 			else if (req.getParameterMap().containsKey(Parameters.CHECKOUT.getId())) {
 				CartHandler ch = new CartHandler(req);
 				v = ch.checkout();
@@ -140,29 +144,30 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		//Debugging
 		AteamContextListener.dumpRequest(req);
 		
+		View v = null;
 		
 		try {
 			
 			//Get the form and process
 			FormSubmission results = processFormSubmission(req);
 			
-			//Set Result View
-			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, results.getResultView());
+			v = results.getResultView();
 
 			
 		} catch (Exception e) {
 			l.log(Level.SEVERE, "Exception caught in doGet", e);
 			Handler h = new Handler(req);
-			View v = h.getMainView();
+			v = h.getMainView();
 			
 			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
 			v.setMessage(e.getMessage());
 			v.addContentView(cv);
 			
-			v.setServletPath("store");
-			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
 		}
 		
+		v.setServletPath("store");
+		req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
+
 		l.info(req.getAttribute(REQUEST_ATTRIBUTE_VIEW).toString());
 		
 		//Forward to JSP
@@ -191,6 +196,11 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			CustomerHandler h = new CustomerHandler(req);
 			return h.processRegistrationRequest();
 		}
+		else if (formId.equals(FormName.EDIT_CART.getId())) {
+			CartHandler ch = new CartHandler(req);
+			return ch.processUpdate();
+		}
+
 		else if (formId.equals(FormName.ORDER_SHIPPING.getId())) {
 			OrderHandler oh = new OrderHandler(req);
 			return oh.processOrderShipppingRequest();

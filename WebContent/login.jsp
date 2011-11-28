@@ -11,6 +11,10 @@
 			<form method="post" action="<%=request.getContextPath()%>/<%=v.getServletPath()%>">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.LOGIN.getId()%>">
+					<%if (v.getLoginRedirectPath() != null) {%>
+					<input type="hidden" name=<%=Constants.Parameters.REDIRECT.getId()%> 
+						value="<%=v.getLoginRedirectPath()%>">
+					<%} %>
 						Email:<br>
 					<input type="text" name="<%=Constants.Parameters.EMAIL.getId()%>" value="<%=v.getVisitor().getEmail()%>"><br><br>
 						Password:<br>

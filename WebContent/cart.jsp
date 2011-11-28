@@ -2,37 +2,64 @@
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="com.ateam.webstore.model.Product"%>
+<%@page import="com.ateam.webstore.model.Cart"%>
 <%@page import="com.ateam.webstore.ui.views.ProductListView"%>
 <%@page import="com.ateam.webstore.ui.views.CartView"%>
 <%@page import="com.ateam.webstore.model.ProductsInCart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-<%CartView v = (CartView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
-<h3> <%= v.getTitle() %></h3>
+<%CartView v = (CartView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW);
+Cart cart = (Cart) request.getSession().getAttribute(Constants.SESSION_ATTRIBUTE_CART);
+%>
+
+<%if (v.getMessage() != null) {out.print(v.getMessage());} %>
+
+<% if (v.getProducts()== null) { %>
+Empty Cart
+<% } else {  %>
+
+			<form method="post" action="<%=request.getContextPath()%>/store">
+					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
+						value="<%=Constants.FormName.EDIT_CART.getId()%>">
+
 
 <table width="100%">
 
 	<%  for (ProductsInCart p : v.getProducts()) { %>  
+	
+			<%
+			if (p == null) {continue;}
+			Product pd = p.getProduct();
+			if (pd == null) {continue;} 
+			
+			%>
+	
 	<tr>
-		<td><input type="checkbox" name="Product" value="Cart item" ;/> <br /></td>
-		<td><a href="<%=request.getContextPath()%>/store?product=<%=p.getProduct().getId()%>"><%=p.getProduct().getProductName()%></a></td>
-		<td><%=p.getProduct().getPrice()%></td>
-		<td> <select <%=p.getProduct().getId()%>  > style="width: 70%">  <option selected>1</option>  <option value="http://mousetrax.com">Mousetrax</option> </select></td>
-        <td colspan=2><a href="p.getProduct().getId()">Remove</a></td>
+		<td><input type="checkbox" name="Product" value="Cart item"/></td>
+		<td width="500" ><a href="<%=request.getContextPath()%>/store?product=<%=pd.getId()%>"><%=pd.getShortProductName(35)%></a></td>
+		<td><%=pd.getPrice()%></td>
+		<td><input type="text" name="<%=p.getId()+"_"+Constants.Parameters.PRODUCT_QUANTITY.getId()%>" value="<%=p.getQuantity()%>" size="3"/></td>
+        <td colspan=2><a href="<%=request.getContextPath()%>/store?cart=<%=cart.getId()%>&remove=<%=p.getId()%>">Remove</a></td>
 	</tr>
 	
 	<%  } %>
 	
-<tr>
-<td> </td><td > <input type="submit" value="Move to WishList" /> 
-   <input type="submit" value="Update" /></td>
-</tr>
+	<tr></tr>
+	
+	<tr align="right">
+		<td> 
+   		<!--  <input type="submit" value="Move Selected to WishList" /> --> 
+   		<input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Update Quantity" />
+   		</td>
+	</tr>
 
+	<tr align="right">
+		<td>
+   			<input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Checkout" />
+		</td>   
+	</tr>
 
-<tr>
- <td> </td>  <td> </td> <td> </td><td> </td>    <td>
+</table>  
 
-   <input type="submit" value="CheckOut" /></td></tr>
-   
- </table>  
-   
+</form>
+<%} %>   

@@ -93,6 +93,19 @@ public class Product extends BaseModel implements Serializable {
 	public String getProductName() {
 		return productName;
 	}
+	
+	/**
+	 * Get a limited form of the product name
+	 * @return
+	 */
+	public String getShortProductName(int limit) {
+		if (productName != null && productName.length() > limit) {
+			return productName.substring(0,50)+"...";
+		}
+		else {
+			return productName;
+		}
+	}
 
 	/**
 	 * Set the product's name
@@ -102,10 +115,25 @@ public class Product extends BaseModel implements Serializable {
 		this.productName = productName;
 	}
 
+	/**
+	 * Get the current sale price
+	 * @return
+	 */
 	public Double getPrice() {
+		if (saleInd == "T") {
+			return (percentDiscount / 100) * price;
+		}
 		return price;
 	}
 
+	/**
+	 * Get the regular price
+	 * @return
+	 */
+	public Double getRegularPrice() {
+		return price;
+	}
+	
 	/**
 	 * Set the product's price
 	 * 
@@ -198,6 +226,18 @@ public class Product extends BaseModel implements Serializable {
 		this.saleInd = saleInd;
 	}
 	
+	/**
+	 * Check if the sale indicator is set
+	 * @return
+	 */
+	public boolean isOnSale() {
+		if (saleInd != null) {
+			return saleInd == "T";
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public Boolean isActive() {
 		return active;

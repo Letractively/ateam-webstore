@@ -1,11 +1,17 @@
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
-<%@page import="com.ateam.webstore.ui.views.*"%>
+<%@page import="com.ateam.webstore.ui.views.RegistrationView"%>
+<%@page import="com.ateam.webstore.ui.forms.RegistrationForm"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="com.ateam.webstore.model.SecurityQuestion"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%RegistrationView v = (RegistrationView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
+<%RegistrationView v = (RegistrationView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
+RegistrationForm f = v.getForm();
+if (f == null) {
+	f = new RegistrationForm();
+}
+%>
 
 <%if (v.getMessage() != null) { %><%=v.getMessage() %><br><% } %>
 
@@ -15,15 +21,15 @@
 <table>						
 <tr>
 		<td><font size="2" >First Name:</font></td><td>
-		<input type="text" name="<%=Constants.Parameters.FIRST_NAME.getId() %>" size="25"/></td>
+		<input type="text" name="<%=Constants.Parameters.FIRST_NAME.getId() %>" value="<%=f.getFirstName()%>" size="25"/></td>
 </tr>
 <tr>
 		<td><font size="2" >Last Name:</font></td><td>
-		<input type="text" name="<%=Constants.Parameters.LAST_NAME.getId() %>" size="25"/></td>
+		<input type="text" name="<%=Constants.Parameters.LAST_NAME.getId() %>" value="<%=f.getLastName()%>" size="25"/></td>
 </tr>
 <tr>
 		<td><font size="2" >Email:</font></td><td>
-		<input type="text" name="<%=Constants.Parameters.EMAIL.getId() %>" size="25"/></td>
+		<input type="text" name="<%=Constants.Parameters.EMAIL.getId() %>" value="<%=f.getEmail()%>" size="25"/></td>
 </tr>
 <tr>
 <td><font size="2" >Password:</font></td><td><input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>" size="26" /></td>
@@ -34,9 +40,9 @@
 <tr>
 <td><font size="2" >Security Question:</font></td><td><select  name="<%=Constants.Parameters.SECURITY_QUESTION.getId()%>" size="1" >
 					<%for(SecurityQuestion s : v.getSecurityQuestions()){%>
-					<option  value= "<%=s.getId() %>"><%=s.getQuestion() %> </option> <% } %></select></td>
+					<option  value= "<%=s.getId() %>" <%if (s.getId().toString().equals(f.getSecurityQuestionId())) {out.print("SELECTED");} %>><%=s.getQuestion() %> </option> <% } %></select></td>
 					<tr>
-<td><font size="2" >Answer:</font></td><td><input type="text" name="<%=Constants.Parameters.SECURITY_ANSWER.getId()%>" size="25" /></td>
+<td><font size="2" >Answer:</font></td><td><input type="text" name="<%=Constants.Parameters.SECURITY_ANSWER.getId()%>" value="<%=f.getSecurityAnswer()%>" size="25" /></td>
 </tr>
 <tr>	
    <td></td><td></td><td>	<input type="submit" name="submit" value="Register"></td><td></td>

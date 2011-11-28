@@ -33,9 +33,7 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 						</td>
 				<tr>
 						<td colspan="2">						
-						Description:<br><textarea name="<%=Constants.Parameters.PRODUCT_DESC.getId()%>">
-						<%= p.getDescription() %>
-						</textarea>
+						Description:<br><textarea name="<%=Constants.Parameters.PRODUCT_DESC.getId()%>"><%= p.getDescription() %></textarea>
 						</td>
 						
 				</tr>

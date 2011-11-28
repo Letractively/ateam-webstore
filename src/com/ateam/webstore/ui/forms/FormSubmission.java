@@ -77,5 +77,24 @@ public class FormSubmission {
 	public void setResultMessage(String resultMessage) {
 		this.resultMessage = resultMessage;
 	}
-	
+	protected boolean validString(String s) {
+		return s != null && !s.isEmpty() && !s.trim().isEmpty();
+	}
+	protected boolean validDouble(String s) {
+		try {
+			Double.parseDouble(s);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	protected boolean validLong(String s) {
+		try {
+			Long.parseLong(s);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
 }
