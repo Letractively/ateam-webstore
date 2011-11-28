@@ -5,18 +5,18 @@ import java.util.Collection;
 import com.ateam.webstore.model.Product;
 import com.ateam.webstore.model.ProductListing;
 
-public class ProductListView extends View {
-	Collection<Product> product;
+public class ProductListingView extends View {
+	Collection<ProductListing> product;
 	String listTitle;
 
-	public ProductListView(View v) {
+	public ProductListingView(View v) {
 		super(v);
 	}
-	public Collection<Product> getProducts() {
+	public Collection<ProductListing> getProducts() {
 		return product;
 	}
 
-	public void setProducts(Collection<Product> product) {
+	public void setProducts(Collection<ProductListing> product) {
 		this.product = product;
 	}
 

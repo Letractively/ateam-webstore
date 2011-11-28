@@ -53,6 +53,7 @@ public class CartHandler extends Handler {
 			ProductsInCartService pics = new ProductsInCartService();
 			ProductsInCart pic = pics.getById(new Long(removeId));
 			pics.remove(pic);
+			updateCart();
 		}
 			
 		CartView cv = new CartView(getMainView());
@@ -109,7 +110,7 @@ public class CartHandler extends Handler {
 			CustomerHandler ch = new CustomerHandler(req);
 			add.setResultView(ch.getLoginView("Please first login"));
 			add.setResultMessage("Please first logon");
-			updateCart();
+			return add;
 		}
 		
 		if (cart == null) {
@@ -140,6 +141,7 @@ public class CartHandler extends Handler {
 		
 		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
 		cart = service.getByCustomerId(new Long(v.getCustomer().getId()));
+		req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cart);
 		
 	}
 
