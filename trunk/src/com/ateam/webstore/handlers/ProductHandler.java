@@ -2,6 +2,7 @@ package com.ateam.webstore.handlers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
 import com.ateam.webstore.service.impl.ProductService;
+import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
@@ -113,9 +115,12 @@ public class ProductHandler extends Handler {
 	 */
 	public ProductListView getAllView(boolean admin) {
 		
-		View main = getMainView();
+		View main = null;
+		
 		if (admin) {
 			main = getMainAdminView();
+		} else {
+			main = getMainView();
 		}
 		
 		ProductListView hp = new ProductListView(main);
@@ -148,27 +153,35 @@ public class ProductHandler extends Handler {
 		
 	}
 	
+	public ProductDetailsView getProductView() {
+		return getProductView(false, null);
+	}
 	/**
 	 * Get the view for a specific product.
 	 * @param req
 	 * @return
 	 */
-	public ProductDetailsView getProductView(boolean admin) {
+	public ProductDetailsView getProductView(boolean admin, Product p) {
 		
-		Product p = getProduct(req.getParameter(Parameters.PRODUCT.getId()));
+		if (p == null) {
+			p = getProduct(req.getParameter(Parameters.PRODUCT.getId()));
+		} 
 		
-		View main = getMainView();
+		View main = null;
+		String jsp = null;
 		if (admin) {
 			main = getMainAdminView();
+			jsp = JSP_ADMIN_PRODUCT_DETAILS;
 		}
+		else {
+			main = getMainView();
+			jsp = JSP_PRODUCT_DETAILS;
+		}
+		
 		ProductDetailsView pv = new ProductDetailsView(main);
 		
 		if (p != null) {
 			pv.setProduct(p);
-			String jsp = JSP_PRODUCT_DETAILS;
-			if (admin) {
-				jsp = JSP_ADMIN_PRODUCT_DETAILS;
-			}
 			pv.addContentView(new ContentView(jsp, p.getProductName()));
 		}
 		else {
@@ -217,6 +230,52 @@ public class ProductHandler extends Handler {
 		//prod.setImagePath("/images/no_img/");
 		return prod;
 		
+	}
+
+	public FormSubmission processEditProductRequest() {
+		
+
+		
+		FormSubmission fs = new FormSubmission();
+
+		Long id = Long.parseLong(req.getParameter(Parameters.PRODUCT_ID.getId()));
+
+		l.info("edit product "+id);
+		
+		Product p = service.getById(id);
+
+		View fv = getProductView(true, p);
+
+		try {
+
+			Double price = Double.parseDouble(req.getParameter(Parameters.PRODUCT_PRICE.getId()));
+			p.setPrice(price);
+			
+			String description = req.getParameter(Parameters.PRODUCT_DESC.getId());
+			p.setDescription(description);
+			
+			String onSale = req.getParameter(Parameters.ON_SALE.getId());
+			if (onSale != null && onSale.equals("on")) {
+				p.setSaleInd("T");	
+			}
+			else {
+				p.setSaleInd("F");
+			}
+			
+			fs.setForm(FormName.EDIT_PRODUCT);
+			fv.setMessage("Update sucessful!");
+			service.store(p);
+			
+		} catch (Exception e) {
+			l.log(Level.WARNING, "Error updating product", e);
+			
+			fv.setMessage(e.getMessage());
+	
+		}
+		
+		fs.setResultView(fv);
+		
+		return fs;
 	}
 	
 }

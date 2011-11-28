@@ -220,8 +220,17 @@ public class OrderHandler extends Handler {
 		return opf;
 	}
 
-	public OrderListView getAllView() {
-		OrderListView olv = new OrderListView(getMainView());
+	public OrderListView getAllView(boolean admin) {
+		
+		View main = null;
+		
+		if (admin) {
+			main = getMainAdminView();
+		} else {
+			main = getMainView();
+		}
+
+		OrderListView olv = new OrderListView(main);
 		olv.setOrders(service.getAll());
 		
 		olv.addContentView(new ContentView(JSP_ORDER_LIST, "All Orders"));

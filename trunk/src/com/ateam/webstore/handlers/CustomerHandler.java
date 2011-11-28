@@ -77,7 +77,7 @@ public class CustomerHandler extends Handler {
 		Visitor v = login.getVistor();
 		
 		Customer cust = null;
-		View resultView;
+		View resultView = null;
 		
 		try {
 			cust = service.authenticateCustomer(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
@@ -92,21 +92,27 @@ public class CustomerHandler extends Handler {
 				login.setForm(FormName.LOGIN);
 				login.setSuccess(true);
 
-				CartService cs = new CartService();
-				l.info("retrieving cart for customerId:"+cust.getId());
-				req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByCustomerId(cust.getId()));
-				
-				//Build view
-				ProductHandler ph = new ProductHandler(req);
-				resultView = ph.getHomePageView();
 			}
 			else {
 				resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
 			}
 			
 		} catch (Exception e) {
-			l.log(Level.INFO, "Failed autnetication", e);
+			l.log(Level.INFO, "Failed authentication", e);
 			resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
+		}
+
+		if (v.isAuthenticated()) try {
+			CartService cs = new CartService();
+			l.info("retrieving cart for customerId:"+cust.getId());
+			req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByCustomerId(cust.getId()));
+			
+			//Build view
+			ProductHandler ph = new ProductHandler(req);
+			resultView = ph.getHomePageView();
+
+		} catch (Exception e) {
+			l.log(Level.INFO, "", e);			
 		}
 		
 		login.setResultView(resultView);

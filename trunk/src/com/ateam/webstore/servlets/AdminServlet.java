@@ -1,6 +1,7 @@
 package com.ateam.webstore.servlets;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import com.ateam.webstore.handlers.ProductHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
+import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.View;
 
 public class AdminServlet extends HttpServlet implements Constants  {
@@ -35,7 +37,7 @@ public class AdminServlet extends HttpServlet implements Constants  {
 		}
 		else if (req.getParameterMap().containsKey(Parameters.ALL_ORDERS.getId())) {
 			OrderHandler oh = new OrderHandler(req);
-			v = oh.getAllView();
+			v = oh.getAllView(true);
 		}
 
 		else if (req.getParameterMap().containsKey(Parameters.ALL_EMPLOYEES.getId())) {
@@ -48,7 +50,7 @@ public class AdminServlet extends HttpServlet implements Constants  {
 		}
 		else if (req.getParameterMap().containsKey(Parameters.PRODUCT.getId())) {
 			ProductHandler ph = new ProductHandler(req);
-			v = ph.getProductView(true);
+			v = ph.getProductView(true, null);
 		}
 		else {
 			Handler h = new Handler(req);
@@ -74,9 +76,42 @@ public class AdminServlet extends HttpServlet implements Constants  {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		
+		l.info("form submission "+req.getSession().getId());
+		
+		//Debugging
+		AteamContextListener.dumpRequest(req);
+		
+		
+		try {
+			
+			//Get the form and process
+			FormSubmission results = processFormSubmission(req);
+			
+			//Set Result View
+			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, results.getResultView());
+
+			
+		} catch (Exception e) {
+			l.log(Level.SEVERE, "Exception caught in doGet", e);
+			Handler h = new Handler(req);
+			View v = h.getMainView();
+			
+			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
+			v.setMessage(e.getMessage());
+			v.addContentView(cv);
+			
+			v.setServletPath("store");
+			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
+		}
+		
+		l.info(req.getAttribute(REQUEST_ATTRIBUTE_VIEW).toString());
+		
+		//Forward to JSP
+		getServletConfig().getServletContext().getRequestDispatcher(
+				JSP_MAIN).forward(req, resp);
 	}
+
 
 	/**
 	 * Extracts a FormSubmission from the request.
@@ -86,6 +121,8 @@ public class AdminServlet extends HttpServlet implements Constants  {
 	private FormSubmission processFormSubmission(HttpServletRequest req) {
 
 		String formId = req.getParameter(Parameters.FORM_ID.getId());
+		
+		l.info("process form:"+formId);
 
 		if (formId == null) {
 			l.warning("null form ID ");
@@ -95,11 +132,15 @@ public class AdminServlet extends HttpServlet implements Constants  {
 			EmployeeHandler h = new EmployeeHandler(req);
 			return h.processLoginRequest();
 		}
+		else if (formId.equals(FormName.EDIT_PRODUCT.getId())) {
+			ProductHandler ph = new ProductHandler(req); 
+			return ph.processEditProductRequest();
+		}
 		else {
 			l.warning("unknown formId:"+formId);
 			//TODO throw execpton
 		}
-	
+
 		return null;
 		
 	}
