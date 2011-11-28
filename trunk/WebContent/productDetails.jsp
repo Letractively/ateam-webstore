@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%ProductDetailsView v = (ProductDetailsView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
-Product p=v.getProduct();
+Product p=v.getProduct();	
 
 String productImageRoot = (String) AteamContextListener.ateamProperties.get(Constants.PROPERTY_PRODUCT_IMAGE_ROOT);
 %>	
@@ -17,7 +17,14 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 						<td>
 						</td>
 						<td align=top>
-							<b><%=p.getPrice() %><b></b><br>
+						
+							<b>$<%=p.getPrice() %><b></b><br>
+							<% if (p.isOnSale()) {%>
+							<font color="DCDCDC"></font>Regular Price: $<%=p.getRegularPrice()%></b></font>
+							<br>
+							<%} %>
+							
+							<br>
 							<form method="POST" action="<%=request.getContextPath()%>/store">
 							<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.ADD_TO_CART.getId()%>">
 							<input type="hidden" name=<%=Constants.Parameters.PRODUCT_ID.getId()%> value="<%=p.getId()%>">
@@ -33,10 +40,6 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 				
 				<tr>
 						<td>
-						<% if (p.getSaleInd().equals("T")) {%>
-						On Sale!<br>
-						<%} %>
-						
 						<br><%= p.getDescription() %></td>
 						
 		

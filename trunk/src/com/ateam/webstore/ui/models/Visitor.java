@@ -8,6 +8,7 @@ public class Visitor {
 	Employee employee;
 	String email = "";
 	boolean authenticated;
+	boolean employeeAuthenticated;
 	boolean known;
 	public String getEmail() {
 		return email;
@@ -48,6 +49,12 @@ public class Visitor {
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	public boolean isEmployeeAuthenticated() {
+		return employeeAuthenticated;
+	}
+	public void setEmployeeAuthenticated(boolean employeeAuthenticated) {
+		this.employeeAuthenticated = employeeAuthenticated;
 	}
 	
 }

@@ -8,6 +8,7 @@ public class LoginForm extends FormSubmission {
 	 */
 	Visitor v;
 	String password;
+	String redirect;
 	boolean rememberEmail;
 
 	public Visitor getVistor() {
@@ -32,5 +33,13 @@ public class LoginForm extends FormSubmission {
 
 	public void setRememberEmail(boolean rememberEmail) {
 		this.rememberEmail = rememberEmail;
+	}
+
+	public String getRedirect() {
+		return redirect;
+	}
+
+	public void setRedirect(String redirect) {
+		this.redirect = redirect;
 	}
 }

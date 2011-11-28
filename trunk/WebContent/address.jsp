@@ -5,8 +5,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%AddressView v = (AddressView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
-Address a= v.getAddress();
+<%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
+Address a;
+if (v != null && v instanceof AddressView) {
+	a = ((AddressView) v).getAddress();	
+}
+else {
+	a = new Address("", "", "", "", false, null);
+}
+
 %>
 
 <form method="post" action="<%=request.getContextPath()%>/store">
@@ -20,7 +27,7 @@ Address a= v.getAddress();
 	<table>
 		<tr>
 				<td>Name:</td>
-				<td><input type="text" name="name" value="<%=v.getVisitor().getEmail()%>"></td>
+				<td><input type="text" name="name" value=""></td>
 		</tr>
 
 		<tr>

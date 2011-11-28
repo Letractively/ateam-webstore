@@ -20,16 +20,19 @@ public interface Constants {
 		REMEMBER_ME ("remember"),
 		CONFIRMPASSWORD ("cpw"),
 		CART_ID ("cart"), 
+		CART_ACTION ("cartAction"),
 		VIEW_CART ("viewCart"),
 		CARD_ID ("card"),
 		ADDRESS ("address"),
 		WISHLIST ("wishList"),
 		REGISTER ("register"),
+		REMOVE ("remove"),
 		CHECKOUT ("checkout"),
 		PRODUCTSELECT ("ps"),
 		PRODUCT ("product"),
 		PRODUCT_DESC ("productDesc"),
 		PRODUCT_PRICE ("productPrice"),
+		PRODUCT_QUANTITY ("productQty"),
 		ON_SALE ("onSale"),
 		ALL_PRODUCTS ("products"),
 		ALL_EMPLOYEES ("employees"),
@@ -53,7 +56,8 @@ public interface Constants {
 		ACTION("action"),
 		CITY ("city"),
 		STATE ("state"),
-		ZIP ("zip")
+		ZIP ("zip"),
+		REDIRECT ("redirect")
 		
 		;
 		

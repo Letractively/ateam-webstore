@@ -16,6 +16,8 @@ public class View {
 	String message;
 	Visitor visitor;
 	String servletPath;
+	String redirectPath;
+	String loginRedirectPath;
 	Map<String,String> navLinks;
 	List<ContentView> contentViews;
 	boolean showLogonForm;
@@ -145,5 +147,17 @@ public class View {
 	}
 	public void setServletPath(String servletPath) {
 		this.servletPath = servletPath;
+	}
+	public String getRedirectPath() {
+		return redirectPath;
+	}
+	public void setRedirectPath(String redirectPath) {
+		this.redirectPath = redirectPath;
+	}
+	public String getLoginRedirectPath() {
+		return loginRedirectPath;
+	}
+	public void setLoginRedirectPath(String loginRedirectPath) {
+		this.loginRedirectPath = loginRedirectPath;
 	}
 }

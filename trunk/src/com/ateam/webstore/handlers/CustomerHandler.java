@@ -37,7 +37,7 @@ public class CustomerHandler extends Handler {
 	 * @return
 	 */
 	public RegistrationView getRegistrationView() {
-		return getRegistrationView(null);
+		return getRegistrationView("");
 	}
 	
 	/**
@@ -46,6 +46,26 @@ public class CustomerHandler extends Handler {
 	 * @return
 	 */
 	public RegistrationView getRegistrationView(String message) {
+		return getRegistrationView(message, null);
+	}
+	
+	/**
+	 * 
+	 * @param message
+	 * @param form
+	 * @return
+	 */
+	public RegistrationView getRegistrationView(RegistrationForm form) {
+		return getRegistrationView(form.getResultMessage(), form);
+	}
+	
+	/**
+	 * 
+	 * @param message
+	 * @param form
+	 * @return
+	 */
+	public RegistrationView getRegistrationView(String message, RegistrationForm form) {
 		RegistrationView r = new RegistrationView(getMainView());
 		
 		SecurityQuestionHandler sech = new SecurityQuestionHandler(req);
@@ -54,6 +74,8 @@ public class CustomerHandler extends Handler {
 		if (message != null) {
 			r.setMessage(message);
 		}
+		
+		r.setForm(form);
 		
 		r.setShowVisitorInfo(false);
 		
@@ -107,9 +129,15 @@ public class CustomerHandler extends Handler {
 			l.info("retrieving cart for customerId:"+cust.getId());
 			req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByCustomerId(cust.getId()));
 			
-			//Build view
-			ProductHandler ph = new ProductHandler(req);
-			resultView = ph.getHomePageView();
+			if (login.getRedirect() != null) {
+				resultView = new View();
+				resultView.setRedirectPath(login.getRedirect());
+			}
+			else {
+				//Build view
+				ProductHandler ph = new ProductHandler(req);
+				resultView = ph.getHomePageView();
+			}
 
 		} catch (Exception e) {
 			l.log(Level.INFO, "", e);			
@@ -144,7 +172,10 @@ public class CustomerHandler extends Handler {
 		
 		RegistrationForm reg = getRegistrationRequest();
 		
-		if (service.customerExists(reg.getEmail())) {
+		if (!reg.isValid()) {
+			reg.setResultView(getRegistrationView(reg));
+		}
+		else if (service.customerExists(reg.getEmail())) {
 			reg.setResultView(getRegistrationView("An account for"+reg.getEmail()+" already exists"));
 		}
 		else {
@@ -153,7 +184,7 @@ public class CustomerHandler extends Handler {
 			rv.addContentView(new ContentView(JSP_LOGIN, "Login"));
 			
 			try {
-				service.registerCustomer(reg.getFirstName(), reg.getLastName(), reg.getEmail(), reg.getPw(), reg.getSecurityQuestionId(), reg.getSecurityAnswer());
+				service.registerCustomer(reg.getFirstName(), reg.getLastName(), reg.getEmail(), reg.getPw(), reg.getSecurityQuestionIdLong(), reg.getSecurityAnswer());
 				rv.setMessage("Registration Complete, please login.");
 			} catch (Exception e) {
 				l.log(Level.WARNING, "", e);
@@ -176,8 +207,9 @@ public class CustomerHandler extends Handler {
 		reg.setFirstName(req.getParameter(Parameters.FIRST_NAME.getId()));
 		reg.setLastName(req.getParameter(Parameters.LAST_NAME.getId()));
 		reg.setEmail(req.getParameter(Parameters.EMAIL.getId()));
-		reg.setPw(req.getParameter(Parameters.PASSWORD.getId())); //TODO confirm password
-		reg.setSecurityQuestionId(Long.parseLong(req.getParameter(Parameters.SECURITY_QUESTION.getId())));
+		reg.setPw(req.getParameter(Parameters.PASSWORD.getId()));
+		reg.setCpw(req.getParameter(Parameters.CONFIRMPASSWORD.getId()));
+		reg.setSecurityQuestionId(req.getParameter(Parameters.SECURITY_QUESTION.getId()));
 		reg.setSecurityAnswer(req.getParameter(Parameters.SECURITY_ANSWER.getId()));
 		reg.setForm(FormName.REGISTER);
 		
@@ -201,6 +233,7 @@ public class CustomerHandler extends Handler {
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
 		login.setVisitor(v);
 		login.setForm(FormName.LOGIN);
+		login.setRedirect(req.getParameter(Parameters.REDIRECT.getId()));
 		
 		return login;
 	}
