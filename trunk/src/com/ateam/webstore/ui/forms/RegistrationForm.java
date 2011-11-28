@@ -84,15 +84,15 @@ public class RegistrationForm extends FormSubmission {
 			resultMessage = "Please confirm your password.";
 			return false;
 		}
-		else if (pw != cpw) {
+		else if (!pw.equals(cpw)) {
 			resultMessage = "Passwords do not match.";
 			return false;
 		}
-		else if (validLong(securityQuestionId)) {
+		else if (!validLong(securityQuestionId)) {
 			resultMessage = "Please select a security question";
 			return false;
 		}
-		else if (validString(securityAnswer)) {
+		else if (!validString(securityAnswer)) {
 			resultMessage = "Please answer the security question";
 			return false;
 		}
