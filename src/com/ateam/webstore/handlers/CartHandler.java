@@ -89,8 +89,6 @@ public class CartHandler extends Handler {
 		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
 		l.fine("add prodId :"+prodId);		
 
-		//service.
-
 		add.setResultView(getCartView());
 		
 		return add;

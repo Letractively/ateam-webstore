@@ -39,7 +39,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		View v = null;
 
 		//Debugging
-		dumpRequest(req);
+		AteamContextListener.dumpRequest(req);
 
 		try {
 			
@@ -82,7 +82,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			}
 			else if (req.getParameterMap().containsKey(Parameters.PRODUCT.getId())) {
 				ProductHandler ph = new ProductHandler(req);
-				v = ph.getProductView(false);
+				v = ph.getProductView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.ALL_PRODUCTS.getId())) {
 				ProductHandler ph = new ProductHandler(req);
@@ -138,7 +138,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		l.info("form submission "+req.getSession().getId());
 		
 		//Debugging
-		dumpRequest(req);
+		AteamContextListener.dumpRequest(req);
 		
 		
 		try {
@@ -220,45 +220,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		
 	}
 
-	/**
-	 * 
-	 * @param request
-	 */
-	@SuppressWarnings("unchecked")
-	private void dumpRequest(HttpServletRequest request) {
-		
-		l.fine("queryString: " + request.getQueryString());
-		
-		l.fine("Request Parameters:----------------------");
-		Enumeration<String> en = request.getParameterNames();
-		while (en.hasMoreElements()) {
-			String parm = en.nextElement();
-			l.fine(parm + "=" + request.getParameter(parm) + ", ");
-		}
-		
-//		String classpath = System.getProperty("java.class.path");
-//		l.fine("Classpath:" + classpath);
-		
-//		Enumeration<String> initParms = getInitParameterNames();
-//		while (initParms.hasMoreElements()) {
-//			l.fine("initparm:" + initParms.nextElement());
-//		}
-		
-		l.fine("Request Attributes:----------------------");
-		Enumeration<String> attr = request.getAttributeNames();
-		while (attr.hasMoreElements()) {
-			String a = attr.nextElement();
-			l.fine("requestAttr:" + a + "=" + request.getAttribute(a));
-		}
-		
-		l.fine("Session Attributes:----------------------");
-		Enumeration<String> sessionAttrs = request.getSession().getAttributeNames();
-		while (sessionAttrs.hasMoreElements()) {
-			String a = sessionAttrs.nextElement();
-			l.fine("sessionAttr:" + a + "=" + request.getSession().getAttribute(a));
-		}
 
-	}
 	
 }
 
