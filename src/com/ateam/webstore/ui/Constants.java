@@ -137,6 +137,7 @@ public interface Constants {
 	public static final String JSP_HOME = "/home.jsp";
 	public static final String JSP_PRODUCT_DETAILS = "/productDetails.jsp";
 	public static final String JSP_PRODUCT_LIST = "/productList.jsp";
+	public static final String JSP_PRODUCT_LISTING = "/productListing.jsp";
 	public static final String JSP_ADMIN_PRODUCT_LIST = "/adminProductList.jsp";
 	public static final String JSP_ADMIN_PRODUCT_DETAILS = "/adminProductDetails.jsp";
 	public static final String JSP_ORDER_CONFIRMATION = "/orderConfirmation.jsp";

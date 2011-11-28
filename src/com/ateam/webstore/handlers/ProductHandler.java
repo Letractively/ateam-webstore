@@ -15,6 +15,7 @@ import com.ateam.webstore.ui.forms.ProductEditForm;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.ProductDetailsView;
 import com.ateam.webstore.ui.views.ProductListView;
+import com.ateam.webstore.ui.views.ProductListingView;
 import com.ateam.webstore.ui.views.View;
 
 /**
@@ -89,21 +90,21 @@ public class ProductHandler extends Handler {
 	 * @param category
 	 * @return
 	 */
-	public ProductListView getCategoryView() {
+	public ProductListingView getCategoryView() {
 		
 		String category = req.getParameter(Parameters.CATEGORY_ID.getId());
 		
 		Category cat = new Category(category);
 		
-		ProductListView hp = new ProductListView(getMainView());
+		ProductListingView pl = new ProductListingView(getMainView());
 		
-		//hp.setProducts(service.getProductsByCategory(Long.parseLong(category)));
+		pl.setProducts(service.getProductsByCategory(Long.parseLong(category)));
 		
-		ContentView cv = new ContentView(JSP_PRODUCT_LIST, cat.getName());
+		ContentView cv = new ContentView(JSP_PRODUCT_LISTING, cat.getName());
 		
-		hp.getContentViews().add(cv);
+		pl.getContentViews().add(cv);
 
-		return hp;
+		return pl;
 		
 
 	}

@@ -100,7 +100,7 @@ public class Product extends BaseModel implements Serializable {
 	 */
 	public String getShortProductName(int limit) {
 		if (productName != null && productName.length() > limit) {
-			return productName.substring(0,50)+"...";
+			return productName.substring(0,limit)+"...";
 		}
 		else {
 			return productName;

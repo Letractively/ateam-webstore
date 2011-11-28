@@ -40,7 +40,7 @@ Released   : 20081009
 	<div id="page">
 
 		<div id="header">
-			<div id="headerTitle"><%=v.getHeaderTitle()%></div>
+			<div id="headerTitle"><a href="<%=request.getContextPath()%>/store"><%=v.getHeaderTitle()%></a></div>
 			<div id="headerSubText"><%=v.getHeaderSubText()%></div>
 
 			

@@ -200,7 +200,6 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			CartHandler ch = new CartHandler(req);
 			return ch.processUpdate();
 		}
-
 		else if (formId.equals(FormName.ORDER_SHIPPING.getId())) {
 			OrderHandler oh = new OrderHandler(req);
 			return oh.processOrderShipppingRequest();
