@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Cart;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.ProductsInCart;
 import com.ateam.webstore.service.impl.CartService;
@@ -99,18 +100,27 @@ public class CartHandler extends Handler {
 	 */
 	public FormSubmission addProduct() {
 		
-		l.info("adding product to cart for session: "+req.getSession().getId());
-		
 		FormSubmission add = new FormSubmission();
 		
 		//Check auth
-//		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
-//		if (v == null || v.isAuthenticated()) {
-//			CustomerHandler ch = new CustomerHandler(req);
-//			add.setResultView(ch.getLoginView("Please first login"));
-//			add.setResultMessage("Please first logon");
-//			updateCart();
-//		}
+		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
+		
+		if (v == null || !v.isAuthenticated()) {
+			CustomerHandler ch = new CustomerHandler(req);
+			add.setResultView(ch.getLoginView("Please first login"));
+			add.setResultMessage("Please first logon");
+			updateCart();
+		}
+		
+		if (cart == null) {
+			l.info("creating cart for session: "+req.getSession().getId());
+			Customer cust = v.getCustomer();
+			cart = new Cart(cust);
+			service.store(cart);
+			req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, service.getByCustomerId(cust.getId()));
+		}
+
+		l.info("adding product to cart for session: "+req.getSession().getId());
 		
 		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
 		l.fine("add prodId :"+prodId);		
