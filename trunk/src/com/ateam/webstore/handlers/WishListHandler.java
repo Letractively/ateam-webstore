@@ -47,7 +47,6 @@ public class WishListHandler extends Handler {
 		if (v.isAuthenticated()) {
 			CustomerHandler ch = new CustomerHandler(req);
 			add.setResultView(ch.getLoginView("Please first login"));
-			add.setResultMessage("Please first logon");
 		}
 		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
 		l.fine("add prodId :"+prodId);

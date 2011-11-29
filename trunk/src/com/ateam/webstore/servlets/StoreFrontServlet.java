@@ -25,8 +25,7 @@ import com.ateam.webstore.ui.views.View;
  * Handles basic GET requests
  *
  */
-public class StoreFrontServlet extends HttpServlet implements Constants {
-	static Logger l = Logger.getLogger(Constants.LOGGER_NAME);
+public class StoreFrontServlet extends AteamServlet implements Constants {
 	/**
 	 * 
 	 */
@@ -39,7 +38,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		View v = null;
 
 		//Debugging
-		AteamContextListener.dumpRequest(req);
+		dumpRequest(req);
 
 		try {
 			
@@ -51,6 +50,10 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			else if (req.getParameterMap().containsKey(Parameters.LOGOUT.getId())) {
 				CustomerHandler vh = new CustomerHandler(req);
 				v = vh.getLogoutView();
+			}
+			else if (req.getParameterMap().containsKey(Parameters.MY_ACCOUNT.getId())) {
+				CustomerHandler vh = new CustomerHandler(req);
+				v = vh.getMyAccountView();
 			}
 			else if (req.getParameterMap().containsKey(Parameters.FORGOT.getId())) {
 				CustomerHandler vh = new CustomerHandler(req);
@@ -92,6 +95,13 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				ProductHandler ph = new ProductHandler(req);
 				v = ph.getAllView(false);
 			}
+			else if (req.getParameterMap().containsKey(Parameters.FEEDBACK.getId())) {
+				CustomerHandler ch = new CustomerHandler(req);
+				v = ch.getFeedbackView();
+			}
+			else if (req.getParameterMap().containsKey("error")) {
+				throw new Exception("Error Test");
+			}
 			else {
 				ProductHandler ph = new ProductHandler(req);
 				v = ph.getHomePageView();
@@ -111,27 +121,26 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 				v = new View();
 				l.warning("null view:");
 			}
+
+			v.setServletPath("store");
+			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
 			
+			getServletConfig().getServletContext().getRequestDispatcher(
+					JSP_MAIN).forward(req, resp);
+
 			
 		} catch (Exception e) {
 			l.log(Level.SEVERE, "Exception caught in doGet", e);
-			Handler h = new Handler(req);
-			View mv = new View(h.getMainView());
-			mv.setMessage(e.getMessage());
+//			Handler h = new Handler(req);
+//			View mv = new View(h.getMainView());
+//			mv.setMessage(e.getMessage());
+//			
+//			mv.addContentView(getErrorContent());
+//			
+//			v = mv;
 			
-			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
-			//cv.setContentText(e.getMessage());
-			mv.addContentView(cv);
-			
-			v = mv;
-			
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
-
-		v.setServletPath("store");
-		req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
-		
-		getServletConfig().getServletContext().getRequestDispatcher(
-				JSP_MAIN).forward(req, resp);
 
 	}
 	
@@ -142,7 +151,7 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		l.info("form submission "+req.getSession().getId());
 		
 		//Debugging
-		AteamContextListener.dumpRequest(req);
+		dumpRequest(req);
 		
 		View v = null;
 		
@@ -153,26 +162,26 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			
 			v = results.getResultView();
 
-			
+			v.setServletPath("store");
+			req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
+
+			l.info(req.getAttribute(REQUEST_ATTRIBUTE_VIEW).toString());
+
+			//Forward to JSP
+			getServletConfig().getServletContext().getRequestDispatcher(
+					JSP_MAIN).forward(req, resp);
+
 		} catch (Exception e) {
-			l.log(Level.SEVERE, "Exception caught in doGet", e);
-			Handler h = new Handler(req);
-			v = h.getMainView();
-			
-			ContentView cv = new ContentView(JSP_MESSAGE, "Opps...");
-			v.setMessage(e.getMessage());
-			v.addContentView(cv);
-			
+			l.log(Level.WARNING, "Exception processing doGet", e);
+//			Handler h = new Handler(req);
+//			v = h.getMainView();
+//			v.setMessage(e.getMessage());
+//			v.addContentView(getErrorContent());
+
+			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
 		}
 		
-		v.setServletPath("store");
-		req.setAttribute(REQUEST_ATTRIBUTE_VIEW, v);
-
-		l.info(req.getAttribute(REQUEST_ATTRIBUTE_VIEW).toString());
-		
-		//Forward to JSP
-		getServletConfig().getServletContext().getRequestDispatcher(
-				JSP_MAIN).forward(req, resp);
 	}
 
 	/**
@@ -220,6 +229,11 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 			WishListHandler wh = new WishListHandler(req);
 			return wh.addProduct();
 		}
+		else if (formId.equals(FormName.SEARCH.getId())) {
+			ProductHandler ph = new ProductHandler(req);
+			return ph.search();
+		}
+
 		else {
 			l.warning("unknown formId:"+formId);
 			//TODO throw execpton
@@ -229,7 +243,5 @@ public class StoreFrontServlet extends HttpServlet implements Constants {
 		
 	}
 
-
-	
 }
 

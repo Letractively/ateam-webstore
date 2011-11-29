@@ -279,4 +279,29 @@ public class ProductHandler extends Handler {
 		return fs;
 	}
 	
+	/**
+	 * Perform a product search
+	 * @return
+	 */
+	public FormSubmission search() {
+
+		FormSubmission fs = new FormSubmission();
+		
+		String query = req.getParameter(Parameters.SEARCH_QUERY.getId());
+		
+		if (fs.validString(query)) {
+			ProductListingView pl = new ProductListingView(getMainView());
+			
+			pl.setProducts(service.searchProductsByNameOrDescription(query));
+			pl.addContentView(new ContentView(JSP_PRODUCT_LISTING, "Search results for: "+query));
+			
+			fs.setResultView(pl);
+			
+		}
+		else {
+			fs.setResultView(getHomePageView());
+		}
+		
+		return fs;
+	}
 }

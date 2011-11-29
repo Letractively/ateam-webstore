@@ -19,8 +19,7 @@ import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.View;
 
-public class AdminServlet extends HttpServlet implements Constants  {
-	static Logger l = Logger.getLogger(Constants.LOGGER_NAME);
+public class AdminServlet extends AteamServlet implements Constants  {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -80,7 +79,7 @@ public class AdminServlet extends HttpServlet implements Constants  {
 		l.info("form submission "+req.getSession().getId());
 		
 		//Debugging
-		AteamContextListener.dumpRequest(req);
+		dumpRequest(req);
 		
 		
 		try {

@@ -92,7 +92,7 @@ public class CartHandler extends Handler {
 		
 		OrderHandler oh = new OrderHandler(req);
 		
-		return oh.getOrderShippingView(v.getCustomer().getId());
+		return oh.getOrderShippingView();
 	}
 	
 	/**
@@ -108,8 +108,8 @@ public class CartHandler extends Handler {
 		
 		if (v == null || !v.isAuthenticated()) {
 			CustomerHandler ch = new CustomerHandler(req);
-			add.setResultView(ch.getLoginView("Please first login"));
-			add.setResultMessage("Please first logon");
+			add.setResultView(ch.getLoginView());
+			add.setResultMessage("Please first login");
 			return add;
 		}
 		

@@ -1,6 +1,7 @@
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
 <%@page import="com.ateam.webstore.ui.views.View"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
+<%@page import="com.ateam.webstore.handlers.Handler"%>
 <%@page import="com.ateam.webstore.model.Cart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +24,8 @@ Released   : 20081009
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <%
-	View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW);
+	Handler h = new Handler(request);
+	View v = h.getMainView();
 %>
 
 <head>
@@ -109,19 +111,12 @@ Released   : 20081009
 		</div>
 
 
-		<%
-			if (v.getContentViews() != null)
-				for (ContentView cv : v.getContentViews()) {
-		%>
 		<div class="contentTitle">
-			<h1><%=cv.getContentHeader()%></h1>
+			<h1>Error</h1>
 		</div>
 		<div class="contentText">
-			<%if (cv.getJspf() != null) { %><jsp:include page="<%=cv.getJspf()%>" /><% }%>
+			An internal error occurred.
 		</div>
-		<%
-			}
-		%>
 
 	</div>
 	<div id="footer"><%=v.getFooterText()%></div>

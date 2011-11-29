@@ -1,5 +1,6 @@
 package com.ateam.webstore.handlers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,9 +22,8 @@ public class AddressHandler extends Handler {
 	 * @param id  User ID
 	 * @return
 	 */
-	public Collection<Address> getUserAddresses(Long id) {
+	public Collection<Address> getUserAddresses() {
 
-		
 		return service.getAll();
 //		// TODO Get from DB
 //		
@@ -40,11 +40,13 @@ public class AddressHandler extends Handler {
 		
 	}
 
-	public Address getUserAddress(Long id, String parameter) {
+	public Address getUserAddress() {
 		
-		//TODO get from DB
-		Address addr = new Address("PO Box 123","Pougheepsie","NY","12601",true, null);
-		return addr;
+		Long id = Long.parseLong(req.getParameter(Parameters.ADDRESS.getId()));
+		l.fine("get user addr id:"+id);
+		//Address addr = new Address("PO Box 123","Pougheepsie","NY","12601",true, null);
+		
+		return service.getById(id);
 	}
 	
 	/**

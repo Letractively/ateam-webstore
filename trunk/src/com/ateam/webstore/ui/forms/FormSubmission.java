@@ -31,6 +31,7 @@ public class FormSubmission {
 	View resultView;
 	
 	public View getResultView() {
+		resultView.setMessage(resultMessage);
 		return resultView;
 	}
 
@@ -77,10 +78,10 @@ public class FormSubmission {
 	public void setResultMessage(String resultMessage) {
 		this.resultMessage = resultMessage;
 	}
-	protected boolean validString(String s) {
+	public boolean validString(String s) {
 		return s != null && !s.isEmpty() && !s.trim().isEmpty();
 	}
-	protected boolean validDouble(String s) {
+	public boolean validDouble(String s) {
 		try {
 			Double.parseDouble(s);
 			return true;
@@ -88,7 +89,7 @@ public class FormSubmission {
 			return false;
 		}
 	}
-	protected boolean validLong(String s) {
+	public boolean validLong(String s) {
 		try {
 			Long.parseLong(s);
 			return true;
