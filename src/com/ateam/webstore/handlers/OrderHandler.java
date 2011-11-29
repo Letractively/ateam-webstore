@@ -1,5 +1,7 @@
 package com.ateam.webstore.handlers;
 
+import java.util.logging.Level;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Address;
@@ -49,18 +51,29 @@ public class OrderHandler extends Handler {
 	 * @param custId
 	 * @return
 	 */
-	public OrderShippingView getOrderShippingView(Long custId) {
+	public OrderShippingView getOrderShippingView() {
+		return getOrderShippingView(null);
+	}
+	
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
+	public OrderShippingView getOrderShippingView(String message) {
 
 		OrderShippingView osv = new OrderShippingView(getMainView());
 
 		AddressHandler ah = new AddressHandler(req);
-		osv.setUserAddresses(ah.getUserAddresses(custId));
+		osv.setUserAddresses(ah.getUserAddresses());
 
 		ShippingCodeHandler sch = new ShippingCodeHandler(req);
 		osv.setShippers(sch.getShippingCodes());
 		
 		osv.addContentView(new ContentView(Constants.JSP_ORDER_SHIPPING, "Shipping Options"));
 		osv.addContentView(new ContentView(Constants.JSP_ADDRESS, "Add New Shipping Address"));
+		
+		osv.setMessage(message);
 		
 		return osv;
 		
@@ -149,17 +162,13 @@ public class OrderHandler extends Handler {
 	public OrderShippingForm getOrderShippingRequest() {
 		OrderShippingForm osf = new OrderShippingForm();
 		
-		Visitor visitor = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
-		
+		//Get the selected addr
 		AddressHandler ah = new AddressHandler(req);
-		Address addr = ah.getUserAddress(visitor.getCustomer().getId(), req.getParameter(Constants.Parameters.ADDRESS_1.getId()));
-		osf.setAddress(addr);
+		osf.setAddress(ah.getUserAddress());
 		
-		
+		//Get the selected shipping code
 		ShippingCodeHandler sch = new ShippingCodeHandler(req);
-
-		ShippingCode shippingCode = sch.getShippingCode(Integer.parseInt(req.getParameter(Constants.Parameters.SHIPPING_CODE.getId())));
-		osf.setShippingCode(shippingCode);
+		osf.setShippingCode(sch.getShippingCode());
 		
 		return osf;
 	}
@@ -174,16 +183,24 @@ public class OrderHandler extends Handler {
 	public FormSubmission processOrderShipppingRequest() {
 		
 		l.finer("->");
-		OrderShippingForm osf = getOrderShippingRequest();
+		OrderShippingForm osf;
 		
-		Orders order = (Orders) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDER);
-		
-		order.setShippingCode(osf.getShippingCode());
-		order.setAddress(osf.getAddress());
+		try {
+			osf = getOrderShippingRequest();
+			Orders order = (Orders) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDER);
+			
+			order.setShippingCode(osf.getShippingCode());
+			order.setAddress(osf.getAddress());
 
-		//FormSubmission fs = new FormSubmission();
-		osf.setSuccess(true);
-		osf.setResultView(getOrderPaymentView());
+			//FormSubmission fs = new FormSubmission();
+			osf.setSuccess(true);
+			osf.setResultView(getOrderPaymentView());
+
+		} catch (Exception e) {
+			l.log(Level.WARNING, "Failed to get shipping details", e);
+			osf = new OrderShippingForm();
+			osf.setResultView(getOrderShippingView("Failed to process shipping request"));
+		}
 		
 		l.finer("<-");
 		return osf;

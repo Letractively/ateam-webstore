@@ -261,4 +261,21 @@ public class CustomerHandler extends Handler {
 		return null;
 	}
 
+	public View getMyAccountView() {
+		
+		View v = new View(getMainView());
+		
+		v.addContentView(new ContentView(JSP_MY_ACCOUNT, "My Account"));
+		
+		return v;
+	}
+
+	public View getFeedbackView() {
+		
+		View v = new View();
+		
+		v.addContentView(new ContentView(JSP_CUSTOMER_FEEDBACK, "Send Feedback"));
+		return v;
+	}
+
 }

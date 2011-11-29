@@ -35,6 +35,7 @@ public interface Constants {
 		PRODUCT_QUANTITY ("productQty"),
 		ON_SALE ("onSale"),
 		ALL_PRODUCTS ("products"),
+		FEEDBACK ("feedback"),
 		ALL_EMPLOYEES ("employees"),
 		ALL_ORDERS ("orders"),
 		ORDER_ID ("order"),
@@ -57,8 +58,10 @@ public interface Constants {
 		CITY ("city"),
 		STATE ("state"),
 		ZIP ("zip"),
-		REDIRECT ("redirect")
-		
+		REDIRECT ("redirect"),
+		SEARCH_QUERY ("query"),
+		MY_ACCOUNT ("myAccount"),
+		MESSAGE ("message")
 		;
 		
 		String id;
@@ -81,6 +84,7 @@ public interface Constants {
 	public enum FormName {
 		LOGIN ("login"),
 		REGISTER ("register"),
+		SEARCH ("search"),
 		ADD_EMPLOYEE ("addEmployee"),
 		EDIT_CART ("editCart"),
 		ORDER_SHIPPING ("orderShipping"),
@@ -94,7 +98,8 @@ public interface Constants {
 		ADD_TO_WISHLIST ("addToWishList"),
 		EDIT_PRODUCT ("editProduct"),
 		DELETE_PRODUCT ("deleteProduct"),
-		DELETE_EMPLOYEE ("deleteEmployee")
+		DELETE_EMPLOYEE ("deleteEmployee"),
+		CUSTOMER_FEEDBACK ("customerFeedback")
 		;
 		
 		String id;
@@ -150,6 +155,8 @@ public interface Constants {
 	public static final String JSP_CREDIT_CARD = "/creditCard.jsp";
 	public static final String JSP_CART = "/cart.jsp";
 	public static final String JSP_WISHLIST = "/wishList.jsp";
+	public static final String JSP_MY_ACCOUNT = "/myAccount.jsp";
+	public static final String JSP_CUSTOMER_FEEDBACK = "/customerFeedback.jsp";
 
 	//Properties
 	public static final String PROPERTY_PRODUCT_IMAGE_ROOT =  "com.ateam.webstore.ui.ProductImageRoot";
