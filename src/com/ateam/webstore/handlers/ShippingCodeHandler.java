@@ -37,7 +37,7 @@ public class ShippingCodeHandler extends Handler {
 	 */
 	public ShippingCode getShippingCode() {
 		
-		Long id = Long.parseLong(req.getParameter(Parameters.SHIPPING_CODE.getId()));
+		Integer id = Integer.parseInt(req.getParameter(Parameters.SHIPPING_CODE.getId()));
 		
 		l.fine("get shipping code id:"+id);
 		//ShippingCode code = new ShippingCode(2, "UPS Next Day", null);

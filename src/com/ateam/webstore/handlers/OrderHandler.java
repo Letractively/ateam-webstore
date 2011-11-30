@@ -115,10 +115,22 @@ public class OrderHandler extends Handler {
 	 * @return
 	 */
 	public OrderDetailsView getOrderDetailsView() {
+		return getOrderDetailsView(null);
+	}
+	
+	/**
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public OrderDetailsView getOrderDetailsView(Orders order) {
 
 		OrderDetailsView odv = new OrderDetailsView(getMainView());
 		
-		Orders order = getOrder();
+		if (order == null) {
+			order = getOrder();
+		}
+
 		odv.setOrder(order);
 		
 		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
@@ -146,12 +158,8 @@ public class OrderHandler extends Handler {
 		
 		CreditCardHandler cch = new CreditCardHandler(req);
 		
+		opf.setCard(cch.getSelectedCard());
 		
-		//TODO Get the card ID from the request
-		
-		opf.setCard(cch.getUsersCard(0));
-		
-		opf.setResultView(getOrderDetailsView());
 		return opf;
 	}
 
@@ -215,7 +223,20 @@ public class OrderHandler extends Handler {
 		
 		FormSubmission submission = new FormSubmission();
 				
-		// TODO Auto-generated method stub
+		Orders order = (Orders) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDER);
+		
+		try {
+			order = service.store(order);
+			
+			submission.setResultMessage("Order Placed!");
+
+		} catch (Exception e) {
+			l.log(Level.WARNING, "Failed to store order.", e);
+			submission.setResultMessage("Failed to submit order");
+		}
+		
+		submission.setResultView(getOrderDetailsView(order));
+		
 		return submission;
 	}
 
@@ -233,6 +254,8 @@ public class OrderHandler extends Handler {
 		
 		opf.setSuccess(true);
 		opf.setResultView(getOrderPreView());
+		
+		opf.setResultView(getOrderDetailsView(order));
 		
 		return opf;
 	}

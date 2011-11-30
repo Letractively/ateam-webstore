@@ -100,8 +100,8 @@ Released   : 20081009
 				}
 			%>
 
-			<div method="post" action="<%=request.getContextPath()%>/store" id="searchField">
-				<form id="searchFieldForm"><input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.SEARCH.getId()%>">
+			<div id="searchField">
+				<form method="post" action="<%=request.getContextPath()%>/store" id="searchFieldForm"><input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.SEARCH.getId()%>">
 				<input type="text" name="<%=Constants.Parameters.SEARCH_QUERY.getId()%>"/> 
 				<input type="submit" value="Search" /> </form>
 			</div>

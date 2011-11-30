@@ -14,7 +14,7 @@
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.ORDER_PAYMENT.getId()%>">
 
-				<select  name="<%=Constants.Parameters.CART_ID%>">
+				<select  name="<%=Constants.Parameters.CARD_ID.getId()%>">
 				<%for (CreditCard cc : v.getUserCards()) {%>
 					<option value="<%=cc.getId()%>"><%=cc.getCardNumber() %></option>
 				<%} %>
