@@ -1,7 +1,5 @@
 package com.ateam.webstore.handlers;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
