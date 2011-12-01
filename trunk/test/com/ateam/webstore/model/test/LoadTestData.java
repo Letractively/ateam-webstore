@@ -5,7 +5,12 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.service.impl.HelperService;
+import com.ateam.webstore.model.Address;
+import com.ateam.webstore.model.CreditCard;
+import com.ateam.webstore.model.Orders;
+import com.ateam.webstore.service.impl.AddressService;
+import com.ateam.webstore.service.impl.CreditCardService;
+import com.ateam.webstore.service.impl.OrdersService;
 
 /**
  * @author Hendrix Tavarez
@@ -177,16 +182,30 @@ public class LoadTestData {
 //		Category category = catServ.getById(new Long(102));
 //		System.out.println(category.getName());
 		
-		String queryText = "SELECT * FROM PRODUCT";
-		Collection<Object> results = new HelperService().runAnyQuery(queryText);
-		for (Object columns : results) {
-			Object[] row = (Object[])columns;
-			for (Object column : row) {
-				System.out.print(column + " ");
-			}
-			System.out.println("");
+//		String queryText = "SELECT * FROM PRODUCT";
+//		Collection<Object> results = new HelperService().runAnyQuery(queryText);
+//		for (Object columns : results) {
+//			Object[] row = (Object[])columns;
+//			for (Object column : row) {
+//				System.out.print(column + " ");
+//			}
+//			System.out.println("");
+//		}
+		
+		Collection<Address> addresses = new AddressService().getByCustomerId(new Long(100002));
+		for (Address address : addresses) {
+			System.out.println(address.getCity());
 		}
 		
+		Collection<CreditCard> creditCards = new CreditCardService().getByCustomerId(new Long(100002));
+		for (CreditCard creditCard : creditCards) {
+			System.out.println(creditCard.getCardNumber());
+		}
+		
+		Collection<Orders> orders = new OrdersService().getByCustomerId(new Long(100001));
+		for (Orders order : orders) {
+			System.out.println(order.getCreditCard().getBillingAddress().getCity());
+		}
 	}
 
 }
