@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import com.ateam.webstore.dao.AddressDAO;
 import com.ateam.webstore.model.Address;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.service.RepositoryService;
 
 /**
@@ -44,6 +45,12 @@ public class AddressService implements RepositoryService<Address> {
 	public Address getById(Serializable id) {
 		AddressDAO repository = new AddressDAO();
 		return repository.get(id);
+	}
+	
+	public Collection<Address> getByCustomerId(Serializable id) {
+		Customer customer = new CustomerService().getById(id);
+		AddressDAO repository = new AddressDAO();
+		return repository.getByPerson(customer.getPerson());
 	}
 
 }
