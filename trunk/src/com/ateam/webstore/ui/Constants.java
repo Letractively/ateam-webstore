@@ -16,6 +16,7 @@ public interface Constants {
 		LOGOUT ("logout"),
 		FORGOT ("forgot"),
 		FORM_ID ("formId"),
+		CONTEXT ("context"),
 		PASSWORD ("pw"),
 		REMEMBER_ME ("remember"),
 		CONFIRMPASSWORD ("cpw"),
@@ -46,7 +47,8 @@ public interface Constants {
 		CARD_NAME ("cardName"),
 		CARD_TYPE ("cardType"),
 		CARD_ACCOUNT_NUMBER ("cardAcctNum"),
-		CARD_EXPIRATION ("cardExp"),
+		CARD_EXPIRATION_MONTH ("cardExpMo"),
+		CARD_EXPIRATION_YEAR ("cardExpYr"),
 		CARD_SECURITY_CODE ("cardCode"),
 		USE_SHIPPING ("useShipping"),
 		NAME ("name"),
@@ -123,6 +125,7 @@ public interface Constants {
 	public static final String SESSION_ATTRIBUTE_VISITOR = "visitor";
 	public static final String SESSION_ATTRIBUTE_CART = "cart";
 	public static final String SESSION_ATTRIBUTE_ORDER = "order";
+	public static final String SESSION_ATTRIBUTE_ORDERED_ITEMS = "orderedItems";
 	
 	/**
 	 * Request Attributes

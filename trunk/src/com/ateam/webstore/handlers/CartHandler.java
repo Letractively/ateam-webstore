@@ -1,5 +1,7 @@
 package com.ateam.webstore.handlers;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.logging.Level;
 
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Cart;
 import com.ateam.webstore.model.Customer;
+import com.ateam.webstore.model.ItemsOrdered;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.ProductsInCart;
 import com.ateam.webstore.service.impl.CartService;
@@ -87,8 +90,18 @@ public class CartHandler extends Handler {
 		
 		Orders order = new Orders(cart.getProducts().size(), 0.0, 0.0, 0.0, v.getCustomer(), null, null, null);
 		
+		Collection<ItemsOrdered> items = new ArrayList<ItemsOrdered>();
+		for (ProductsInCart prod : cart.getProducts()) {
+			ItemsOrdered item = new ItemsOrdered(prod.getProduct().getPrice(), prod.getQuantity(), false, null, prod.getProduct());
+			items.add(item);
+			order.addItemPrice(prod.getProduct().getPrice());
+		}
+		
+		
+		
 		//Add order to session
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_ORDER, order);
+		req.getSession().setAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS, items);
 		
 		OrderHandler oh = new OrderHandler(req);
 		

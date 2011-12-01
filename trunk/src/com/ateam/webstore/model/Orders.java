@@ -4,6 +4,7 @@
 package com.ateam.webstore.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -169,6 +170,7 @@ public class Orders extends BaseModel implements Serializable {
 	}
 
 	public void setShippingCode(ShippingCode shippingCode) {
+		shippingTotal = shippingCode.getCost();
 		this.shippingCode = shippingCode;
 	}
 
@@ -180,5 +182,13 @@ public class Orders extends BaseModel implements Serializable {
 		return this.timeShipped != null;
 	}
 	
+	public Double getGrandTotal() {
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		return Double.parseDouble(twoDForm.format(itemSubTotal + salesTax + shippingTotal));
+	}
+	
+	public void addItemPrice(Double itemPrice) {
+		itemSubTotal += itemPrice;
+	}
 
 }

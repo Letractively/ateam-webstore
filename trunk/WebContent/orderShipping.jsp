@@ -23,7 +23,7 @@
 				<br><br>
 				<h3>Shipping Method:</h3>
 				<% for (ShippingCode s : v.getShippers()) { %>
-					<input type="radio" name="<%=Constants.Parameters.SHIPPING_CODE.getId()%>" value="<%=s.getShippingCode()%>"><%=s.getDescription()%><br>
+					<input type="radio" name="<%=Constants.Parameters.SHIPPING_CODE.getId()%>" value="<%=s.getShippingCode()%>"><%=s.getDescription()%> - <%=s.getCost()%><br>
 				<%} %>
 				
 				<input type="submit" value="Back"><input type="submit" value="Continue">

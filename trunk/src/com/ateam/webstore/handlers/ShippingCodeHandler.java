@@ -32,6 +32,21 @@ public class ShippingCodeHandler extends Handler {
 
 	/**
 	 * 
+	 * @return
+	 */
+	public Collection<ShippingCode> getShippingCodes(int qty) {
+		
+		Collection<ShippingCode> codes = new ArrayList<ShippingCode>();
+		for (ShippingCode c : getShippingCodes()) {
+			if (c.getItemQty() == qty) {
+				codes.add(c);
+			}
+		}
+		return codes;
+	}
+	
+	/**
+	 * 
 	 * @param parseInt
 	 * @return
 	 */
