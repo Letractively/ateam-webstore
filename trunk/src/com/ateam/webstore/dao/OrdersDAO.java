@@ -55,5 +55,24 @@ public class OrdersDAO extends GenericDAOImpl<Orders, Serializable> {
 			getPersistenceManager().close();
 		}
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public Collection<Orders> getByCustomer(Serializable customer) {
+		
+		
+		Collection<Orders> orders = null;
+		
+		try {
+			Query query = getPersistenceManager().newQuery(getPersistentClass(), "customer == :customer");
+			orders = (Collection<Orders>) query.execute(customer);
+			
+			return (Collection<Orders>) getPersistenceManager().detachCopyAll(orders);
+			
+		} catch (RuntimeException re) {
+			throw re;
+		} finally {
+			getPersistenceManager().close();
+		}
+	}		
 
 }
