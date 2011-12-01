@@ -97,7 +97,7 @@
       <field name="defaultInd"/>
       <field name="cardType"/>
       <field name="customer"/>
-      <field name="billingAddress"/>
+      <field name="billingAddress"  default-fetch-group="true"/>
 		</class>
 		
 		<class name="AcceptedCards" identity-type="application" detachable="true">
