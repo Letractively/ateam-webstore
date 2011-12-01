@@ -30,6 +30,11 @@ public class FormSubmission {
 	 */
 	View resultView;
 	
+	public boolean isValid() {
+		resultMessage = "Validation not implemented.";
+		return false;
+	}
+	
 	public View getResultView() {
 		resultView.setMessage(resultMessage);
 		return resultView;

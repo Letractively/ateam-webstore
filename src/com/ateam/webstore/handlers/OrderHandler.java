@@ -1,18 +1,22 @@
 package com.ateam.webstore.handlers;
 
+import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Address;
+import com.ateam.webstore.model.ItemsOrdered;
 import com.ateam.webstore.model.Orders;
-import com.ateam.webstore.model.ShippingCode;
+import com.ateam.webstore.model.SalesTax;
+import com.ateam.webstore.service.impl.ItemsOrderedService;
 import com.ateam.webstore.service.impl.OrdersService;
+import com.ateam.webstore.service.impl.SalesTaxService;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.OrderPaymentForm;
 import com.ateam.webstore.ui.forms.OrderShippingForm;
-import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.OrderDetailsView;
 import com.ateam.webstore.ui.views.OrderListView;
@@ -52,7 +56,7 @@ public class OrderHandler extends Handler {
 	 * @return
 	 */
 	public OrderShippingView getOrderShippingView() {
-		return getOrderShippingView(null);
+		return getOrderShippingView(null, null);
 	}
 	
 	/**
@@ -60,7 +64,7 @@ public class OrderHandler extends Handler {
 	 * @param message
 	 * @return
 	 */
-	public OrderShippingView getOrderShippingView(String message) {
+	public OrderShippingView getOrderShippingView(String message, Address addr) {
 
 		OrderShippingView osv = new OrderShippingView(getMainView());
 
@@ -68,12 +72,13 @@ public class OrderHandler extends Handler {
 		osv.setUserAddresses(ah.getUserAddresses());
 
 		ShippingCodeHandler sch = new ShippingCodeHandler(req);
-		osv.setShippers(sch.getShippingCodes());
+		osv.setShippers(sch.getShippingCodes(2));
 		
 		osv.addContentView(new ContentView(Constants.JSP_ORDER_SHIPPING, "Shipping Options"));
 		osv.addContentView(new ContentView(Constants.JSP_ADDRESS, "Add New Shipping Address"));
 		
 		osv.setMessage(message);
+		osv.setAddress(addr);
 		
 		return osv;
 		
@@ -104,7 +109,9 @@ public class OrderHandler extends Handler {
 		OrderDetailsView odv = new OrderDetailsView(getMainView());
 		
 		odv.setOrder((Orders) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDER));
+		odv.setItems((Collection<ItemsOrdered>) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS));
 		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Preview Your Order"));
+		odv.setOrderPreview(true);
 		
 		return odv;
 	}
@@ -132,6 +139,8 @@ public class OrderHandler extends Handler {
 		}
 
 		odv.setOrder(order);
+		
+		odv.setItems((Collection<ItemsOrdered>) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS));
 		
 		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
 		
@@ -207,7 +216,7 @@ public class OrderHandler extends Handler {
 		} catch (Exception e) {
 			l.log(Level.WARNING, "Failed to get shipping details", e);
 			osf = new OrderShippingForm();
-			osf.setResultView(getOrderShippingView("Failed to process shipping request"));
+			osf.setResultView(getOrderShippingView("Failed to process shipping request", null));
 		}
 		
 		l.finer("<-");
@@ -224,9 +233,17 @@ public class OrderHandler extends Handler {
 		FormSubmission submission = new FormSubmission();
 				
 		Orders order = (Orders) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDER);
+		Collection<ItemsOrdered> items = (Collection<ItemsOrdered>) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS);
 		
 		try {
 			order = service.store(order);
+			l.info("order "+order.getId()+" created");
+			ItemsOrderedService is = new ItemsOrderedService();
+			for (ItemsOrdered item : items) {
+				item.setOrders(order);
+				is.store(item);
+				l.info("item "+item.getProduct().getId()+" added to order");
+			}
 			
 			submission.setResultMessage("Order Placed!");
 
@@ -252,11 +269,18 @@ public class OrderHandler extends Handler {
 		
 		order.setCreditCard(opf.getCard());
 		
+		SalesTaxService sts = new SalesTaxService();
+		SalesTax st = sts.getById(opf.getCard().getBillingAddress().getState());
+		Double tax = 10.00;
+		if (st != null) {
+			tax = st.getPercent()/100 * order.getItemSubTotal();
+		}
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		order.setSalesTax(Double.parseDouble(twoDForm.format(tax)));
+		
 		opf.setSuccess(true);
 		opf.setResultView(getOrderPreView());
-		
-		opf.setResultView(getOrderDetailsView(order));
-		
+			
 		return opf;
 	}
 
@@ -287,4 +311,5 @@ public class OrderHandler extends Handler {
 		
 		return odv;
 	}
+
 }

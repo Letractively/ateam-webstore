@@ -17,9 +17,11 @@ public class OrderShippingView extends View {
 
 	Collection<Address> userAddresses;
 	Collection<ShippingCode> shippers;
+	Address address;
 
 	public OrderShippingView(View v) {
 		super(v);
+		context = View.Contexts.ORDER_SHIPPING.getId();
 	}
 
 	public Collection<Address> getUserAddresses() {
@@ -36,5 +38,13 @@ public class OrderShippingView extends View {
 
 	public void setShippers(Collection<ShippingCode> shippers) {
 		this.shippers = shippers;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }

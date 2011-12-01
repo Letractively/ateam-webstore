@@ -23,7 +23,25 @@ public class View {
 	boolean showLogonForm;
 	boolean showVisitorInfo;
 	private boolean error;
+	String context;
 	
+	
+	public enum Contexts {
+		ORDER_SHIPPING ("orderShipping"),
+		ORDER_PAYMENT ("orderPayment"),
+		CART ("cart");
+		
+		String id;
+		Contexts (String id) {
+            this.id = id;
+		}
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+	}
 	/**
 	 * 
 	 */
@@ -159,5 +177,11 @@ public class View {
 	}
 	public void setLoginRedirectPath(String loginRedirectPath) {
 		this.loginRedirectPath = loginRedirectPath;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
 	}
 }

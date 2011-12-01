@@ -62,6 +62,7 @@ public class RegistrationForm extends FormSubmission {
 		this.pw = pw;
 	}
 
+	@Override
 	public boolean isValid() {
 		
 		if (!validString(firstName)) {

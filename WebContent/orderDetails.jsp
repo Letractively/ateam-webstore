@@ -2,6 +2,7 @@
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="com.ateam.webstore.model.Orders"%>
+<%@page import="com.ateam.webstore.model.ItemsOrdered"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -9,24 +10,29 @@
 Orders o = v.getOrder();
 %>
 
+<% if (v.isOrderPreview()) {%>
 			<form method="post" action="<%=request.getContextPath()%>/store">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.ORDER_CONFIRM.getId()%>">
 
-			
+<%} %>
 
 
 				<table width="100%">
 					<tr>
-							<td><h3>Shipping Details:</h3>
-							<br>
+							<td valign="top"><h3>Shipping Details:</h3>
 							<%=o.getAddress().getStreetAddress1() %><br>
 							<%=o.getAddress().getStreetAddress2() %><br>
 							<%=o.getAddress().getCity()%> <%=o.getAddress().getState()%> <%=o.getAddress().getZip()%><br>
 							</td>
-							<td><h3>Payment Details</h3>
-							<%=o.getCreditCard().getCardNumber()%><br>
-							Billing: <%=o.getCreditCard().getBillingAddress()%>
+							
+							<td valign="top"><h3>Payment Details</h3>
+							<%=o.getCreditCard().getObfusticatedCardInfo()%><br>
+							Billing Address:<br>
+							<%=o.getCreditCard().getBillingAddress().getStreetAddress1() %><br>
+							<%=o.getCreditCard().getBillingAddress().getStreetAddress2() %><br>
+							<%=o.getCreditCard().getBillingAddress().getCity()%> <%=o.getCreditCard().getBillingAddress().getState()%> <%=o.getCreditCard().getBillingAddress().getZip()%><br>
+							
 							</td>
 							<td></td>
 					</tr>
@@ -36,50 +42,47 @@ Orders o = v.getOrder();
 				<table width="100%">
 					<tr>
 							<td><b>Item</b></td>
-							<td><b>Description</b></td>
 							<td><b>Qty</b></td>
 							<td><b>Price</b></td>
 					</tr>
 			
+			
+				<% if (v.getItems() != null) for (ItemsOrdered item : v.getItems()) { %>
 					<tr>
-							<td>Widget</td>
-							<td>A Widget</td>
-							<td>2</td>
-							<td>$12.99</td>
+							<td><%=item.getProduct().getShortProductName(40) %></td>
+							<td><%=item.getItemQty() %></td>
+							<td><%=item.getUnitPrice() %></td>
 					</tr>
 			
-			
+				<%} %>
 					<tr>
 							<td></td>
-							<td></td>
-							<td>SubTotal</td>
-							<td>$120.99</td>
-					</tr>
-			
-					<tr>
-							<td></td>
-							<td></td>
-							<td>Tax (NY)</td>
-							<td>$120.99</td>
+							<td><b>SubTotal</b></td>
+							<td><%=o.getItemSubTotal() %></td>
 					</tr>
 			
 					<tr>
 							<td></td>
-							<td></td>
-							<td>Shipping</td>
-							<td>$120.99</td>
+							<td><b>Tax</b></td>
+							<td><%=o.getSalesTax()%></td>
 					</tr>
 			
 					<tr>
 							<td></td>
+							<td><b>Shipping</b></td>
+							<td><%=o.getShippingTotal() %></td>
+					</tr>
+			
+					<tr>
 							<td></td>
-							<td>Grand Total</td>
-							<td>$120.99</td>
+							<td><b>Grand Total</b></td>
+							<td><%=o.getGrandTotal()%></td>
 					</tr>
 			
 				</table>	
 
-
+<% if (v.isOrderPreview()) {%>
 				<input type="submit" value="Place Order">
-
-			</form>
+				</form>
+<%} %>
+	

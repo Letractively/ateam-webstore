@@ -1,24 +1,21 @@
 package com.ateam.webstore.servlets;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ateam.webstore.handlers.AddressHandler;
 import com.ateam.webstore.handlers.CartHandler;
+import com.ateam.webstore.handlers.CreditCardHandler;
 import com.ateam.webstore.handlers.CustomerHandler;
-import com.ateam.webstore.handlers.Handler;
 import com.ateam.webstore.handlers.OrderHandler;
 import com.ateam.webstore.handlers.ProductHandler;
 import com.ateam.webstore.handlers.WishListHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
-import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.View;
 
 /**
@@ -220,6 +217,14 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 		else if (formId.equals(FormName.ORDER_CONFIRM.getId())) {
 			OrderHandler oh = new OrderHandler(req);
 			return oh.processOrderConfirmationRequest();
+		}
+		else if (formId.equals(FormName.ADDRESS.getId())) {
+			AddressHandler oh = new AddressHandler(req);
+			return oh.processAddAddressRequest();
+		}
+		else if (formId.equals(FormName.CREDIT_CARD.getId())) {
+			CreditCardHandler cch = new CreditCardHandler(req);
+			return cch.processAddCardRequest();
 		}
 		else if (formId.equals(FormName.ADD_TO_CART.getId())) {
 			CartHandler ch = new CartHandler(req);

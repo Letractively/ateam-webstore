@@ -135,6 +135,8 @@ public class CreditCard extends BaseModel implements Serializable {
 		return id;
 	}
 	
-	
+	public String getObfusticatedCardInfo() {
+		return cardType +" ending in " + cardNumber.substring(cardNumber.length()-4, cardNumber.length());
+	}
 
 }
