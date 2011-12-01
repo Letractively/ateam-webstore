@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import com.ateam.webstore.dao.CreditCardDAO;
 import com.ateam.webstore.model.CreditCard;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.service.RepositoryService;
 
 /**
@@ -44,6 +45,12 @@ public class CreditCardService implements RepositoryService<CreditCard> {
 	public CreditCard getById(Serializable id) {
 		CreditCardDAO repository = new CreditCardDAO();
 		return repository.get(id);
+	}
+	
+	public Collection<CreditCard> getByCustomerId(Serializable id) {
+		CreditCardDAO repository = new CreditCardDAO();
+		Customer customer = new CustomerService().getById(id);
+		return repository.getByCustomer(customer);
 	}
 
 }

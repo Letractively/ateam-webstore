@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import com.ateam.webstore.dao.OrdersDAO;
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.service.RepositoryService;
 
@@ -55,4 +56,9 @@ public class OrdersService implements RepositoryService<Orders> {
 		return repository.getOrdersInCompleted();
 	}
 
+	public Collection<Orders> getByCustomerId(Serializable id) {
+		OrdersDAO repository = new OrdersDAO();
+		Customer customer = new CustomerService().getById(id);
+		return repository.getByCustomer(customer);
+	}
 }
