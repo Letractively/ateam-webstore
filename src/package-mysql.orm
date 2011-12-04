@@ -165,6 +165,10 @@
         <column name="salary" jdbc-type="DECIMAL" allows-null="false"/>
       </field>
       
+      <field name="roles" persistence-modifier="persistent" mapped-by="employee">
+        <collection element-type="EmployeeRoles" />
+      </field>       
+      
     </class>
     
     

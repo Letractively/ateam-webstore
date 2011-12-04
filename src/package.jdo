@@ -66,6 +66,7 @@
       <field name="departmentCode"/>
       <field name="salary"/>
       <field name="person" default-fetch-group="true" />
+      <field name="roles" default-fetch-group="true" />
 		</class>
         
 		<class name="Department" identity-type="application" detachable="true">
