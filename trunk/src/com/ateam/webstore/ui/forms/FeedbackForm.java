@@ -4,10 +4,11 @@ import com.ateam.webstore.ui.models.Visitor;
 
 public class FeedbackForm extends FormSubmission {
 	/**
-	 * The visitor requesting a login.
+	 * User sending a feedback
 	 */
 	Visitor v;
 	String feedback;
+	
 	public String getFeedback() {
 		return feedback;
 	}
