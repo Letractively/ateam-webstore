@@ -142,5 +142,27 @@ public class ProductListing {
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-
+	
+	/**
+	 * Check if the sale indicator is set
+	 * @return
+	 */
+	public boolean isOnSale() {
+		if (saleInd != null) {
+			return saleInd.contains("T");
+		}
+		else {
+			return false;
+		}
+	}
+	/**
+	 * Get the current sale price
+	 * @return
+	 */
+	public Double getSalesPrice() {
+		if (isOnSale()) {
+			return price - (percentDiscount / 100) * price;
+		}
+		return price;
+	}
 }

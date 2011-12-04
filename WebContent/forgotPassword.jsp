@@ -10,9 +10,9 @@
 
 			<form method="post" action="<%=request.getContextPath()%>/<%=v.getServletPath()%>">
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
-						value="<%=Constants.FormName.CUSTOMER_FEEDBACK.getId()%>">
+						value="<%=Constants.FormName.FORGOT_PASSWORD.getId()%>">
 			
-					<b>Please enter your comments:</b><br>
-					<textarea name="<%=Constants.Parameters.MESSAGE.getId()%>" rows="15" cols="45"></textarea><br><br>
-					<input type="submit" name="submit" value="Send Feedback">
+					<b>Email:</b><br>
+					<input type="text" name="<%=Constants.Parameters.EMAIL.getId()%>"></><br><br>
+					<input type="submit" name="submit" value="Reset Password">
 			</form>

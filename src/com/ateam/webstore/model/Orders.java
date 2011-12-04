@@ -191,6 +191,20 @@ public class Orders extends BaseModel implements Serializable {
 	public void addItemPrice(Double itemPrice) {
 		itemSubTotal += itemPrice;
 	}
+	public String getStatus() {
+		String status = "";
+		if (returnInd) {
+			status = "Returned";
+		}
+		else if (trackingNumber != null) {
+			status = "Shipped";
+		}
+		else {
+			status = "Processing";
+		}
+		
+		return status;
+	}
 	
 	public void addItem(ItemsOrdered item) {
 		this.itemsOrdered.add(item);

@@ -90,6 +90,22 @@ public class Handler implements Constants {
 	}
 	
 	/**
+	 * 
+	 * @param message
+	 * @param contentHeader
+	 * @return
+	 */
+	public View getMessageView(String message, String contentHeader) {
+		View v = new View(getMainView()); 
+		v.setMessage(message);
+		
+		v.addContentView(new ContentView(JSP_MESSAGE, contentHeader));
+		
+		return v;
+		
+	}
+	
+	/**
 	 * Builds the main site View
 	 * @return
 	 */

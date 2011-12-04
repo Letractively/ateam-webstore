@@ -30,7 +30,7 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 		<%} else { %>
 		<td><%=p.getDescription()%></td>
 		<%} %>
-		<td><b><%=p.getPrice()%></b></td>
+		<td><b><%=p.getSalesPrice()%></b></td>
 
 	</tr>
 	<%  } %>

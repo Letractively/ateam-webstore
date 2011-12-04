@@ -76,7 +76,9 @@ Released   : 20081009
 				}
 			%>
 			<div id="searchField">
-				<form id="searchFieldForm"><input type="text" /> <input type="submit" value="Search" /> </form>
+				<form method="post" action="<%=request.getContextPath()%>/admin" id="searchFieldForm"><input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.SEARCH.getId()%>">
+				<input type="text" name="<%=Constants.Parameters.SEARCH_QUERY.getId()%>"/> 
+				<input type="submit" value="Search" /> </form>
 			</div>
 
 		</div>

@@ -1,6 +1,7 @@
 package com.ateam.webstore.handlers;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,7 +123,7 @@ public class OrderHandler extends Handler {
 	 * @return
 	 */
 	public OrderDetailsView getOrderDetailsView() {
-		return getOrderDetailsView(null);
+		return getOrderDetailsView(null, false);
 	}
 	
 	/**
@@ -130,17 +131,34 @@ public class OrderHandler extends Handler {
 	 * @param order
 	 * @return
 	 */
-	public OrderDetailsView getOrderDetailsView(Orders order) {
+	public OrderDetailsView getOrderDetailsView(Orders order, boolean admin) {
 
-		OrderDetailsView odv = new OrderDetailsView(getMainView());
+		
+		View main = null;
+		if (admin) {
+			main = getMainAdminView();
+		}
+		else {
+			main = getMainView();
+		}
+		
+		
+		OrderDetailsView odv = new OrderDetailsView(main);
 		
 		if (order == null) {
 			order = getOrder();
 		}
 
 		odv.setOrder(order);
+		odv.setAdmin(admin);
 		
-		odv.setItems((Collection<ItemsOrdered>) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS));
+		if (admin) {
+			odv.setItems(order.getItemsOrdered());
+		} else {
+			odv.setItems((Collection<ItemsOrdered>) req.getSession().getAttribute(SESSION_ATTRIBUTE_ORDERED_ITEMS));			
+		}
+		
+
 		
 		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
 		
@@ -246,13 +264,16 @@ public class OrderHandler extends Handler {
 			}
 			
 			submission.setResultMessage("Order Placed!");
+			
+			CartHandler ch = new CartHandler(req);
+			ch.delete();
 
 		} catch (Exception e) {
 			l.log(Level.WARNING, "Failed to store order.", e);
 			submission.setResultMessage("Failed to submit order");
 		}
 		
-		submission.setResultView(getOrderDetailsView(order));
+		submission.setResultView(getOrderDetailsView(order,false));
 		
 		return submission;
 	}
@@ -333,25 +354,64 @@ public class OrderHandler extends Handler {
 		return olv;
 	}
 
-	public OrderDetailsView getAdminOrderDetailsView() {
-		OrderDetailsView odv = new OrderDetailsView(getMainAdminView());
-		
-		Orders order = getOrder();
-		odv.setOrder(order);
-		
-		odv.addContentView(new ContentView(JSP_ADMIN_ORDER_DETAILS, "Order "+order.getId()));
-		
-		return odv;
-	}
+//	public OrderDetailsView getAdminOrderDetailsView(boolean admin) {
+//		
+//		View main = null;
+//		if (admin) {
+//			main = getMainAdminView();
+//		}
+//		else {
+//			main = getMainView();
+//		}
+//		
+//		OrderDetailsView odv = new OrderDetailsView(main);
+//		
+//		Orders order = getOrder();
+//		odv.setOrder(order);
+//		odv.setAdmin(admin);
+//		
+//		odv.addContentView(new ContentView(JSP_ORDER_DETAILS, "Order "+order.getId()));
+//		
+//		return odv;
+//	}
 
 	public FormSubmission processOrderUpdateRequest() {
-		// TODO Auto-generated method stub
-		return null;
+		FormSubmission fs = new FormSubmission();
+		
+		l.info("order update");
+		
+		Orders o = getOrder();
+		
+		String action = req.getParameter(Parameters.ORDER_CONFIRM.getId());
+		
+		if (action.equals("Update Order")) {
+			
+			if (req.getParameter(Parameters.TRACKING_NUMBER.getId()) != null) {
+				o.setTrackingNumber(req.getParameter(Parameters.TRACKING_NUMBER.getId()));
+				o.setTimeShipped(new Date(new java.util.Date().getTime()));
+				fs.setResultMessage("Order Updated");
+			}
+			else {
+				fs.setResultMessage("Invalid Tracking Number");
+				fs.setResultView(getOrderDetailsView(null, true));
+				return fs;
+			}
+			
+		}
+		else if (action.equals("Cancel Order")) {
+			o.setReturnInd(true);
+			fs.setResultMessage("Order Cannceled");
+		}
+		
+		fs.setResultView(getOrderDetailsView(null, true));
+		service.store(o);
+		
+		return fs;
 	}
 
-	public FormSubmission processOrderCancelRequest() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public FormSubmission processOrderCancelRequest() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

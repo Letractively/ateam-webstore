@@ -1,3 +1,4 @@
+<%@page import="com.ateam.webstore.utilities.Utilities"%>
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
@@ -30,7 +31,7 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 		<%} else { %>
 		<td><%=p.getDescription()%></td>
 		<%} %>
-		<td><b><%=p.getPrice()%></b></td>
+		<td><b><%=Utilities.formatDouble(p.getSalesPrice())%></b></td>
 
 	</tr>
 	<%  } %>

@@ -33,6 +33,13 @@ public class Utilities {
         
         public static String formatDouble(Double d) {
         	DecimalFormat twoDForm = new DecimalFormat("#.##");
-    		return Double.parseDouble(twoDForm.format(d))+"";
+        	String d2 = Double.parseDouble(twoDForm.format(d))+"";
+
+        	String[] dc = d2.split("\\.");
+        	if (dc.length > 1 && dc[1].length() == 1) {
+        		d2 += "0";
+        	}
+      	
+    		return d2; 
         }
 }

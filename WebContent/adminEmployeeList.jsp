@@ -10,34 +10,24 @@
 
 %>
 
-<h3><%=v.getListTitle()%></h3>
-<table border="1">
+<%if (v.getMessage() != null) { %><%=v.getMessage() %><br><% } %>
+
+<br><a href="<%=request.getContextPath()%>/admin?addEmployee">Add Employee</a><br> 
+<table>
     <tr>
-            <th> Employee ID</th>
-            <th> Person ID</th>
-            <th>Full Name</th>
-            <th> DOB</th>
-            <th> Job Title</th>
-            <th> Department Code</th>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Roles</th>
 
 
     <tr>
     <%  for (Employee p : v.getEmployee()) { %>
 
     <tr>
-        <td><%=p.getId()%></td>
-        <td><%=p.getPerson()%></td>
-        <td><%=p.getFirstName()%>,<%=p.getMiddleName()%>,<%=p.getLastName()%></td>
-        <td><%=p.getDob()%></td>
+        <td><a href="<%=request.getContextPath()%>/admin?<%=Constants.Parameters.EMPLOYEE.getId()%>=<%=p.getId()%>"><%=p.getId()%></a></td>
+        <td><%=p.getFullName()%></td>
         <td><%=p.getJobTitle()%></td>
-        <td><%=p.getDepartmentCode()%></td>
-        <td><a href="employeeDetails.jsp?employee="+<%=p.getId()%>>Details</a>
-       
-
-contextPath/store?employee=<id>
-
     </tr>
     <%  } %>
 
 </table>
-<br><input type="button" value="Search employee">

@@ -17,14 +17,23 @@ Orders o = v.getOrder();
 					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
 						value="<%=Constants.FormName.ORDER_CONFIRM.getId()%>">
 
+<%} else if (v.isAdmin()) {%>
+			<form method="post" action="<%=request.getContextPath()%>/admin">
+					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
+						value="<%=Constants.FormName.ORDER_UPDATE.getId()%>">
+					<input type="hidden" name=<%=Constants.Parameters.ORDER_ID.getId()%> 
+						value="<%=o.getId()%>">
+
 <%} %>
 
+
+				<% if (!v.isOrderPreview()) {%><h3>Status: <%=o.getStatus()%></h3><%} %> 
+				<% if (!v.isOrderPreview() && !v.isAdmin() && o.getTrackingNumber() != null) {%><h3>Tracking #: <%=o.getTrackingNumber()%></h3><%} %>
 
 				<table width="100%">
 					<tr>
 							<td valign="top"><h3>Shipping Details:</h3>
 							<%=o.getAddress().getStreetAddress1() %><br>
-							<%=o.getAddress().getStreetAddress2() %><br>
 							<%=o.getAddress().getCity()%> <%=o.getAddress().getState()%> <%=o.getAddress().getZip()%><br>
 							</td>
 							
@@ -32,7 +41,6 @@ Orders o = v.getOrder();
 							<%=o.getCreditCard().getObfusticatedCardInfo()%><br>
 							Billing Address:<br>
 							<%=o.getCreditCard().getBillingAddress().getStreetAddress1() %><br>
-							<%=o.getCreditCard().getBillingAddress().getStreetAddress2() %><br>
 							<%=o.getCreditCard().getBillingAddress().getCity()%> <%=o.getCreditCard().getBillingAddress().getState()%> <%=o.getCreditCard().getBillingAddress().getZip()%><br>
 							
 							</td>
@@ -53,7 +61,7 @@ Orders o = v.getOrder();
 					<tr>
 							<td><%=item.getProduct().getShortProductName(40) %></td>
 							<td><%=item.getItemQty() %></td>
-							<td><%=item.getUnitPrice() %></td>
+							<td><%=Utilities.formatDouble(item.getUnitPrice())%></td>
 					</tr>
 			
 				<%} %>
@@ -66,7 +74,7 @@ Orders o = v.getOrder();
 					<tr>
 							<td></td>
 							<td><b>Tax</b></td>
-							<td><%=o.getSalesTax()%></td>
+							<td><%=Utilities.formatDouble(o.getSalesTax())%></td>
 					</tr>
 			
 					<tr>
@@ -86,8 +94,23 @@ Orders o = v.getOrder();
 						<td><input type="submit" value="Go Back"></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Cancel Order"></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Place Order"></td>
 					</tr>
 <%} %>
+
+<% if (v.isAdmin()) {%>
+
+					<tr>
+							<td></td>
+							<td><b>Tracking #</b></td>
+							<td><input type="text" name="<%=Constants.Parameters.TRACKING_NUMBER.getId() %>" <% if (o.getTrackingNumber() != null) {%>value="<%=o.getTrackingNumber()%>"<%}%>/></td>
+					</tr>
+					<% if (!o.isReturnInd()) {%>
+					<tr>
+						<td></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Cancel Order"></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Update Order"></td>
+					</tr>
+					<% } %>
+<%} %>
+
 				</table>	
-<% if (v.isOrderPreview()) {%>
+<% if (v.isOrderPreview() || v.isAdmin()) {%>
 			</form>
 <%} %>
 	

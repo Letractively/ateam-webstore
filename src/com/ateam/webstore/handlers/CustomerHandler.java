@@ -143,6 +143,8 @@ public class CustomerHandler extends Handler {
 			l.log(Level.INFO, "", e);			
 		}
 		
+		l.fine("Login result view:"+resultView);
+		
 		login.setResultView(resultView);
 		
 		l.info("Login results:"+v);
@@ -295,8 +297,12 @@ public class CustomerHandler extends Handler {
 	}
 
 	public View getForgotPasswordView() {
-		// TODO Auto-generated method stub
-		return null;
+		View v = new View(getMainView());
+		
+		v.addContentView(new ContentView(JSP_FORGOT_PASSWORD, "Password Recovery"));
+		v.setShowLogonForm(false);
+		
+		return v;
 	}
 
 	public View getMyAccountView() {
@@ -308,12 +314,23 @@ public class CustomerHandler extends Handler {
 		return v;
 	}
 
-	public View getFeedbackView() {
+	public FormSubmission processPasswordRecovery() {
+
+		FormSubmission fs = new FormSubmission();
 		
-		View v = new View();
+		String email = req.getParameter(Parameters.EMAIL.getId());
+		if (service.customerExists(email)) {
+			//fs .setResultMessage();
+			l.info("password recovery sent for "+email);
+			fs.setResultView(getMessageView("Request Sent. You will recieve instructions to reset your password.", "Password Recovery"));
+		}
+		else {
+			fs.setResultView(getMessageView("No account exists for "+email, "Password Recovery"));
+		}
+
+		fs.getResultView().setShowLogonForm(false);
 		
-		v.addContentView(new ContentView(JSP_CUSTOMER_FEEDBACK, "Send Feedback"));
-		return v;
+		return fs;
 	}
 
 }

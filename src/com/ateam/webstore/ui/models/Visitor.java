@@ -28,7 +28,9 @@ public class Visitor {
 		
 		return "[ Visitor :: email="+email+","+
 				"customer="+customer+","+
+				"employee="+employee+","+
 				"authenticated="+authenticated+","+
+				"employeeAuthenticated="+employeeAuthenticated+","+
 				"known="+known
 				+" ]";
 				

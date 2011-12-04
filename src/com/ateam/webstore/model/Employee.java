@@ -64,6 +64,14 @@ public class Employee extends BaseModel implements Serializable {
 		this.person = person;
 	}
 
+	public String getFullName() {
+		String fullName = lastName+", "+firstName;
+		if (middleName != null) {
+			fullName += " "+middleName;
+		}
+		return fullName;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -166,6 +174,17 @@ public class Employee extends BaseModel implements Serializable {
 	
 	public Collection<EmployeeRoles> getRoles() {
 		return this.roles;
+	}
+	
+	public boolean hasRole(int id) {
+		
+		for (EmployeeRoles er : roles) {
+			if (er.getRole().getCode() == id) {
+				return true;
+			}
+		}
+		return false;
+		
 	}
 
 }
