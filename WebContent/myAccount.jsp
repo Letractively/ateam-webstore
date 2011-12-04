@@ -33,7 +33,7 @@
 						</td>
 				</tr>
 				<tr>
-						<td>FeedBack</td>
+						<td valign="top"><b>Comments</b></td>
 						<td><a href="<%=request.getContextPath()%>/store?customerFeedback">Send feedback</a></td>
 				</tr>
 			</table>
