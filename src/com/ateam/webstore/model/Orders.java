@@ -4,7 +4,7 @@
 package com.ateam.webstore.model;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -50,6 +50,8 @@ public class Orders extends BaseModel implements Serializable {
 	private CreditCard creditCard;
 	
 	private ShippingCode shippingCode;
+	
+	private Collection<ItemsOrdered> itemsOrdered;
 		
 	@SuppressWarnings("unused")
 	private Orders() {
@@ -189,5 +191,16 @@ public class Orders extends BaseModel implements Serializable {
 	public void addItemPrice(Double itemPrice) {
 		itemSubTotal += itemPrice;
 	}
+	
+	public void addItem(ItemsOrdered item) {
+		this.itemsOrdered.add(item);
+	}
+	
+	public void removeItem(ItemsOrdered item) {
+		this.itemsOrdered.remove(item);
+	}
 
+	public Collection<ItemsOrdered> getItemsOrdered() {
+		return this.itemsOrdered;
+	}
 }
