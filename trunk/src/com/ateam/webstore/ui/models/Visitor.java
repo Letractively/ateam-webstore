@@ -63,5 +63,18 @@ public class Visitor {
 	public boolean isRemember() {
 		return remember;
 	}
-	
+	public String getName() {
+		if (customer != null) {
+			return customer.getFirstName();
+		}
+		else if (employee != null) {
+			return employee.getFirstName();
+		}
+		else {
+			return null;
+		}
+	}
+	public boolean isEmployee() {
+		return employeeAuthenticated || employee != null;
+	}
 }

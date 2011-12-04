@@ -7,7 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %> 
+<%View v = (View) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW);
+%> 
+
+
 
 <li><a href="<%=request.getContextPath()%>/<%=v.getServletPath()%>?products">Product Management</a></li>
 <li><a href="<%=request.getContextPath()%>/<%=v.getServletPath()%>?orders">Order Management</a></li>

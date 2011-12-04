@@ -136,14 +136,7 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 			
 		} catch (Exception e) {
 			l.log(Level.SEVERE, "Exception caught in doGet", e);
-//			Handler h = new Handler(req);
-//			View mv = new View(h.getMainView());
-//			mv.setMessage(e.getMessage());
-//			
-//			mv.addContentView(getErrorContent());
-//			
-//			v = mv;
-			
+			req.setAttribute(REQUEST_ATTRIBUTE_CONTEXT, "store");
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 
@@ -178,11 +171,7 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 
 		} catch (Exception e) {
 			l.log(Level.WARNING, "Exception processing doGet", e);
-//			Handler h = new Handler(req);
-//			v = h.getMainView();
-//			v.setMessage(e.getMessage());
-//			v.addContentView(getErrorContent());
-
+			req.setAttribute(REQUEST_ATTRIBUTE_CONTEXT, "store");
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
 		}

@@ -3,6 +3,7 @@
 <%@page import="com.ateam.webstore.ui.forms.RegistrationForm"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
 <%@page import="com.ateam.webstore.model.SecurityQuestion"%>
+<%@page import="com.ateam.webstore.model.Role"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -38,10 +39,20 @@ if (f == null) {
 <td><font size="2" >Confirm Password:</font></td><td><input type="password" name="<%=Constants.Parameters.CONFIRMPASSWORD.getId()%>" size="26" /></td>
 </tr>
 <tr>
+<%if (v.isAdmin()) {%>
+<td><font size="2" >Security Question:</font></td><td><select  name="<%=Constants.Parameters.SECURITY_QUESTION.getId()%>" size="1" >
+					<%for(Role s : v.getRoles()){ String code = s.getCode()+"";%>
+					<option  value= "<%=s.getCode() %>" <%if (code.equals(f.getRoleId())) {out.print("SELECTED");} %>><%=s.getDescription() %> </option> <% } %></select>
+</td>
+<%} else { %>
 <td><font size="2" >Security Question:</font></td><td><select  name="<%=Constants.Parameters.SECURITY_QUESTION.getId()%>" size="1" >
 					<%for(SecurityQuestion s : v.getSecurityQuestions()){%>
-					<option  value= "<%=s.getId() %>" <%if (s.getId().toString().equals(f.getSecurityQuestionId())) {out.print("SELECTED");} %>><%=s.getQuestion() %> </option> <% } %></select></td>
-					<tr>
+					<option  value= "<%=s.getId() %>" <%if (s.getId().toString().equals(f.getSecurityQuestionId())) {out.print("SELECTED");} %>><%=s.getQuestion() %> </option> <% } %></select>
+</td>
+<%} %>
+
+
+<tr>
 <td><font size="2" >Answer:</font></td><td><input type="text" name="<%=Constants.Parameters.SECURITY_ANSWER.getId()%>" value="<%=f.getSecurityAnswer()%>" size="25" /></td>
 </tr>
 <tr>	

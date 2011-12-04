@@ -100,19 +100,7 @@ public class Handler implements Constants {
 		v.setTitle("A+Team Administration");
 		v.setHeaderTitle(v.getTitle());
 		
-//		Collection<Category> categories = new CategoryService().getAll();
-//		Map<String, String> navLinks = new HashMap<String,String>();
-//
-//		
-//		int i = 0;
-//		for (Category c : categories) if (i < 3) {
-//			navLinks.put(c.getName(), req.getContextPath()+"/admin?);
-//			i++;
-//		}
-//		
-//		v.setNavLinks(navLinks);
-
-		//v.addContentView(new ContentView(JSP_ADMIN_HOME, "Admin Home"));
+		v.setShowLogonForm(false);
 		
 		v = setVisitorInfo(v);
 		

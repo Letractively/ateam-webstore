@@ -109,7 +109,6 @@ public class CustomerHandler extends Handler {
 				v.setAuthenticated(true);
 				v.setKnown(true);
 				v.setRemember(req.getParameter(Parameters.REMEMBER_ME.getId()) != null);
-				v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 				
 				req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
 				req.getSession().setAttribute(SESSION_ATTRIBUTE_USER_NAME, v.getEmail());
@@ -261,6 +260,7 @@ public class CustomerHandler extends Handler {
 		Visitor v = new Visitor();
 		v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 		login.setVisitor(v);
+		login.setPassword(req.getParameter(Parameters.PASSWORD.getId()));
 		
 		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
 		login.setVisitor(v);

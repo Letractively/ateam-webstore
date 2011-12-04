@@ -15,7 +15,7 @@ public class AdminEmployeeListView extends View {
 		return employee;
 	}
 
-	public void setEmployee(Collection<Employee> employee) {
+	public void setEmployees(Collection<Employee> employee) {
 		this.employee = employee;
 	}
 	

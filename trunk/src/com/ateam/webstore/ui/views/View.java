@@ -120,8 +120,10 @@ public class View {
 	public String getGreeting() {
 		String greet = "Welcome ";
 		
-		if (visitor.getCustomer().getFirstName() != null) {
-			greet+=visitor.getCustomer().getFirstName();
+		
+		
+		if (visitor.getName() != null) {
+			greet+=visitor.getName();
 		}
 		else if (visitor != null && visitor.getEmail() != null
 				&& !visitor.getEmail().isEmpty()) {
