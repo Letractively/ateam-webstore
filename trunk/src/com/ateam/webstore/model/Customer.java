@@ -31,7 +31,7 @@ public class Customer extends BaseModel implements Serializable {
 	
 	private String sex;
 	
-	private Person person;
+	private static Person person;
 	
 	@SuppressWarnings("unused")
 	private Customer() {
@@ -41,7 +41,7 @@ public class Customer extends BaseModel implements Serializable {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.person = person;
+		Customer.person = person;
 	}
 
 	public String getFirstName() {
@@ -84,12 +84,12 @@ public class Customer extends BaseModel implements Serializable {
 		this.sex = sex;
 	}
 
-	public Person getPerson() {
+	public static Person getPerson() {
 		return person;
 	}
 
 	public void setPerson(Person person) {
-		this.person = person;
+		Customer.person = person;
 	}
 
 	public Long getId() {
