@@ -8,8 +8,6 @@ import com.ateam.webstore.model.WishList;
 public class WishListView extends View {
 	WishList wishList;
 
-	Collection<ProductsInWishList> productsInWishList;
-	
 	public WishListView(View v) {
 		super(v);
 	}
@@ -23,11 +21,7 @@ public class WishListView extends View {
 	}
 
 	public Collection<ProductsInWishList> getProductsInWishList() {
-		return productsInWishList;
+		return wishList.getProducts();
 	}
 
-	public void setProductsInWishList(
-			Collection<ProductsInWishList> productsInWishList) {
-		this.productsInWishList = productsInWishList;
-	}
 }

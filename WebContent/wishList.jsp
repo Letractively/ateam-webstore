@@ -8,31 +8,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%WishListView v = (WishListView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); %>
-<h3> <%= v.getTitle() %></h3>
+
+<%if (v.getMessage() != null) {out.print(v.getMessage());} %>
+
+			<form method="post" action="<%=request.getContextPath()%>/store">
+					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
+						value="<%=Constants.FormName.WISHLIST_TO_CART.getId()%>">
 
 <table width="100%">
 
 	<%  for (ProductsInWishList p : v.getProductsInWishList()) { %>  
 	<tr>
-		<td><input type="checkbox" name="Product" value="Cart item" ;/> <br /></td>
+		<td><input type="checkbox" name="<%=p.getProduct().getId()%>"/></td>
 		<td><a href="<%=request.getContextPath()%>/store?product=<%=p.getProduct().getId()%>"><%=p.getProduct().getProductName()%></a></td>
 		<td><%=p.getProduct().getPrice()%></td>
-		<td> <select <%=p.getProduct().getId()%>  > style="width: 70%">  <option selected>1</option>  <option value="http://mousetrax.com">Mousetrax</option> </select></td>
-        <td colspan=2><a href="p.getProduct().getId()">Remove</a></td>
+        <td colspan=2><a href="<%=request.getContextPath()%>/store?wishList&remove=<%=p.getId()%>">Remove</a></td>
 	</tr>
 	
 	<%  } %>
 	
-<tr>
-<td> </td><td > <input type="submit" value="Move to Cart" /> 
-   <input type="submit" value="Update" /></td>
-</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td> <input type="submit" value="Move Selected to Cart" /> 
+	</tr>
 
-
-<tr>
- <td> </td>  <td> </td> <td> </td><td> </td>    <td>
-
-   <input type="submit" value="CheckOut" /></td></tr>
    
  </table>  
+ 
+</form>
    

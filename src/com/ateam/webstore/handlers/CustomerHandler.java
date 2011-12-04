@@ -108,9 +108,11 @@ public class CustomerHandler extends Handler {
 				v.setCustomer(cust);
 				v.setAuthenticated(true);
 				v.setKnown(true);
+				v.setRemember(req.getParameter(Parameters.REMEMBER_ME.getId()) != null);
 				v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 				
 				req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
+				req.getSession().setAttribute(SESSION_ATTRIBUTE_USER_NAME, v.getEmail());
 				login.setForm(FormName.LOGIN);
 				login.setSuccess(true);
 
@@ -130,13 +132,12 @@ public class CustomerHandler extends Handler {
 			req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByCustomerId(cust.getId()));
 			
 			if (login.getRedirect() != null) {
+				l.info("redirecting to "+login.getRedirect());
 				resultView = new View();
 				resultView.setRedirectPath(login.getRedirect());
 			}
 			else {
-				//Build view
-				ProductHandler ph = new ProductHandler(req);
-				resultView = ph.getHomePageView();
+				resultView = processPostLogin();
 			}
 
 		} catch (Exception e) {
@@ -150,6 +151,37 @@ public class CustomerHandler extends Handler {
 		return login;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	private View processPostLogin() {
+		
+
+		if (req.getSession().getAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_CART) != null) {
+			l.info("Adding item to cart post login");
+			String prodId = (String) req.getSession().getAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_CART);
+			CartHandler ch = new CartHandler(req);
+			
+			req.getSession().setAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_CART, null);
+			return ch.addProduct(prodId).getResultView();
+			
+		}
+		else if (req.getSession().getAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_WISHLIST) != null) {
+			l.info("Adding item to wish list post login");
+			String prodId = (String) req.getSession().getAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_WISHLIST);
+			CartHandler ch = new CartHandler(req);
+			req.getSession().setAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_WISHLIST, null);
+			return ch.addProduct(prodId).getResultView();
+			
+		}
+		else {
+			//Build view
+			ProductHandler ph = new ProductHandler(req);
+			return ph.getHomePageView();
+		}
+	}
+
 	/**
 	 * Get the login view
 	 * @param loginMessage
@@ -247,8 +279,14 @@ public class CustomerHandler extends Handler {
 		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
 		
 		if (v != null ) {
+			l.info("logout for session "+req.getSession().getId());
 			//req.getSession().invalidate();
 			v.setAuthenticated(false);
+			if (v.isRemember()) {
+				l.info("forgetting user");
+				req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, null);
+			}
+			req.getSession().invalidate();
 		}
 		
 		ProductHandler ph = new ProductHandler(req);

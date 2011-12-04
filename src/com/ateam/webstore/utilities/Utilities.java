@@ -1,5 +1,7 @@
 package com.ateam.webstore.utilities;
 
+import java.text.DecimalFormat;
+
 public class Utilities {
         /**
          * Pad the given string with the given character until the string reaches the given length
@@ -27,5 +29,10 @@ public class Utilities {
                         s = s.substring(0, l);
                 }
                 return s;
+        }
+        
+        public static String formatDouble(Double d) {
+        	DecimalFormat twoDForm = new DecimalFormat("#.##");
+    		return Double.parseDouble(twoDForm.format(d))+"";
         }
 }

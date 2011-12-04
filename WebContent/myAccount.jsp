@@ -4,28 +4,28 @@
 <%@page import="com.ateam.webstore.model.CreditCard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-			<!--  <form method="post" action="<%=request.getContextPath()%>/store">
-					<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
-						value="<%=Constants.FormName.CREDIT_CARD.getId()%>">-->
 		
-		<h3>My Account</h3>
-							<br>
-
 			<table>
 				<tr>
-						<td>Orders</td>
-						<td><a href="/ateam/store?product=null">Order History</a>
-						<br> <a href="/ateam/store?product=null">View Open Orders</a></td>
+						<td valign="top"><b>Products</b></td>
+						<td><a href="<%=request.getContextPath()%>/store?wishList">My Wish List</a>
+						<br> <a href="<%=request.getContextPath()%>/store?cart">My Cart</a></td>
+				</tr>
+			
+				<tr>
+						<td valign="top"><b>Orders</b></td>
+						<td><a href="<%=request.getContextPath()%>/store?orders">Order History</a>
+						<br> <a href="<%=request.getContextPath()%>/store?openOrders">Open Orders</a></td>
 				</tr>
 		
 				<tr>
-						<td>Payment</td>
+						<td valign="top"><b>Payment</b></td>
 						<td><a href="<%=request.getContextPath()%>/store?creditCardList">Manage Payment Options</a>
 						<br> <a href="<%=request.getContextPath()%>/store?creditCard">Add a Debit or Credit Card</a></td>
 				</tr>
+				
 				<tr>
-						<td>Settings</td>
+						<td valign="top"><b>Settings</b></td>
 						<td><a href="<%=request.getContextPath()%>/store?register">Edit Personal Info</a>
 						(Name, e-mail, password, Security question)<br>
 						<a href="<%=request.getContextPath()%>/store?addressList">Manage Address book</a><br>

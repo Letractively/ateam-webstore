@@ -84,6 +84,14 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 				OrderHandler oh = new OrderHandler(req);
 				v = oh.getOrderDetailsView();
 			}
+			else if (req.getParameterMap().containsKey(Parameters.ALL_ORDERS.getId())) {
+				OrderHandler oh = new OrderHandler(req);
+				v = oh.getCustomerOrders();
+			}
+			else if (req.getParameterMap().containsKey(Parameters.OPEN_ORDERS.getId())) {
+				OrderHandler oh = new OrderHandler(req);
+				v = oh.getCustomerOrders();
+			}
 			else if (req.getParameterMap().containsKey(Parameters.PRODUCT.getId())) {
 				ProductHandler ph = new ProductHandler(req);
 				v = ph.getProductView();
@@ -228,11 +236,15 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 		}
 		else if (formId.equals(FormName.ADD_TO_CART.getId())) {
 			CartHandler ch = new CartHandler(req);
-			return ch.addProduct();
+			return ch.addProduct(null);
 		}
 		else if (formId.equals(FormName.ADD_TO_WISHLIST.getId())) {
 			WishListHandler wh = new WishListHandler(req);
-			return wh.addProduct();
+			return wh.addProduct(null);
+		}
+		else if (formId.equals(FormName.WISHLIST_TO_CART.getId())) {
+			WishListHandler wh = new WishListHandler(req);
+			return wh.moveSelectedToCart();
 		}
 		else if (formId.equals(FormName.SEARCH.getId())) {
 			ProductHandler ph = new ProductHandler(req);

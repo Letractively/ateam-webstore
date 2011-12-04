@@ -12,9 +12,12 @@ import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.ItemsOrdered;
 import com.ateam.webstore.model.Orders;
 import com.ateam.webstore.model.ProductsInCart;
+import com.ateam.webstore.model.ProductsInWishList;
+import com.ateam.webstore.model.WishList;
 import com.ateam.webstore.service.impl.CartService;
 import com.ateam.webstore.service.impl.ProductService;
 import com.ateam.webstore.service.impl.ProductsInCartService;
+import com.ateam.webstore.service.impl.ProductsInWishListService;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
@@ -27,6 +30,14 @@ public class CartHandler extends Handler {
 	 * 
 	 */
 	Cart cart;
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
 	/**
 	 * 
 	 */
@@ -112,14 +123,21 @@ public class CartHandler extends Handler {
 	 * Add a product to the users cart
 	 * @return
 	 */
-	public FormSubmission addProduct() {
+	public FormSubmission addProduct(String prodId) {
 		
 		FormSubmission add = new FormSubmission();
 		
 		//Check auth
 		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
 		
+		if (prodId == null) {
+			prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
+		}
+		
+		req.getSession().setAttribute(SESSION_ATTRIBUTE_PRODUCT_TO_CART, prodId);
+		
 		if (v == null || !v.isAuthenticated()) {
+			l.info("not authenticated for product add ");
 			CustomerHandler ch = new CustomerHandler(req);
 			add.setResultView(ch.getLoginView());
 			add.setResultMessage("Please first login");
@@ -135,8 +153,7 @@ public class CartHandler extends Handler {
 		}
 
 		l.info("adding product to cart for session: "+req.getSession().getId());
-		
-		String prodId = req.getParameter(Parameters.PRODUCT_ID.getId());
+
 		l.fine("add prodId :"+prodId);		
 
 		ProductsInCart prodInCart = new ProductsInCart(1, cart, new ProductService().getById(new Long(prodId)));
@@ -170,7 +187,10 @@ public class CartHandler extends Handler {
 			if (action.equals("Checkout")) {
 				fs.setResultView(checkout());
 			}
-			else {
+			else if (action.equals("Move Selected to WishList")) {
+				fs = moveSelectedToWishList();
+			}
+			else if (action.equals("Update Quantity")) {
 				for (Enumeration e = req.getParameterNames() ; e.hasMoreElements() ;) {
 					String name = (String) e.nextElement();
 					if (name.endsWith(Constants.Parameters.PRODUCT_QUANTITY.getId())) {
@@ -198,10 +218,41 @@ public class CartHandler extends Handler {
 			View v = getCartView();
 			v.setMessage("Unable to process request.");
 			fs.setResultView(v);
+			fs.setResultMessage("Unable to process request.");
 		}
 
 
 		
+		return fs;
+	}
+	
+	public FormSubmission moveSelectedToWishList() {
+
+		WishListHandler wlh = new WishListHandler(req);
+		ProductsInCartService pics = new ProductsInCartService();
+		FormSubmission fs = new FormSubmission();
+		
+		int i = 0;
+		
+		for (ProductsInCart p : cart.getProducts()) {
+			String prodId = p.getProduct().getId()+"";
+			if (req.getParameter(prodId) != null) {
+				l.fine("moving prodId :"+prodId+" to cart");
+				wlh.addProduct(prodId);
+				pics.remove(p);
+				i++;
+			}
+		}
+		
+		if (i > 0) {
+			fs.setResultView(wlh.getWishListView());	
+			fs.setResultMessage(i+" products moved to your wish list.");
+		}
+		else {
+			fs.setResultView(getCartView());	
+			fs.setResultMessage("No products were selected");
+		}
+
 		return fs;
 	}
 }

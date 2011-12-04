@@ -10,6 +10,7 @@ public class Visitor {
 	boolean authenticated;
 	boolean employeeAuthenticated;
 	boolean known;
+	boolean remember;
 	public String getEmail() {
 		return email;
 	}
@@ -55,6 +56,12 @@ public class Visitor {
 	}
 	public void setEmployeeAuthenticated(boolean employeeAuthenticated) {
 		this.employeeAuthenticated = employeeAuthenticated;
+	}
+	public void setRemember(boolean b) {
+		remember = b;
+	}
+	public boolean isRemember() {
+		return remember;
 	}
 	
 }

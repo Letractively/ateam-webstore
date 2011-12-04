@@ -1,6 +1,5 @@
 package com.ateam.webstore.handlers;
 
-import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.logging.Level;
 
@@ -17,6 +16,7 @@ import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.OrderPaymentForm;
 import com.ateam.webstore.ui.forms.OrderShippingForm;
+import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.OrderDetailsView;
 import com.ateam.webstore.ui.views.OrderListView;
@@ -275,29 +275,61 @@ public class OrderHandler extends Handler {
 		if (st != null) {
 			tax = st.getPercent()/100 * order.getItemSubTotal();
 		}
-		DecimalFormat twoDForm = new DecimalFormat("#.##");
-		order.setSalesTax(Double.parseDouble(twoDForm.format(tax)));
+		order.setSalesTax(tax);
 		
 		opf.setSuccess(true);
 		opf.setResultView(getOrderPreView());
 			
 		return opf;
 	}
+	
+	public OrderListView getCustomerOrders() {
+		
+		OrderListView olv = new OrderListView(getMainView());
+		
+		String title = null;
+//		if (inProgressOnly) {
+//			title = "Orders in Progress";
+//			olv.setOrders(service.getOrdersInProgress());
+//		}
+//		else {
+//			title = "All Orders";
+//			olv.setOrders(service.getAll());	
+//		}
+		Visitor v = (Visitor) req.getSession().getAttribute(SESSION_ATTRIBUTE_VISITOR);
+		title = "All Orders";
+		olv.setOrders(service.getByCustomerId(v.getCustomer().getId()));	
+		
+		olv.addContentView(new ContentView(JSP_ORDER_LIST, title));
+		return olv;
+	}
 
-	public OrderListView getAllView(boolean admin) {
+	public OrderListView getAllView(boolean inProgressOnly) {
 		
 		View main = null;
 		
-		if (admin) {
-			main = getMainAdminView();
-		} else {
-			main = getMainView();
-		}
+//		if (admin) {
+//			
+//		} else {
+//			main = getMainView();
+//		}
 
-		OrderListView olv = new OrderListView(main);
-		olv.setOrders(service.getAll());
+		main = getMainAdminView();
 		
-		olv.addContentView(new ContentView(JSP_ORDER_LIST, "All Orders"));
+		OrderListView olv = new OrderListView(main);
+		
+		String title = null;
+		if (inProgressOnly) {
+			title = "Orders in Progress";
+			olv.setOrders(service.getOrdersInProgress());
+		}
+		else {
+			title = "All Orders";
+			olv.setOrders(service.getAll());	
+		}
+		
+		
+		olv.addContentView(new ContentView(JSP_ORDER_LIST, title));
 		return olv;
 	}
 

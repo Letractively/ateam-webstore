@@ -26,6 +26,9 @@ import com.ateam.webstore.ui.views.View;
  */
 public class Handler implements Constants {
 	
+	
+	private static Map<String, String> navLinks;
+	
 	static Logger l = Logger.getLogger(Constants.LOGGER_NAME);
 	HttpServletRequest req;
 	RepositoryService service;
@@ -57,14 +60,26 @@ public class Handler implements Constants {
 		v.setTitle("A+Team WebStore");
 		v.setHeaderTitle(v.getTitle());
 		
-		Collection<Category> categories = new CategoryService().getAll();
-		Map<String, String> navLinks = new HashMap<String,String>();
+		if (navLinks == null) {
+			l.info("building navigation");
+			CategoryService service = new CategoryService();
+			ArrayList<Category> categories = new ArrayList<Category>();
+			
+			categories.add((Category) service.getById(new Long(101)));
+			categories.add((Category) service.getById(new Long(102)));
+			categories.add((Category) service.getById(new Long(103)));
+			
+			navLinks = new HashMap<String,String>();
 
-		
-		int i = 0;
-		for (Category c : categories) if (i < 3) {
-			navLinks.put(c.getName(), req.getContextPath()+"/store?category="+c.getId());
-			i++;
+			int i = 0;
+			for (Category c : categories) if (i < 3) {
+				navLinks.put(c.getName(), req.getContextPath()+"/store?category="+c.getId());
+				i++;
+			}
+			
+		}
+		else {
+			l.fine("navigation exists");
 		}
 		
 		v.setNavLinks(navLinks);
