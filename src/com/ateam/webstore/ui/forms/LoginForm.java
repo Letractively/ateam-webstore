@@ -1,7 +1,7 @@
 package com.ateam.webstore.ui.forms;
 
 import com.ateam.webstore.ui.models.Visitor;
-
+import com.ateam.webstore.model.*;
 public class LoginForm extends FormSubmission {
 	/**
 	 * The visitor requesting a login.
@@ -10,6 +10,14 @@ public class LoginForm extends FormSubmission {
 	String password;
 	String redirect;
 	boolean rememberEmail;
+    Employee e;
+	public Employee getE() {
+		return e;
+	}
+
+	public void setE(Employee e) {
+		this.e = e;
+	}
 
 	public Visitor getVistor() {
 		return v;
