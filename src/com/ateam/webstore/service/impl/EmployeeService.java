@@ -66,7 +66,7 @@ public class EmployeeService implements RepositoryService<Employee> {
 	public Employee getEmployee(String email) {
 		PersonService personServ = new PersonService();
 		Person person = personServ.getByLogin(email);
-		return person.getEmployee();
+		return getById(person.getEmployee().getId()); //person.getEmployee();
 	}
 	
 	public Employee authenticateEmployee(String email, String password) {
