@@ -5,12 +5,9 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Address;
-import com.ateam.webstore.model.CreditCard;
-import com.ateam.webstore.model.Orders;
-import com.ateam.webstore.service.impl.AddressService;
-import com.ateam.webstore.service.impl.CreditCardService;
-import com.ateam.webstore.service.impl.OrdersService;
+import com.ateam.webstore.model.Employee;
+import com.ateam.webstore.model.EmployeeRoles;
+import com.ateam.webstore.service.impl.EmployeeService;
 
 /**
  * @author Hendrix Tavarez
@@ -192,20 +189,34 @@ public class LoadTestData {
 //			System.out.println("");
 //		}
 		
-		Collection<Address> addresses = new AddressService().getByCustomerId(new Long(100002));
-		for (Address address : addresses) {
-			System.out.println(address.getCity());
+//		Collection<Address> addresses = new AddressService().getByCustomerId(new Long(100002));
+//		for (Address address : addresses) {
+//			System.out.println(address.getCity());
+//		}
+//		
+//		Collection<CreditCard> creditCards = new CreditCardService().getByCustomerId(new Long(100002));
+//		for (CreditCard creditCard : creditCards) {
+//			System.out.println(creditCard.getCardNumber());
+//		}
+//		
+//		Collection<Orders> orders = new OrdersService().getByCustomerId(new Long(100001));
+//		for (Orders order : orders) {
+//			System.out.println(order.getCreditCard().getBillingAddress().getCity());
+//		}
+		
+//		Collection<Category> categories = new CategoryService().getAll();
+//		for (Category category : categories) {
+//			System.out.println(category.getName());
+//		}
+		
+		Collection<Employee> employees = new EmployeeService().getAll();
+		for (Employee employee : employees) {
+			Collection<EmployeeRoles> roles = employee.getRoles();
+			for (EmployeeRoles role : roles) {
+				System.out.println(role.getEffectiveDate());
+			}
 		}
 		
-		Collection<CreditCard> creditCards = new CreditCardService().getByCustomerId(new Long(100002));
-		for (CreditCard creditCard : creditCards) {
-			System.out.println(creditCard.getCardNumber());
-		}
-		
-		Collection<Orders> orders = new OrdersService().getByCustomerId(new Long(100001));
-		for (Orders order : orders) {
-			System.out.println(order.getCreditCard().getBillingAddress().getCity());
-		}
 	}
 
 }

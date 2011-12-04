@@ -1,6 +1,7 @@
 package com.ateam.webstore.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
@@ -42,6 +43,8 @@ public class Employee extends BaseModel implements Serializable {
 	private Double salary;
 	
 	private Person person;
+	
+	private Collection<EmployeeRoles> roles;
 	
 	@SuppressWarnings("unused")
 	private Employee() {
@@ -153,6 +156,16 @@ public class Employee extends BaseModel implements Serializable {
 		return id;
 	}
 	
+	public void addRole(EmployeeRoles role) {
+		this.roles.add(role);
+	}
 	
+	public void removeRole(EmployeeRoles role) {
+		this.roles.remove(role);
+	}
+	
+	public Collection<EmployeeRoles> getRoles() {
+		return this.roles;
+	}
 
 }
