@@ -5,9 +5,9 @@ package com.ateam.webstore.model.test;
 
 import java.util.Collection;
 
-import com.ateam.webstore.model.Employee;
-import com.ateam.webstore.model.EmployeeRoles;
-import com.ateam.webstore.service.impl.EmployeeService;
+import com.ateam.webstore.model.ItemsOrdered;
+import com.ateam.webstore.model.Orders;
+import com.ateam.webstore.service.impl.OrdersService;
 
 /**
  * @author Hendrix Tavarez
@@ -209,14 +209,27 @@ public class LoadTestData {
 //			System.out.println(category.getName());
 //		}
 		
-		Collection<Employee> employees = new EmployeeService().getAll();
-		for (Employee employee : employees) {
-			Collection<EmployeeRoles> roles = employee.getRoles();
-			for (EmployeeRoles role : roles) {
-				System.out.println(role.getEffectiveDate());
+//		Collection<Employee> employees = new EmployeeService().getAll();
+//		for (Employee employee : employees) {
+//			Collection<EmployeeRoles> roles = employee.getRoles();
+//			for (EmployeeRoles role : roles) {
+//				System.out.println(role.getRole().getDescription());
+//			}
+//		}
+		
+//		Employee employee = new EmployeeService().authenticateEmployee("claudio@loose.com", "password");
+//		Collection<EmployeeRoles> roles = employee.getRoles();
+//		for (EmployeeRoles role : roles) {
+//			System.out.println(role.getRole().getDescription());
+//		}
+		
+		Collection<Orders> orders = new OrdersService().getAll();
+		for (Orders order : orders) {
+			Collection<ItemsOrdered> items = order.getItemsOrdered();
+			for (ItemsOrdered item : items) {
+				System.out.println(item.getItemQty() + " - " + item.getUnitPrice());
 			}
 		}
-		
 	}
 
 }
