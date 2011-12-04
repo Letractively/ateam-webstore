@@ -13,12 +13,6 @@ public interface Constants {
 		PRODUCT_ID ("productId"),
 		EMAIL ("email"),
 		LOGIN ("login"),
-		EMPLOGIN("emplogin"),
-		EMPPASSWORD("emppassword"),
-		EMPCONFIRMPASSWORD("empconfirmpassword"),
-		EMPFIRSTNAME("empfirstname"),
-		EMPLASTNAME("emplastname"),
-		EMPLOYEE("employee"),
 		LOGOUT ("logout"),
 		FORGOT ("forgot"),
 		FORM_ID ("formId"),
@@ -45,9 +39,7 @@ public interface Constants {
 		FEEDBACK ("feedback"),
 		ALL_EMPLOYEES ("employees"),
 		ALL_ORDERS ("orders"),
-		OPEN_ORDERS ("openOrders"),
 		ORDER_ID ("order"),
-		ORDER_CONFIRM ("orderConfirm"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
 		SECURITY_ANSWER ("sa"),
@@ -71,7 +63,14 @@ public interface Constants {
 		REDIRECT ("redirect"),
 		SEARCH_QUERY ("query"),
 		MY_ACCOUNT ("myAccount"),
-		MESSAGE ("message")
+		MESSAGE ("message"),
+		EMPLOGIN("emplogin"),
+		EMPPASSWORD("emppassword"),
+		EMPCONFIRMPASSWORD("empconfirmpassword"),
+		EMPFIRSTNAME("empfirstname"),
+		EMPLASTNAME("emplastname"),
+		EMPLOYEE("employee")
+		
 		;
 		
 		String id;
@@ -106,7 +105,6 @@ public interface Constants {
 		CREDIT_CARD ("creditCard"),
 		ADD_TO_CART ("addToCart"),
 		ADD_TO_WISHLIST ("addToWishList"),
-		WISHLIST_TO_CART ("wishListToCart"),
 		EDIT_PRODUCT ("editProduct"),
 		DELETE_PRODUCT ("deleteProduct"),
 		DELETE_EMPLOYEE ("deleteEmployee"),
@@ -131,13 +129,10 @@ public interface Constants {
 	/**
 	 * Session Attributes
 	 */
-	public static final String SESSION_ATTRIBUTE_USER_NAME = "userName";
 	public static final String SESSION_ATTRIBUTE_VISITOR = "visitor";
 	public static final String SESSION_ATTRIBUTE_CART = "cart";
 	public static final String SESSION_ATTRIBUTE_ORDER = "order";
 	public static final String SESSION_ATTRIBUTE_ORDERED_ITEMS = "orderedItems";
-	public static final String SESSION_ATTRIBUTE_PRODUCT_TO_CART = "prodToWishList";
-	public static final String SESSION_ATTRIBUTE_PRODUCT_TO_WISHLIST = "prodToWishList";
 	
 	/**
 	 * Request Attributes
