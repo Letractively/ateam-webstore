@@ -344,4 +344,14 @@ public class OrderHandler extends Handler {
 		return odv;
 	}
 
+	public FormSubmission processOrderUpdateRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public FormSubmission processOrderCancelRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

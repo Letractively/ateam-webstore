@@ -13,6 +13,12 @@ public interface Constants {
 		PRODUCT_ID ("productId"),
 		EMAIL ("email"),
 		LOGIN ("login"),
+		EMPLOGIN("emplogin"),
+		EMPPASSWORD("emppassword"),
+		EMPCONFIRMPASSWORD("empconfirmpassword"),
+		EMPFIRSTNAME("empfirstname"),
+		EMPLASTNAME("emplastname"),
+		EMPLOYEE("employee"),
 		LOGOUT ("logout"),
 		FORGOT ("forgot"),
 		FORM_ID ("formId"),
@@ -38,8 +44,11 @@ public interface Constants {
 		ALL_PRODUCTS ("products"),
 		FEEDBACK ("feedback"),
 		ALL_EMPLOYEES ("employees"),
+		ADD_EMPLOYEE ("addEmployee"),
 		ALL_ORDERS ("orders"),
+		OPEN_ORDERS ("openOrders"),
 		ORDER_ID ("order"),
+		ORDER_CONFIRM ("orderConfirm"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
 		SECURITY_ANSWER ("sa"),
@@ -63,14 +72,7 @@ public interface Constants {
 		REDIRECT ("redirect"),
 		SEARCH_QUERY ("query"),
 		MY_ACCOUNT ("myAccount"),
-		MESSAGE ("message"),
-		EMPLOGIN("emplogin"),
-		EMPPASSWORD("emppassword"),
-		EMPCONFIRMPASSWORD("empconfirmpassword"),
-		EMPFIRSTNAME("empfirstname"),
-		EMPLASTNAME("emplastname"),
-		EMPLOYEE("employee")
-		
+		MESSAGE ("message")
 		;
 		
 		String id;
@@ -105,6 +107,7 @@ public interface Constants {
 		CREDIT_CARD ("creditCard"),
 		ADD_TO_CART ("addToCart"),
 		ADD_TO_WISHLIST ("addToWishList"),
+		WISHLIST_TO_CART ("wishListToCart"),
 		EDIT_PRODUCT ("editProduct"),
 		DELETE_PRODUCT ("deleteProduct"),
 		DELETE_EMPLOYEE ("deleteEmployee"),
@@ -129,15 +132,19 @@ public interface Constants {
 	/**
 	 * Session Attributes
 	 */
+	public static final String SESSION_ATTRIBUTE_USER_NAME = "userName";
 	public static final String SESSION_ATTRIBUTE_VISITOR = "visitor";
 	public static final String SESSION_ATTRIBUTE_CART = "cart";
 	public static final String SESSION_ATTRIBUTE_ORDER = "order";
 	public static final String SESSION_ATTRIBUTE_ORDERED_ITEMS = "orderedItems";
+	public static final String SESSION_ATTRIBUTE_PRODUCT_TO_CART = "prodToWishList";
+	public static final String SESSION_ATTRIBUTE_PRODUCT_TO_WISHLIST = "prodToWishList";
 	
 	/**
 	 * Request Attributes
 	 */
 	public static final String REQUEST_ATTRIBUTE_VIEW = "view";
+	public static final String REQUEST_ATTRIBUTE_CONTEXT = "context";
 	
 	/**
 	 * JSPs
@@ -147,6 +154,9 @@ public interface Constants {
 	public static final String JSP_ERROR = "/error.jsp";
 	public static final String JSP_ADMIN_MAIN = "/adminMain.jsp";
 	public static final String JSP_ADMIN_HOME = "/adminHome.jsp";
+	//public static final String JSP_ADMIN_ADD_EMPLOYEE = "/adminAddEmployee.jsp";
+	public static final String JSP_EMPLOYEE_DETAILS = "/employeeDetails.jsp";
+	public static final String JSP_EMPLOYEE_LIST = "/adminEmployeeDetails.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_REGISTRATION = "/registration.jsp";
 	public static final String JSP_HOME = "/home.jsp";

@@ -36,55 +36,33 @@ Released   : 20081009
 	<div id="page">
 
 		<div id="header">
-			<div id="headerTitle"><%=v.getHeaderTitle()%></div>
+			<div id="headerTitle"><a href="<%=request.getContextPath()%>/admin"><%=v.getHeaderTitle()%></a></div>
 			<div id="headerSubText"><%=v.getHeaderSubText()%></div>
 
 			
 					<%
-						if (v.showVisitorInfo()) {
+						if (v.showVisitorInfo() && v.getVisitor().isEmployee()) {
 					%>
 			<div id="headerVisitor"><%=v.getGreeting()%>
 				<div class="actionLink">
 					<%
-						if (v.getVisitor().isAuthenticated()) {
+						if (v.getVisitor().isEmployeeAuthenticated()) {
 					%>
-					<a href="<%=request.getContextPath()%>/store?logout">Logout</a>
+					<a href="<%=request.getContextPath()%>/admin?logout">Logout</a>
 					<%
 						} else {
 					%>
-					<a href="<%=request.getContextPath()%>/store?login">Login</a>
+					<a href="<%=request.getContextPath()%>/admin?login">Login</a>
 					<%
 						}
 					%>
 				</div>
 			</div>
-					
-					<%
-						} else if (v.showLogonForm()) {
-					%>
-			<div id="headerLogon">
-				<form method="post" action="<%=request.getContextPath()%>/store" id="headerLogonForm">
-				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> 
-						value="<%=Constants.FormName.LOGIN.getId()%>">
-				Email: <input type="text"  name="email" value="<%=v.getVisitor().getEmail()%>">
-				Password: <input type="password" name="password"> <input type="submit" value="Login"></form>
-			</div> 
-					
+			
 					<%
 						} 
 					%>
 			
-					<%
-	if (request.getSession().getAttribute(Constants.SESSION_ATTRIBUTE_CART) != null) {
- %>
-				<div id="headerCart">
-					? item(s) in Cart
-					<div class="actionLink">
-						<a href="<%=request.getContextPath()%>/store?cart=12345">View Cart</a>
-					</div>
-				</div> <%
- 	}
- %>
 		</div>
 
 		<div id="bar">

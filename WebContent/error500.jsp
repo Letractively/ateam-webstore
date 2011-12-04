@@ -25,7 +25,10 @@ Released   : 20081009
 
 <%
 	Handler h = new Handler(request);
-	View v = h.getMainView();
+	View v = h.getMainAdminView();
+
+	String context = (String) request.getAttribute(Constants.REQUEST_ATTRIBUTE_CONTEXT); 
+	
 %>
 
 <head>
@@ -33,7 +36,12 @@ Released   : 20081009
 <% if (v.getRedirectPath() != null) { %>
 <meta http-equiv="REFRESH" content="0;url="<%=v.getRedirectPath()%>"/>
 <%} %>
+
+<%if (context.equals("store"))  {%> 
 <link rel="stylesheet" type="text/css" href="css/main.css" />
+<% } else if (context.equals("admin"))  {%>
+<link rel="stylesheet" type="text/css" href="css/admin.css" />
+<%} %>
 
 <title><%=v.getTitle()%></title>
 </head>
@@ -42,7 +50,7 @@ Released   : 20081009
 	<div id="page">
 
 		<div id="header">
-			<div id="headerTitle"><a href="<%=request.getContextPath()%>/store"><%=v.getHeaderTitle()%></a></div>
+			<div id="headerTitle"><a href="<%=request.getContextPath()%>/<%=context%>"><%=v.getHeaderTitle()%></a></div>
 			<div id="headerSubText"><%=v.getHeaderSubText()%></div>
 
 			

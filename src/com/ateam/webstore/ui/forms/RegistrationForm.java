@@ -9,6 +9,24 @@ public class RegistrationForm extends FormSubmission {
 	String cpw = "";
 	String securityQuestionId = ""; 
 	String securityAnswer = "";
+	String roleId = "";
+	boolean admin;
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
 	public String getSecurityQuestionId() {
 		return securityQuestionId;
@@ -89,14 +107,19 @@ public class RegistrationForm extends FormSubmission {
 			resultMessage = "Passwords do not match.";
 			return false;
 		}
-		else if (!validLong(securityQuestionId)) {
+		else if (!admin && !validLong(securityQuestionId)) {
 			resultMessage = "Please select a security question";
 			return false;
 		}
-		else if (!validString(securityAnswer)) {
+		else if (!admin && !validString(securityAnswer)) {
 			resultMessage = "Please answer the security question";
 			return false;
 		}
+		else if (admin && !validInt(roleId)) {
+			resultMessage = "Please select a role";
+			return false;
+		}
+
 		return true;
 	}
 

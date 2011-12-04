@@ -1,12 +1,20 @@
 package com.ateam.webstore.handlers;
 
+import java.sql.Date;
+import java.util.logging.Level;
+
 import javax.servlet.http.HttpServletRequest;
 
-import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.Employee;
+import com.ateam.webstore.model.EmployeeRoles;
+import com.ateam.webstore.model.Role;
+import com.ateam.webstore.service.impl.EmployeeRolesService;
 import com.ateam.webstore.service.impl.EmployeeService;
+import com.ateam.webstore.service.impl.RoleService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.LoginForm;
+import com.ateam.webstore.ui.forms.RegistrationForm;
+import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.AdminEmployeeDetailsView;
 import com.ateam.webstore.ui.views.AdminEmployeeListView;
 import com.ateam.webstore.ui.views.ContentView;
@@ -43,9 +51,10 @@ public class EmployeeHandler extends Handler {
          * @return
          */
 
-        public Employee getEmployee(String id) {
+        public Employee getEmployee() {
+        	String eid =req.getParameter(Parameters.EMPLOYEE.getId());
 
-                return (Employee) service.getById(Long.parseLong(id));
+           return service.getById(Long.parseLong(eid));
         }
 
 
@@ -55,23 +64,15 @@ public class EmployeeHandler extends Handler {
          * @param req
          * @return
          */
-        public AdminEmployeeDetailsView getEmployeeDetailsView(Employee e) {
+        public AdminEmployeeDetailsView getEmployeeDetailsView() {
                
-                if (e == null) {
-                        e = getEmployee(req.getParameter(Parameters.EMPLOYEE.getId()));
-                        View main = null;
-                        String jsp = null;
-                }
-                else {
-                        main = getMainView();
-                        jsp = JSP_EMPLOYEE_DETAILS;
-                }
+            AdminEmployeeDetailsView ev = new AdminEmployeeDetailsView(getMainAdminView());
+            
+            Employee e = getEmployee();
                
-                AdminEmployeeDetailsView ev = new AdminEmployeeDetailsView(main);
-               
-                if (ev != null) {
-                        ev.setEmployee(e);
-                        ev.addContentView(new ContentView(jsp, ev.getEmployee().getId()));
+                if (e != null) {
+		            ev.setEmployee(e);
+		            ev.addContentView(new ContentView(JSP_EMPLOYEE_DETAILS, "Employee "+e.getId()));
                 }
                 else {
                         ev.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));
@@ -88,36 +89,45 @@ public class EmployeeHandler extends Handler {
          * @return
          */
 
-        public AdminEmployeeListView getAllView(boolean admin) {
+        public AdminEmployeeListView getAllView() {
                
-                View main = null;
+                AdminEmployeeListView ep = new AdminEmployeeListView (getMainAdminView());
                
-                if (admin) {
-                        main = getMainAdminView();
-                } else {
-                        main = getMainView();
-                }
+                ep.setEmployees(service.getAll());
                
-                AdminEmployeeListView ep = new AdminEmployeeListView (main);
-               
-                ep.setEmployees(getAllemployees());
-               
-                String jsp = JSP_EMPLOYEE_LIST;
-                if (admin) {
-                        jsp = JSP_ADMIN_EMPLOYEE_LIST;
-                }
-                ContentView cv = new ContentView(jsp, "All employees");
-               
-                ep.getContentViews().add(cv);
+                ContentView cv = new ContentView(JSP_EMPLOYEE_LIST, "All Employees");
+                
+                ep.addContentView(cv);
 
                 return ep;
                
 
         }
 
+    	/**
+    	 * Builds a LoginForm from the request
+    	 * @param req
+    	 * @return
+    	 */
+    	public LoginForm getLoginRequest() {
+    		
+    		l.info("Parsing Login Request from session "+req.getSession().getId());
+    		
+    		LoginForm login = new LoginForm();
+    		Visitor v = new Visitor();
+    		v.setEmail(req.getParameter(Parameters.EMAIL.getId()));
+    		login.setVisitor(v);
+    		login.setPassword(req.getParameter(Parameters.PASSWORD.getId()));
+    		
+    		req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR, v);
+    		login.setVisitor(v);
+    		login.setForm(FormName.LOGIN);
+    		login.setRedirect(req.getParameter(Parameters.REDIRECT.getId()));
+    		
+    		return login;
+    	}
 
-
-/**
+        /**
          * Process a login request
          * @param login
          * @param req
@@ -127,24 +137,23 @@ public class EmployeeHandler extends Handler {
    
         public FormSubmission processLoginRequest() {
                
-                LoginForm login = (LoginForm) processLoginRequest();
+                LoginForm login = (LoginForm) getLoginRequest();
                
                 l.info("Processing Login Request from session "+req.getSession().getId());
-                Employee E = login.getE();
-               
+              
+                Visitor v = login.getVistor();
                 Employee emp = null;
                 View resultView = null;
                
                 try {
-                        emp= service.authenticateEmployee(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
+                        emp= service.authenticateEmployee(login.getVistor().getEmail(), login.getPassword());
                         if (emp!= null) {
-                                l.info("Login Successful for "+Customer.getPerson().getLogin());
-                                login.setE(emp);
-                                E.setAuthenticated(true);
-                                E.setKnown(true);
-                                E.setEmail(req.getParameter(Parameters.EMAIL.getId()));
+                                l.info("Login Successful for "+login.getVistor().getEmail());
+
+                                v.setEmployeeAuthenticated(true);
+                                v.setKnown(true);
                                
-                                req.getSession().setAttribute(SESSION_ATTRIBUTE_EMPLOYEE,E);
+                                req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR,v);
                                 login.setForm(FormName.LOGIN);
                                 login.setSuccess(true);
 
@@ -158,19 +167,14 @@ public class EmployeeHandler extends Handler {
                         resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
                 }
 
-                if (E.isAuthenticated()) try {
-                        CartService cs = new CartService();
-                        l.info("retrieving cart for employeeId:"+emp.getId());
-                        req.getSession().setAttribute(SESSION_ATTRIBUTE_CART, cs.getByEmployeeId(emp.getId()));
+                if (v.isEmployeeAuthenticated()) try {
                        
                         if (login.getRedirect() != null) {
                                 resultView = new View();
                                 resultView.setRedirectPath(login.getRedirect());
                         }
                         else {
-                                //Build view
-                                ProductHandler ph = new ProductHandler(req);
-                                resultView = ph.getHomePageView();
+                                resultView = getAdminHomeView();
                         }
 
                 } catch (Exception e) {
@@ -180,6 +184,10 @@ public class EmployeeHandler extends Handler {
                 login.setResultView(resultView);
                
                 l.info("Login results:"+v);
+                
+//                EmployeeRolesService ers = new EmployeeRolesService();
+//                
+//                ..ers.getById(id);
                
                 return login;
         }
@@ -190,10 +198,10 @@ public class EmployeeHandler extends Handler {
                   
                 l.info("Processing registration request from session "+req.getSession().getId());
                
-                AdminAddEmployeeForm add= getAdminAddEmployeeRequest();
+                RegistrationForm add = getRegistrationRequest();
                
                 if (!add.isValid()) {
-                        add.setResultView(getAdminAddEmployeeView(add));
+                        add.setResultView(getAdminAddEmployeeView(null));
                 }
                 else if (service.employeeExists(add.getEmail())) {
                         add.setResultView(getAdminAddEmployeeView("An account for"+add.getEmail()+" already exists"));
@@ -204,13 +212,17 @@ public class EmployeeHandler extends Handler {
                         rv.addContentView(new ContentView(JSP_LOGIN, "Login"));
                        
                         try {
-                                service.addemployee(add.getFirstName(), add.getLastName(), add.getEmail(), add.getPw(), add.getSecurityQuestionIdLong(), add.getSecurityAnswer());
+                        		Employee e = service.registerEmployee(add.getFirstName(), add.getLastName(), add.getEmail(), add.getPw(), new Long(1), "foo", null, null, null, null, null);
+                        		RoleService rs = new RoleService();
+                        		Role role = rs.getById(new Long(add.getRoleId()));
+                        		EmployeeRoles er = new EmployeeRoles(new Date(new java.util.Date().getTime()), e, role);
+                        		EmployeeRolesService ers = new EmployeeRolesService();
+                        		ers.store(er);
                                 rv.setMessage("Employee addition Complete");
                         } catch (Exception e) {
                                 l.log(Level.WARNING, "", e);
                                 rv.setError(true);
-                                //rv.setMessage("Failed!! "+e.getMessage());
-                                add.setResultView(getRegistrationView("An error occured."));
+                                add.setResultView(getAdminAddEmployeeView("An error occured."));
                         }
 
                         add.setResultView(rv);                 
@@ -218,6 +230,51 @@ public class EmployeeHandler extends Handler {
                
                 return add;
         }
+
+
+
+		public RegistrationView getAdminAddEmployeeView(String string) {
+			
+			RegistrationView aeav = new RegistrationView(getMainAdminView());
+			
+			aeav.addContentView(new ContentView(JSP_REGISTRATION, "New Employee"));
+			
+			aeav.setAdmin(true);
+			
+			RoleService rs = new RoleService();
+			aeav.setRoles(rs.getAll());
+			
+			return aeav;
+		}
+
+		public AdminEmployeeListView getEmployeeListView() {
+			
+			AdminEmployeeListView aempl = new AdminEmployeeListView(getMainAdminView());
+			
+			aempl.setEmployees(service.getAll());
+			
+			aempl.addContentView(new ContentView(JSP_EMPLOYEE_LIST, "All Employees"));
+
+			return aempl;
+		}
+		
+		private RegistrationForm getRegistrationRequest() {
+			l.info("Parsing Registration Request from session "+req.getSession().getId());
+			
+			RegistrationForm reg = new RegistrationForm();
+
+			reg.setFirstName(req.getParameter(Parameters.FIRST_NAME.getId()));
+			reg.setLastName(req.getParameter(Parameters.LAST_NAME.getId()));
+			reg.setEmail(req.getParameter(Parameters.EMAIL.getId()));
+			reg.setPw(req.getParameter(Parameters.PASSWORD.getId()));
+			reg.setCpw(req.getParameter(Parameters.CONFIRMPASSWORD.getId()));
+			reg.setSecurityQuestionId(req.getParameter(Parameters.SECURITY_QUESTION.getId()));
+			reg.setSecurityAnswer(req.getParameter(Parameters.SECURITY_ANSWER.getId()));
+			reg.setForm(FormName.REGISTER);
+			reg.setAdmin(true);
+			
+			return reg;
+		}
        
 
      }
