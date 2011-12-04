@@ -2,11 +2,15 @@ package com.ateam.webstore.handlers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ateam.webstore.model.Customer;
 import com.ateam.webstore.model.Employee;
 import com.ateam.webstore.service.impl.EmployeeService;
 import com.ateam.webstore.ui.forms.FormSubmission;
+import com.ateam.webstore.ui.forms.LoginForm;
 import com.ateam.webstore.ui.views.AdminEmployeeDetailsView;
+import com.ateam.webstore.ui.views.AdminEmployeeListView;
 import com.ateam.webstore.ui.views.ContentView;
+import com.ateam.webstore.ui.views.RegistrationView;
 import com.ateam.webstore.ui.views.View;
 
 public class EmployeeHandler extends Handler {
@@ -55,11 +59,9 @@ public class EmployeeHandler extends Handler {
                
                 if (e == null) {
                         e = getEmployee(req.getParameter(Parameters.EMPLOYEE.getId()));
+                        View main = null;
+                        String jsp = null;
                 }
-               
-                View main = null;
-                String jsp = null;
-                              
                 else {
                         main = getMainView();
                         jsp = JSP_EMPLOYEE_DETAILS;
@@ -67,16 +69,16 @@ public class EmployeeHandler extends Handler {
                
                 AdminEmployeeDetailsView ev = new AdminEmployeeDetailsView(main);
                
-                if (e != null) {
-                        e.setEmployee(e);
-                        e.addContentView(new ContentView(jsp, e.getEmployeeName()));
+                if (ev != null) {
+                        ev.setEmployee(e);
+                        ev.addContentView(new ContentView(jsp, ev.getEmployee().getId()));
                 }
                 else {
-                        e.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));
-                        e.setMessage("Sorry, employee not found.");
+                        ev.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));
+                        ev.setMessage("Sorry, employee not found.");
                 }
                
-                return e;
+                return ev;
         }
        
 
@@ -122,13 +124,13 @@ public class EmployeeHandler extends Handler {
          * @return
          */
 
-    public FormSubmission processLoginRequest() {
+   
         public FormSubmission processLoginRequest() {
                
-                LoginForm login = getLoginRequest();
+                LoginForm login = (LoginForm) processLoginRequest();
                
                 l.info("Processing Login Request from session "+req.getSession().getId());
-                Employee E = login.getEmployee();
+                Employee E = login.getE();
                
                 Employee emp = null;
                 View resultView = null;
@@ -136,8 +138,8 @@ public class EmployeeHandler extends Handler {
                 try {
                         emp= service.authenticateEmployee(req.getParameter(Parameters.EMAIL.getId()), req.getParameter(Parameters.PASSWORD.getId()));
                         if (emp!= null) {
-                                l.info("Login Successful for "+cust.getPerson().getLogin());
-                                E.setEmployee(emp);
+                                l.info("Login Successful for "+Customer.getPerson().getLogin());
+                                login.setE(emp);
                                 E.setAuthenticated(true);
                                 E.setKnown(true);
                                 E.setEmail(req.getParameter(Parameters.EMAIL.getId()));
