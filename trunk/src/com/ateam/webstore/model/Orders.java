@@ -183,8 +183,7 @@ public class Orders extends BaseModel implements Serializable {
 	}
 	
 	public Double getGrandTotal() {
-		DecimalFormat twoDForm = new DecimalFormat("#.##");
-		return Double.parseDouble(twoDForm.format(itemSubTotal + salesTax + shippingTotal));
+		return itemSubTotal + salesTax + shippingTotal;
 	}
 	
 	public void addItemPrice(Double itemPrice) {

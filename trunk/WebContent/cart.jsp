@@ -35,7 +35,7 @@ Empty Cart
 			%>
 	
 	<tr>
-		<td><input type="checkbox" name="Product" value="Cart item"/></td>
+		<td><input type="checkbox" name="<%=p.getProduct().getId()%>"/></td>
 		<td width="500" ><a href="<%=request.getContextPath()%>/store?product=<%=pd.getId()%>"><%=pd.getShortProductName(35)%></a></td>
 		<td><%=pd.getPrice()%></td>
 		<td><input type="text" name="<%=p.getId()+"_"+Constants.Parameters.PRODUCT_QUANTITY.getId()%>" value="<%=p.getQuantity()%>" size="3"/></td>
@@ -47,16 +47,11 @@ Empty Cart
 	<tr></tr>
 	
 	<tr align="right">
-		<td> 
-   		<!--  <input type="submit" value="Move Selected to WishList" /> --> 
-   		<input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Update Quantity" />
-   		</td>
-	</tr>
-
-	<tr align="right">
-		<td>
-   			<input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Checkout" />
-		</td>   
+		<td></td>
+		<td></td>
+		<td><input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Move Selected to WishList" /></td>
+		<td><input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Update Quantity" /></td>
+		<td><input type="submit" name="<%=Constants.Parameters.CART_ACTION.getId()%>" value="Checkout" /></td>   
 	</tr>
 
 </table>  

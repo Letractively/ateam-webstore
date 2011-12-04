@@ -86,6 +86,12 @@ public class FormSubmission {
 	public boolean validString(String s) {
 		return s != null && !s.isEmpty() && !s.trim().isEmpty();
 	}
+	
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public boolean validDouble(String s) {
 		try {
 			Double.parseDouble(s);
@@ -94,6 +100,12 @@ public class FormSubmission {
 			return false;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public boolean validLong(String s) {
 		try {
 			Long.parseLong(s);
@@ -102,5 +114,28 @@ public class FormSubmission {
 			return false;
 		}
 	}
+	/**
+	 * Check the given string can be an int value
+	 * @param s
+	 * @return
+	 */
+	public boolean validInt(String s) {
+		try {
+			Integer.parseInt(s);	
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+
+	}
+
+	
+//	public boolean containsAlphas(String s) {
+//		if (validString(s)) {
+//			if (s.contains("\a-z")) {
+//				return true;
+//			}
+//		}
+//	}
 
 }

@@ -1,3 +1,5 @@
+<%@page import="com.ateam.webstore.utilities.Utilities"%>
+<%@page import="com.ateam.webstore.ui.Constants.Parameters"%>
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
@@ -58,7 +60,7 @@ Orders o = v.getOrder();
 					<tr>
 							<td></td>
 							<td><b>SubTotal</b></td>
-							<td><%=o.getItemSubTotal() %></td>
+							<td><%=Utilities.formatDouble(o.getItemSubTotal())%></td>
 					</tr>
 			
 					<tr>
@@ -70,19 +72,22 @@ Orders o = v.getOrder();
 					<tr>
 							<td></td>
 							<td><b>Shipping</b></td>
-							<td><%=o.getShippingTotal() %></td>
+							<td><%=Utilities.formatDouble(o.getShippingTotal())%></td>
 					</tr>
 			
 					<tr>
 							<td></td>
 							<td><b>Grand Total</b></td>
-							<td><%=o.getGrandTotal()%></td>
+							<td><%=Utilities.formatDouble(o.getGrandTotal())%></td>
 					</tr>
-			
-				</table>	
 
 <% if (v.isOrderPreview()) {%>
-				<input type="submit" value="Place Order">
-				</form>
+					<tr>
+						<td><input type="submit" value="Go Back"></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Cancel Order"></td><td><input type="submit" name="<%=Parameters.ORDER_CONFIRM.getId()%>" value="Place Order"></td>
+					</tr>
+<%} %>
+				</table>	
+<% if (v.isOrderPreview()) {%>
+			</form>
 <%} %>
 	

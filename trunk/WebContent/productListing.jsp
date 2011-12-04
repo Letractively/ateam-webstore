@@ -21,7 +21,7 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 	<%  for (ProductListing p : v.getProducts()) {	%>
 	<tr>
 		
-		<td rowspan="2"><img src="<%=productImageRoot%>t_<%=p.getProductID()%>.png"></td>
+		<td rowspan="2"><img src="<%=productImageRoot%>t_<%=p.getSku()%>.png"></td>
 		<td colspan="2"><a href="<%=request.getContextPath()%>/store?product=<%=p.getProductID()%>"><%=p.getProductName()%></a></td>
 	</tr>
 	<tr>

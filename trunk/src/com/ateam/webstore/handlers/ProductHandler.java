@@ -27,8 +27,6 @@ public class ProductHandler extends Handler {
 	
 	ProductService service;
 	
-	static Logger l = Logger.getLogger(ProductHandler.class.getName().toString());
-
 	/**
 	 * 
 	 * @param req
