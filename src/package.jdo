@@ -164,6 +164,7 @@
       <field name="address" default-fetch-group="true"/>
       <field name="creditCard" default-fetch-group="true"/>
       <field name="shippingCode" default-fetch-group="true"/>
+      <field name="itemsOrdered" default-fetch-group="true"/>
 		</class>
 		
 		<class name="Role" identity-type="application" detachable="true">

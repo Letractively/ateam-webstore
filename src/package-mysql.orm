@@ -424,6 +424,10 @@
         <column name="returnInd" length="1" jdbc-type="CHAR" allows-null="true"/>
       </field>
       
+      <field name="itemsOrdered" persistence-modifier="persistent" mapped-by="orders">
+        <collection element-type="ItemsOrdered" />
+      </field>        
+      
     </class>
     
     
