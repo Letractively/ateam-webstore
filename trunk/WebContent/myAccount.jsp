@@ -32,6 +32,9 @@
 						<a href="<%=request.getContextPath()%>/store?address">Add New Address</a>
 						</td>
 				</tr>
-				
+				<tr>
+						<td>FeedBack</td>
+						<td><a href="<%=request.getContextPath()%>/store?customerFeedback">Send feedback</a></td>
+				</tr>
 			</table>
 	
