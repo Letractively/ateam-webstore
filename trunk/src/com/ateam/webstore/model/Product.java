@@ -120,20 +120,20 @@ public class Product extends BaseModel implements Serializable {
 	 * @return
 	 */
 	public Double getPrice() {
-		if (saleInd == "T") {
-			return (percentDiscount / 100) * price;
+		return price;
+	}
+	
+	/**
+	 * Get the current sale price
+	 * @return
+	 */
+	public Double getSalesPrice() {
+		if (isOnSale()) {
+			return price - (percentDiscount / 100) * price;
 		}
 		return price;
 	}
 
-	/**
-	 * Get the regular price
-	 * @return
-	 */
-	public Double getRegularPrice() {
-		return price;
-	}
-	
 	/**
 	 * Set the product's price
 	 * 
@@ -232,7 +232,7 @@ public class Product extends BaseModel implements Serializable {
 	 */
 	public boolean isOnSale() {
 		if (saleInd != null) {
-			return saleInd == "T";
+			return saleInd.contains("T");
 		}
 		else {
 			return false;

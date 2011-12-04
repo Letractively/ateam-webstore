@@ -103,9 +103,9 @@ public class CartHandler extends Handler {
 		
 		Collection<ItemsOrdered> items = new ArrayList<ItemsOrdered>();
 		for (ProductsInCart prod : cart.getProducts()) {
-			ItemsOrdered item = new ItemsOrdered(prod.getProduct().getPrice(), prod.getQuantity(), false, null, prod.getProduct());
+			ItemsOrdered item = new ItemsOrdered(prod.getProduct().getSalesPrice(), prod.getQuantity(), false, null, prod.getProduct());
 			items.add(item);
-			order.addItemPrice(prod.getProduct().getPrice());
+			order.addItemPrice(prod.getProduct().getSalesPrice());
 		}
 		
 		
@@ -237,7 +237,7 @@ public class CartHandler extends Handler {
 		for (ProductsInCart p : cart.getProducts()) {
 			String prodId = p.getProduct().getId()+"";
 			if (req.getParameter(prodId) != null) {
-				l.fine("moving prodId :"+prodId+" to cart");
+				l.fine("moving prodId :"+prodId+" to wish list");
 				wlh.addProduct(prodId);
 				pics.remove(p);
 				i++;
@@ -254,5 +254,21 @@ public class CartHandler extends Handler {
 		}
 
 		return fs;
+	}
+	
+	/**
+	 * 
+	 */
+	public void delete() {
+		l.info("Deleting user cart ");
+		ProductsInCartService pics = new ProductsInCartService();
+		
+		for (ProductsInCart p : cart.getProducts()) {
+			l.fine("deleting prodId :"+p.getId()+" from cart");
+			pics.remove(p);
+		}
+		
+		service.remove(cart);
+		updateCart();
 	}
 }

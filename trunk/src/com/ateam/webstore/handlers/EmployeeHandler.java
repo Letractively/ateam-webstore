@@ -1,6 +1,8 @@
 package com.ateam.webstore.handlers;
 
 import java.sql.Date;
+import java.util.Collection;
+import java.util.Random;
 import java.util.logging.Level;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import com.ateam.webstore.ui.views.AdminEmployeeListView;
 import com.ateam.webstore.ui.views.ContentView;
 import com.ateam.webstore.ui.views.RegistrationView;
 import com.ateam.webstore.ui.views.View;
+import com.ateam.webstore.utilities.Utilities;
 
 public class EmployeeHandler extends Handler {
     EmployeeService service;
@@ -77,6 +80,11 @@ public class EmployeeHandler extends Handler {
                 else {
                         ev.addContentView(new ContentView(JSP_MESSAGE, "Not Found"));
                         ev.setMessage("Sorry, employee not found.");
+                }
+                
+                Collection<EmployeeRoles> roles = e.getRoles();
+                for (EmployeeRoles role : roles) {
+                	ev.addRole(role.getRole().getDescription());
                 }
                
                 return ev;
@@ -151,6 +159,7 @@ public class EmployeeHandler extends Handler {
                                 l.info("Login Successful for "+login.getVistor().getEmail());
 
                                 v.setEmployeeAuthenticated(true);
+                                v.setEmployee(emp);
                                 v.setKnown(true);
                                
                                 req.getSession().setAttribute(SESSION_ATTRIBUTE_VISITOR,v);
@@ -159,12 +168,12 @@ public class EmployeeHandler extends Handler {
 
                         }
                         else {
-                                resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
+                                resultView = getLoginView("Invalid email or password. Please try again.", getMainAdminView());
                         }
                        
                 } catch (Exception e) {
                         l.log(Level.INFO, "Failed authentication", e);
-                        resultView = getLoginView("Invalid email or password. Please try again.", getMainView());
+                        resultView = getLoginView("Invalid email or password. Please try again.", getMainAdminView());
                 }
 
                 if (v.isEmployeeAuthenticated()) try {
@@ -185,10 +194,21 @@ public class EmployeeHandler extends Handler {
                
                 l.info("Login results:"+v);
                 
-//                EmployeeRolesService ers = new EmployeeRolesService();
-//                
-//                ..ers.getById(id);
-               
+                try {
+                    String roleNames = "";
+                    Collection<EmployeeRoles> roles = emp.getRoles();
+                    for (EmployeeRoles role : roles) {
+                    	//roleNames += role.getId();
+                    	roleNames += role.getRole().getDescription();
+                    }
+                   
+                    l.info("employee roles:"+roleNames);
+                	
+                }
+                catch (Exception e) {
+                	l.log(Level.WARNING, "", e);
+                }
+                
                 return login;
         }
        
@@ -201,31 +221,39 @@ public class EmployeeHandler extends Handler {
                 RegistrationForm add = getRegistrationRequest();
                
                 if (!add.isValid()) {
-                        add.setResultView(getAdminAddEmployeeView(null));
+                	l.info("registration form error in session "+req.getSession().getId());
+                	add.setResultView(getAdminAddEmployeeView(null));	
                 }
                 else if (service.employeeExists(add.getEmail())) {
+                		l.info("employee exists "+req.getSession().getId());
                         add.setResultView(getAdminAddEmployeeView("An account for"+add.getEmail()+" already exists"));
                 }
                 else {
-                        View rv = new View(getMainView());
-                       
-                        rv.addContentView(new ContentView(JSP_LOGIN, "Login"));
-                       
-                        try {
-                        		Employee e = service.registerEmployee(add.getFirstName(), add.getLastName(), add.getEmail(), add.getPw(), new Long(1), "foo", null, null, null, null, null);
-                        		RoleService rs = new RoleService();
-                        		Role role = rs.getById(new Long(add.getRoleId()));
-                        		EmployeeRoles er = new EmployeeRoles(new Date(new java.util.Date().getTime()), e, role);
-                        		EmployeeRolesService ers = new EmployeeRolesService();
-                        		ers.store(er);
-                                rv.setMessage("Employee addition Complete");
-                        } catch (Exception e) {
-                                l.log(Level.WARNING, "", e);
-                                rv.setError(true);
-                                add.setResultView(getAdminAddEmployeeView("An error occured."));
-                        }
+                	
+                	l.info("registration form check OK "+req.getSession().getId());
+                    View rv = new View(getAdminHomeView());
+                    Employee e = null;
+                    try {
+                    		String ssn = Utilities.padStringToLength(Math.abs(new Random().nextInt())+"", "0", 9, false);
+                    		e = service.registerEmployee(add.getFirstName(), add.getLastName(), add.getEmail(), add.getPw(), new Long(1), "foo", ssn, "Employee", new Date(new java.util.Date().getTime()), "A1", new Double(100000));
+                    		RoleService rs = new RoleService();
+                    		Role role = rs.getById(new Integer(add.getRoleId()));
+                    		EmployeeRoles er = new EmployeeRoles(new Date(new java.util.Date().getTime()), e, role);
+                    		EmployeeRolesService ers = new EmployeeRolesService();
+                    		ers.store(er);
+                            rv.setMessage("Employee addition Complete");
+                            add.setResultMessage("Employee successfull added");
+                    } catch (Exception e1) {
+                    	if (e != null) {
+                    		service.remove(e);
+                    	}
+                        l.log(Level.WARNING, "", e1);
+                        rv.setError(true);
+                        rv = getAdminAddEmployeeView("An error occured.");
+                        add.setResultMessage("Unable to process request");
+                    }
 
-                        add.setResultView(rv);                 
+                    add.setResultView(rv);                 
                 }
                
                 return add;
@@ -268,12 +296,41 @@ public class EmployeeHandler extends Handler {
 			reg.setEmail(req.getParameter(Parameters.EMAIL.getId()));
 			reg.setPw(req.getParameter(Parameters.PASSWORD.getId()));
 			reg.setCpw(req.getParameter(Parameters.CONFIRMPASSWORD.getId()));
-			reg.setSecurityQuestionId(req.getParameter(Parameters.SECURITY_QUESTION.getId()));
-			reg.setSecurityAnswer(req.getParameter(Parameters.SECURITY_ANSWER.getId()));
+			reg.setRoleId(req.getParameter(Parameters.ROLE.getId()));
 			reg.setForm(FormName.REGISTER);
 			reg.setAdmin(true);
 			
 			return reg;
+		}
+
+
+
+		public View getLogoutView() {
+			View v = new View (getLoginView("You are now logged out"));
+			
+			req.getSession().invalidate();
+			
+			return v;
+		}
+
+
+
+		public FormSubmission processDeleteEmployeeRequest() {
+			
+			FormSubmission fs = new FormSubmission();
+			
+			fs.setResultView(getEmployeeListView());
+			try { 
+				Employee e = getEmployee();
+				service.remove(e);
+				fs.setResultMessage("Employee deleted");
+			} catch (Exception e) {
+				fs.setResultMessage("Failed to delete employee");
+				l.log(Level.WARNING, "Failed to delete eomplyee", e);
+			}
+			
+			return fs;
+			
 		}
        
 

@@ -14,6 +14,7 @@ import com.ateam.webstore.handlers.Handler;
 import com.ateam.webstore.handlers.OrderHandler;
 import com.ateam.webstore.handlers.ProductHandler;
 import com.ateam.webstore.ui.Constants;
+import com.ateam.webstore.ui.Constants.FormName;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.models.Visitor;
 import com.ateam.webstore.ui.views.ContentView;
@@ -32,11 +33,13 @@ public class AdminServlet extends AteamServlet implements Constants  {
 		
 			if (vis != null && vis.isEmployeeAuthenticated()) {
 				
-	
-				
 				if (req.getParameterMap().containsKey(Parameters.LOGIN.getId())) {
 					EmployeeHandler eh = new EmployeeHandler(req);
 					v = eh.getLoginView(null);
+				}
+				if (req.getParameterMap().containsKey(Parameters.LOGOUT.getId())) {
+					EmployeeHandler eh = new EmployeeHandler(req);
+					v = eh.getLogoutView();
 				}
 				else if (req.getParameterMap().containsKey(Parameters.ALL_PRODUCTS.getId())) {
 					ProductHandler ph = new ProductHandler(req);
@@ -45,6 +48,10 @@ public class AdminServlet extends AteamServlet implements Constants  {
 				else if (req.getParameterMap().containsKey(Parameters.ALL_ORDERS.getId())) {
 					OrderHandler oh = new OrderHandler(req);
 					v = oh.getAllView(false);
+				}
+				else if (req.getParameterMap().containsKey(Parameters.EMPLOYEE.getId())) {
+					EmployeeHandler eh = new EmployeeHandler(req);
+					v = eh.getEmployeeDetailsView();
 				}
 				else if (req.getParameterMap().containsKey(Parameters.ALL_EMPLOYEES.getId())) {
 					EmployeeHandler eh = new EmployeeHandler(req);
@@ -56,7 +63,7 @@ public class AdminServlet extends AteamServlet implements Constants  {
 				}
 				else if (req.getParameterMap().containsKey(Parameters.ORDER_ID.getId())) {
 					OrderHandler oh = new OrderHandler(req);
-					v = oh.getAdminOrderDetailsView();
+					v = oh.getOrderDetailsView(null,true);
 				}
 				else if (req.getParameterMap().containsKey(Parameters.PRODUCT.getId())) {
 					ProductHandler ph = new ProductHandler(req);
@@ -148,17 +155,21 @@ public class AdminServlet extends AteamServlet implements Constants  {
 				ProductHandler ph = new ProductHandler(req); 
 				return ph.processEditProductRequest();
 			}
-			else if (formId.equals(FormName.ADD_EMPLOYEE.getId())) {
+			else if (formId.equals(FormName.REGISTER.getId())) {
 				EmployeeHandler eh = new EmployeeHandler(req); 
 				return eh.processAddEmployeeRequest();
+			}
+			else if (formId.equals(FormName.DELETE_EMPLOYEE.getId())) {
+				EmployeeHandler eh = new EmployeeHandler(req); 
+				return eh.processDeleteEmployeeRequest();
 			}
 			else if (formId.equals(FormName.ORDER_UPDATE.getId())) {
 				OrderHandler oh = new OrderHandler(req); 
 				return oh.processOrderUpdateRequest();
 			}
-			else if (formId.equals(FormName.ORDER_CANCEL.getId())) {
-				OrderHandler oh = new OrderHandler(req); 
-				return oh.processOrderCancelRequest();
+			else if (formId.equals(FormName.SEARCH.getId())) {
+				ProductHandler ph = new ProductHandler(req);
+				return ph.search(true);
 			}
 			else {
 				l.warning("unknown formId:"+formId);

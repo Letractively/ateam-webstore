@@ -13,6 +13,7 @@ import com.ateam.webstore.handlers.CreditCardHandler;
 import com.ateam.webstore.handlers.CustomerHandler;
 import com.ateam.webstore.handlers.OrderHandler;
 import com.ateam.webstore.handlers.ProductHandler;
+import com.ateam.webstore.handlers.ServiceCaseHandler;
 import com.ateam.webstore.handlers.WishListHandler;
 import com.ateam.webstore.ui.Constants;
 import com.ateam.webstore.ui.forms.FormSubmission;
@@ -42,7 +43,7 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 			
 			if (req.getParameterMap().containsKey(Parameters.LOGIN.getId())) {
 				CustomerHandler vh = new CustomerHandler(req);
-				v = vh.getLoginView();
+				v = vh.getLoginView("Please Login");
 			}
 			else if (req.getParameterMap().containsKey(Parameters.LOGOUT.getId())) {
 				CustomerHandler vh = new CustomerHandler(req);
@@ -101,7 +102,7 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 				v = ph.getAllView(false);
 			}
 			else if (req.getParameterMap().containsKey(Parameters.FEEDBACK.getId())) {
-				CustomerHandler ch = new CustomerHandler(req);
+				ServiceCaseHandler ch = new ServiceCaseHandler(req);
 				v = ch.getFeedbackView();
 			}
 			else if (req.getParameterMap().containsKey("error")) {
@@ -203,6 +204,10 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 			CartHandler ch = new CartHandler(req);
 			return ch.processUpdate();
 		}
+		else if (formId.equals(FormName.CUSTOMER_FEEDBACK.getId())) {
+			ServiceCaseHandler sch = new ServiceCaseHandler(req);
+			return sch.submitNewCase();
+		}
 		else if (formId.equals(FormName.ORDER_SHIPPING.getId())) {
 			OrderHandler oh = new OrderHandler(req);
 			return oh.processOrderShipppingRequest();
@@ -239,6 +244,11 @@ public class StoreFrontServlet extends AteamServlet implements Constants {
 			ProductHandler ph = new ProductHandler(req);
 			return ph.search();
 		}
+		else if (formId.equals(FormName.FORGOT_PASSWORD.getId())) {
+			CustomerHandler ph = new CustomerHandler(req);
+			return ph.processPasswordRecovery();
+		}
+
 
 		else {
 			l.warning("unknown formId:"+formId);

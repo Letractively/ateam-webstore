@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.ateam.webstore.model.Category;
 import com.ateam.webstore.model.Product;
+import com.ateam.webstore.service.impl.CategoryService;
 import com.ateam.webstore.service.impl.ProductService;
 import com.ateam.webstore.ui.forms.FormSubmission;
 import com.ateam.webstore.ui.forms.ProductEditForm;
@@ -92,11 +93,14 @@ public class ProductHandler extends Handler {
 		
 		String category = req.getParameter(Parameters.CATEGORY_ID.getId());
 		
-		Category cat = new Category(category);
+		CategoryService cs = new CategoryService();
+		
+		Category cat = cs.getById(Long.parseLong(category));
 		
 		ProductListingView pl = new ProductListingView(getMainView());
 		
 		pl.setProducts(service.getProductsByCategory(Long.parseLong(category)));
+		l.info("displaying category: "+cat.getName());
 		
 		ContentView cv = new ContentView(JSP_PRODUCT_LISTING, cat.getName());
 		
@@ -191,13 +195,13 @@ public class ProductHandler extends Handler {
 		return pv;
 	}
 	
-	/**
-	 * Updates a product entry.
-	 */
-	public void update(ProductEditForm update) {
-		service.store(update.getProduct());
-	}
-	
+//	/**
+//	 * Updates a product entry.
+//	 */
+//	public void update(ProductEditForm update) {
+//		service.store(update.getProduct());
+//	}
+//	
 	/**
 	 * 
 	 * @return
@@ -233,8 +237,6 @@ public class ProductHandler extends Handler {
 
 	public FormSubmission processEditProductRequest() {
 		
-
-		
 		FormSubmission fs = new FormSubmission();
 
 		Long id = Long.parseLong(req.getParameter(Parameters.PRODUCT_ID.getId()));
@@ -243,35 +245,46 @@ public class ProductHandler extends Handler {
 		
 		Product p = service.getById(id);
 
-		View fv = getProductView(true, p);
+		
 
 		try {
 
-			Double price = Double.parseDouble(req.getParameter(Parameters.PRODUCT_PRICE.getId()));
-			p.setPrice(price);
-			
-			String description = req.getParameter(Parameters.PRODUCT_DESC.getId());
-			p.setDescription(description);
-			
-			String onSale = req.getParameter(Parameters.ON_SALE.getId());
-			if (onSale != null && onSale.equals("on")) {
-				p.setSaleInd("T");	
+			String action = req.getParameter(Parameters.PRODUCT_ACTION.getId());
+			if (action.equals("Update Product")) {
+				Double price = Double.parseDouble(req.getParameter(Parameters.PRODUCT_PRICE.getId()));
+				p.setPrice(price);
+				
+				String description = req.getParameter(Parameters.PRODUCT_DESC.getId());
+				p.setDescription(description);
+				
+				String onSale = req.getParameter(Parameters.ON_SALE.getId());
+				if (onSale != null && onSale.equals("on")) {
+					p.setSaleInd("T");	
+				}
+				else {
+					p.setSaleInd("F");
+				}
+				
+				String active = req.getParameter(Parameters.ON_SALE.getId());
+				p.setActive(active != null && active.equals("on"));
+				
+				fs.setForm(FormName.EDIT_PRODUCT);
 			}
-			else {
-				p.setSaleInd("F");
+			else if (action.equals("")) {
+				
 			}
-			
-			fs.setForm(FormName.EDIT_PRODUCT);
-			fv.setMessage("Update sucessful!");
+
+			fs.setResultMessage("Update sucessful!");
 			service.store(p);
 			
 		} catch (Exception e) {
 			l.log(Level.WARNING, "Error updating product", e);
 			
-			fv.setMessage(e.getMessage());
+			fs.setResultMessage(e.getMessage());
 	
 		}
 		
+		View fv = getProductView(true, p);
 		fs.setResultView(fv);
 		
 		return fs;
@@ -282,13 +295,24 @@ public class ProductHandler extends Handler {
 	 * @return
 	 */
 	public FormSubmission search() {
+		return search(false);
+	}
+	public FormSubmission search(boolean admin) {
 
 		FormSubmission fs = new FormSubmission();
 		
 		String query = req.getParameter(Parameters.SEARCH_QUERY.getId());
 		
 		if (fs.validString(query)) {
-			ProductListingView pl = new ProductListingView(getMainView());
+			
+			View main = null;
+			if (admin) {
+				main = getMainAdminView();
+			}
+			else {
+				main = getMainView();
+			}
+			ProductListingView pl = new ProductListingView(main);
 			
 			pl.setProducts(service.searchProductsByNameOrDescription(query));
 			pl.addContentView(new ContentView(JSP_PRODUCT_LISTING, "Search results for: "+query));

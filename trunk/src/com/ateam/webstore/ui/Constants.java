@@ -37,20 +37,25 @@ public interface Constants {
 		CHECKOUT ("checkout"),
 		PRODUCTSELECT ("ps"),
 		PRODUCT ("product"),
+		PRODUCT_ACTION ("productAction"),
 		PRODUCT_DESC ("productDesc"),
 		PRODUCT_PRICE ("productPrice"),
+		PRODUCT_DISCOUNT ("productDiscount"),
 		PRODUCT_QUANTITY ("productQty"),
 		ON_SALE ("onSale"),
+		ACTIVE ("active"),
 		ALL_PRODUCTS ("products"),
-		FEEDBACK ("feedback"),
+		FEEDBACK ("customerFeedback"),
 		ALL_EMPLOYEES ("employees"),
 		ADD_EMPLOYEE ("addEmployee"),
 		ALL_ORDERS ("orders"),
 		OPEN_ORDERS ("openOrders"),
 		ORDER_ID ("order"),
 		ORDER_CONFIRM ("orderConfirm"),
+		TRACKING_NUMBER ("trackingNumber"),
 		CATEGORY_ID ("category"),
 		SECURITY_QUESTION ("sq"),
+		ROLE ("role"),
 		SECURITY_ANSWER ("sa"),
 		SHIPPING_CODE ("shippingCode"),
 		CARD_NAME ("cardName"),
@@ -96,8 +101,8 @@ public interface Constants {
 		LOGIN ("login"),
 		REGISTER ("register"),
 		SEARCH ("search"),
-		ADD_EMPLOYEE ("addEmployee"),
 		EDIT_CART ("editCart"),
+		FORGOT_PASSWORD ("forgotPw"),
 		ORDER_SHIPPING ("orderShipping"),
 		ORDER_PAYMENT ("orderPayment"),
 		ORDER_CONFIRM ("orderConfirm"),
@@ -154,9 +159,8 @@ public interface Constants {
 	public static final String JSP_ERROR = "/error.jsp";
 	public static final String JSP_ADMIN_MAIN = "/adminMain.jsp";
 	public static final String JSP_ADMIN_HOME = "/adminHome.jsp";
-	//public static final String JSP_ADMIN_ADD_EMPLOYEE = "/adminAddEmployee.jsp";
 	public static final String JSP_EMPLOYEE_DETAILS = "/employeeDetails.jsp";
-	public static final String JSP_EMPLOYEE_LIST = "/adminEmployeeDetails.jsp";
+	public static final String JSP_EMPLOYEE_LIST = "/adminEmployeeList.jsp";
 	public static final String JSP_LOGIN = "/login.jsp";
 	public static final String JSP_REGISTRATION = "/registration.jsp";
 	public static final String JSP_HOME = "/home.jsp";
@@ -177,6 +181,7 @@ public interface Constants {
 	public static final String JSP_WISHLIST = "/wishList.jsp";
 	public static final String JSP_MY_ACCOUNT = "/myAccount.jsp";
 	public static final String JSP_CUSTOMER_FEEDBACK = "/customerFeedback.jsp";
+	public static final String JSP_FORGOT_PASSWORD = "/forgotPassword.jsp";
 
 	//Properties
 	public static final String PROPERTY_PRODUCT_IMAGE_ROOT =  "com.ateam.webstore.ui.ProductImageRoot";

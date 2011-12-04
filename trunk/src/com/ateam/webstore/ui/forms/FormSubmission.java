@@ -36,7 +36,9 @@ public class FormSubmission {
 	}
 	
 	public View getResultView() {
-		resultView.setMessage(resultMessage);
+		if (resultMessage != null) {
+			resultView.setMessage(resultMessage);			
+		}
 		return resultView;
 	}
 

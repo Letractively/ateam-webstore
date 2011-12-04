@@ -1,3 +1,4 @@
+<%@page import="com.ateam.webstore.utilities.Utilities"%>
 <%@page import="com.ateam.webstore.ui.views.ContentView"%>
 <%@page import="com.ateam.webstore.ui.views.*"%>
 <%@page import="com.ateam.webstore.ui.Constants"%>
@@ -37,7 +38,7 @@ Empty Cart
 	<tr>
 		<td><input type="checkbox" name="<%=p.getProduct().getId()%>"/></td>
 		<td width="500" ><a href="<%=request.getContextPath()%>/store?product=<%=pd.getId()%>"><%=pd.getShortProductName(35)%></a></td>
-		<td><%=pd.getPrice()%></td>
+		<td><%=Utilities.formatDouble(pd.getSalesPrice())%></td>
 		<td><input type="text" name="<%=p.getId()+"_"+Constants.Parameters.PRODUCT_QUANTITY.getId()%>" value="<%=p.getQuantity()%>" size="3"/></td>
         <td colspan=2><a href="<%=request.getContextPath()%>/store?cart=<%=cart.getId()%>&remove=<%=p.getId()%>">Remove</a></td>
 	</tr>

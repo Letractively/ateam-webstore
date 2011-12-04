@@ -72,18 +72,6 @@ Released   : 20081009
 			<br>
 					
 					<%
-						} else if (v.showLogonForm()) {
-					%>
-			<div id="headerLogon">
-				<form method="post" action="<%=request.getContextPath()%>/store" id="headerLogonForm">
-				<input type="hidden" name=<%=Constants.Parameters.FORM_ID.getId()%> value="<%=Constants.FormName.LOGIN.getId()%>">
-				Email: <input type="text"  name="<%=Constants.Parameters.EMAIL.getId()%>" value="<%=v.getVisitor().getEmail()%>">
-				Password: <input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>"> <input type="submit" value="Login">
-				<a class="headerLink" href="<%=request.getContextPath()%>/store?register"> &nbsp Or Register</a>
-				</form>
-			</div> 
-					
-					<%
 						} 
 					%>
 			

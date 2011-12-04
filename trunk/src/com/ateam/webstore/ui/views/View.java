@@ -147,8 +147,13 @@ public class View {
 	}
 	
 	public String toString() {
-		return "[View :: "+this.getClass().getName()+", "+contentViews.size()+" content views ]";
+		return "[View :: "+this.getClass().getName()+", "+
+				contentViews.size()+" content views, " +
+				"message="+message+", " +
+				"context="+context+" " +
+				"]";
 	}
+	
 	public String getMessage() {
 		return message;
 	}

@@ -4,6 +4,7 @@
 <%@page import="com.ateam.webstore.model.Product"%>
 <%@page import="com.ateam.webstore.ui.views.ProductDetailsView"%>
 <%@page import="com.ateam.webstore.servlets.AteamContextListener"%>
+<%@page import="com.ateam.webstore.utilities.Utilities"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%ProductDetailsView v = (ProductDetailsView) request.getAttribute(Constants.REQUEST_ATTRIBUTE_VIEW); 
@@ -18,10 +19,10 @@ String productImageRoot = (String) AteamContextListener.ateamProperties.get(Cons
 						</td>
 						<td align=top>
 						
-							<b>$<%=p.getPrice() %><b></b><br>
+							<b>Sales Price: $<%=Utilities.formatDouble(p.getSalesPrice())%><br>
 							<% if (p.isOnSale()) {%>
-							<font color="DCDCDC"></font>Regular Price: $<%=p.getRegularPrice()%></b></font>
-							<br>
+								<font color="DCDCDC"></font>Regular Price: $<%=Utilities.formatDouble(p.getPrice())%></b></font>
+							</b><br>
 							<%} %>
 							
 							<br>

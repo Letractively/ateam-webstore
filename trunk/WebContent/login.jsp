@@ -19,8 +19,13 @@
 					<input type="text" name="<%=Constants.Parameters.EMAIL.getId()%>" value="<%=v.getVisitor().getEmail()%>"><br><br>
 						Password:<br>
 					<input type="password" name="<%=Constants.Parameters.PASSWORD.getId()%>"><br>
-					<a href="<%=request.getContextPath()%>/store?register">Register</a>    <a href="<%=request.getContextPath()%>/store?forgot">Forgot Password?</a>
+					
+					<% if (v.getServletPath().equals("store")) {  %>
+					
+					<a href="<%=request.getContextPath()%>/store?register">Register</a>    <a href="<%=request.getContextPath()%>/store?forgot">Forgot Password?</a> 
 					<br><br>
-					<input type="checkbox" name="<%=Constants.Parameters.REMEMBER_ME.getId()%>">Remember Me<br><br>
-					<input type="submit" name="submit" value="Login">
+					<input type="checkbox" name="<%=Constants.Parameters.REMEMBER_ME.getId()%>">Remember Me<br>
+					
+					<% } %>
+					<br><input type="submit" name="submit" value="Login">
 			</form>
