@@ -87,11 +87,11 @@ if (a == null)  {
 				<option value="MO">MO</option>
 				<option value="MT">MT</option>
 				<option value="NE">NE</option>
+				<option value="NC">NC</option>
+				<option value="ND">ND</option>
 				<option value="NV">NV</option>
 				<option value="NH">NH</option>
 				<option value="NY">NY</option>
-				<option value="NC">NN</option>
-				<option value="ND">ND</option>
 				<option value="OH">OH</option>
 				<option value="OR">OR</option>
 				<option value="PA">PA</option>
